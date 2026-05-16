@@ -1,12 +1,7 @@
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
-  "width": 700,
-  "height": 400,
-
-  "data": {
-    "url": "data/raw/2000-2021-telecommunications-statistics-malaysia.csv"
-  },
-
-  "mark": "line"
-}
+year,mobile,broadband
+2000,5,0.2
+2005,15,2
+2010,30,10
+2015,45,25
+2020,55,40
+2024,60,52
