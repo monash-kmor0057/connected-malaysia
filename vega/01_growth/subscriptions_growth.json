@@ -1,0 +1,28 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 400,
+  "height": 300,
+
+  "data": {
+    "values": [
+      {"year": 2020, "value": 40},
+      {"year": 2021, "value": 50},
+      {"year": 2022, "value": 60}
+    ]
+  },
+
+  "mark": "line",
+
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative"
+    },
+
+    "y": {
+      "field": "value",
+      "type": "quantitative"
+    }
+  }
+}
