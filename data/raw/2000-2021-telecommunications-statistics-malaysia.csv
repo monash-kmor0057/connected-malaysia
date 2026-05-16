@@ -1,0 +1,12 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 700,
+  "height": 400,
+
+  "data": {
+    "url": "data/raw/2000-2021-telecommunications-statistics-malaysia.csv"
+  },
+
+  "mark": "line"
+}
