@@ -1,15 +1,27 @@
-<section class="title-section">
-  <h1>Connected Malaysia</h1>
+<body>
 
-  <p>
-    How broadband transformed Malaysian digital life from 2000–2024
-  </p>
-</section>
+  <section class="title-section">
+    <h1>Connected Malaysia</h1>
 
-<section class="growth-section">
+    <p>
+      How broadband transformed Malaysian digital life from 2000–2024
+    </p>
+  </section>
 
-  <h2>Malaysia became connected</h2>
+  <section class="growth-section">
 
-  <div id="subscriptions-chart"></div>
+    <h2>Malaysia became connected</h2>
 
-</section>
+    <div id="subscriptions-chart"></div>
+
+  </section>
+
+
+  <script>
+    vegaEmbed(
+      "#subscriptions-chart",
+      "vega/01_growth/subscriptions_growth.json"
+    );
+  </script>
+
+</body>
