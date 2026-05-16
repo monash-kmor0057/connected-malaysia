@@ -1,28 +1,43 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 400,
-  "height": 300,
+  "width": 700,
+  "height": 400,
 
   "data": {
-    "values": [
-      {"year": 2020, "value": 40},
-      {"year": 2021, "value": 50},
-      {"year": 2022, "value": 60}
-    ]
+    "url": "data/cleaned/subscriptions_growth.csv"
   },
 
-  "mark": "line",
+  "transform": [
+    {
+      "fold": ["mobile", "broadband"],
+      "as": ["type", "value"]
+    }
+  ],
+
+  "mark": {
+    "type": "line",
+    "point": true
+  },
 
   "encoding": {
+
     "x": {
       "field": "year",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Year"
     },
 
     "y": {
       "field": "value",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions (Millions)"
+    },
+
+    "color": {
+      "field": "type",
+      "type": "nominal",
+      "title": "Connection Type"
     }
   }
 }
