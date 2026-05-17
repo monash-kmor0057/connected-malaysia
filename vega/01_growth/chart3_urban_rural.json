@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Urban vs Rural broadband access 2010-2024",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "../../data/cleaned/urban_rural.json"},
+  "layer": [
+    {
+      "mark": {"type": "area", "interpolate": "monotone", "opacity": 0.12},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": "Year"},
+        "y": {"field": "pct", "type": "quantitative", "title": "Access rate (%)", "scale": {"domain": [0, 100]}},
+        "color": {
+          "field": "type", "type": "nominal",
+          "scale": {"domain": ["Urban", "Rural"], "range": ["#185FA5", "#1D9E75"]},
+          "legend": {"title": null, "orient": "top-left", "labelFontSize": 12}
+        }
+      }
+    },
+    {
+      "mark": {"type": "line", "interpolate": "monotone", "strokeWidth": 3, "point": {"filled": true, "size": 70}},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "pct", "type": "quantitative"},
+        "color": {"field": "type", "type": "nominal",
+          "scale": {"domain": ["Urban", "Rural"], "range": ["#185FA5", "#1D9E75"]}
+        },
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "type", "title": "Area"},
+          {"field": "pct", "title": "Access rate (%)", "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -12, "fontSize": 11, "fontWeight": "bold"},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "pct", "format": ".0f"},
+        "color": {
+          "field": "type", "type": "nominal",
+          "scale": {"domain": ["Urban", "Rural"], "range": ["#185FA5", "#1D9E75"]}
+        }
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}

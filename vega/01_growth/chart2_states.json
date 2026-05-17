@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Internet penetration by Malaysian state 2024",
+  "width": "container",
+  "height": 320,
+  "projection": {"type": "mercator"},
+  "layer": [
+    {
+      "data": {
+        "url": "../../data/geo/malaysia-states.geojson",
+        "format": {"type": "json", "property": "features"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.state",
+          "from": {
+            "data": {"url": "../../data/cleaned/state_penetration.json"},
+            "key": "state",
+            "fields": ["penetration"]
+          }
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.8},
+      "encoding": {
+        "color": {
+          "field": "penetration",
+          "type": "quantitative",
+          "scale": {"scheme": "blues", "domain": [40, 100]},
+          "legend": {"title": "Penetration (%)", "orient": "bottom-right", "gradientLength": 120}
+        },
+        "tooltip": [
+          {"field": "properties.state", "title": "State"},
+          {"field": "penetration", "title": "Penetration (%)", "format": ".0f"}
+        ]
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+}

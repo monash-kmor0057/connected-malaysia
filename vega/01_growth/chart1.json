@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Broadband and mobile subscriptions growth 2000-2021",
+  "width": "container",
+  "height": 280,
+  "data": {"url": "../../data/cleaned/subscriptions.json"},
+  "transform": [
+    {
+      "filter": "datum.type == 'Mobile subscriptions' || datum.type == 'Fixed broadband' || datum.type == 'Wireless broadband'"
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {"filter": "datum.type == 'Fixed broadband' || datum.type == 'Wireless broadband'"}
+      ],
+      "mark": {"type": "area", "interpolate": "monotone", "opacity": 0.85},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": "Year", "axis": {"labelAngle": -45, "labelFontSize": 11}},
+        "y": {"field": "value_million", "type": "quantitative", "stack": "zero", "title": "Subscriptions (millions)", "axis": {"labelFontSize": 11}},
+        "color": {
+          "field": "type", "type": "nominal",
+          "scale": {
+            "domain": ["Fixed broadband", "Wireless broadband", "Mobile subscriptions"],
+            "range": ["#185FA5", "#5DCAA5", "#888780"]
+          },
+          "legend": {"title": null, "orient": "top-left", "labelFontSize": 12}
+        },
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "type", "title": "Category"},
+          {"field": "value_million", "title": "Subscriptions (M)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.type == 'Mobile subscriptions'"}],
+      "mark": {"type": "line", "interpolate": "monotone", "color": "#444441", "strokeWidth": 2.5, "strokeDash": [5,3]},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "value_million", "type": "quantitative"},
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "type", "title": "Category"},
+          {"field": "value_million", "title": "Subscriptions (M)", "format": ".1f"}
+        ]
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}
