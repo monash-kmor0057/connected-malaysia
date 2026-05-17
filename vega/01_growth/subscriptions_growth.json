@@ -5,7 +5,7 @@
   "height": 400,
 
   "data": {
-    "url": "./data/raw/telecommunications_statistics_malaysia.csv"
+    "url": "../../data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
@@ -23,35 +23,17 @@
 
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "quantitative"
     },
 
     "y": {
       "field": "Value in Thousand",
-      "type": "quantitative",
-      "title": "Subscriptions (Thousands)"
+      "type": "quantitative"
     },
 
     "color": {
       "field": "Sub-Items",
-      "type": "nominal",
-      "title": "Subscription Type"
-    },
-
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "quantitative"
-      },
-      {
-        "field": "Sub-Items",
-        "type": "nominal"
-      },
-      {
-        "field": "Value in Thousand",
-        "type": "quantitative"
-      }
-    ]
+      "type": "nominal"
+    }
   }
 }
