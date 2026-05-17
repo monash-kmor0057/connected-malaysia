@@ -1,44 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Connected Malaysia</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
+  <title>Connected Malaysia: How Broadband Transformed Malaysian Digital Life</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Vega-Lite stack -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
 </head>
 
 <body>
 
-  <section class="title-section">
-    <h1>Connected Malaysia</h1>
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="page-wrap">
+    <div class="header-grid">
+      <div>
+        <p class="header-kicker">Data Visualisation · FIT2179</p>
+        <h1 class="header-title">Connected Malaysia</h1>
+        <p class="header-subtitle">How broadband transformed Malaysian digital life</p>
+        <p class="header-intro">
+          Malaysia has become far more connected over the last two decades. Faster infrastructure
+          has enabled new digital lifestyles, and overall experience has improved — but gaps remain
+          across regions and activities.
+        </p>
+      </div>
 
-    <p>
-      How broadband transformed Malaysian digital life from 2000–2024
-    </p>
-  </section>
+      <nav class="nav-box">
+        <p class="nav-box-title">Navigation</p>
+        <ul class="nav-list">
+          <li><a href="#section-growth"><span class="nav-num">1</span> Growth of Connectivity</a></li>
+          <li><a href="#section-usage"><span class="nav-num">2</span> How Malaysians Use the Internet</a></li>
+          <li><a href="#section-experience"><span class="nav-num">3</span> Experience &amp; Satisfaction</a></li>
+          <li><a href="#section-speed"><span class="nav-num">4</span> The Speed Divide</a></li>
+          <li><a href="#takeaways"><span class="nav-num" style="background:var(--teal)">★</span> Key Takeaways</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-  <section class="growth-section">
 
-    <h2>Malaysia became connected</h2>
+<!-- ════════════════════════════════════════════
+     SECTION 1 · GROWTH
+════════════════════════════════════════════ -->
+<section class="section" id="section-growth">
+  <div class="page-wrap">
 
-    <div id="subscriptions-chart"></div>
+    <div class="section-header">
+      <span class="section-number">Section 1</span>
+      <h2 class="section-title">Malaysia became connected</h2>
+      <span class="section-source">Data source: Telecommunications Statistics Malaysia (2000–2024) · MCMC</span>
+    </div>
 
-  </section>
+    <div class="chart-grid-3">
 
-  <script>
-    vegaEmbed(
-      "#subscriptions-chart",
-      "./vega/01_growth/subscriptions_growth.json"
-    );
-  </script>
+      <!-- Chart 1: Subscriptions growth -->
+      <div class="chart-card full">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 1</span>
+          <p class="chart-title">Broadband &amp; mobile subscriptions growth (2000–2024)</p>
+          <p class="chart-sub">Subscriptions (million)</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-subscriptions"></div>
+        </div>
+        <p class="chart-annotation">
+          Mobile and broadband subscriptions have grown dramatically. Mobile reached over 50 million by 2024,
+          while fixed and wireless broadband grew steadily from near zero in 2000 to 31.8 million.
+        </p>
+      </div>
+
+      <!-- Chart 2: Penetration map -->
+      <div class="chart-card" style="grid-column: span 2;">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 2</span>
+          <p class="chart-title">Internet penetration by state (Latest year: 2024)</p>
+          <p class="chart-sub">Penetration (%)</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-map"></div>
+        </div>
+        <p class="chart-annotation">
+          Penetration is higher in urbanised states (W. Malaysia), and lower in Sabah and Sarawak.
+        </p>
+      </div>
+
+      <!-- Chart 3: Urban vs Rural -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 3</span>
+          <p class="chart-title">Urban vs Rural broadband access</p>
+          <p class="chart-sub">% of population</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-urban-rural"></div>
+        </div>
+        <p class="chart-annotation">
+          The gap has narrowed, but rural access still lags behind urban areas.
+        </p>
+      </div>
+
+    </div><!-- /chart-grid-3 -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 · USAGE
+════════════════════════════════════════════ -->
+<section class="section" id="section-usage">
+  <div class="page-wrap">
+
+    <div class="section-header">
+      <span class="section-number">Section 2</span>
+      <h2 class="section-title">How Malaysians use the internet (BQoES 2024)</h2>
+      <span class="section-source">Data source: BQoES 2024 · MCMC</span>
+    </div>
+
+    <div class="chart-grid-3">
+
+      <!-- Chart 4: Activities -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 4</span>
+          <p class="chart-title">What Malaysians do online most</p>
+          <p class="chart-sub">% using each activity</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-activities"></div>
+        </div>
+        <p class="chart-annotation">
+          Communication and entertainment activities dominate online life.
+        </p>
+      </div>
+
+      <!-- Chart 5: Platform dominance -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 5</span>
+          <p class="chart-title">Platform dominance (Top platforms)</p>
+          <p class="chart-sub">% share of users</p>
+        </div>
+        <div class="chart-body">
+          <div class="platform-pair">
+            <div>
+              <p class="platform-label">Streaming (Video)</p>
+              <p class="platform-big" style="color:#ef4444">87%</p>
+              <p class="platform-name">YouTube</p>
+              <div id="chart-platform-video" style="margin-top:8px"></div>
+            </div>
+            <div>
+              <p class="platform-label">Communication (Voice)</p>
+              <p class="platform-big" style="color:#22c55e">96%</p>
+              <p class="platform-name">WhatsApp</p>
+              <!-- Inline data donut for communication -->
+              <div id="chart-platform-comm" style="margin-top:8px"></div>
+            </div>
+          </div>
+        </div>
+        <p class="chart-annotation">
+          YouTube and WhatsApp are the dominant platforms for Malaysians.
+        </p>
+      </div>
+
+      <!-- Chart 6: Gaming devices -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 6</span>
+          <p class="chart-title">Gaming devices used</p>
+          <p class="chart-sub">% of gamers · FBB vs MBB users</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-gaming-devices"></div>
+        </div>
+        <p class="chart-annotation">
+          Mobile gaming dominates on mobile broadband, while PC/laptop is more common on fixed broadband.
+        </p>
+      </div>
+
+    </div><!-- /chart-grid-3 -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 · EXPERIENCE
+════════════════════════════════════════════ -->
+<section class="section" id="section-experience">
+  <div class="page-wrap">
+
+    <div class="section-header">
+      <span class="section-number">Section 3</span>
+      <h2 class="section-title">Faster internet ≠ perfect experience (BQoES)</h2>
+      <span class="section-source">Data source: BQoES 2023 vs 2024 · MCMC</span>
+    </div>
+
+    <div class="chart-grid-3">
+
+      <!-- Chart 7: CSI comparison -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 7</span>
+          <p class="chart-title">CSI score comparison (2023 vs 2024)</p>
+          <p class="chart-sub">Score 1–5 · Mobile Broadband users</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-csi"></div>
+        </div>
+        <p class="chart-annotation">
+          Satisfaction improved across all activities, especially gaming (up 0.43).
+        </p>
+      </div>
+
+      <!-- Chart 8: SQG -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 8</span>
+          <p class="chart-title">Service Quality Gap (Expectation – Satisfaction)</p>
+          <p class="chart-sub">2023 vs 2024 · MBB users</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-sqg"></div>
+        </div>
+        <p class="chart-annotation">
+          Gaps narrowed in most activities; gaming showed the biggest improvement.
+        </p>
+      </div>
+
+      <!-- Chart 9: IPA matrix -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 9</span>
+          <p class="chart-title">Importance–Performance Matrix (2024)</p>
+          <p class="chart-sub">MBB users · dashed lines = mean values</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-ipa"></div>
+        </div>
+        <p class="chart-annotation">
+          Voice and video calls sit in "Keep up the Good Work"; gaming remains an area to improve.
+        </p>
+      </div>
+
+    </div><!-- /chart-grid-3 -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 · SPEED
+════════════════════════════════════════════ -->
+<section class="section" id="section-speed">
+  <div class="page-wrap">
+
+    <div class="section-header">
+      <span class="section-number">Section 4</span>
+      <h2 class="section-title">The speed divide: progress across Malaysia</h2>
+      <span class="section-source">Data source: Ookla Open Data (Speedtest Intelligence)</span>
+    </div>
+
+    <div class="chart-grid-2">
+
+      <!-- Chart 10: Speed maps -->
+      <div class="chart-card full">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 10</span>
+          <p class="chart-title">Median download speed (Mbps) by state — 2020 Q1 vs 2026 Q1</p>
+          <p class="chart-sub">Darker blue = faster</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-speed-map"></div>
+        </div>
+        <p class="chart-annotation">
+          High-speed connectivity expanded from urban centres to more states, but interior and rural areas still lag behind.
+        </p>
+      </div>
+
+      <!-- Chart 11: Speed improvement bar -->
+      <div class="chart-card full">
+        <div class="chart-card-header">
+          <span class="chart-num">Chart 11</span>
+          <p class="chart-title">Speed improvement by state (Median download speed)</p>
+          <p class="chart-sub">Change 2020 Q1 → 2026 Q1 (Mbps)</p>
+        </div>
+        <div class="chart-body">
+          <div id="chart-speed-bar"></div>
+        </div>
+        <p class="chart-annotation">
+          Most states recorded substantial speed gains, but East Malaysia and northern states still have lower speeds.
+        </p>
+      </div>
+
+    </div><!-- /chart-grid-2 -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     KEY TAKEAWAYS
+════════════════════════════════════════════ -->
+<section class="takeaways" id="takeaways">
+  <div class="page-wrap">
+    <h2 class="takeaways-title">Key Takeaways</h2>
+    <div class="takeaways-grid">
+      <div class="takeaway-card">
+        <div class="takeaway-icon">📶</div>
+        <p class="takeaway-text">Malaysia's connectivity has grown dramatically over the past two decades.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-icon">💬</div>
+        <p class="takeaway-text">Internet is essential in daily life, led by communication, entertainment and transactions.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-icon">⭐</div>
+        <p class="takeaway-text">Experience quality has improved, but gaming and some services need more attention.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-icon">🗺️</div>
+        <p class="takeaway-text">Speed and experience improvements are uneven across regions.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-icon">⚡</div>
+        <p class="takeaway-text">Better speed does not automatically mean equal digital experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="page-wrap">
+    <div class="footer-inner">
+      <div class="footer-sources">
+        <strong style="color:rgba(255,255,255,0.6)">Data sources:</strong>
+        <a href="https://archive.data.gov.my/data/ms_MY/dataset/telecommunications-statistics-malaysia" target="_blank">Telecommunications Statistics Malaysia (2000–2021)</a>
+        <span class="footer-separator">·</span>
+        <a href="https://mcmc.gov.my/en/resources/statistics/bqoes" target="_blank">BQoES 2023 &amp; 2024 (MCMC)</a>
+        <span class="footer-separator">·</span>
+        <a href="https://github.com/teamookla/ookla-open-data" target="_blank">Ookla Open Data (Speedtest Intelligence)</a>
+      </div>
+      <div style="color:rgba(255,255,255,0.4); white-space:nowrap;">
+        FIT2179 Data Visualisation 2 · Monash University Malaysia · 2026
+        <br>AI tools used for grammar assistance (acknowledged per Monash policy)
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     VEGA-LITE EMBED SCRIPTS
+════════════════════════════════════════════ -->
+<script>
+/* ── Shared config applied to every spec ────────────────── */
+const VEGA_CONFIG = {
+  font: "DM Sans, system-ui, sans-serif",
+  background: "transparent",
+  axis: {
+    labelColor: "#64748b",
+    titleColor: "#475569",
+    gridColor: "#e2e8f0",
+    domainColor: "#cbd5e1",
+    tickColor: "#cbd5e1",
+    labelFontSize: 11,
+    titleFontSize: 11
+  },
+  legend: { labelColor: "#475569", titleColor: "#64748b", labelFontSize: 11 },
+  view: { stroke: "transparent" },
+  title: { color: "#1e3a5f", fontSize: 13, fontWeight: 600, font: "DM Sans, sans-serif" }
+};
+
+const EMBED_OPTS = {
+  actions: false,
+  renderer: "svg",
+  theme: "none",
+  config: VEGA_CONFIG
+};
+
+/* Helper: embed a JSON spec file */
+function embedSpec(id, path) {
+  vegaEmbed('#' + id, path, EMBED_OPTS).catch(console.error);
+}
+
+/* ── Chart 1: Subscriptions growth ────────────────────── */
+embedSpec("chart-subscriptions", "vega/01_growth/subscriptions.json");
+
+/* ── Chart 2: Penetration map ──────────────────────────── */
+embedSpec("chart-map", "vega/01_growth/penetration_map.json");
+
+/* ── Chart 3: Urban vs Rural ──────────────────────────── */
+embedSpec("chart-urban-rural", "vega/01_growth/urban_rural.json");
+
+/* ── Chart 4: Activities ──────────────────────────────── */
+embedSpec("chart-activities", "vega/02_usage/activities.json");
+
+/* ── Chart 5a: Platform video donut ──────────────────── */
+embedSpec("chart-platform-video", "vega/02_usage/platforms_video.json");
+
+/* ── Chart 5b: Platform comm donut (inline) ──────────── */
+const commSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 140, "height": 140,
+  "data": { "values": [
+    { "platform": "WhatsApp", "pct": 96 },
+    { "platform": "Telegram", "pct": 3 },
+    { "platform": "Others",   "pct": 1 }
+  ]},
+  "mark": { "type": "arc", "innerRadius": 45, "outerRadius": 68, "stroke": "white", "strokeWidth": 1.5 },
+  "encoding": {
+    "theta": { "field": "pct", "type": "quantitative" },
+    "color": {
+      "field": "platform", "type": "nominal",
+      "legend": { "title": null, "orient": "bottom" },
+      "scale": {
+        "domain": ["WhatsApp", "Telegram", "Others"],
+        "range": ["#22c55e", "#3b82f6", "#94a3b8"]
+      }
+    },
+    "tooltip": [
+      { "field": "platform", "type": "nominal", "title": "Platform" },
+      { "field": "pct", "type": "quantitative", "title": "Share (%)" }
+    ]
+  }
+};
+vegaEmbed('#chart-platform-comm', commSpec, EMBED_OPTS);
+
+/* ── Chart 6: Gaming devices ──────────────────────────── */
+embedSpec("chart-gaming-devices", "vega/02_usage/gaming_devices.json");
+
+/* ── Chart 7: CSI scores ──────────────────────────────── */
+embedSpec("chart-csi", "vega/03_experience/csi.json");
+
+/* ── Chart 8: Service Quality Gap ────────────────────── */
+embedSpec("chart-sqg", "vega/03_experience/sqg.json");
+
+/* ── Chart 9: IPA matrix ──────────────────────────────── */
+embedSpec("chart-ipa", "vega/03_experience/ipa.json");
+
+/* ── Chart 10: Speed maps ─────────────────────────────── */
+embedSpec("chart-speed-map", "vega/04_speed/malaysia_map.json");
+
+/* ── Chart 11: Speed improvement bar ─────────────────── */
+embedSpec("chart-speed-bar", "vega/04_speed/speed_improvement.json");
+</script>
 
 </body>
-
 </html>
