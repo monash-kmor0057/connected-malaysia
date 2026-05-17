@@ -9,12 +9,17 @@
   },
 
   "transform": [
-    {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
-    },
 
     {
-      "filter": "datum['Sub-Items'] == 'Number of Cellular phones subscriptions'"
+      "filter": "
+      (datum.Items == 'Number of Cellular phones subscriptions'
+      && datum['Sub-Items'] == 'Number of Cellular phones subscriptions')
+
+      ||
+
+      (datum.Items == 'Number of broadband subscriptions'
+      && datum['Sub-Items'] == 'Number of broadband subscriptions')
+      "
     }
   ],
 
@@ -37,10 +42,20 @@
       "title": "Subscriptions (Thousands)"
     },
 
+    "color": {
+      "field": "Items",
+      "type": "nominal",
+      "title": "Type"
+    },
+
     "tooltip": [
       {
         "field": "Year",
         "type": "quantitative"
+      },
+      {
+        "field": "Items",
+        "type": "nominal"
       },
       {
         "field": "Value in Thousand",
