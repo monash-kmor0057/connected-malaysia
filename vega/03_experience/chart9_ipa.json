@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Importance-Performance Matrix 2023 vs 2024",
+  "width": "container",
+  "height": 320,
+  "data": {"url": "../../data/cleaned/bqoes_ipa.json"},
+  "params": [
+    {
+      "name": "ipa_type",
+      "value": "MBB",
+      "bind": {
+        "input": "select",
+        "options": ["FBB", "MBB"],
+        "labels": ["Fixed Broadband", "Mobile Broadband"],
+        "name": "Broadband type: "
+      }
+    }
+  ],
+  "transform": [{"filter": "datum.type == ipa_type"}],
+  "layer": [
+    {
+      "mark": {"type": "rect", "opacity": 0.04},
+      "encoding": {
+        "x": {"value": 0},
+        "x2": {"value": 340},
+        "y": {"value": 0},
+        "y2": {"value": 160},
+        "color": {"value": "#E24B4A"}
+      }
+    },
+    {
+      "mark": {"type": "rect", "opacity": 0.04},
+      "encoding": {
+        "x": {"value": 340},
+        "x2": {"value": 700},
+        "y": {"value": 0},
+        "y2": {"value": 160},
+        "color": {"value": "#1D9E75"}
+      }
+    },
+    {
+      "mark": {"type": "rect", "opacity": 0.04},
+      "encoding": {
+        "x": {"value": 0},
+        "x2": {"value": 340},
+        "y": {"value": 160},
+        "y2": {"value": 320},
+        "color": {"value": "#888780"}
+      }
+    },
+    {
+      "mark": {"type": "rect", "opacity": 0.04},
+      "encoding": {
+        "x": {"value": 340},
+        "x2": {"value": 700},
+        "y": {"value": 160},
+        "y2": {"value": 320},
+        "color": {"value": "#EF9F27"}
+      }
+    },
+    {
+      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#888780", "strokeWidth": 1},
+      "encoding": {"x": {"datum": 4.0, "type": "quantitative"}}
+    },
+    {
+      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#888780", "strokeWidth": 1},
+      "encoding": {"y": {"datum": 4.1, "type": "quantitative"}}
+    },
+    {
+      "transform": [
+        {
+          "lookup": "scope",
+          "from": {
+            "data": {"url": "../../data/cleaned/bqoes_ipa.json"},
+            "key": "scope",
+            "fields": ["performance", "importance", "year", "type"]
+          }
+        }
+      ],
+      "mark": {"type": "rule", "color": "#888780", "strokeWidth": 1.2, "opacity": 0.5},
+      "encoding": {
+        "x": {
+          "field": "performance", "type": "quantitative",
+          "scale": {"domain": [3.3, 4.7]},
+          "title": "Performance (Satisfaction)"
+        },
+        "x2": {"field": "performance"},
+        "y": {
+          "field": "importance", "type": "quantitative",
+          "scale": {"domain": [2.8, 5.0]},
+          "title": "Importance"
+        },
+        "y2": {"field": "importance"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 100},
+      "encoding": {
+        "x": {
+          "field": "performance", "type": "quantitative",
+          "scale": {"domain": [3.3, 4.7]},
+          "title": "Performance (Satisfaction)",
+          "axis": {"grid": true, "gridOpacity": 0.2, "labelFontSize": 11}
+        },
+        "y": {
+          "field": "importance", "type": "quantitative",
+          "scale": {"domain": [2.8, 5.0]},
+          "title": "Importance",
+          "axis": {"grid": true, "gridOpacity": 0.2, "labelFontSize": 11}
+        },
+        "color": {
+          "field": "year", "type": "ordinal",
+          "scale": {"domain": [2023, 2024], "range": ["#B4B2A9", "#185FA5"]},
+          "legend": {"title": "Year", "orient": "top-left", "labelFontSize": 12}
+        },
+        "shape": {
+          "field": "year", "type": "ordinal",
+          "scale": {"domain": [2023, 2024], "range": ["circle", "square"]}
+        },
+        "tooltip": [
+          {"field": "scope", "title": "Scope"},
+          {"field": "year", "title": "Year"},
+          {"field": "performance", "title": "Performance", "format": ".2f"},
+          {"field": "importance", "title": "Importance", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year == 2024"}],
+      "mark": {"type": "text", "dy": -10, "fontSize": 10, "fontWeight": "bold", "color": "#185FA5"},
+      "encoding": {
+        "x": {"field": "performance", "type": "quantitative"},
+        "y": {"field": "importance", "type": "quantitative"},
+        "text": {"field": "scope"}
+      }
+    },
+    {
+      "mark": {"type": "text", "fontSize": 10, "fontStyle": "italic", "opacity": 0.5},
+      "data": {"values": [
+        {"x": 3.5, "y": 4.7, "label": "Concentrate here"},
+        {"x": 4.4, "y": 4.7, "label": "Keep up good work"},
+        {"x": 3.5, "y": 3.0, "label": "Low priority"},
+        {"x": 4.4, "y": 3.0, "label": "Possible overkill"}
+      ]},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}

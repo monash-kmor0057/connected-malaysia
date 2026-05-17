@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Service Quality Gap 2023 vs 2024",
+  "width": "container",
+  "height": 300,
+  "data": {"url": "../../data/cleaned/bqoes_sqg.json"},
+  "params": [
+    {
+      "name": "bb_type",
+      "value": "FBB",
+      "bind": {
+        "input": "select",
+        "options": ["FBB", "MBB"],
+        "labels": ["Fixed Broadband", "Mobile Broadband"],
+        "name": "Broadband type: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.type == bb_type"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 3},
+      "encoding": {
+        "y": {
+          "field": "scope", "type": "nominal",
+          "sort": {"field": "gap", "order": "ascending"},
+          "title": null,
+          "axis": {"labelFontSize": 12}
+        },
+        "yOffset": {"field": "year", "type": "ordinal"},
+        "x": {
+          "field": "gap", "type": "quantitative",
+          "title": "Service Quality Gap (Performance − Expectation)",
+          "scale": {"domain": [-0.7, 0.6]},
+          "axis": {"grid": true, "gridOpacity": 0.3, "labelFontSize": 11}
+        },
+        "color": {
+          "condition": {"test": "datum.gap >= 0", "value": "#1D9E75"},
+          "value": "#E24B4A"
+        },
+        "opacity": {
+          "field": "year", "type": "ordinal",
+          "scale": {"domain": [2023, 2024], "range": [0.5, 1.0]},
+          "legend": {"title": "Year", "orient": "bottom-right", "labelFontSize": 12}
+        },
+        "tooltip": [
+          {"field": "scope", "title": "Scope"},
+          {"field": "year", "title": "Year"},
+          {"field": "gap", "title": "Gap", "format": "+.2f"},
+          {"field": "importance", "title": "Importance", "format": ".2f"},
+          {"field": "satisfaction", "title": "Satisfaction", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#444441", "strokeWidth": 1},
+      "encoding": {"x": {"datum": 0}}
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}

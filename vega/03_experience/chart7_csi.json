@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "CSI score comparison 2023 vs 2024 - FBB and MBB",
+  "width": "container",
+  "height": 280,
+  "data": {"url": "../../data/cleaned/bqoes_csi.json"},
+  "params": [
+    {
+      "name": "broadband_type",
+      "value": "FBB",
+      "bind": {
+        "input": "select",
+        "options": ["FBB", "MBB"],
+        "labels": ["Fixed Broadband", "Mobile Broadband"],
+        "name": "Broadband type: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.type == broadband_type"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 4, "opacity": 0.75},
+      "encoding": {
+        "x": {
+          "field": "scope", "type": "nominal",
+          "title": null,
+          "sort": {"field": "csi", "order": "descending"},
+          "axis": {"labelAngle": -20, "labelFontSize": 11}
+        },
+        "xOffset": {"field": "year", "type": "ordinal"},
+        "y": {
+          "field": "csi", "type": "quantitative",
+          "title": "CSI Score (out of 5)",
+          "scale": {"domain": [3.0, 4.5]},
+          "axis": {
+            "grid": true, "gridOpacity": 0.3,
+            "values": [3.0,3.5,4.0,4.5],
+            "labelFontSize": 11
+          }
+        },
+        "color": {
+          "field": "year", "type": "ordinal",
+          "scale": {"domain": [2023, 2024], "range": ["#B5D4F4", "#185FA5"]},
+          "legend": {"title": "Year", "orient": "top-right", "labelFontSize": 12}
+        },
+        "tooltip": [
+          {"field": "scope", "title": "Scope"},
+          {"field": "year", "title": "Year"},
+          {"field": "csi", "title": "CSI Score", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#E24B4A", "strokeWidth": 1.5, "strokeDash": [6,3]},
+      "encoding": {
+        "y": {"datum": 3.5, "type": "quantitative"}
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#639922", "strokeWidth": 1.5, "strokeDash": [6,3]},
+      "encoding": {
+        "y": {"datum": 4.0, "type": "quantitative"}
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "right", "dx": -4, "dy": -6, "fontSize": 10, "color": "#E24B4A"},
+      "encoding": {
+        "y": {"datum": 3.5},
+        "x": {"datum": "Online gaming"},
+        "text": {"value": "Zone of Indifference ≥3.5"}
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "right", "dx": -4, "dy": -6, "fontSize": 10, "color": "#639922"},
+      "encoding": {
+        "y": {"datum": 4.0},
+        "x": {"datum": "Online gaming"},
+        "text": {"value": "Zone of Loyalty ≥4.0"}
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}
