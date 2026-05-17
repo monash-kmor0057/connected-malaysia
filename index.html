@@ -3,18 +3,32 @@
 // Spec for Section 01: Infrastructure Growth
 const growthSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", // Makes the chart responsive to the CSS container
+  "width": "container",
   "height": 400,
   "background": "transparent",
+  
+  // --- NEW: Global font configuration for the chart ---
+  "config": {
+    "font": "'Inter', sans-serif", // Matches the Google Font in our CSS
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 10
+    },
+    "legend": {
+      "titleFontSize": 13,
+      "labelFontSize": 12,
+      "padding": 10
+    }
+  },
+  
   "data": {
-    // Make sure this path matches your folder structure!
     "url": "data/raw/telecommunications_statistics_malaysia.csv",
     "format": {
       "type": "csv"
     }
   },
   "transform": [
-    // 1. Filter only the specific sub-items we need to avoid double-counting
     {
       "filter": {
         "field": "Sub-Items",
@@ -26,19 +40,16 @@ const growthSpec = {
         ]
       }
     },
-    // 2. Group them into three main clean categories
     {
       "calculate": "datum['Sub-Items'] === 'Residential' || datum['Sub-Items'] === 'Business' ? 'Fixed Line (DEL)' : (datum['Sub-Items'] === 'Number of Cellular phones subscriptions' ? 'Mobile Cellular' : 'Broadband')",
       "as": "Technology_Type"
     },
-    // 3. Sum the values (This combines Residential + Business for Fixed Lines)
     {
       "aggregate": [
         {"op": "sum", "field": "Value in Thousand", "as": "Total_Subscriptions"}
       ],
       "groupby": ["Year", "Technology_Type"]
     },
-    // 4. Remove zero values so the Broadband line doesn't crash after 2015
     {
       "filter": "datum['Total_Subscriptions'] > 0"
     }
@@ -55,10 +66,9 @@ const growthSpec = {
     "x": {
       "field": "Year",
       "type": "temporal",
-      "title": null, // Removing title for a cleaner look
+      "title": null,
       "axis": {
         "grid": false,
-        "labelFontSize": 12,
         "tickCount": 10
       }
     },
@@ -67,10 +77,7 @@ const growthSpec = {
       "type": "quantitative",
       "title": "Subscriptions (in Thousands)",
       "axis": {
-        "gridColor": "#e2e8f0",
-        "labelFontSize": 12,
-        "titleFontSize": 13,
-        "titlePadding": 10
+        "gridColor": "#e2e8f0"
       }
     },
     "color": {
@@ -78,15 +85,11 @@ const growthSpec = {
       "type": "nominal",
       "title": "Technology",
       "scale": {
-        // Applying a modern color palette
-        "range": ["#f59e0b", "#3b82f6", "#10b981"] 
+        "range": ["#f59e0b", "#3b82f6", "#10b981"]
       },
       "legend": {
         "orient": "top-left",
-        "titleFontSize": 13,
-        "labelFontSize": 12,
-        "padding": 10,
-        "fillColor": "rgba(255,255,255,0.8)" // Slightly transparent background for readability
+        "fillColor": "rgba(255,255,255,0.8)"
       }
     },
     "tooltip": [
