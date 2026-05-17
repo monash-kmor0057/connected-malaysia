@@ -5,13 +5,12 @@
   "height": 400,
 
   "data": {
-    "url": "data/cleaned/subscriptions_growth.csv"
+    "url": "./data/raw/2000-2021-telecommunications-statistics-malaysia.csv"
   },
 
   "transform": [
     {
-      "fold": ["mobile", "broadband"],
-      "as": ["type", "value"]
+      "filter": "datum.Items == 'Cellular Phone Subscriptions'"
     }
   ],
 
@@ -23,21 +22,20 @@
   "encoding": {
 
     "x": {
-      "field": "year",
+      "field": "Year",
       "type": "quantitative",
       "title": "Year"
     },
 
     "y": {
-      "field": "value",
+      "field": "Value in Thousand",
       "type": "quantitative",
-      "title": "Subscriptions (Millions)"
+      "title": "Subscriptions (Thousands)"
     },
 
     "color": {
-      "field": "type",
-      "type": "nominal",
-      "title": "Connection Type"
+      "field": "Sub-Items",
+      "type": "nominal"
     }
   }
 }
