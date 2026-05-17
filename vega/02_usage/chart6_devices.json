@@ -1,0 +1,52 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Gaming devices used: FBB vs MBB users",
+  "width": "container",
+  "height": 220,
+  "data": {"url": "../../data/cleaned/gaming_devices.json"},
+  "transform": [
+    {"fold": ["FBB", "MBB"], "as": ["broadband_type", "pct"]}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rule", "strokeWidth": 1.5, "color": "#D3D1C7"},
+      "encoding": {
+        "y": {"field": "device", "type": "nominal", "sort": "-x", "title": null},
+        "x": {"field": "FBB", "type": "quantitative", "title": "% of gamers", "scale": {"domain": [0, 100]}},
+        "x2": {"field": "MBB"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 90},
+      "encoding": {
+        "y": {"field": "device", "type": "nominal", "sort": "-x", "title": null,
+              "axis": {"labelFontSize": 12}},
+        "x": {"field": "pct", "type": "quantitative",
+              "axis": {"grid": true, "gridOpacity": 0.3, "labelFontSize": 11}},
+        "color": {
+          "field": "broadband_type", "type": "nominal",
+          "scale": {"domain": ["FBB", "MBB"], "range": ["#185FA5", "#1D9E75"]},
+          "legend": {"title": "Connection type", "orient": "bottom-right", "labelFontSize": 12}
+        },
+        "tooltip": [
+          {"field": "device", "title": "Device"},
+          {"field": "broadband_type", "title": "Type"},
+          {"field": "pct", "title": "% of gamers", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -10, "fontSize": 10},
+      "encoding": {
+        "y": {"field": "device", "type": "nominal", "sort": "-x"},
+        "x": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "pct", "format": ".1f"},
+        "color": {
+          "field": "broadband_type", "type": "nominal",
+          "scale": {"domain": ["FBB", "MBB"], "range": ["#185FA5", "#1D9E75"]}
+        }
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}, "font": "inherit"}
+}
