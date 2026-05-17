@@ -1,104 +1,80 @@
-// js/main.js
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Malaysia: A Digital Transformation Journey</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// Spec for Section 01: Infrastructure Growth
-const growthSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": 400,
-  "background": "transparent",
-  
-  // --- NEW: Global font configuration for the chart ---
-  "config": {
-    "font": "'Inter', sans-serif", // Matches the Google Font in our CSS
-    "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13,
-      "titlePadding": 10
-    },
-    "legend": {
-      "titleFontSize": 13,
-      "labelFontSize": 12,
-      "padding": 10
-    }
-  },
-  
-  "data": {
-    "url": "data/raw/telecommunications_statistics_malaysia.csv",
-    "format": {
-      "type": "csv"
-    }
-  },
-  "transform": [
-    {
-      "filter": {
-        "field": "Sub-Items",
-        "oneOf": [
-          "Residential",
-          "Business",
-          "Number of Cellular phones subscriptions",
-          "Number of broadband subscriptions"
-        ]
-      }
-    },
-    {
-      "calculate": "datum['Sub-Items'] === 'Residential' || datum['Sub-Items'] === 'Business' ? 'Fixed Line (DEL)' : (datum['Sub-Items'] === 'Number of Cellular phones subscriptions' ? 'Mobile Cellular' : 'Broadband')",
-      "as": "Technology_Type"
-    },
-    {
-      "aggregate": [
-        {"op": "sum", "field": "Value in Thousand", "as": "Total_Subscriptions"}
-      ],
-      "groupby": ["Year", "Technology_Type"]
-    },
-    {
-      "filter": "datum['Total_Subscriptions'] > 0"
-    }
-  ],
-  "mark": {
-    "type": "line",
-    "point": {
-      "filled": true,
-      "fill": "white"
-    },
-    "strokeWidth": 3
-  },
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "temporal",
-      "title": null,
-      "axis": {
-        "grid": false,
-        "tickCount": 10
-      }
-    },
-    "y": {
-      "field": "Total_Subscriptions",
-      "type": "quantitative",
-      "title": "Subscriptions (in Thousands)",
-      "axis": {
-        "gridColor": "#e2e8f0"
-      }
-    },
-    "color": {
-      "field": "Technology_Type",
-      "type": "nominal",
-      "title": "Technology",
-      "scale": {
-        "range": ["#f59e0b", "#3b82f6", "#10b981"]
-      },
-      "legend": {
-        "orient": "top-left",
-        "fillColor": "rgba(255,255,255,0.8)"
-      }
-    },
-    "tooltip": [
-      {"field": "Year", "timeUnit": "year", "title": "Year"},
-      {"field": "Technology_Type", "title": "Infrastructure"},
-      {"field": "Total_Subscriptions", "title": "Subscriptions (x1,000)", "format": ",.0f"}
-    ]
-  }
-};
+    <header>
+        <div class="container">
+            <h1>Connected Malaysia</h1>
+            <p class="subtitle">The growth, usage, and user experience of telecommunications infrastructure in Malaysia</p>
+        </div>
+    </header>
 
-// Embed the chart into the div with id="vis-growth"
-vegaEmbed('#vis-growth', growthSpec, {actions: false}).catch(console.error);
+    <main class="container">
+
+        <section class="vis-section">
+            <div class="vis-description">
+                <h2>01. Rapid Infrastructure Growth</h2>
+                <p>
+                    Over the past decades, Malaysia's telecommunications infrastructure has undergone a dramatic evolution. 
+                    This chart illustrates the transition from traditional fixed telephone lines (DEL) to the explosive adoption of mobile cellular and broadband subscriptions.
+                </p>
+            </div>
+            <div class="vis-container" id="vis-growth"></div>
+        </section>
+
+        <section class="vis-section row-reverse">
+            <div class="vis-description">
+                <h2>02. The Normalization of Digital Usage</h2>
+                <p>
+                    As infrastructure improved, the way Malaysians consume data and interact with the internet shifted significantly. 
+                    This section explores the current trends in digital consumption and daily communication habits.
+                </p>
+            </div>
+            <div class="vis-container" id="vis-usage"></div>
+        </section>
+
+        <section class="vis-section">
+            <div class="vis-description">
+                <h2>03. The Reality of Quality of Experience (QoE)</h2>
+                <p>
+                    Beyond raw infrastructure numbers, the MCMC Quality of Experience data reveals the actual satisfaction of users. 
+                    Here, we examine the perceived stability, reliability, and challenges faced by everyday consumers.
+                </p>
+            </div>
+            <div class="vis-container" id="vis-experience"></div>
+        </section>
+
+        <section class="vis-section layout-vertical">
+            <div class="vis-description full-width">
+                <h2>04. Regional Disparities in Network Speeds (2020 - 2026)</h2>
+                <p>
+                    Utilizing Ookla's open datasets, we map the evolution of network speeds across Malaysia. 
+                    This geographical visualization highlights the ongoing digital divide between urban centers and rural areas.
+                </p>
+            </div>
+            <div class="vis-container map-container" id="vis-speed"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Data Sources:</strong> Data.gov.my (MCMC Telecommunications Statistics), MCMC BQoES Report 2024, Ookla Open Data</p>
+            <p><strong>Course:</strong> FIT2179 Data Visualisation 2 | <strong>Author:</strong> [Your Name/ID] | <strong>Date:</strong> May 2026</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
