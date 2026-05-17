@@ -1,41 +1,28 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 700,
-  "height": 400,
+  "width": 400,
+  "height": 300,
 
   "data": {
-    "url": "/connected-malaysia/data/raw/telecommunications_statistics_malaysia.csv"
+    "values": [
+      {"year": 2020, "value": 40},
+      {"year": 2021, "value": 50},
+      {"year": 2022, "value": 60}
+    ]
   },
 
-  "transform": [
-    {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
-    }
-  ],
-
-  "mark": {
-    "type": "line",
-    "point": true
-  },
+  "mark": "line",
 
   "encoding": {
     "x": {
-      "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "field": "year",
+      "type": "quantitative"
     },
 
     "y": {
-      "field": "Value in Thousand",
-      "type": "quantitative",
-      "title": "Subscriptions (Thousands)"
-    },
-
-    "color": {
-      "field": "Sub-Items",
-      "type": "nominal",
-      "title": "Subscription Type"
+      "field": "value",
+      "type": "quantitative"
     }
   }
 }
