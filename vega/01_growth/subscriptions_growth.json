@@ -5,7 +5,7 @@
   "height": 400,
 
   "data": {
-    "url": "./data/raw/2000-2021-telecommunications-statistics-malaysia.csv"
+    "url": "./data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
@@ -35,7 +35,23 @@
 
     "color": {
       "field": "Sub-Items",
-      "type": "nominal"
-    }
+      "type": "nominal",
+      "title": "Subscription Type"
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative"
+      },
+      {
+        "field": "Sub-Items",
+        "type": "nominal"
+      },
+      {
+        "field": "Value in Thousand",
+        "type": "quantitative"
+      }
+    ]
   }
 }
