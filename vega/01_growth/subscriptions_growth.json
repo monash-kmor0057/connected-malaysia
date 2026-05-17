@@ -14,15 +14,7 @@
     },
 
     {
-      "aggregate": [
-        {
-          "op": "sum",
-          "field": "Value in Thousand",
-          "as": "TotalSubscriptions"
-        }
-      ],
-
-      "groupby": ["Year"]
+      "filter": "datum['Sub-Items'] == 'Number of Cellular phones subscriptions'"
     }
   ],
 
@@ -40,9 +32,20 @@
     },
 
     "y": {
-      "field": "TotalSubscriptions",
+      "field": "Value in Thousand",
       "type": "quantitative",
       "title": "Subscriptions (Thousands)"
-    }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative"
+      },
+      {
+        "field": "Value in Thousand",
+        "type": "quantitative"
+      }
+    ]
   }
 }
