@@ -8,25 +8,43 @@
     "url": "/connected-malaysia/data/raw/telecommunications_statistics_malaysia.csv"
   },
 
+  "transform": [
+    {
+      "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
+    },
+    {
+      "filter": "datum['Sub-Items'] == 'Total'"
+    }
+  ],
+
   "mark": {
-    "type": "line"
+    "type": "line",
+    "point": true
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Year"
     },
 
     "y": {
       "field": "Value in Thousand",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions (Thousands)"
     },
 
-    "color": {
-      "field": "Items",
-      "type": "nominal"
-    }
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative"
+      },
+      {
+        "field": "Value in Thousand",
+        "type": "quantitative"
+      }
+    ]
   }
 }
