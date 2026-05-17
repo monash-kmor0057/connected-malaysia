@@ -9,17 +9,8 @@
   },
 
   "transform": [
-
     {
-      "filter": "
-      (datum.Items == 'Number of Cellular phones subscriptions'
-      && datum['Sub-Items'] == 'Number of Cellular phones subscriptions')
-
-      ||
-
-      (datum.Items == 'Number of broadband subscriptions'
-      && datum['Sub-Items'] == 'Number of broadband subscriptions')
-      "
+      "filter": "(datum.Items == 'Number of Cellular phones subscriptions' && datum['Sub-Items'] == 'Number of Cellular phones subscriptions') || (datum.Items == 'Number of broadband subscriptions' && datum['Sub-Items'] == 'Number of broadband subscriptions')"
     }
   ],
 
