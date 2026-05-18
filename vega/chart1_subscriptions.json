@@ -1,6 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+
   "width": 300,
   "height": 220,
 
@@ -35,7 +40,8 @@
 
     "color": {
       "field": "Items",
-      "type": "nominal"
+      "type": "nominal",
+      "legend": null
     }
   },
 
