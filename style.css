@@ -79,7 +79,7 @@ body {
 
     overflow: hidden;
 
-    min-height: 450px;
+    min-height: auto;
 }
 
 
