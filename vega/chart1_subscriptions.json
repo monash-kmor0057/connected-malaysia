@@ -5,7 +5,7 @@
   "height": 220,
 
   "data": {
-    "url": "../data/raw/telecommunications_statistics_malaysia.csv"
+    "url": "data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
