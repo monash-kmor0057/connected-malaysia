@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 300,
-  "height": 240,
+  "width": 320,
+  "height": 260,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -11,33 +11,36 @@
   "transform": [
 
     {
-      "filter": "datum.Items == 'Number of 3G subscriptions'"
+      "filter": "datum.Items == 'Number of broadband subscriptions'"
     },
 
     {
-      "filter": "datum['Sub-Items'] == 'Prepaid' || datum['Sub-Items'] == 'Postpaid'"
+      "filter": "datum['Sub-Items'] == 'Wireless' || datum['Sub-Items'] == 'Fixed'"
+    },
+
+    {
+      "filter": "datum.Value_in_Thousand > 0"
     }
 
   ],
 
   "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
+    "type": "area",
+    "opacity": 0.75
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "quantitative"
     },
 
     "y": {
       "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "3G subscriptions"
+      "stack": true,
+      "title": "Broadband subscriptions"
     },
 
     "color": {
@@ -45,29 +48,8 @@
       "type": "nominal",
 
       "scale": {
-        "range": ["#f59e0b", "#fde68a"]
-      },
-
-      "legend": {
-        "title": null,
-        "orient": "top"
+        "range": ["#38bdf8", "#1d4ed8"]
       }
-    },
-
-    "tooltip": [
-
-      {
-        "field": "Year"
-      },
-
-      {
-        "field": "Sub-Items"
-      },
-
-      {
-        "field": "Value_in_Thousand"
-      }
-
-    ]
+    }
   }
 }
