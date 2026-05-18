@@ -9,51 +9,32 @@
   },
 
   "transform": [
-    {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions' || datum.Items == 'Number of broadband subscriptions'"
-    },
 
     {
-      "filter": "datum['Sub-Items'] == datum.Items"
-    },
-
-    {
-      "filter": "datum.Value_in_Thousand > 0"
-    },
-
-    {
-      "calculate": "datum.Items == 'Number of Cellular phones subscriptions' ? 'Mobile' : 'Broadband'",
-      "as": "Category"
+      "filter": "datum.Items == 'Number of short message services (SMS)sent (billion)'"
     }
+
   ],
 
   "mark": {
-    "type": "line",
+    "type": "area",
+    "line": true,
     "point": true,
-    "strokeWidth": 3
+    "color": "#dc2626",
+    "opacity": 0.6
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "quantitative"
     },
 
     "y": {
       "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "Subscriptions"
-    },
-
-    "color": {
-      "field": "Category",
-      "type": "nominal",
-
-      "scale": {
-        "range": ["#2563eb", "#16a34a"]
-      }
+      "title": "SMS Sent"
     }
   }
 }
