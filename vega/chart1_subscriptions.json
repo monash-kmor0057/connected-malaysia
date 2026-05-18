@@ -10,7 +10,7 @@
 
   "transform": [
     {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions' || datum.Items == 'Number of broadband subscriptions'"
+      "filter": "datum.Items === 'Number of Cellular phones subscriptions' || datum.Items === 'Number of broadband subscriptions'"
     }
   ],
 
@@ -35,26 +35,8 @@
 
     "color": {
       "field": "Items",
-      "type": "nominal",
-      "legend": {
-        "title": null
-      }
-    },
-
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "ordinal"
-      },
-      {
-        "field": "Items",
-        "type": "nominal"
-      },
-      {
-        "field": "Value in Thousand",
-        "type": "quantitative"
-      }
-    ]
+      "type": "nominal"
+    }
   },
 
   "config": {
