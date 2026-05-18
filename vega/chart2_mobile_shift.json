@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 260,
-  "height": 220,
+  "width": 300,
+  "height": 240,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -12,32 +12,53 @@
     {
       "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
     },
+
     {
       "filter": "datum.SubItems == 'Post paid' || datum.SubItems == 'Prepaid'"
     }
   ],
 
   "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
+    "type": "area",
+    "opacity": 0.75
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Year"
     },
 
     "y": {
       "field": "Value",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions (Thousand)",
+      "stack": true
     },
 
     "color": {
       "field": "SubItems",
-      "type": "nominal"
-    }
+      "type": "nominal",
+      "scale": {
+        "range": ["#2563eb", "#93c5fd"]
+      },
+      "legend": {
+        "title": null
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year"
+      },
+      {
+        "field": "SubItems"
+      },
+      {
+        "field": "Value"
+      }
+    ]
   }
 }
