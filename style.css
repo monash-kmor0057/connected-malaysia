@@ -7,13 +7,13 @@ body {
 }
 
 
-/* HERO */
+/* Hero Banner */
 
 .hero {
 
-    height: 320px;
+    width: 100%;
 
-    background-color: #eef6fb;
+    min-height: 320px;
 
     background-image: url("images/header.png");
 
@@ -21,61 +21,55 @@ body {
 
     background-position: right center;
 
-    background-size: auto 100%;
+    background-size: contain;
+
+    background-color: #eef5fb;
 
     display: flex;
+    align-items: center;
 
-    flex-direction: column;
-
-    justify-content: center;
-
-    padding-left: 70px;
-
-    padding-right: 70px;
+    padding: 40px 70px;
 
     box-sizing: border-box;
 }
 
 
-/* HERO TITLE */
+/* Hero Text */
+
+.hero-text {
+    max-width: 650px;
+}
 
 .hero h1 {
 
     margin: 0;
 
-    color: #0f172a;
+    font-size: 72px;
 
-    font-size: 52px;
+    line-height: 0.95;
 
     font-weight: 700;
 
-    line-height: 1.0;
+    letter-spacing: 1px;
 
-    letter-spacing: 0.5px;
-
-    max-width: 500px;
+    color: #0f172a;
 }
-
-
-/* HERO SUBTITLE */
 
 .hero p {
 
-    margin-top: 22px;
-
-    color: #111827;
+    margin-top: 26px;
 
     font-size: 24px;
 
-    line-height: 1.4;
+    line-height: 1.5;
 
     font-weight: 400;
 
-    max-width: 620px;
+    color: #1e293b;
 }
 
 
-/* SECTION */
+/* Section Layout */
 
 .dashboard-section {
 
@@ -85,7 +79,6 @@ body {
 
     padding: 0 40px;
 }
-
 
 .section-title h2 {
 
@@ -97,7 +90,7 @@ body {
 }
 
 
-/* GRID */
+/* Grid System */
 
 .grid-3 {
 
@@ -111,7 +104,7 @@ body {
 }
 
 
-/* CARD */
+/* Chart Card */
 
 .chart-card {
 
@@ -129,12 +122,11 @@ body {
 }
 
 
-/* NUMBER */
+/* Number Badge */
 
 .chart-number {
 
     width: 42px;
-
     height: 42px;
 
     border-radius: 10px;
@@ -144,9 +136,7 @@ body {
     color: white;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     font-size: 18px;
@@ -157,7 +147,7 @@ body {
 }
 
 
-/* TITLES */
+/* Card Titles */
 
 .chart-card h3 {
 
@@ -173,7 +163,7 @@ body {
 }
 
 
-/* ANNOTATION */
+/* Annotation Text */
 
 .annotation {
 
@@ -187,7 +177,7 @@ body {
 }
 
 
-/* VEGA */
+/* Vega Chart Container */
 
 .vega-embed {
 
@@ -198,18 +188,19 @@ body {
     margin-bottom: -10px;
 }
 
-.vega-embed summary {
 
+/* Hide Vega Menu */
+
+.vega-embed summary {
     display: none;
 }
 
 .vega-embed details {
-
     display: none;
 }
 
 
-/* MOBILE */
+/* Mobile Responsive */
 
 @media screen and (max-width: 1200px) {
 
@@ -220,27 +211,23 @@ body {
 
     .hero {
 
-        height: 240px;
+        min-height: 260px;
 
-        padding-left: 40px;
+        padding: 30px;
 
-        padding-right: 40px;
+        background-size: cover;
 
-        background-size: auto 100%;
-
-        background-position: right center;
+        background-position: center right;
     }
 
     .hero h1 {
 
-        font-size: 38px;
+        font-size: 48px;
     }
 
     .hero p {
 
-        font-size: 18px;
-
-        max-width: 420px;
+        font-size: 20px;
     }
 
     .section-title h2 {
@@ -252,5 +239,4 @@ body {
 
         min-height: auto;
     }
-
 }
