@@ -46,9 +46,9 @@ body {
 }
 
 .section-title h2 {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
 
-    font-size: 30px;
+    font-size: 38px;
     font-weight: 700;
 }
 
@@ -73,7 +73,7 @@ body {
 
     border-radius: 22px;
 
-    padding: 28px;
+    padding: 22px;
 
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 
@@ -110,9 +110,9 @@ body {
 .chart-card h3 {
     margin-top: 0;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.35;
 
     font-weight: 700;
@@ -122,7 +122,7 @@ body {
 /* ANNOTATION */
 
 .annotation {
-    margin-top: 18px;
+    margin-top: 16px;
 
     font-size: 15px;
     line-height: 1.6;
@@ -137,6 +137,8 @@ body {
     width: 100%;
 
     overflow: hidden;
+
+    margin-bottom: -10px;
 }
 
 .vega-embed summary {
@@ -165,7 +167,7 @@ body {
     }
 
     .section-title h2 {
-        font-size: 34px;
+        font-size: 32px;
     }
 
     .chart-card {
