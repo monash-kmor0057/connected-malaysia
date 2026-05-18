@@ -1,351 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connected Malaysia — How broadband transformed Malaysian digital life</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <title>Connected Malaysia</title>
 
-  <!-- Vega-Lite -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ── Navigation ──────────────────────────────────────────────────── -->
-<nav id="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="#hero">Connected Malaysia</a>
-    <ul class="nav-links">
-      <li><a href="#section1">1. Growth</a></li>
-      <li><a href="#section2">2. Usage</a></li>
-      <li><a href="#section3">3. Experience</a></li>
-      <li><a href="#section4">4. Speed</a></li>
-      <li><a href="#takeaways">5. Takeaways</a></li>
-    </ul>
-  </div>
-</nav>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-left">
+            <h1>CONNECTED MALAYSIA</h1>
+            <p>
+                How internet access transformed Malaysian digital life
+            </p>
+        </div>
 
-<!-- ── Hero ────────────────────────────────────────────────────────── -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <span class="hero-tag">Data Visualisation · Malaysia</span>
-        <h1 class="hero-title">
-          Connected<br><span>Malaysia</span>
-        </h1>
-        <p class="hero-sub">
-          Malaysia has become far more connected over the last two decades. Faster infrastructure
-          has enabled new digital lifestyles, and overall experience has improved — but gaps
-          remain across regions and activities.
+        <div class="hero-right">
+            <h3>NAVIGATION</h3>
+            <ul>
+                <li>1. Growth of Connectivity</li>
+                <li>2. How Malaysians Use the Internet</li>
+                <li>3. Faster Internet ≠ Better Experience</li>
+                <li>4. The Speed Divide</li>
+            </ul>
+        </div>
+    </header>
+
+
+    <!-- INTRO -->
+    <section class="intro">
+        <p>
+            Malaysia has become significantly more connected over the past two decades.
+            Faster internet infrastructure changed how Malaysians communicate,
+            work, shop, and entertain themselves.
         </p>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">47.2<span>M</span></div>
-          <div class="hero-stat-label">Mobile subscriptions (2021)</div>
+    </section>
+
+
+    <!-- SECTION 1 -->
+    <section class="dashboard-section blue-section">
+
+        <div class="section-title">
+            <h2>SECTION 1 | Growth of Connectivity</h2>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">91<span>%</span></div>
-          <div class="hero-stat-label">Urban broadband access (2024)</div>
+
+        <div class="grid grid-3">
+
+            <div class="chart-card large-card">
+                <div class="chart-number">1</div>
+                <h3>Broadband subscriptions growth</h3>
+                <div id="chart1"></div>
+                <p class="annotation">
+                    Mobile broadband subscriptions grew rapidly after 2010.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">2</div>
+                <h3>Mobile-first internet shift</h3>
+                <div id="chart2"></div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">3</div>
+                <h3>Internet access over time</h3>
+                <div id="chart3"></div>
+            </div>
+
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">82<span>Mbps</span></div>
-          <div class="hero-stat-label">Malaysia median download speed (2024)</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">#52</div>
-          <div class="hero-stat-label">Global speed ranking out of 229 countries</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Section 1: Growth ────────────────────────────────────────────── -->
-<section id="section1" class="section">
-  <div class="container">
-    <div class="section-label">Section 1</div>
-    <h2 class="section-title">Malaysia became connected</h2>
-    <p class="section-desc">
-      From fewer than 20,000 broadband subscribers in 2002 to over 30 million by 2015,
-      Malaysia's digital leap was rapid — driven first by fixed infrastructure, then by
-      an explosion in mobile connectivity.
-    </p>
-
-    <!-- Chart 1 full width -->
-    <div class="card span-3" style="margin-bottom:20px;">
-      <div class="card-title">Chart 1</div>
-      <div class="card-heading">Broadband subscriptions growth (2000–2021)</div>
-      <div class="card-note">
-        Mobile subscriptions (dashed line) vs fixed and wireless broadband (stacked area).
-        Source: Telecommunications Statistics Malaysia, data.gov.my
-      </div>
-      <div class="vega-wrap" id="chart1"></div>
-    </div>
-
-    <!-- Charts 2 & 3 side by side -->
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Chart 2</div>
-        <div class="card-heading">Internet penetration by state (2024)</div>
-        <div class="card-note">Hover over a state to see penetration rate. Source: MCMC / BQoES 2024</div>
-        <div class="vega-wrap" id="chart2"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Chart 3</div>
-        <div class="card-heading">Urban vs Rural broadband access (2010–2024)</div>
-        <div class="card-note">The gap has narrowed, but rural access still lags urban areas. Source: MCMC</div>
-        <div class="vega-wrap" id="chart3"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ── Section 2: Usage ──────────────────────────────────────────────── -->
-<section id="section2" class="section">
-  <div class="container">
-    <div class="section-label">Section 2</div>
-    <h2 class="section-title">How Malaysians use the internet</h2>
-    <p class="section-desc">
-      Communication and entertainment dominate online life. WhatsApp connects nearly every
-      Malaysian, while YouTube leads video streaming. Mobile gaming has surged — but device
-      preferences differ sharply between fixed and mobile broadband users.
-    </p>
-
-    <!-- Insight row -->
-    <div class="insight-row">
-      <div class="insight-box">
-        <div class="insight-num">93%</div>
-        <div class="insight-label">use instant messaging daily</div>
-      </div>
-      <div class="insight-box">
-        <div class="insight-num">96%</div>
-        <div class="insight-label">use WhatsApp for voice calls</div>
-      </div>
-      <div class="insight-box">
-        <div class="insight-num">87%</div>
-        <div class="insight-label">stream video on YouTube</div>
-      </div>
-      <div class="insight-box">
-        <div class="insight-num">51%</div>
-        <div class="insight-label">play online games regularly</div>
-      </div>
-    </div>
-
-    <!-- Charts 4, 5, 6 -->
-    <div class="grid-3">
-      <div class="card span-2">
-        <div class="card-title">Chart 4</div>
-        <div class="card-heading">What Malaysians do online most</div>
-        <div class="card-note">% of users engaging in each activity. Source: BQoES 2024</div>
-        <div class="vega-wrap" id="chart4"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Chart 6</div>
-        <div class="card-heading">Gaming devices: FBB vs MBB</div>
-        <div class="card-note">Mobile-first on MBB; PC more common on fixed broadband. Source: BQoES 2024</div>
-        <div class="vega-wrap" id="chart6"></div>
-      </div>
-    </div>
-
-    <div style="margin-top:20px;">
-      <div class="card">
-        <div class="card-title">Chart 5</div>
-        <div class="card-heading">Platform dominance — streaming and voice</div>
-        <div class="card-note">
-          YouTube commands 87% of streaming traffic. WhatsApp holds 96% of online voice calls.
-          Source: BQoES 2024
-        </div>
-        <div class="vega-wrap" id="chart5"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ── Section 3: Experience ─────────────────────────────────────────── -->
-<section id="section3" class="section">
-  <div class="container">
-    <div class="section-label">Section 3</div>
-    <h2 class="section-title">Faster internet ≠ perfect experience</h2>
-    <p class="section-desc">
-      Consumer satisfaction improved across all activities from 2023 to 2024. Online gaming
-      showed the biggest leap. But web browsing, voice calls, and video calls still fall
-      short of what users expect — the gap between expectation and reality persists.
-    </p>
-
-    <!-- Charts 7 & 8 -->
-    <div class="grid-2" style="margin-bottom:20px;">
-      <div class="card">
-        <div class="card-title">Chart 7</div>
-        <div class="card-heading">CSI score comparison 2023 vs 2024</div>
-        <div class="card-note">
-          Score 1–5. Zone of Loyalty ≥4.0 (green). Zone of Indifference 3.5–4.0 (red).
-          Use the dropdown to toggle between FBB and MBB. Source: BQoES 2024
-        </div>
-        <div class="vega-wrap" id="chart7"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Chart 8</div>
-        <div class="card-heading">Service quality gap (expectation − satisfaction)</div>
-        <div class="card-note">
-          Negative = provider falls short of expectations. Gaps narrowed in 2024;
-          gaming exceeded expectations. Source: BQoES 2024
-        </div>
-        <div class="vega-wrap" id="chart8"></div>
-      </div>
-    </div>
-
-    <!-- Chart 9 full width -->
-    <div class="card">
-      <div class="card-title">Chart 9</div>
-      <div class="card-heading">Importance–Performance matrix (2023 vs 2024)</div>
-      <div class="card-note">
-        Circles = 2023; squares = 2024. Attributes in the top-right quadrant are high importance
-        and high performance — the goal. Use dropdown to switch FBB / MBB. Source: BQoES 2024
-      </div>
-      <div class="vega-wrap" id="chart9"></div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ── Section 4: Speed Divide ───────────────────────────────────────── -->
-<section id="section4" class="section">
-  <div class="container">
-    <div class="section-label">Section 4</div>
-    <h2 class="section-title">The speed divide: progress across Malaysia</h2>
-    <p class="section-desc">
-      Every state gained speed between 2020 and 2026 — but the gains are uneven.
-      Johor and Selangor surged ahead, while East Malaysia and northern states still trail.
-      Speed and experience improvements do not automatically mean equal digital access.
-    </p>
-
-    <!-- Ookla maps trio -->
-    <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">
-      Median download speed (Mbps) — Ookla Speedtest Intelligence tiles.
-      Colours are on the same scale across all three maps.
-    </p>
-
-    <div class="map-trio" style="margin-bottom:16px;">
-      <div class="map-card">
-        <div class="map-year-badge">2020 Q1</div>
-        <div class="map-card-inner">
-          <div class="vega-wrap" id="chart10a"></div>
-        </div>
-      </div>
-      <div class="map-card">
-        <div class="map-year-badge">2023 Q1</div>
-        <div class="map-card-inner">
-          <div class="vega-wrap" id="chart10b"></div>
-        </div>
-      </div>
-      <div class="map-card">
-        <div class="map-year-badge">2026 Q1</div>
-        <div class="map-card-inner">
-          <div class="vega-wrap" id="chart10c"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Shared legend -->
-    <div class="speed-legend">
-      <span>0 Mbps</span>
-      <div class="speed-legend-bar"></div>
-      <span>125+ Mbps</span>
-      <span style="margin-left:12px;font-size:11px;">Source: Ookla Open Data (SpeedTest Intelligence)</span>
-    </div>
-
-    <!-- Charts 11 & 12 -->
-    <div class="grid-2" style="margin-top:32px;">
-      <div class="card">
-        <div class="card-title">Chart 11</div>
-        <div class="card-heading">Speed improvement by state (2020 Q1 → 2026 Q1)</div>
-        <div class="card-note">
-          Dot = 2020 speed (grey) vs 2026 speed (coloured). Label = Mbps gained.
-          Source: Ookla Open Data
-        </div>
-        <div class="vega-wrap" id="chart11"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Chart 12</div>
-        <div class="card-heading">Malaysia global download speed ranking (2017–2024)</div>
-        <div class="card-note">
-          Speed in Mbps (blue line). Grey numbers below each point show global rank.
-          Source: Speedtest Global Index (Ookla)
-        </div>
-        <div class="vega-wrap" id="chart12"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Key Takeaways ──────────────────────────────────────────────────── -->
-<section id="takeaways">
-  <div class="container">
-    <div class="section-label" style="color:rgba(255,255,255,0.5);">Key Takeaways</div>
-    <h2 class="section-title" style="color:#fff;margin-bottom:40px;">What the data tells us</h2>
-    <div class="takeaways-grid">
-      <div class="takeaway-card">
-        <div class="takeaway-icon">📈</div>
-        <div class="takeaway-text">
-          Malaysia's connectivity has grown dramatically over the past two decades — from near-zero broadband to 30+ million subscribers.
-        </div>
-      </div>
-      <div class="takeaway-card">
-        <div class="takeaway-icon">💬</div>
-        <div class="takeaway-text">
-          Internet is essential in daily life, led by communication and entertainment — WhatsApp and YouTube dominate.
-        </div>
-      </div>
-      <div class="takeaway-card">
-        <div class="takeaway-icon">⭐</div>
-        <div class="takeaway-text">
-          Experience quality has improved, but gaming and some services — especially voice and video calls — still need attention.
-        </div>
-      </div>
-      <div class="takeaway-card">
-        <div class="takeaway-icon">🗺️</div>
-        <div class="takeaway-text">
-          Speed improvements are uneven — Johor and Selangor gained the most; East Malaysia and northern states still lag behind.
-        </div>
-      </div>
-      <div class="takeaway-card">
-        <div class="takeaway-icon">⚡</div>
-        <div class="takeaway-text">
-          Better speed does not automatically mean equal digital experience. Rural-urban and inter-state gaps persist.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ─────────────────────────────────────────────────────────── -->
-<footer id="footer">
-  <p class="footer-text">
-    Data sources: Telecommunications Statistics Malaysia (data.gov.my, 2000–2024) ·
-    Broadband Quality of Experience Survey 2024 (MCMC, 2025) ·
-    Ookla Open Data – SpeedTest Intelligence (2020 Q1, 2023 Q1, 2026 Q1) ·
-    Speedtest Global Index (Ookla, 2017–2024)<br>
-    Visualisation by [Your Name] · FIT2179 Data Visualisation 2, Monash University Malaysia · May 2026<br>
-    AI tools used: Claude (Anthropic) for data cleaning and Vega-Lite JSON generation.
-  </p>
-</footer>
-
-<!-- ── Scripts ──────────────────────────────────────────────────────── -->
-<script src="js/main.js"></script>
-</body>
+    </section>
 </html>
