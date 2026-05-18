@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 320,
-  "height": 320,
+  "width": 340,
+  "height": 260,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -21,23 +21,26 @@
   ],
 
   "mark": {
-    "type": "line",
-    "interpolate": "cardinal",
+    "type": "area",
+    "line": {
+      "strokeWidth": 4
+    },
     "point": true,
-    "strokeWidth": 4,
-    "color": "#dc2626"
+    "color": "#ef4444",
+    "opacity": 0.55
   },
 
   "encoding": {
 
-    "theta": {
+    "x": {
       "field": "Year",
       "type": "ordinal"
     },
 
-    "radius": {
+    "y": {
       "field": "Value_in_Thousand",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "SMS Sent (Billions)"
     }
   }
 }
