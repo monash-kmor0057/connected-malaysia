@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 300,
-  "height": 240,
+  "width": 320,
+  "height": 260,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -11,68 +11,30 @@
   "transform": [
 
     {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
-    },
-
-    {
-      "filter": "datum['Sub-Items'] == 'Post paid' || datum['Sub-Items'] == 'Prepaid'"
-    },
-
-    {
-      "calculate": "datum['Sub-Items'] == 'Post paid' ? 'Postpaid' : 'Prepaid'",
-      "as": "Category"
+      "filter": "datum.Items == 'Number of short message services (SMS)sent (billion)'"
     }
 
   ],
 
   "mark": {
     "type": "area",
-    "opacity": 0.75
+    "line": true,
+    "point": true,
+    "color": "#dc2626",
+    "opacity": 0.6
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "quantitative"
     },
 
     "y": {
       "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "Subscriptions",
-      "stack": true
-    },
-
-    "color": {
-      "field": "Category",
-      "type": "nominal",
-
-      "scale": {
-        "range": ["#2563eb", "#93c5fd"]
-      },
-
-      "legend": {
-        "title": null,
-        "orient": "top"
-      }
-    },
-
-    "tooltip": [
-
-      {
-        "field": "Year"
-      },
-
-      {
-        "field": "Category"
-      },
-
-      {
-        "field": "Value_in_Thousand"
-      }
-
-    ]
+      "title": "SMS Sent"
+    }
   }
 }
