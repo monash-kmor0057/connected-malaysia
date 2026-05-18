@@ -15,6 +15,11 @@
 
     {
       "filter": "datum.SubItems == datum.Items"
+    },
+
+    {
+      "calculate": "datum.Items == 'Number of Cellular phones subscriptions' ? 'Mobile' : 'Broadband'",
+      "as": "Category"
     }
   ],
 
@@ -39,13 +44,16 @@
     },
 
     "color": {
-      "field": "Items",
+      "field": "Category",
       "type": "nominal",
+
       "scale": {
         "range": ["#2563eb", "#16a34a"]
       },
+
       "legend": {
-        "title": null
+        "title": null,
+        "orient": "top"
       }
     },
 
@@ -54,7 +62,7 @@
         "field": "Year"
       },
       {
-        "field": "Items"
+        "field": "Category"
       },
       {
         "field": "Value"
