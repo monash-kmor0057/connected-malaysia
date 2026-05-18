@@ -10,19 +10,13 @@
 
   "transform": [
     {
-      "filter": "datum.Items == 'Internet users'"
-    },
-    {
       "calculate": "toNumber(datum['Value in Thousand'])",
       "as": "value"
     }
   ],
 
   "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3,
-    "color": "#16a34a"
+    "type": "bar"
   },
 
   "encoding": {
@@ -38,16 +32,10 @@
       "title": "Users (Thousand)"
     },
 
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "ordinal"
-      },
-      {
-        "field": "value",
-        "type": "quantitative"
-      }
-    ]
+    "color": {
+      "field": "Items",
+      "type": "nominal"
+    }
   },
 
   "config": {
