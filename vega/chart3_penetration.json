@@ -1,12 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "autosize": {
-    "type": "fit",
-    "contains": "padding"
-  },
-
-  "width": 300,
+  "width": 280,
   "height": 220,
 
   "data": {
@@ -15,38 +10,24 @@
 
   "transform": [
     {
-      "calculate": "toNumber(datum['Value in Thousand'])",
-      "as": "value"
+      "filter": "datum.Items == 'Number of 3G subscriptions'"
     }
   ],
 
   "mark": {
-    "type": "bar"
+    "type": "bar",
+    "color": "#f59e0b"
   },
 
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "ordinal",
-      "title": "Year"
+      "type": "ordinal"
     },
 
     "y": {
-      "field": "value",
-      "type": "quantitative",
-      "title": "Users (Thousand)"
-    },
-
-    "color": {
-      "field": "Items",
-      "type": "nominal",
-      "legend": null
-    }
-  },
-
-  "config": {
-    "view": {
-      "stroke": null
+      "field": "Value in Thousand",
+      "type": "quantitative"
     }
   }
 }
