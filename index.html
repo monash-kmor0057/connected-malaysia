@@ -1,179 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Connected Malaysia</title>
 
+    <!-- Vega -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-    <link rel="stylesheet" href="style.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- HERO -->
     <header class="hero">
+
         <div class="hero-left">
             <h1>CONNECTED MALAYSIA</h1>
+
             <p>
                 How internet access transformed Malaysian digital life
             </p>
         </div>
 
-        </header>
-
-
-    
+    </header>
 
 
     <!-- SECTION 1 -->
-    <section class="dashboard-section blue-section">
+    <section class="dashboard-section">
 
         <div class="section-title">
             <h2>SECTION 1 | Growth of Connectivity</h2>
         </div>
 
-        <div class="grid grid-3">
+        <div class="grid-3">
 
-            <div class="chart-card large-card">
+            <!-- CHART 1 -->
+            <div class="chart-card">
+
                 <div class="chart-number">1</div>
+
                 <h3>Broadband subscriptions growth</h3>
+
                 <div id="chart1"></div>
+
                 <p class="annotation">
                     Mobile broadband subscriptions grew rapidly after 2010.
                 </p>
+
             </div>
 
+
+            <!-- CHART 2 -->
             <div class="chart-card">
+
                 <div class="chart-number">2</div>
+
                 <h3>Mobile-first internet shift</h3>
+
                 <div id="chart2"></div>
+
             </div>
 
+
+            <!-- CHART 3 -->
             <div class="chart-card">
+
                 <div class="chart-number">3</div>
+
                 <h3>Internet access over time</h3>
+
                 <div id="chart3"></div>
+
             </div>
 
-        </div>
-    </section>
-
-
-    <!-- SECTION 2 -->
-    <section class="dashboard-section green-section">
-
-        <div class="section-title">
-            <h2>SECTION 2 | How Malaysians Use the Internet</h2>
-        </div>
-      <div class="grid grid-2">
-
-            <div class="chart-card">
-                <div class="chart-number">4</div>
-                <h3>Most common online activities</h3>
-                <div id="chart4"></div>
-            </div>
-
-            <div class="chart-card">
-                <div class="chart-number">5</div>
-                <h3>Device preference</h3>
-                <div id="chart5"></div>
-            </div>
-
-            <div class="chart-card">
-                <div class="chart-number">6</div>
-                <h3>Satisfaction comparison</h3>
-                <div id="chart6"></div>
-            </div>
-
-            <div class="chart-card">
-                <div class="chart-number">7</div>
-                <h3>Expectation vs Satisfaction</h3>
-                <div id="chart7"></div>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- SECTION 3 -->
-    <section class="dashboard-section purple-section">
-
-        <div class="section-title">
-            <h2>SECTION 3 | The Speed Divide</h2>
-        </div>
-
-        <div class="grid grid-2">
-
-            <div class="chart-card map-card">
-                <div class="chart-number">8</div>
-                <h3>Speed map comparison</h3>
-                <div class="map-grid">
-                    <div id="map2020"></div>
-                    <div id="map2023"></div>
-                    <div id="map2026"></div>
-                </div>
-            </div>
-
-            <div class="chart-card">
-                <div class="chart-number">9</div>
-                <h3>National speed growth</h3>
-                <div id="chart9"></div>
-            </div>
-
-            <div class="chart-card wide-card">
-                <div class="chart-number">10</div>
-                <h3>Speed vs satisfaction</h3>
-                <div id="chart10"></div>
-                <p class="annotation">
-                    Faster speed does not always guarantee better digital experience.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- TAKEAWAYS -->
-    <section class="takeaways">
-        <div class="takeaway-box">
-            <h4>Connectivity Growth</h4>
-            <p>Malaysia experienced rapid internet expansion.</p>
-        </div>
-
-        <div class="takeaway-box">
-            <h4>Mobile-First Usage</h4>
-            <p>Smartphones dominate online access and activities.</p>
-        </div>
-
-        <div class="takeaway-box">
-            <h4>Improved Experience</h4>
-            <p>User satisfaction improved across most activities.</p>
-        </div>
-
-        <div class="takeaway-box">
-            <h4>Remaining Gaps</h4>
-            <p>Speed and quality remain uneven across contexts.</p>
         </div>
 
     </section>
 
 
-    <!-- FOOTER -->
-    <footer>
-        <p>
-            Author: Kyo Morimoto | FIT2179 Data Visualisation 2 | 2026
-        </p>
-
-        <p>
-            Sources: DOSM, MCMC BQoES, Ookla Open Data
-        </p>
-    </footer>
-
-
+    <!-- JS -->
     <script src="js/main.js"></script>
+
 </body>
+
 </html>
