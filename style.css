@@ -13,7 +13,7 @@ body {
 
     width: 100%;
 
-    min-height: 320px;
+    min-height: 300px;
 
     background-image: url("images/header.png");
 
@@ -23,7 +23,7 @@ body {
 
     background-size: contain;
 
-    background-color: #eef5fb;
+    background-color: white;
 
     display: flex;
     align-items: center;
@@ -37,18 +37,19 @@ body {
 /* Hero Text */
 
 .hero-text {
-    max-width: 650px;
+
+    max-width: 540px;
 }
 
 .hero h1 {
 
     margin: 0;
 
-    font-size: 72px;
+    font-size: 56px;
 
     line-height: 0.95;
 
-    font-weight: 700;
+    font-weight: 600;
 
     letter-spacing: 1px;
 
@@ -57,9 +58,9 @@ body {
 
 .hero p {
 
-    margin-top: 26px;
+    margin-top: 20px;
 
-    font-size: 24px;
+    font-size: 22px;
 
     line-height: 1.5;
 
@@ -211,7 +212,7 @@ body {
 
     .hero {
 
-        min-height: 260px;
+        min-height: 220px;
 
         padding: 30px;
 
@@ -222,12 +223,12 @@ body {
 
     .hero h1 {
 
-        font-size: 48px;
+        font-size: 40px;
     }
 
     .hero p {
 
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .section-title h2 {
@@ -235,8 +236,4 @@ body {
         font-size: 32px;
     }
 
-    .chart-card {
-
-        min-height: auto;
-    }
 }
