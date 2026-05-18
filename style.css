@@ -1,4 +1,5 @@
 body {
+
     margin: 0;
 
     background: #f3f4f6;
@@ -15,7 +16,7 @@ body {
 
     width: 100%;
 
-    min-height: 300px;
+    min-height: 260px;
 
     background-image: url("images/header.png");
 
@@ -23,7 +24,7 @@ body {
 
     background-position: right center;
 
-    background-size: cover;
+    background-size: contain;
 
     background-color: #F7FBFD;
 
@@ -41,7 +42,7 @@ body {
 
 .hero-text {
 
-    max-width: 620px;
+    max-width: 540px;
 
     z-index: 2;
 }
@@ -50,7 +51,7 @@ body {
 
     margin: 0;
 
-    font-size: 48px;
+    font-size: 44px;
 
     line-height: 0.95;
 
@@ -63,9 +64,9 @@ body {
 
 .hero p {
 
-    margin-top: 20px;
+    margin-top: 18px;
 
-    font-size: 22px;
+    font-size: 20px;
 
     line-height: 1.5;
 
@@ -79,52 +80,35 @@ body {
 
 .dashboard-section {
 
-    max-width: 1800px;
+    max-width: 1500px;
 
     margin: 60px auto;
 
     padding: 0 40px;
 }
 
-.section-title {
 
-    position: relative;
-}
+/* Section Title */
 
 .section-title h2 {
 
-    margin-bottom: 36px;
+    margin-bottom: 40px;
 
     font-size: 38px;
 
     font-weight: 700;
-}
 
-.section-title::after {
-
-    content: "";
-
-    width: 80px;
-
-    height: 5px;
-
-    background: #2563eb;
-
-    border-radius: 10px;
-
-    display: block;
-
-    margin-top: 14px;
+    color: #0f172a;
 }
 
 
-/* Main Grid */
+/* GRID */
 
-.grid-3 {
+.grid-2 {
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 32px;
 
@@ -132,7 +116,7 @@ body {
 }
 
 
-/* Full Width Card */
+/* FULL WIDTH */
 
 .full-width-card {
 
@@ -140,7 +124,7 @@ body {
 }
 
 
-/* Chart Card */
+/* CARD */
 
 .chart-card {
 
@@ -150,30 +134,9 @@ body {
 
     padding: 24px;
 
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 
-    overflow: visible;
-
-    transition: 0.25s ease;
-}
-
-.chart-card:hover {
-
-    transform: translateY(-4px);
-
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
-}
-
-
-/* Highlight Card */
-
-.visual-highlight {
-
-    background: linear-gradient(
-        135deg,
-        #eff6ff,
-        #ffffff
-    );
+    overflow: hidden;
 }
 
 
@@ -205,7 +168,7 @@ body {
 }
 
 
-/* Card Titles */
+/* Titles */
 
 .chart-card h3 {
 
@@ -237,26 +200,20 @@ body {
 }
 
 
-/* Vega Container */
+/* Vega */
 
 .vega-embed {
 
     width: 100%;
-
-    overflow: visible;
-
-    display: flex;
-
-    justify-content: center;
 }
 
 
-/* Auto Resize Charts */
+/* IMPORTANT */
 
 .vega-embed canvas,
 .vega-embed svg {
 
-    max-width: 100% !important;
+    width: 100% !important;
 
     height: auto !important;
 }
@@ -275,7 +232,7 @@ body {
 }
 
 
-/* MAP TIMELINE */
+/* MAP */
 
 .map-timeline {
 
@@ -285,21 +242,19 @@ body {
 
     align-items: center;
 
-    gap: 18px;
+    gap: 20px;
 
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
-    margin-top: 20px;
+    overflow-x: auto;
 }
 
 
-/* Map Containers */
-
 .map-box {
 
-    flex: 0 1 250px;
+    width: 260px;
 
-    max-width: 250px;
+    flex-shrink: 0;
 }
 
 
@@ -307,13 +262,11 @@ body {
 
 .map-arrow {
 
-    font-size: 40px;
+    font-size: 42px;
 
     color: #2563eb;
 
     font-weight: bold;
-
-    text-align: center;
 }
 
 
@@ -323,15 +276,13 @@ body {
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 24px;
-
-    margin-top: 10px;
 }
 
 
-/* Mini Chart Block */
+/* Mini Card */
 
 .mini-chart {
 
@@ -340,110 +291,25 @@ body {
     border-radius: 18px;
 
     padding: 18px;
-
-    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.15);
 }
 
 .mini-chart h4 {
 
     margin-top: 0;
 
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 
     font-size: 18px;
-
-    color: #0f172a;
 }
 
 
-/* Chart Rows */
-
-.chart-row {
-
-    display: flex;
-
-    gap: 24px;
-
-    align-items: stretch;
-
-    flex-wrap: wrap;
-}
-
-.chart-row .chart-card {
-
-    flex: 1 1 450px;
-}
-
-
-/* Radar / Bubble */
-
-.radar-card {
-
-    background: linear-gradient(
-        135deg,
-        #eff6ff,
-        #ffffff
-    );
-}
-
-
-/* Labels */
-
-.small-label {
-
-    font-size: 13px;
-
-    color: #64748b;
-
-    margin-bottom: 8px;
-}
-
-
-/* Mobile Responsive */
+/* Mobile */
 
 @media screen and (max-width: 1200px) {
 
-    .grid-3 {
+    .grid-2 {
 
         grid-template-columns: 1fr;
-    }
-
-    .hero {
-
-        min-height: 240px;
-
-        padding: 30px;
-
-        background-size: cover;
-
-        background-position: center right;
-    }
-
-    .hero h1 {
-
-        font-size: 38px;
-    }
-
-    .hero p {
-
-        font-size: 18px;
-    }
-
-    .section-title h2 {
-
-        font-size: 32px;
-    }
-
-    .map-timeline {
-
-        flex-direction: column;
-
-        gap: 30px;
-    }
-
-    .map-arrow {
-
-        transform: rotate(90deg);
     }
 
     .platform-grid {
@@ -451,8 +317,32 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .chart-row {
+    .map-timeline {
 
         flex-direction: column;
+    }
+
+    .map-arrow {
+
+        transform: rotate(90deg);
+    }
+
+    .hero {
+
+        min-height: 220px;
+
+        padding: 30px;
+
+        background-size: cover;
+    }
+
+    .hero h1 {
+
+        font-size: 36px;
+    }
+
+    .hero p {
+
+        font-size: 18px;
     }
 }
