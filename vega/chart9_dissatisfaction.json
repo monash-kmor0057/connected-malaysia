@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "width": 340,
-  "height": 260,
+  "height": 280,
 
   "data": {
     "url": "data/raw/bqoes(2024vs2023).csv"
@@ -19,30 +19,42 @@
     },
 
     {
-      "calculate": "-datum.value",
-      "as": "negative"
+      "filter": "datum.value > 20"
     }
 
   ],
 
   "mark": {
-    "type": "bar"
+    "type": "bar",
+    "cornerRadiusEnd": 5
   },
 
   "encoding": {
 
     "y": {
       "field": "label",
-      "type": "nominal"
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
     },
 
     "x": {
-      "field": "negative",
-      "type": "quantitative"
+      "field": "value",
+      "type": "quantitative",
+      "title": "%"
     },
 
     "color": {
-      "value": "#ef4444"
+      "field": "scope",
+
+      "scale": {
+        "range": [
+          "#ef4444",
+          "#f97316",
+          "#f59e0b",
+          "#2563eb"
+        ]
+      }
     }
   }
 }
