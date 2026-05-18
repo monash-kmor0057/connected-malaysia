@@ -40,7 +40,7 @@ body {
 
 .hero-text {
 
-    max-width: 1000px;
+    max-width: 760px;
 
     z-index: 2;
 }
@@ -52,9 +52,9 @@ body {
 
     margin: 0;
 
-    font-size: 54px;
+    font-size: 44px;
 
-    line-height: 0.95;
+    line-height: 1;
 
     font-weight: 600;
 
@@ -62,7 +62,7 @@ body {
 
     color: #0f172a;
 
-    max-width: 1000px;
+    max-width: 760px;
 
     white-space: normal;
 
@@ -74,9 +74,9 @@ body {
 
 .hero p {
 
-    margin-top: 18px;
+    margin-top: 14px;
 
-    font-size: 18px;
+    font-size: 16px;
 
     line-height: 1.45;
 
@@ -84,7 +84,43 @@ body {
 
     color: #1e293b;
 
-    max-width: 1000px;
+    max-width: 760px;
+}
+
+
+/* Wrap Later */
+
+@media screen and (max-width: 760px) {
+
+    .hero {
+
+        padding: 24px 32px;
+
+        height: 220px;
+
+        background-size: auto 220px;
+
+        background-position: right center;
+    }
+
+    .hero-text {
+
+        max-width: 420px;
+    }
+
+    .hero-title {
+
+        font-size: 34px;
+
+        max-width: 420px;
+    }
+
+    .hero p {
+
+        font-size: 15px;
+
+        max-width: 420px;
+    }
 }
 
 
