@@ -1,9 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 320,
+  "width": "container",
 
-  "height": 260,
+  "height": 280,
 
   "autosize": {
     "type": "fit",
@@ -37,75 +37,116 @@
 
   ],
 
-  "mark": {
-    "type": "line",
-    "point": {
-      "filled": true,
-      "size": 70
-    },
-    "strokeWidth": 3
-  },
+  "layer": [
 
-  "encoding": {
+    {
 
-    "x": {
-      "field": "Year",
-      "type": "quantitative",
-      "title": "Year",
+      "mark": {
+        "type": "area",
+        "opacity": 0.15
+      },
 
-      "axis": {
-        "labelAngle": 0,
-        "tickCount": 6
+      "encoding": {
+
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "title": "Year",
+
+          "axis": {
+            "labelAngle": 0,
+            "tickCount": 6,
+            "grid": false
+          }
+        },
+
+        "y": {
+          "field": "Value_in_Thousand",
+          "type": "quantitative",
+          "title": "Subscriptions (Thousands)",
+
+          "axis": {
+            "gridColor": "#e5e7eb"
+          }
+        },
+
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+
+          "scale": {
+            "range": [
+              "#2563eb",
+              "#16a34a"
+            ]
+          },
+
+          "legend": {
+            "title": null,
+            "orient": "top"
+          }
+        }
       }
     },
 
-    "y": {
-      "field": "Value_in_Thousand",
-      "type": "quantitative",
-      "title": "Subscriptions",
+    {
 
-      "axis": {
-        "gridColor": "#e5e7eb"
-      }
-    },
+      "mark": {
+        "type": "line",
+        "strokeWidth": 4,
+        "point": {
+          "filled": true,
+          "size": 90
+        }
+      },
 
-    "color": {
-      "field": "Category",
-      "type": "nominal",
+      "encoding": {
 
-      "scale": {
-        "range": [
-          "#2563eb",
-          "#16a34a"
+        "x": {
+          "field": "Year",
+          "type": "quantitative"
+        },
+
+        "y": {
+          "field": "Value_in_Thousand",
+          "type": "quantitative"
+        },
+
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+
+          "scale": {
+            "range": [
+              "#2563eb",
+              "#16a34a"
+            ]
+          }
+        },
+
+        "tooltip": [
+
+          {
+            "field": "Year",
+            "type": "quantitative"
+          },
+
+          {
+            "field": "Category",
+            "type": "nominal"
+          },
+
+          {
+            "field": "Value_in_Thousand",
+            "type": "quantitative",
+            "title": "Subscriptions"
+          }
+
         ]
-      },
-
-      "legend": {
-        "title": null,
-        "orient": "top"
       }
-    },
+    }
 
-    "tooltip": [
-
-      {
-        "field": "Year",
-        "type": "quantitative"
-      },
-
-      {
-        "field": "Category",
-        "type": "nominal"
-      },
-
-      {
-        "field": "Value_in_Thousand",
-        "type": "quantitative",
-        "title": "Subscriptions"
-      }
-
-    ]
-  },
+  ],
 
   "config": {
 
@@ -115,7 +156,13 @@
 
     "axis": {
       "labelFontSize": 11,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    },
+
+    "legend": {
+      "labelFontSize": 12
     }
   }
 }
