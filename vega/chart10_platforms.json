@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "width": 320,
-  "height": 260,
+  "height": 320,
 
   "data": {
     "url": "data/raw/bqoes(2024vs2023).csv"
@@ -11,45 +11,41 @@
   "transform": [
 
     {
-      "filter": "datum.category == 'Dissatisfaction_reason'"
+      "filter": "datum.category == 'Platform_share'"
     },
 
     {
       "filter": "datum.year == 2024"
-    },
-
-    {
-      "filter": "datum.scope == 'Video streaming'"
-    },
-
-    {
-      "filter": "datum.broadband_type == 'MBB'"
     }
 
   ],
 
   "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5
+    "type": "arc",
+    "innerRadius": 80,
+    "stroke": "white",
+    "strokeWidth": 3
   },
 
   "encoding": {
 
-    "y": {
-      "field": "label",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null
-    },
-
-    "x": {
+    "theta": {
       "field": "value",
-      "type": "quantitative",
-      "title": "%"
+      "type": "quantitative"
     },
 
     "color": {
-      "value": "#dc2626"
+      "field": "label",
+
+      "scale": {
+        "range": [
+          "#2563eb",
+          "#16a34a",
+          "#f59e0b",
+          "#ef4444",
+          "#8b5cf6"
+        ]
+      }
     }
   }
 }
