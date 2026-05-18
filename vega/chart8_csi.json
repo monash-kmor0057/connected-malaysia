@@ -11,55 +11,72 @@
   "transform": [
 
     {
-      "filter": "datum.category == 'Participation'"
+      "filter": "datum.category == 'CSI'"
     },
 
     {
-      "filter": "datum.year == 2024"
-    },
-
-    {
-      "filter": "datum.broadband_type == 'MBB'"
+      "filter": "datum.scope == 'Overall'"
     }
 
   ],
 
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5
-  },
+  "layer": [
 
-  "encoding": {
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 4,
+        "color": "#94a3b8"
+      },
 
-    "y": {
-      "field": "scope",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null
-    },
+      "encoding": {
 
-    "x": {
-      "field": "value",
-      "type": "quantitative",
-      "title": "Participation (%)",
+        "x": {
+          "field": "broadband_type",
+          "type": "nominal"
+        },
 
-      "scale": {
-        "domain": [0, 100]
+        "y": {
+          "value": 0
+        },
+
+        "y2": {
+          "field": "value"
+        }
       }
     },
 
-    "color": {
-      "field": "scope",
-      "legend": null,
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 220
+      },
 
-      "scale": {
-        "range": [
-          "#2563eb",
-          "#0ea5e9",
-          "#16a34a",
-          "#f59e0b"
-        ]
+      "encoding": {
+
+        "x": {
+          "field": "broadband_type",
+          "type": "nominal"
+        },
+
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+
+        "color": {
+          "field": "year",
+
+          "scale": {
+            "range": [
+              "#2563eb",
+              "#16a34a"
+            ]
+          }
+        }
       }
     }
-  }
+
+  ]
 }
