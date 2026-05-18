@@ -224,10 +224,7 @@ body {
 }
 
 
-/* VERY IMPORTANT */
-
-.vega-embed canvas,
-.vega-embed svg {
+.vega-embed canvas {
 
     width: 100% !important;
 
