@@ -1,8 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 340,
-  "height": 260,
+  "width": 500,
+
+  "height": 300,
+
+  "background": null,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -20,33 +23,15 @@
 
     {
       "filter": "datum.Value_in_Thousand > 0"
-    },
-
-    {
-      "calculate": "datum.Items == 'Number of Cellular phones subscriptions' ? 'Mobile' : 'Broadband'",
-      "as": "Category"
     }
 
   ],
 
-  "layer": [
-
-    {
-      "mark": {
-        "type": "area",
-        "opacity": 0.2
-      }
-    },
-
-    {
-      "mark": {
-        "type": "line",
-        "strokeWidth": 4,
-        "point": true
-      }
-    }
-
-  ],
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 4
+  },
 
   "encoding": {
 
@@ -61,14 +46,8 @@
     },
 
     "color": {
-      "field": "Category",
-
-      "scale": {
-        "range": [
-          "#2563eb",
-          "#16a34a"
-        ]
-      }
+      "field": "Items",
+      "type": "nominal"
     }
   }
 }
