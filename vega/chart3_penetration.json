@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 300,
+  "height": 220,
+
+  "data": {
+    "url": "../data/raw/telecommunications_statistics_malaysia.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.Items == 'Internet users'"
+    },
+    {
+      "calculate": "toNumber(datum['Value in Thousand'])",
+      "as": "value"
+    }
+  ],
+
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3,
+    "color": "#16a34a"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year"
+    },
+
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Users (Thousand)"
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "value",
+        "type": "quantitative"
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}
