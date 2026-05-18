@@ -12,7 +12,7 @@ body {
 
     width: 100%;
 
-    height: 300px;
+    height: 220px;
 
     background-image: url("images/header.png");
 
@@ -20,7 +20,7 @@ body {
 
     background-position: right center;
 
-    background-size: auto 100%;
+    background-size: 1200px 220px;
 
     background-color: #F7FBFD;
 
@@ -28,7 +28,7 @@ body {
 
     align-items: center;
 
-    padding: 40px 70px;
+    padding: 30px 60px;
 
     box-sizing: border-box;
 
@@ -40,18 +40,21 @@ body {
 
 .hero-text {
 
-    max-width: 700px;
+    max-width: 1000px;
 
     z-index: 2;
 }
+
+
+/* Main Title */
 
 .hero-title {
 
     margin: 0;
 
-    font-size: clamp(42px, 4vw, 72px);
+    font-size: 54px;
 
-    line-height: 1.02;
+    line-height: 0.95;
 
     font-weight: 600;
 
@@ -59,24 +62,29 @@ body {
 
     color: #0f172a;
 
-    max-width: 1200px;
+    max-width: 1000px;
 
     white-space: normal;
 
     word-break: keep-all;
 }
 
+
+/* Subtitle */
+
 .hero p {
 
-    margin-top: 20px;
+    margin-top: 18px;
 
-    font-size: 22px;
+    font-size: 18px;
 
-    line-height: 1.5;
+    line-height: 1.45;
 
     font-weight: 400;
 
     color: #1e293b;
+
+    max-width: 1000px;
 }
 
 
@@ -91,6 +99,9 @@ body {
     padding: 0 40px;
 }
 
+
+/* Section Titles */
+
 .section-title {
 
     position: relative;
@@ -104,9 +115,6 @@ body {
 
     font-weight: 700;
 }
-
-
-/* Remove Blue Line */
 
 .section-title::after {
 
@@ -128,7 +136,7 @@ body {
 }
 
 
-/* Full Width */
+/* Full Width Card */
 
 .full-width-card {
 
@@ -136,7 +144,7 @@ body {
 }
 
 
-/* Card */
+/* Chart Card */
 
 .chart-card {
 
@@ -190,7 +198,7 @@ body {
 }
 
 
-/* Titles */
+/* Card Titles */
 
 .chart-card h3 {
 
@@ -222,7 +230,7 @@ body {
 }
 
 
-/* VEGA */
+/* Vega */
 
 .vega-embed {
 
@@ -232,9 +240,12 @@ body {
 }
 
 
-.vega-embed canvas {
+/* Important for Vega */
 
-    width: 100% !important;
+.vega-embed canvas,
+.vega-embed svg {
+
+    max-width: 100%;
 
     display: block;
 }
@@ -330,37 +341,36 @@ body {
 
 /* Mobile */
 
-@media screen and (max-width: 1200px) {
-
-    .grid-2 {
-
-        grid-template-columns: 1fr;
-    }
+@media screen and (max-width: 1000px) {
 
     .hero {
 
-        min-height: 240px;
+        height: 220px;
 
-        padding: 30px;
+        padding: 24px 32px;
 
-        background-size: contain;
+        background-size: 1200px 220px;
 
         background-position: right center;
     }
 
-    .hero h1 {
+    .hero-title {
 
-        font-size: 38px;
+        font-size: 42px;
+
+        max-width: 520px;
     }
 
     .hero p {
 
-        font-size: 18px;
+        font-size: 16px;
+
+        max-width: 520px;
     }
 
-    .section-title h2 {
+    .grid-2 {
 
-        font-size: 32px;
+        grid-template-columns: 1fr;
     }
 
     .map-timeline {
@@ -371,5 +381,10 @@ body {
     .platform-grid {
 
         grid-template-columns: 1fr;
+    }
+
+    .section-title h2 {
+
+        font-size: 30px;
     }
 }
