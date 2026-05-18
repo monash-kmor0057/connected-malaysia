@@ -1,11 +1,7 @@
 body {
-
     margin: 0;
-
     background: #f3f4f6;
-
     font-family: Arial, sans-serif;
-
     color: #111827;
 }
 
@@ -16,13 +12,13 @@ body {
 
     width: 100%;
 
-    min-height: 260px;
+    min-height: 300px;
 
     background-image: url("images/header.png");
 
     background-repeat: no-repeat;
 
-    background-position: right center;
+    background-position: center;
 
     background-size: contain;
 
@@ -42,7 +38,7 @@ body {
 
 .hero-text {
 
-    max-width: 540px;
+    max-width: 620px;
 
     z-index: 2;
 }
@@ -51,7 +47,7 @@ body {
 
     margin: 0;
 
-    font-size: 44px;
+    font-size: 48px;
 
     line-height: 0.95;
 
@@ -64,9 +60,9 @@ body {
 
 .hero p {
 
-    margin-top: 18px;
+    margin-top: 20px;
 
-    font-size: 20px;
+    font-size: 22px;
 
     line-height: 1.5;
 
@@ -80,35 +76,43 @@ body {
 
 .dashboard-section {
 
-    max-width: 1500px;
+    max-width: 1800px;
 
     margin: 60px auto;
 
     padding: 0 40px;
 }
 
+.section-title {
 
-/* Section Title */
+    position: relative;
+}
 
 .section-title h2 {
 
-    margin-bottom: 40px;
+    margin-bottom: 36px;
 
     font-size: 38px;
 
     font-weight: 700;
-
-    color: #0f172a;
 }
 
 
-/* GRID */
+/* REMOVE BLUE BAR */
+
+.section-title::after {
+
+    display: none;
+}
+
+
+/* Main Grid */
 
 .grid-2 {
 
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 32px;
 
@@ -116,7 +120,7 @@ body {
 }
 
 
-/* FULL WIDTH */
+/* Full Width Card */
 
 .full-width-card {
 
@@ -124,7 +128,7 @@ body {
 }
 
 
-/* CARD */
+/* Chart Card */
 
 .chart-card {
 
@@ -134,9 +138,31 @@ body {
 
     padding: 24px;
 
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
 
     overflow: hidden;
+}
+
+
+/* REMOVE HOVER ANIMATION */
+
+.chart-card:hover {
+
+    transform: none;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Highlight Card */
+
+.visual-highlight {
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #ffffff
+    );
 }
 
 
@@ -168,7 +194,7 @@ body {
 }
 
 
-/* Titles */
+/* Card Titles */
 
 .chart-card h3 {
 
@@ -200,22 +226,30 @@ body {
 }
 
 
-/* Vega */
+/* Vega Container */
 
 .vega-embed {
 
     width: 100%;
+
+    max-width: 100%;
+
+    overflow: hidden;
 }
 
 
-/* IMPORTANT */
+/* Auto Resize Charts */
 
 .vega-embed canvas,
 .vega-embed svg {
 
     width: 100% !important;
 
+    max-width: 100% !important;
+
     height: auto !important;
+
+    display: block;
 }
 
 
@@ -232,41 +266,37 @@ body {
 }
 
 
-/* MAP */
+/* MAP TIMELINE */
 
 .map-timeline {
 
-    display: flex;
+    display: grid;
 
-    justify-content: center;
-
-    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
 
-    flex-wrap: nowrap;
+    align-items: start;
 
-    overflow-x: auto;
+    margin-top: 20px;
 }
 
+
+/* Map Containers */
 
 .map-box {
 
-    width: 260px;
+    width: 100%;
 
-    flex-shrink: 0;
+    overflow: hidden;
 }
 
 
-/* Arrow */
+/* REMOVE ARROW */
 
 .map-arrow {
 
-    font-size: 42px;
-
-    color: #2563eb;
-
-    font-weight: bold;
+    display: none;
 }
 
 
@@ -276,13 +306,15 @@ body {
 
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 24px;
+
+    margin-top: 10px;
 }
 
 
-/* Mini Card */
+/* Mini Chart Block */
 
 .mini-chart {
 
@@ -291,23 +323,94 @@ body {
     border-radius: 18px;
 
     padding: 18px;
+
+    overflow: hidden;
 }
 
 .mini-chart h4 {
 
     margin-top: 0;
 
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 
     font-size: 18px;
+
+    color: #0f172a;
 }
 
 
-/* Mobile */
+/* Chart Rows */
+
+.chart-row {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+
+/* Radar / Bubble */
+
+.radar-card {
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #ffffff
+    );
+}
+
+
+/* Labels */
+
+.small-label {
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    margin-bottom: 8px;
+}
+
+
+/* Mobile Responsive */
 
 @media screen and (max-width: 1200px) {
 
     .grid-2 {
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+
+        min-height: 240px;
+
+        padding: 30px;
+
+        background-size: cover;
+
+        background-position: center;
+    }
+
+    .hero h1 {
+
+        font-size: 38px;
+    }
+
+    .hero p {
+
+        font-size: 18px;
+    }
+
+    .section-title h2 {
+
+        font-size: 32px;
+    }
+
+    .map-timeline {
 
         grid-template-columns: 1fr;
     }
@@ -317,32 +420,8 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .map-timeline {
+    .chart-row {
 
-        flex-direction: column;
-    }
-
-    .map-arrow {
-
-        transform: rotate(90deg);
-    }
-
-    .hero {
-
-        min-height: 220px;
-
-        padding: 30px;
-
-        background-size: cover;
-    }
-
-    .hero h1 {
-
-        font-size: 36px;
-    }
-
-    .hero p {
-
-        font-size: 18px;
+        grid-template-columns: 1fr;
     }
 }
