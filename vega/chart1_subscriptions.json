@@ -23,17 +23,43 @@
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "ordinal"
+      "type": "ordinal",
+      "title": "Year"
     },
 
     "y": {
       "field": "Value in Thousand",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions (Thousand)"
     },
 
     "color": {
       "field": "Items",
-      "type": "nominal"
+      "type": "nominal",
+      "legend": {
+        "title": null
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "Items",
+        "type": "nominal"
+      },
+      {
+        "field": "Value in Thousand",
+        "type": "quantitative"
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
     }
   }
 }
