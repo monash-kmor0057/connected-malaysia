@@ -1,152 +1,52 @@
-body {
-    margin: 0;
-    background: #f3f4f6;
-
-    font-family: Arial, sans-serif;
-    color: #111827;
-}
-
-
 /* HERO */
 
 .hero {
-    background: linear-gradient(to right, #082f6b, #0f172a);
+    height: 340px;
 
-    color: white;
+    background-image: url("images/header.png");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
 
-    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-left: 70px;
+    padding-right: 70px;
+
+    box-sizing: border-box;
 }
+
+
+/* TITLE */
 
 .hero h1 {
     margin: 0;
 
-    font-size: 45px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    color: #111827;
+
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: 1px;
+
+    max-width: 650px;
 }
+
+
+/* SUBTITLE */
 
 .hero p {
-    margin-top: 18px;
+    margin-top: 26px;
 
-    font-size: 30px;
+    color: #111827;
+
+    font-size: 28px;
+    font-weight: 500;
     line-height: 1.4;
 
-    font-weight: 500;
-}
-
-
-/* SECTION */
-
-.dashboard-section {
-    max-width: 1600px;
-
-    margin: 50px auto;
-
-    padding: 0 40px;
-}
-
-.section-title h2 {
-    margin-bottom: 36px;
-
-    font-size: 38px;
-    font-weight: 700;
-}
-
-
-/* GRID */
-
-.grid-3 {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 32px;
-
-    align-items: start;
-}
-
-
-/* CARD */
-
-.chart-card {
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 22px;
-
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-
-    overflow: hidden;
-
-    min-height: auto;
-}
-
-
-/* NUMBER */
-
-.chart-number {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 10px;
-
-    background: #1d4ed8;
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    margin-bottom: 18px;
-}
-
-
-/* TITLES */
-
-.chart-card h3 {
-    margin-top: 0;
-
-    margin-bottom: 18px;
-
-    font-size: 22px;
-    line-height: 1.35;
-
-    font-weight: 700;
-}
-
-
-/* ANNOTATION */
-
-.annotation {
-    margin-top: 16px;
-
-    font-size: 15px;
-    line-height: 1.6;
-
-    color: #4b5563;
-}
-
-
-/* VEGA */
-
-.vega-embed {
-    width: 100%;
-
-    overflow: hidden;
-
-    margin-bottom: -10px;
-}
-
-.vega-embed summary {
-    display: none;
-}
-
-.vega-embed details {
-    display: none;
+    max-width: 760px;
 }
 
 
@@ -154,24 +54,21 @@ body {
 
 @media screen and (max-width: 1200px) {
 
-    .grid-3 {
-        grid-template-columns: 1fr;
+    .hero {
+        height: 260px;
+
+        padding-left: 40px;
+        padding-right: 40px;
+
+        background-position: center;
     }
 
     .hero h1 {
-        font-size: 52px;
+        font-size: 48px;
     }
 
     .hero p {
-        font-size: 24px;
-    }
-
-    .section-title h2 {
-        font-size: 32px;
-    }
-
-    .chart-card {
-        min-height: auto;
+        font-size: 20px;
     }
 
 }
