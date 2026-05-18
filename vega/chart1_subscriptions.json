@@ -5,19 +5,12 @@
   "height": 220,
 
   "data": {
-    "url": "../data/raw/telecommunications_statistics_malaysia.csv",
-    "format": {
-      "type": "csv"
-    }
+    "url": "../data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
     {
-      "filter": "datum.Items === 'Number of broadband subscriptions'"
-    },
-    {
-      "calculate": "toNumber(datum['Value in Thousand'])",
-      "as": "value"
+      "filter": "datum.Items == 'Number of broadband subscriptions'"
     }
   ],
 
@@ -31,26 +24,15 @@
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "quantitative"
     },
 
     "y": {
-      "field": "value",
+      "field": "Value",
       "type": "quantitative",
-      "title": "Subscriptions (Thousand)",
       "scale": {
         "domainMin": 0
       }
-    },
-
-    "tooltip": [
-      {
-        "field": "Year"
-      },
-      {
-        "field": "value"
-      }
-    ]
+    }
   }
 }
