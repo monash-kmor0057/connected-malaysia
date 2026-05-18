@@ -25,7 +25,9 @@
   ],
 
   "mark": {
-    "type": "area"
+    "type": "line",
+    "point": true,
+    "strokeWidth": 4
   },
 
   "encoding": {
@@ -37,8 +39,8 @@
 
     "y": {
       "field": "Value_in_Thousand",
-      "stack": "normalize",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions"
     },
 
     "color": {
