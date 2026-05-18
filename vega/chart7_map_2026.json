@@ -1,14 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": "container",
+  "width": 240,
 
-  "height": 420,
-
-  "autosize": {
-    "type": "fit",
-    "contains": "padding"
-  },
+  "height": 300,
 
   "title": "2026",
 
@@ -29,7 +24,7 @@
 
     "stroke": "#ffffff",
 
-    "strokeWidth": 0.4
+    "strokeWidth": 0.3
   },
 
   "encoding": {
@@ -61,13 +56,13 @@
       {
         "field": "properties.avg_d_kbps",
 
-        "title": "Download Speed"
+        "title": "Download"
       },
 
       {
         "field": "properties.avg_u_kbps",
 
-        "title": "Upload Speed"
+        "title": "Upload"
       }
 
     ]
