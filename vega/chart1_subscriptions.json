@@ -2,13 +2,22 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "width": 320,
+
   "height": 260,
+
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+
+  "background": null,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
+
     {
       "filter": "datum.Items == 'Number of Cellular phones subscriptions' || datum.Items == 'Number of broadband subscriptions'"
     },
@@ -25,11 +34,15 @@
       "calculate": "datum.Items == 'Number of Cellular phones subscriptions' ? 'Mobile' : 'Broadband'",
       "as": "Category"
     }
+
   ],
 
   "mark": {
     "type": "line",
-    "point": true,
+    "point": {
+      "filled": true,
+      "size": 70
+    },
     "strokeWidth": 3
   },
 
@@ -38,13 +51,22 @@
     "x": {
       "field": "Year",
       "type": "quantitative",
-      "title": "Year"
+      "title": "Year",
+
+      "axis": {
+        "labelAngle": 0,
+        "tickCount": 6
+      }
     },
 
     "y": {
       "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "Subscriptions"
+      "title": "Subscriptions",
+
+      "axis": {
+        "gridColor": "#e5e7eb"
+      }
     },
 
     "color": {
@@ -52,8 +74,48 @@
       "type": "nominal",
 
       "scale": {
-        "range": ["#2563eb", "#16a34a"]
+        "range": [
+          "#2563eb",
+          "#16a34a"
+        ]
+      },
+
+      "legend": {
+        "title": null,
+        "orient": "top"
       }
+    },
+
+    "tooltip": [
+
+      {
+        "field": "Year",
+        "type": "quantitative"
+      },
+
+      {
+        "field": "Category",
+        "type": "nominal"
+      },
+
+      {
+        "field": "Value_in_Thousand",
+        "type": "quantitative",
+        "title": "Subscriptions"
+      }
+
+    ]
+  },
+
+  "config": {
+
+    "view": {
+      "stroke": null
+    },
+
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
     }
   }
 }
