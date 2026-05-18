@@ -17,23 +17,31 @@
 
   "mark": {
     "type": "line",
-    "point": true
+    "point": false
   },
 
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "ordinal"
+      "type": "ordinal",
+      "title": "Year"
     },
 
     "y": {
       "field": "value",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Subscriptions (Thousand)"
     },
 
     "color": {
       "field": "Items",
       "type": "nominal"
+    }
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
     }
   }
 }
