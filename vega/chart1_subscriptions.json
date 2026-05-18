@@ -10,9 +10,6 @@
 
   "transform": [
     {
-      "filter": "datum.Items == 'Number of Cellular phones subscriptions' && datum['Sub-Items'] == 'Number of Cellular phones subscriptions'"
-    },
-    {
       "calculate": "toNumber(datum['Value in Thousand'])",
       "as": "value"
     }
@@ -20,9 +17,7 @@
 
   "mark": {
     "type": "line",
-    "point": true,
-    "strokeWidth": 3,
-    "color": "#2563eb"
+    "point": true
   },
 
   "encoding": {
@@ -34,6 +29,11 @@
     "y": {
       "field": "value",
       "type": "quantitative"
+    },
+
+    "color": {
+      "field": "Items",
+      "type": "nominal"
     }
   }
 }
