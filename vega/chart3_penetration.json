@@ -9,18 +9,15 @@
   },
 
   "transform": [
+
     {
       "filter": "datum.Items == 'Number of 3G subscriptions'"
     },
 
     {
-      "filter": "datum.SubItems == 'Prepaid' || datum.SubItems == 'Postpaid'"
-    },
-
-    {
-      "calculate": "datum.SubItems",
-      "as": "Category"
+      "filter": "datum['Sub-Items'] == 'Prepaid' || datum['Sub-Items'] == 'Postpaid'"
     }
+
   ],
 
   "mark": {
@@ -38,17 +35,17 @@
     },
 
     "y": {
-      "field": "Value",
+      "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "3G Subscriptions (Thousand)"
+      "title": "3G subscriptions"
     },
 
     "color": {
-      "field": "Category",
+      "field": "Sub-Items",
       "type": "nominal",
 
       "scale": {
-        "range": ["#f59e0b", "#fcd34d"]
+        "range": ["#f59e0b", "#fde68a"]
       },
 
       "legend": {
@@ -58,15 +55,19 @@
     },
 
     "tooltip": [
+
       {
         "field": "Year"
       },
+
       {
-        "field": "Category"
+        "field": "Sub-Items"
       },
+
       {
-        "field": "Value"
+        "field": "Value_in_Thousand"
       }
+
     ]
   }
 }
