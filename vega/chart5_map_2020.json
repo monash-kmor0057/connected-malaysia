@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": "container",
+
+  "height": 420,
+
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+
+  "title": "2020",
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "data": {
+    "url": "data/geo/gps_mobile_tiles(2020).json",
+
+    "format": {
+      "type": "geojson"
+    }
+  },
+
+  "mark": {
+    "type": "geoshape",
+
+    "stroke": "#ffffff",
+
+    "strokeWidth": 0.4
+  },
+
+  "encoding": {
+
+    "color": {
+
+      "field": "properties.avg_d_kbps",
+
+      "type": "quantitative",
+
+      "title": "Download Speed",
+
+      "scale": {
+
+        "domain": [0, 200000],
+
+        "range": [
+          "#2563eb",
+          "#93c5fd",
+          "#fef3c7",
+          "#f97316",
+          "#dc2626"
+        ]
+      }
+    },
+
+    "tooltip": [
+
+      {
+        "field": "properties.avg_d_kbps",
+
+        "title": "Download Speed"
+      },
+
+      {
+        "field": "properties.avg_u_kbps",
+
+        "title": "Upload Speed"
+      }
+
+    ]
+  },
+
+  "config": {
+
+    "view": {
+      "stroke": null
+    }
+  }
+}
