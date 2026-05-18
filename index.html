@@ -1,37 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Connected Malaysia</title>
 
-    <!-- Vega Libraries -->
+    <!-- Vega -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HERO -->
     <header class="hero">
 
-        <div class="hero-left">
+        <h1>CONNECTED MALAYSIA</h1>
 
-            <h1>CONNECTED MALAYSIA</h1>
-
-            <p>
-                How internet access transformed Malaysian digital life
-            </p>
-
-        </div>
+        <p>
+            How internet access transformed Malaysian digital life
+        </p>
 
     </header>
 
 
-    <!-- SECTION 1 -->
     <section class="dashboard-section">
 
         <div class="section-title">
@@ -40,42 +36,35 @@
 
         <div class="grid-3">
 
-            <!-- CARD 1 -->
             <div class="chart-card">
 
                 <div class="chart-number">1</div>
 
                 <h3>Broadband subscriptions growth</h3>
 
-                <div id="chart1"></div>
-
-                <p class="annotation">
-                    Mobile broadband subscriptions grew rapidly after 2010.
-                </p>
+                <div id="vis1"></div>
 
             </div>
 
 
-            <!-- CARD 2 -->
             <div class="chart-card">
 
                 <div class="chart-number">2</div>
 
                 <h3>Mobile-first internet shift</h3>
 
-                <div id="chart2"></div>
+                <div id="vis2"></div>
 
             </div>
 
 
-            <!-- CARD 3 -->
             <div class="chart-card">
 
                 <div class="chart-number">3</div>
 
                 <h3>Internet access over time</h3>
 
-                <div id="chart3"></div>
+                <div id="vis3"></div>
 
             </div>
 
@@ -84,8 +73,15 @@
     </section>
 
 
-    <!-- JS -->
-    <script src="js/main.js"></script>
+    <script type="text/javascript">
+
+        vegaEmbed('#vis1', 'vega/chart1_subscriptions.json');
+
+        vegaEmbed('#vis2', 'vega/chart2_mobile_shift.json');
+
+        vegaEmbed('#vis3', 'vega/chart3_penetration.json');
+
+    </script>
 
 </body>
 
