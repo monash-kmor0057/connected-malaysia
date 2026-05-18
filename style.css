@@ -43,19 +43,25 @@ body {
     z-index: 2;
 }
 
-.hero h1 {
+.hero-title {
 
     margin: 0;
 
-    font-size: 48px;
+    font-size: clamp(42px, 5vw, 72px);
 
-    line-height: 0.95;
+    line-height: 1.05;
 
     font-weight: 600;
 
     letter-spacing: 1px;
 
     color: #0f172a;
+
+    max-width: 720px;
+
+    white-space: normal;
+
+    word-break: keep-all;
 }
 
 .hero p {
