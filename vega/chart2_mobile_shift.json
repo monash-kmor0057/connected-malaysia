@@ -9,18 +9,20 @@
   },
 
   "transform": [
+
     {
       "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
     },
 
     {
-      "filter": "datum.SubItems == 'Post paid' || datum.SubItems == 'Prepaid'"
+      "filter": "datum['Sub-Items'] == 'Post paid' || datum['Sub-Items'] == 'Prepaid'"
     },
 
     {
-      "calculate": "datum.SubItems == 'Post paid' ? 'Postpaid' : 'Prepaid'",
+      "calculate": "datum['Sub-Items'] == 'Post paid' ? 'Postpaid' : 'Prepaid'",
       "as": "Category"
     }
+
   ],
 
   "mark": {
@@ -37,9 +39,9 @@
     },
 
     "y": {
-      "field": "Value",
+      "field": "Value_in_Thousand",
       "type": "quantitative",
-      "title": "Subscriptions (Thousand)",
+      "title": "Subscriptions",
       "stack": true
     },
 
@@ -58,15 +60,19 @@
     },
 
     "tooltip": [
+
       {
         "field": "Year"
       },
+
       {
         "field": "Category"
       },
+
       {
-        "field": "Value"
+        "field": "Value_in_Thousand"
       }
+
     ]
   }
 }
