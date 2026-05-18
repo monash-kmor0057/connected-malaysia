@@ -11,15 +11,17 @@ body {
 
 .hero {
 
-    height: 340px;
+    height: 320px;
+
+    background-color: #eef6fb;
 
     background-image: url("images/header.png");
 
-    background-size: cover;
-
-    background-position: center right;
-
     background-repeat: no-repeat;
+
+    background-position: right center;
+
+    background-size: auto 100%;
 
     display: flex;
 
@@ -38,42 +40,45 @@ body {
 /* HERO TITLE */
 
 .hero h1 {
+
     margin: 0;
 
-    color: #111827;
+    color: #0f172a;
 
-    font-size: 72px;
+    font-size: 52px;
 
-    font-weight: 800;
+    font-weight: 700;
 
-    line-height: 0.95;
+    line-height: 1.0;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 
-    max-width: 650px;
+    max-width: 500px;
 }
 
 
 /* HERO SUBTITLE */
 
 .hero p {
-    margin-top: 26px;
+
+    margin-top: 22px;
 
     color: #111827;
 
-    font-size: 28px;
+    font-size: 24px;
 
     line-height: 1.4;
 
-    font-weight: 500;
+    font-weight: 400;
 
-    max-width: 760px;
+    max-width: 620px;
 }
 
 
 /* SECTION */
 
 .dashboard-section {
+
     max-width: 1600px;
 
     margin: 50px auto;
@@ -81,10 +86,13 @@ body {
     padding: 0 40px;
 }
 
+
 .section-title h2 {
+
     margin-bottom: 36px;
 
     font-size: 38px;
+
     font-weight: 700;
 }
 
@@ -92,6 +100,7 @@ body {
 /* GRID */
 
 .grid-3 {
+
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
@@ -105,6 +114,7 @@ body {
 /* CARD */
 
 .chart-card {
+
     background: white;
 
     border-radius: 22px;
@@ -122,19 +132,25 @@ body {
 /* NUMBER */
 
 .chart-number {
+
     width: 42px;
+
     height: 42px;
 
     border-radius: 10px;
 
     background: #1d4ed8;
+
     color: white;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     font-size: 18px;
+
     font-weight: bold;
 
     margin-bottom: 18px;
@@ -144,11 +160,13 @@ body {
 /* TITLES */
 
 .chart-card h3 {
+
     margin-top: 0;
 
     margin-bottom: 18px;
 
     font-size: 22px;
+
     line-height: 1.35;
 
     font-weight: 700;
@@ -158,9 +176,11 @@ body {
 /* ANNOTATION */
 
 .annotation {
+
     margin-top: 16px;
 
     font-size: 15px;
+
     line-height: 1.6;
 
     color: #4b5563;
@@ -170,6 +190,7 @@ body {
 /* VEGA */
 
 .vega-embed {
+
     width: 100%;
 
     overflow: hidden;
@@ -178,10 +199,12 @@ body {
 }
 
 .vega-embed summary {
+
     display: none;
 }
 
 .vega-embed details {
+
     display: none;
 }
 
@@ -191,32 +214,42 @@ body {
 @media screen and (max-width: 1200px) {
 
     .grid-3 {
+
         grid-template-columns: 1fr;
     }
 
     .hero {
-        height: 260px;
+
+        height: 240px;
 
         padding-left: 40px;
 
         padding-right: 40px;
 
-        background-position: center;
+        background-size: auto 100%;
+
+        background-position: right center;
     }
 
     .hero h1 {
-        font-size: 48px;
+
+        font-size: 38px;
     }
 
     .hero p {
-        font-size: 20px;
+
+        font-size: 18px;
+
+        max-width: 420px;
     }
 
     .section-title h2 {
+
         font-size: 32px;
     }
 
     .chart-card {
+
         min-height: auto;
     }
 
