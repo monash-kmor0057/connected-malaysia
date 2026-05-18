@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Connected Malaysia</title>
 
-    <!-- Vega -->
+    <!-- Vega Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+
+    <!-- HERO -->
+
     <header class="hero">
 
-        <h1>CONNECTED MALAYSIA</h1>
+        <h1>
+            CONNECTED<br>
+            MALAYSIA
+        </h1>
 
         <p>
             How internet access transformed Malaysian digital life
@@ -28,61 +37,108 @@
     </header>
 
 
+
+    <!-- SECTION 1 -->
+
     <section class="dashboard-section">
 
         <div class="section-title">
-            <h2>SECTION 1 | Growth of Connectivity</h2>
+
+            <h2>
+                SECTION 1 | Growth of Connectivity
+            </h2>
+
         </div>
 
+
         <div class="grid-3">
+
+
+            <!-- CHART 1 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">1</div>
 
-                <h3>Broadband subscriptions growth</h3>
+                <h3>
+                    Broadband subscriptions growth
+                </h3>
 
-                <div id="vis1"></div>
+                <div id="chart1"></div>
+
+                <p class="annotation">
+                    Mobile and broadband subscriptions increased rapidly over time.
+                </p>
 
             </div>
 
+
+
+            <!-- CHART 2 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">2</div>
 
-                <h3>Mobile-first internet shift</h3>
+                <h3>
+                    Mobile-first internet shift
+                </h3>
 
-                <div id="vis2"></div>
+                <div id="chart2"></div>
+
+                <p class="annotation">
+                    Prepaid mobile subscriptions dominated Malaysia’s mobile market.
+                </p>
 
             </div>
 
+
+
+            <!-- CHART 3 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">3</div>
 
-                <h3>Internet access over time</h3>
+                <h3>
+                    Internet access over time
+                </h3>
 
-                <div id="vis3"></div>
+                <div id="chart3"></div>
+
+                <p class="annotation">
+                    3G subscriptions expanded rapidly before declining after 2014.
+                </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <script type="text/javascript">
 
-        vegaEmbed('#vis1', 'vega/chart1_subscriptions.json');
+    <!-- VEGA EMBED -->
 
-        vegaEmbed('#vis2', 'vega/chart2_mobile_shift.json');
+    <script>
 
-        vegaEmbed('#vis3', 'vega/chart3_penetration.json');
+        vegaEmbed(
+            '#chart1',
+            'vega/chart1_subscriptions.json'
+        );
+
+        vegaEmbed(
+            '#chart2',
+            'vega/chart2_mobile_shift.json'
+        );
+
+        vegaEmbed(
+            '#chart3',
+            'vega/chart3_penetration.json'
+        );
 
     </script>
 
-</body>
 
-</html>
+</body>
