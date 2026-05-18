@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background: #f3f4f6;
+
     font-family: Arial, sans-serif;
     color: #111827;
 }
@@ -10,23 +11,24 @@ body {
 
 .hero {
     background: linear-gradient(to right, #082f6b, #0f172a);
+
     color: white;
 
-    padding: 40px 50px;
+    padding: 40px 60px;
 }
 
 .hero h1 {
     margin: 0;
 
-    font-size: 64px;
+    font-size: 72px;
     font-weight: 700;
     letter-spacing: 2px;
 }
 
 .hero p {
-    margin-top: 16px;
+    margin-top: 18px;
 
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1.5;
 }
 
@@ -34,7 +36,7 @@ body {
 /* SECTION */
 
 .dashboard-section {
-    max-width: 1400px;
+    max-width: 1600px;
 
     margin: 50px auto;
 
@@ -44,7 +46,7 @@ body {
 .section-title h2 {
     margin-bottom: 40px;
 
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 700;
 }
 
@@ -56,7 +58,9 @@ body {
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 30px;
+    gap: 32px;
+
+    align-items: start;
 }
 
 
@@ -65,21 +69,25 @@ body {
 .chart-card {
     background: white;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
-    padding: 24px;
+    padding: 28px;
 
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+
+    min-height: 520px;
 }
 
 
 /* NUMBER */
 
 .chart-number {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
     background: #1d4ed8;
     color: white;
@@ -88,9 +96,10 @@ body {
     align-items: center;
     justify-content: center;
 
+    font-size: 20px;
     font-weight: bold;
 
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 
@@ -99,20 +108,22 @@ body {
 .chart-card h3 {
     margin-top: 0;
 
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 
-    font-size: 34px;
-    line-height: 1.3;
+    font-size: 28px;
+    line-height: 1.35;
+
+    font-weight: 700;
 }
 
 
-/* NOTES */
+/* ANNOTATION */
 
 .annotation {
-    margin-top: 18px;
+    margin-top: 22px;
 
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.7;
 
     color: #4b5563;
 }
@@ -122,6 +133,19 @@ body {
 
 .vega-embed {
     width: 100%;
+
+    overflow: hidden;
+}
+
+.vega-embed summary {
+    display: none;
+}
+
+
+/* REMOVE VEGA BORDER */
+
+.vega-embed details {
+    display: none;
 }
 
 
@@ -134,11 +158,15 @@ body {
     }
 
     .hero h1 {
-        font-size: 48px;
+        font-size: 52px;
     }
 
     .section-title h2 {
-        font-size: 40px;
+        font-size: 42px;
+    }
+
+    .chart-card {
+        min-height: auto;
     }
 
 }
