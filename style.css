@@ -79,11 +79,16 @@ body {
 
 .dashboard-section {
 
-    max-width: 1750px;
+    max-width: 1800px;
 
     margin: 60px auto;
 
     padding: 0 40px;
+}
+
+.section-title {
+
+    position: relative;
 }
 
 .section-title h2 {
@@ -93,6 +98,23 @@ body {
     font-size: 38px;
 
     font-weight: 700;
+}
+
+.section-title::after {
+
+    content: "";
+
+    width: 80px;
+
+    height: 5px;
+
+    background: #2563eb;
+
+    border-radius: 10px;
+
+    display: block;
+
+    margin-top: 14px;
 }
 
 
@@ -110,7 +132,7 @@ body {
 }
 
 
-/* Large Full Width Card */
+/* Full Width Card */
 
 .full-width-card {
 
@@ -132,8 +154,6 @@ body {
 
     overflow: visible;
 
-    min-height: auto;
-
     transition: 0.25s ease;
 }
 
@@ -142,6 +162,18 @@ body {
     transform: translateY(-4px);
 
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Highlight Card */
+
+.visual-highlight {
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #ffffff
+    );
 }
 
 
@@ -205,13 +237,17 @@ body {
 }
 
 
-/* Vega */
+/* Vega Container */
 
 .vega-embed {
 
     width: 100%;
 
     overflow: visible;
+
+    display: flex;
+
+    justify-content: center;
 }
 
 
@@ -220,7 +256,7 @@ body {
 .vega-embed canvas,
 .vega-embed svg {
 
-    width: 100% !important;
+    max-width: 100% !important;
 
     height: auto !important;
 }
@@ -239,17 +275,31 @@ body {
 }
 
 
-/* Map Timeline Layout */
+/* MAP TIMELINE */
 
 .map-timeline {
 
-    display: grid;
+    display: flex;
 
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-
-    gap: 24px;
+    justify-content: center;
 
     align-items: center;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+}
+
+
+/* Map Containers */
+
+.map-box {
+
+    flex: 0 1 250px;
+
+    max-width: 250px;
 }
 
 
@@ -257,7 +307,7 @@ body {
 
 .map-arrow {
 
-    font-size: 46px;
+    font-size: 40px;
 
     color: #2563eb;
 
@@ -273,7 +323,7 @@ body {
 
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
     gap: 24px;
 
@@ -290,6 +340,8 @@ body {
     border-radius: 18px;
 
     padding: 18px;
+
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.15);
 }
 
 .mini-chart h4 {
@@ -304,9 +356,28 @@ body {
 }
 
 
-/* Radar / Bubble Cards */
+/* Chart Rows */
 
-.visual-highlight {
+.chart-row {
+
+    display: flex;
+
+    gap: 24px;
+
+    align-items: stretch;
+
+    flex-wrap: wrap;
+}
+
+.chart-row .chart-card {
+
+    flex: 1 1 450px;
+}
+
+
+/* Radar / Bubble */
+
+.radar-card {
 
     background: linear-gradient(
         135deg,
@@ -316,28 +387,15 @@ body {
 }
 
 
-/* Section Divider */
+/* Labels */
 
-.section-title {
+.small-label {
 
-    position: relative;
-}
+    font-size: 13px;
 
-.section-title::after {
+    color: #64748b;
 
-    content: "";
-
-    width: 80px;
-
-    height: 5px;
-
-    background: #2563eb;
-
-    border-radius: 10px;
-
-    display: block;
-
-    margin-top: 14px;
+    margin-bottom: 8px;
 }
 
 
@@ -346,23 +404,6 @@ body {
 @media screen and (max-width: 1200px) {
 
     .grid-3 {
-
-        grid-template-columns: 1fr;
-    }
-
-    .map-timeline {
-
-        grid-template-columns: 1fr;
-
-        gap: 36px;
-    }
-
-    .map-arrow {
-
-        transform: rotate(90deg);
-    }
-
-    .platform-grid {
 
         grid-template-columns: 1fr;
     }
@@ -391,5 +432,27 @@ body {
     .section-title h2 {
 
         font-size: 32px;
+    }
+
+    .map-timeline {
+
+        flex-direction: column;
+
+        gap: 30px;
+    }
+
+    .map-arrow {
+
+        transform: rotate(90deg);
+    }
+
+    .platform-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .chart-row {
+
+        flex-direction: column;
     }
 }
