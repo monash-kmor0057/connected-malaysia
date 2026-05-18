@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 320,
+  "width": 340,
   "height": 260,
 
   "data": {
@@ -9,6 +9,7 @@
   },
 
   "transform": [
+
     {
       "filter": "datum.Items == 'Number of Cellular phones subscriptions' || datum.Items == 'Number of broadband subscriptions'"
     },
@@ -25,34 +26,48 @@
       "calculate": "datum.Items == 'Number of Cellular phones subscriptions' ? 'Mobile' : 'Broadband'",
       "as": "Category"
     }
+
   ],
 
-  "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
-  },
+  "layer": [
+
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.2
+      }
+    },
+
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 4,
+        "point": true
+      }
+    }
+
+  ],
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative",
-      "title": "Year"
+      "type": "ordinal"
     },
 
     "y": {
       "field": "Value_in_Thousand",
-      "type": "quantitative",
-      "title": "Subscriptions"
+      "type": "quantitative"
     },
 
     "color": {
       "field": "Category",
-      "type": "nominal",
 
       "scale": {
-        "range": ["#2563eb", "#16a34a"]
+        "range": [
+          "#2563eb",
+          "#16a34a"
+        ]
       }
     }
   }
