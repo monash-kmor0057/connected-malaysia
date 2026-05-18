@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 320,
-  "height": 260,
+  "width": 340,
+  "height": 340,
 
   "data": {
     "url": "data/raw/bqoes(2024vs2023).csv"
@@ -24,41 +24,40 @@
 
   ],
 
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5
-  },
+  "layer": [
 
-  "encoding": {
-
-    "y": {
-      "field": "scope",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null
-    },
-
-    "x": {
-      "field": "value",
-      "type": "quantitative",
-      "title": "Participation (%)",
-
-      "scale": {
-        "domain": [0, 100]
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 4,
+        "color": "#2563eb"
       }
     },
 
-    "color": {
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "color": "#2563eb"
+      }
+    }
+
+  ],
+
+  "encoding": {
+
+    "theta": {
       "field": "scope",
-      "legend": null,
+      "type": "nominal"
+    },
+
+    "radius": {
+      "field": "value",
+      "type": "quantitative",
 
       "scale": {
-        "range": [
-          "#2563eb",
-          "#0ea5e9",
-          "#16a34a",
-          "#f59e0b"
-        ]
+        "domain": [0, 100]
       }
     }
   }
