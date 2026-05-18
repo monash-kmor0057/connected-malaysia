@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 320,
+  "width": 340,
   "height": 260,
 
   "data": {
@@ -19,37 +19,30 @@
     },
 
     {
-      "filter": "datum.scope == 'Video streaming'"
-    },
-
-    {
-      "filter": "datum.broadband_type == 'MBB'"
+      "calculate": "-datum.value",
+      "as": "negative"
     }
 
   ],
 
   "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 5
+    "type": "bar"
   },
 
   "encoding": {
 
     "y": {
       "field": "label",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null
+      "type": "nominal"
     },
 
     "x": {
-      "field": "value",
-      "type": "quantitative",
-      "title": "%"
+      "field": "negative",
+      "type": "quantitative"
     },
 
     "color": {
-      "value": "#dc2626"
+      "value": "#ef4444"
     }
   }
 }
