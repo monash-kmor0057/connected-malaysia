@@ -14,6 +14,10 @@
   "transform": [
     {
       "filter": "datum.Items === 'Number of broadband subscriptions'"
+    },
+    {
+      "calculate": "toNumber(datum['Value in Thousand'])",
+      "as": "value"
     }
   ],
 
@@ -32,9 +36,21 @@
     },
 
     "y": {
-      "field": "Value in Thousand",
+      "field": "value",
       "type": "quantitative",
-      "title": "Subscriptions (Thousand)"
-    }
+      "title": "Subscriptions (Thousand)",
+      "scale": {
+        "domainMin": 0
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year"
+      },
+      {
+        "field": "value"
+      }
+    ]
   }
 }
