@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 260,
-  "height": 220,
+  "width": 300,
+  "height": 240,
 
   "data": {
     "url": "data/raw/telecommunications_statistics_malaysia.csv"
@@ -12,26 +12,53 @@
     {
       "filter": "datum.Items == 'Number of 3G subscriptions'"
     },
+
     {
-      "filter": "datum.SubItems == 'Prepaid'"
+      "filter": "datum.SubItems == 'Prepaid' || datum.SubItems == 'Postpaid'"
     }
   ],
 
   "mark": {
-    "type": "bar",
-    "color": "#f59e0b"
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
   },
 
   "encoding": {
 
     "x": {
       "field": "Year",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Year"
     },
 
     "y": {
       "field": "Value",
-      "type": "quantitative"
-    }
+      "type": "quantitative",
+      "title": "3G Subscriptions (Thousand)"
+    },
+
+    "color": {
+      "field": "SubItems",
+      "type": "nominal",
+      "scale": {
+        "range": ["#f59e0b", "#fcd34d"]
+      },
+      "legend": {
+        "title": null
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year"
+      },
+      {
+        "field": "SubItems"
+      },
+      {
+        "field": "Value"
+      }
+    ]
   }
 }
