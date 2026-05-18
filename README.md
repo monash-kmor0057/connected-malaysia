@@ -1,5 +1,4 @@
-# Connected Malaysia 
-# - How broadband transformed Malaysian digital life -
+# Connected Malaysia - How broadband transformed Malaysian digital life -
 
 
 
