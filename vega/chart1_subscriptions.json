@@ -5,7 +5,7 @@
   "height": 220,
 
   "data": {
-    "url": "../data/telecommunications_statistics_malaysia.csv"
+    "url": "../data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
@@ -28,31 +28,12 @@
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "ordinal",
-      "title": "Year"
+      "type": "ordinal"
     },
 
     "y": {
       "field": "value",
-      "type": "quantitative",
-      "title": "Subscriptions (Thousand)"
-    },
-
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "ordinal"
-      },
-      {
-        "field": "value",
-        "type": "quantitative"
-      }
-    ]
-  },
-
-  "config": {
-    "view": {
-      "stroke": null
+      "type": "quantitative"
     }
   }
 }
