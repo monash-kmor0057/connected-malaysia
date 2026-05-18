@@ -12,7 +12,7 @@ body {
 
     width: 100%;
 
-    min-height: 300px;
+    min-height: 150px;
 
     background-image: url("images/header.png");
 
@@ -38,7 +38,7 @@ body {
 
 .hero-text {
 
-    max-width: 620px;
+    max-width: 2000px;
 
     z-index: 2;
 }
@@ -76,7 +76,7 @@ body {
 
 .dashboard-section {
 
-    max-width: 1800px;
+    max-width: 1600px;
 
     margin: 60px auto;
 
@@ -98,7 +98,7 @@ body {
 }
 
 
-/* REMOVE BLUE BAR */
+/* Remove Blue Line */
 
 .section-title::after {
 
@@ -106,7 +106,7 @@ body {
 }
 
 
-/* Main Grid */
+/* Grid */
 
 .grid-2 {
 
@@ -120,7 +120,7 @@ body {
 }
 
 
-/* Full Width Card */
+/* Full Width */
 
 .full-width-card {
 
@@ -128,7 +128,7 @@ body {
 }
 
 
-/* Chart Card */
+/* Card */
 
 .chart-card {
 
@@ -144,25 +144,13 @@ body {
 }
 
 
-/* REMOVE HOVER ANIMATION */
+/* Remove Hover */
 
 .chart-card:hover {
 
     transform: none;
 
     box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
-}
-
-
-/* Highlight Card */
-
-.visual-highlight {
-
-    background: linear-gradient(
-        135deg,
-        #eff6ff,
-        #ffffff
-    );
 }
 
 
@@ -194,7 +182,7 @@ body {
 }
 
 
-/* Card Titles */
+/* Titles */
 
 .chart-card h3 {
 
@@ -226,28 +214,22 @@ body {
 }
 
 
-/* Vega Container */
+/* VEGA */
 
 .vega-embed {
 
     width: 100%;
 
-    max-width: 100%;
-
     overflow: hidden;
 }
 
 
-/* Auto Resize Charts */
+/* VERY IMPORTANT */
 
 .vega-embed canvas,
 .vega-embed svg {
 
     width: 100% !important;
-
-    max-width: 100% !important;
-
-    height: auto !important;
 
     display: block;
 }
@@ -266,33 +248,35 @@ body {
 }
 
 
-/* MAP TIMELINE */
+/* Map Timeline */
 
 .map-timeline {
 
-    display: grid;
+    display: flex;
 
-    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+
+    align-items: flex-start;
 
     gap: 20px;
-
-    align-items: start;
 
     margin-top: 20px;
 }
 
 
-/* Map Containers */
+/* Map Box */
 
 .map-box {
 
-    width: 100%;
+    flex: 1;
+
+    min-width: 0;
 
     overflow: hidden;
 }
 
 
-/* REMOVE ARROW */
+/* Remove Arrow */
 
 .map-arrow {
 
@@ -300,7 +284,7 @@ body {
 }
 
 
-/* Platform Dashboard */
+/* Platform Grid */
 
 .platform-grid {
 
@@ -314,7 +298,7 @@ body {
 }
 
 
-/* Mini Chart Block */
+/* Mini Chart */
 
 .mini-chart {
 
@@ -339,43 +323,7 @@ body {
 }
 
 
-/* Chart Rows */
-
-.chart-row {
-
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 24px;
-}
-
-
-/* Radar / Bubble */
-
-.radar-card {
-
-    background: linear-gradient(
-        135deg,
-        #eff6ff,
-        #ffffff
-    );
-}
-
-
-/* Labels */
-
-.small-label {
-
-    font-size: 13px;
-
-    color: #64748b;
-
-    margin-bottom: 8px;
-}
-
-
-/* Mobile Responsive */
+/* Mobile */
 
 @media screen and (max-width: 1200px) {
 
@@ -390,9 +338,9 @@ body {
 
         padding: 30px;
 
-        background-size: cover;
+        background-size: contain;
 
-        background-position: center;
+        background-position: right center;
     }
 
     .hero h1 {
@@ -412,15 +360,10 @@ body {
 
     .map-timeline {
 
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .platform-grid {
-
-        grid-template-columns: 1fr;
-    }
-
-    .chart-row {
 
         grid-template-columns: 1fr;
     }
