@@ -21,18 +21,22 @@
 <body>
 
 
-    <!-- HERO -->
+    <!-- Hero Banner -->
 
     <header class="hero">
 
-        <h1>
-            CONNECTED<br>
-            MALAYSIA
-        </h1>
+        <div class="hero-text">
 
-        <p>
-            How internet access transformed Malaysian digital life
-        </p>
+            <h1>
+                CONNECTED<br>
+                MALAYSIA
+            </h1>
+
+            <p>
+                How internet access transformed Malaysian digital life
+            </p>
+
+        </div>
 
     </header>
 
@@ -54,64 +58,83 @@
         <div class="grid-3">
 
 
-            <!-- CHART 1 -->
+            <!-- Chart 1 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">1</div>
 
                 <h3>
-                    Broadband subscriptions growth
+                    Mobile and broadband growth
                 </h3>
 
                 <div id="chart1"></div>
 
                 <p class="annotation">
-                    Mobile and broadband subscriptions increased rapidly over time.
+                    Mobile and broadband subscriptions rapidly increased during the 2000s.
                 </p>
 
             </div>
 
 
 
-            <!-- CHART 2 -->
+            <!-- Chart 2 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">2</div>
 
                 <h3>
-                    Mobile-first internet shift
+                    Decline of SMS communication
                 </h3>
 
                 <div id="chart2"></div>
 
                 <p class="annotation">
-                    Prepaid mobile subscriptions dominated Malaysia’s mobile market.
+                    SMS usage collapsed as internet messaging became dominant.
                 </p>
 
             </div>
 
 
 
-            <!-- CHART 3 -->
+            <!-- Chart 3 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">3</div>
 
                 <h3>
-                    Internet access over time
+                    Fixed vs wireless broadband
                 </h3>
 
                 <div id="chart3"></div>
 
                 <p class="annotation">
-                    3G subscriptions expanded rapidly before declining after 2014.
+                    Wireless broadband became the dominant form of internet access.
                 </p>
 
             </div>
 
+
+
+            <!-- Chart 4 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">4</div>
+
+                <h3>
+                    Malaysian digital lifestyle
+                </h3>
+
+                <div id="chart4"></div>
+
+                <p class="annotation">
+                    Malaysians mainly use mobile internet for communication and streaming.
+                </p>
+
+            </div>
 
         </div>
 
@@ -119,24 +142,180 @@
 
 
 
-    <!-- VEGA EMBED -->
+
+    <!-- SECTION 2 -->
+
+    <section class="dashboard-section">
+
+        <div class="section-title">
+
+            <h2>
+                SECTION 2 | The Speed Divide
+            </h2>
+
+        </div>
+
+
+        <div class="grid-3">
+
+
+            <!-- Chart 5 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">5</div>
+
+                <h3>
+                    Internet speed in 2020
+                </h3>
+
+                <div id="chart5"></div>
+
+            </div>
+
+
+
+            <!-- Chart 6 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">6</div>
+
+                <h3>
+                    Internet speed in 2023
+                </h3>
+
+                <div id="chart6"></div>
+
+            </div>
+
+
+
+            <!-- Chart 7 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">7</div>
+
+                <h3>
+                    Internet speed in 2026
+                </h3>
+
+                <div id="chart7"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- SECTION 3 -->
+
+    <section class="dashboard-section">
+
+        <div class="section-title">
+
+            <h2>
+                SECTION 3 | Internet Experience & Quality
+            </h2>
+
+        </div>
+
+
+        <div class="grid-3">
+
+
+            <!-- Chart 8 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">8</div>
+
+                <h3>
+                    Customer satisfaction scores
+                </h3>
+
+                <div id="chart8"></div>
+
+                <p class="annotation">
+                    Fixed broadband users reported slightly higher satisfaction.
+                </p>
+
+            </div>
+
+
+
+            <!-- Chart 9 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">9</div>
+
+                <h3>
+                    Main internet frustrations
+                </h3>
+
+                <div id="chart9"></div>
+
+                <p class="annotation">
+                    Buffering and slow loading remain major complaints.
+                </p>
+
+            </div>
+
+
+
+            <!-- Chart 10 -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">10</div>
+
+                <h3>
+                    Most used digital platforms
+                </h3>
+
+                <div id="chart10"></div>
+
+                <p class="annotation">
+                    WhatsApp, YouTube, and Shopee dominate Malaysian digital life.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- Vega Embed -->
 
     <script>
 
-        vegaEmbed(
-            '#chart1',
-            'vega/chart1_subscriptions.json'
-        );
+        vegaEmbed('#chart1', 'vega/chart1_subscriptions.json');
 
-        vegaEmbed(
-            '#chart2',
-            'vega/chart2_mobile_shift.json'
-        );
+        vegaEmbed('#chart2', 'vega/chart2_sms_decline.json');
 
-        vegaEmbed(
-            '#chart3',
-            'vega/chart3_penetration.json'
-        );
+        vegaEmbed('#chart3', 'vega/chart3_wireless_vs_fixed.json');
+
+        vegaEmbed('#chart4', 'vega/chart4_online_lifestyle.json');
+
+        vegaEmbed('#chart5', 'vega/chart5_map_2020.json');
+
+        vegaEmbed('#chart6', 'vega/chart6_map_2023.json');
+
+        vegaEmbed('#chart7', 'vega/chart7_map_2026.json');
+
+        vegaEmbed('#chart8', 'vega/chart8_csi.json');
+
+        vegaEmbed('#chart9', 'vega/chart9_dissatisfaction.json');
+
+        vegaEmbed('#chart10', 'vega/chart10_platforms.json');
 
     </script>
 
