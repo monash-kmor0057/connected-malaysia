@@ -15,6 +15,11 @@
 
     {
       "filter": "datum.SubItems == 'Prepaid' || datum.SubItems == 'Postpaid'"
+    },
+
+    {
+      "calculate": "datum.SubItems",
+      "as": "Category"
     }
   ],
 
@@ -39,13 +44,16 @@
     },
 
     "color": {
-      "field": "SubItems",
+      "field": "Category",
       "type": "nominal",
+
       "scale": {
         "range": ["#f59e0b", "#fcd34d"]
       },
+
       "legend": {
-        "title": null
+        "title": null,
+        "orient": "top"
       }
     },
 
@@ -54,7 +62,7 @@
         "field": "Year"
       },
       {
-        "field": "SubItems"
+        "field": "Category"
       },
       {
         "field": "Value"
