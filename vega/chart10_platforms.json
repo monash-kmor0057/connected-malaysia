@@ -1,8 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 360,
-  "height": 320,
+  "width": "container",
+
+  "height": 340,
 
   "data": {
     "url": "data/raw/bqoes(2024vs2023).csv"
@@ -23,56 +24,93 @@
     },
 
     {
-      "calculate": "datum.label == 'WhatsApp' || datum.label == 'Telegram' || datum.label == 'Messenger' ? 'Messaging' : datum.label == 'YouTube' || datum.label == 'Netflix' || datum.label == 'Spotify' ? 'Streaming' : datum.label == 'Shopee' || datum.label == 'Grab' ? 'Commerce' : 'Social'",
+      "calculate": "datum.label == 'WhatsApp' || datum.label == 'Telegram' || datum.label == 'Messenger' ? 'Messaging' : datum.label == 'Shopee' || datum.label == 'Grab' ? 'Commerce' : datum.label == 'YouTube' || datum.label == 'Netflix' || datum.label == 'Spotify' ? 'Streaming' : 'Social'",
       "as": "Group"
     }
 
   ],
 
-  "mark": {
-    "type": "circle",
-    "opacity": 0.8,
-    "stroke": "white",
-    "strokeWidth": 2
+  "facet": {
+
+    "field": "Group",
+
+    "type": "nominal",
+
+    "columns": 2,
+
+    "header": {
+      "titleFontSize": 18,
+      "labelFontSize": 16
+    }
   },
 
-  "encoding": {
+  "spec": {
 
-    "x": {
-      "field": "Group",
-      "type": "nominal"
+    "mark": {
+      "type": "circle",
+      "opacity": 0.85,
+      "stroke": "white",
+      "strokeWidth": 2
     },
 
-    "y": {
-      "field": "value",
-      "type": "quantitative"
-    },
+    "encoding": {
 
-    "size": {
-      "field": "value",
-      "type": "quantitative"
-    },
-
-    "color": {
-      "field": "Group",
-
-      "scale": {
-        "range": [
-          "#2563eb",
-          "#16a34a",
-          "#f59e0b",
-          "#ef4444"
-        ]
-      }
-    },
-
-    "tooltip": [
-      {
-        "field": "label"
+      "x": {
+        "field": "label",
+        "type": "nominal",
+        "axis": {
+          "labelAngle": -25,
+          "labelFontSize": 11
+        }
       },
-      {
-        "field": "value"
-      }
-    ]
+
+      "y": {
+        "field": "value",
+        "type": "quantitative",
+        "title": "%"
+      },
+
+      "size": {
+        "field": "value",
+        "type": "quantitative",
+        "scale": {
+          "range": [400, 4000]
+        }
+      },
+
+      "color": {
+        "field": "Group",
+
+        "scale": {
+          "range": [
+            "#2563eb",
+            "#16a34a",
+            "#f59e0b",
+            "#ef4444"
+          ]
+        }
+      },
+
+      "tooltip": [
+
+        {
+          "field": "label",
+          "title": "Platform"
+        },
+
+        {
+          "field": "value",
+          "title": "Usage %"
+        }
+
+      ]
+    }
+  },
+
+  "config": {
+
+    "view": {
+      "stroke": null
+    }
   }
 }
