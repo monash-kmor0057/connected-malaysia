@@ -5,31 +5,40 @@
   "height": 220,
 
   "data": {
-    "url": "../data/raw/telecommunications_statistics_malaysia.csv"
+    "url": "data/raw/telecommunications_statistics_malaysia.csv"
   },
 
   "transform": [
     {
       "filter": "datum.Items == 'Number of Cellular phones subscriptions'"
+    },
+    {
+      "filter": "datum.SubItems == 'Post paid' || datum.SubItems == 'Prepaid'"
     }
   ],
 
   "mark": {
     "type": "line",
-    "point": true,
-    "strokeWidth": 3,
-    "color": "#16a34a"
+    "point": true
   },
 
   "encoding": {
     "x": {
       "field": "Year",
-      "type": "ordinal"
+      "type": "quantitative"
     },
 
     "y": {
-      "field": "Value in Thousand",
-      "type": "quantitative"
+      "field": "Value",
+      "type": "quantitative",
+      "scale": {
+        "domainMin": 0
+      }
+    },
+
+    "color": {
+      "field": "SubItems",
+      "type": "nominal"
     }
   }
 }
