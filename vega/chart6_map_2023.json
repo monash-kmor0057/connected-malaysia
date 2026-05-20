@@ -8,7 +8,7 @@
     {
       "data": {
         "url": "data/geo/basemap_malaysia.json",
-        "format": { "type": "json", "property": "features" }
+        "format": { "type": "geojson" }
       },
       "mark": {
         "type": "geoshape",
