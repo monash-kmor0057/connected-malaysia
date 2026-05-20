@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-chart-map-auto">
+    <link rel="stylesheet" href="style.css?v=20260520-map-align-compact">
 
 </head>
 
@@ -379,7 +379,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-data-path";
+    const mapCacheBust = "20260520-map-align";
 
     function normalizeSpecDataUrls(spec) {
         if (!spec || typeof spec !== "object") return spec;
@@ -445,7 +445,7 @@
     let mapsLoadStarted = false;
     const mapRuntime = [];
 
-    function getMapHeight(containerWidth, containerHeight) {
+    function getMapHeight(containerWidth) {
         const w = Math.max(containerWidth || 320, 120);
         const box = getMapFilter();
         const plotW = w - MAP_PAD.left - MAP_PAD.right;
@@ -453,58 +453,32 @@
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
         const plotH = plotW * (latSpan / lonSpanRad);
         const calcH = Math.round(plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom);
-        if (containerHeight && containerHeight >= 100) {
-            return Math.max(120, Math.min(containerHeight, calcH));
-        }
-        return Math.max(140, calcH);
+        return Math.max(120, calcH);
     }
 
     function getMapBoxMetrics(selector) {
         const el = document.querySelector(selector);
         const box = el && el.closest(".map-box");
         if (!box) {
-            return { w: 400, plotH: getMapHeight(400, 0), box: null, statusH: 0 };
+            const w = 400;
+            return { w, plotH: getMapHeight(w), box: null, statusH: 0 };
         }
         const status = box.querySelector(".map-status");
         const statusH = status ? status.offsetHeight : 0;
         const w = Math.max(box.clientWidth, 120);
-        const innerH = Math.max(box.clientHeight - statusH, 0);
-        const plotH = getMapHeight(w, innerH);
+        const plotH = getMapHeight(w);
         return { w, plotH, box, statusH };
     }
 
     function syncMapBoxHeight(box, plotH, statusH) {
         if (!box) return;
-        box.style.height = (plotH + statusH) + "px";
-        box.style.minHeight = plotH + "px";
+        box.style.height = "auto";
+        box.style.minHeight = (plotH + statusH) + "px";
     }
 
     function mercatorY(latDeg) {
         const r = (latDeg * Math.PI) / 180;
         return Math.log(Math.tan(Math.PI / 4 + r / 2));
-    }
-
-    function buildMapProjection(containerWidth, containerHeight) {
-        const w = Math.max(containerWidth, 120);
-        const h = containerHeight || getMapHeight(w);
-        const box = getMapFilter();
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
-        return {
-            type: "mercator",
-            center: [
-                (box.lon0 + box.lon1) / 2,
-                (box.lat0 + box.lat1) / 2
-            ],
-            scale,
-            translate: [
-                MAP_PAD.left + plotW / 2,
-                MAP_TITLE_H + MAP_PAD.top + plotH / 2
-            ]
-        };
     }
     const mapCharts = [
         ["#chart5", "vega/chart5_map_2020.json?v=" + mapCacheBust, "map-status-5", "Jan 2020"],
@@ -515,27 +489,36 @@
     function patchMapSpec(spec, width, height) {
         const w = Math.max(width, 120);
         const h = height || getMapHeight(w);
+        const box = getMapFilter();
         spec.width = w;
         spec.height = h;
-        spec.projection = buildMapProjection(w, h);
-        const box = getMapFilter();
+        spec.projection = { type: "mercator" };
         const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
-        const hexSize = Math.max(22, Math.min(65, Math.round(scale * 0.0048)));
-        if (spec.layer && spec.layer[1] && spec.layer[1].encoding) {
-            spec.layer[1].encoding.size = { value: hexSize };
-            if (spec.layer[1].encoding.color) {
-                spec.layer[1].encoding.color.legend = null;
+        const hexSize = Math.max(18, Math.min(52, Math.round(plotW * 0.045)));
+        if (spec.layer && spec.layer[1]) {
+            if (!spec.layer[1].transform) spec.layer[1].transform = [];
+            const lonFilter = "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1;
+            const latFilter = "datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1;
+            const hasLonFilter = spec.layer[1].transform.some((t) => t.filter && String(t.filter).indexOf("datum.lon") >= 0);
+            if (!hasLonFilter) {
+                spec.layer[1].transform.push({ filter: lonFilter + " && " + latFilter });
+            }
+            if (spec.layer[1].encoding) {
+                spec.layer[1].encoding.size = { value: hexSize };
+                if (spec.layer[1].encoding.longitude) {
+                    spec.layer[1].encoding.longitude = { field: "lon", "type": "quantitative" };
+                }
+                if (spec.layer[1].encoding.latitude) {
+                    spec.layer[1].encoding.latitude = { field: "lat", "type": "quantitative" };
+                }
+                if (spec.layer[1].encoding.color) {
+                    spec.layer[1].encoding.color.legend = null;
+                }
             }
         }
-        if (spec.padding) {
-            spec.padding = { left: 0, top: 0, right: 0, bottom: 0 };
-        }
+        spec.padding = { left: 0, top: 4, right: 0, bottom: 0 };
         if (spec.title) {
-            spec.title.fontSize = 18;
+            spec.title.fontSize = 14;
             spec.title.fontWeight = 600;
             spec.title.offset = 0;
             spec.title.anchor = "start";
