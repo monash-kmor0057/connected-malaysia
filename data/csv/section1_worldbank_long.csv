@@ -1,0 +1,178 @@
+year,indicator,unit,value
+2001,Fixed broadband subscriptions,count,4000.0
+2002,Fixed broadband subscriptions,count,19302.0
+2003,Fixed broadband subscriptions,count,110402.0
+2004,Fixed broadband subscriptions,count,252500.0
+2005,Fixed broadband subscriptions,count,483100.0
+2006,Fixed broadband subscriptions,count,751000.0
+2007,Fixed broadband subscriptions,count,1035200.0
+2008,Fixed broadband subscriptions,count,1329300.0
+2009,Fixed broadband subscriptions,count,1553600.0
+2010,Fixed broadband subscriptions,count,2097800.0
+2011,Fixed broadband subscriptions,count,2506700.0
+2012,Fixed broadband subscriptions,count,2920900.0
+2013,Fixed broadband subscriptions,count,2938800.0
+2014,Fixed broadband subscriptions,count,3061000.0
+2015,Fixed broadband subscriptions,count,3063800.0
+2016,Fixed broadband subscriptions,count,2718800.0
+2017,Fixed broadband subscriptions,count,2687800.0
+2018,Fixed broadband subscriptions,count,2696000.0
+2019,Fixed broadband subscriptions,count,2964500.0
+2020,Fixed broadband subscriptions,count,3358800.0
+2021,Fixed broadband subscriptions,count,3734100.0
+2022,Fixed broadband subscriptions,count,4224300.0
+2023,Fixed broadband subscriptions,count,4576500.0
+2024,Fixed broadband subscriptions,count,4816800.0
+2001,Fixed broadband subscriptions per 100,per100,0.0170020765486193
+2002,Fixed broadband subscriptions per 100,per100,0.0800830553639777
+2003,Fixed broadband subscriptions per 100,per100,0.447341087591283
+2004,Fixed broadband subscriptions per 100,per100,0.999731873891089
+2005,Fixed broadband subscriptions per 100,per100,1.86986635854964
+2006,Fixed broadband subscriptions per 100,per100,2.84276851737206
+2007,Fixed broadband subscriptions per 100,per100,3.83430285414437
+2008,Fixed broadband subscriptions per 100,per100,4.82153483966066
+2009,Fixed broadband subscriptions per 100,per100,5.52395471352698
+2010,Fixed broadband subscriptions per 100,per100,7.32068815724969
+2011,Fixed broadband subscriptions per 100,per100,8.59576382844835
+2012,Fixed broadband subscriptions per 100,per100,9.84700347717991
+2013,Fixed broadband subscriptions per 100,per100,9.73942530166021
+2014,Fixed broadband subscriptions per 100,per100,9.97193881432051
+2015,Fixed broadband subscriptions per 100,per100,9.80955980953099
+2016,Fixed broadband subscriptions per 100,per100,8.55245970508987
+2017,Fixed broadband subscriptions per 100,per100,8.30705146836206
+2018,Fixed broadband subscriptions per 100,per100,8.19179819298533
+2019,Fixed broadband subscriptions per 100,per100,8.86497357882019
+2020,Fixed broadband subscriptions per 100,per100,9.91101742902637
+2021,Fixed broadband subscriptions per 100,per100,10.8921782282506
+2022,Fixed broadband subscriptions per 100,per100,12.1753566089982
+2023,Fixed broadband subscriptions per 100,per100,13.0287000355119
+2024,Fixed broadband subscriptions per 100,per100,13.5464432669708
+2013,Internet users female (%),percent,55.3657
+2014,Internet users female (%),percent,61.8034
+2015,Internet users female (%),percent,69.0241
+2016,Internet users female (%),percent,76.6869
+2017,Internet users female (%),percent,78.2387
+2018,Internet users female (%),percent,78.7261
+2019,Internet users female (%),percent,82.369
+2020,Internet users female (%),percent,87.7006
+2021,Internet users female (%),percent,96.32
+2022,Internet users female (%),percent,95.85
+2023,Internet users female (%),percent,97.1838
+2024,Internet users female (%),percent,97.6373
+2013,Internet users male (%),percent,58.6364
+2014,Internet users male (%),percent,65.4068
+2015,Internet users male (%),percent,72.9667
+2016,Internet users male (%),percent,80.0322
+2017,Internet users male (%),percent,81.9161
+2018,Internet users male (%),percent,83.5169
+2019,Internet users male (%),percent,85.8538
+2020,Internet users male (%),percent,91.2531
+2021,Internet users male (%),percent,97.1502
+2022,Internet users male (%),percent,98.829
+2023,Internet users male (%),percent,98.153
+2024,Internet users male (%),percent,98.3628
+1960,Mobile subscriptions,count,0.0
+1965,Mobile subscriptions,count,0.0
+1970,Mobile subscriptions,count,0.0
+1975,Mobile subscriptions,count,0.0
+1976,Mobile subscriptions,count,0.0
+1977,Mobile subscriptions,count,0.0
+1978,Mobile subscriptions,count,0.0
+1979,Mobile subscriptions,count,0.0
+1980,Mobile subscriptions,count,0.0
+1981,Mobile subscriptions,count,0.0
+1982,Mobile subscriptions,count,0.0
+1983,Mobile subscriptions,count,0.0
+1984,Mobile subscriptions,count,0.0
+1985,Mobile subscriptions,count,0.0
+1986,Mobile subscriptions,count,10817.0
+1987,Mobile subscriptions,count,17411.0
+1988,Mobile subscriptions,count,27302.0
+1989,Mobile subscriptions,count,39419.0
+1990,Mobile subscriptions,count,86620.0
+1991,Mobile subscriptions,count,130000.0
+1992,Mobile subscriptions,count,200573.0
+1993,Mobile subscriptions,count,340022.0
+1994,Mobile subscriptions,count,571720.0
+1995,Mobile subscriptions,count,1005066.0
+1996,Mobile subscriptions,count,1520320.0
+1997,Mobile subscriptions,count,2000000.0
+1998,Mobile subscriptions,count,2200000.0
+1999,Mobile subscriptions,count,2990000.0
+2000,Mobile subscriptions,count,5121748.0
+2001,Mobile subscriptions,count,7385000.0
+2002,Mobile subscriptions,count,9053000.0
+2003,Mobile subscriptions,count,11124000.0
+2004,Mobile subscriptions,count,14611000.0
+2005,Mobile subscriptions,count,19545000.0
+2006,Mobile subscriptions,count,19463722.0
+2007,Mobile subscriptions,count,23347000.0
+2008,Mobile subscriptions,count,27713000.0
+2009,Mobile subscriptions,count,30144000.0
+2010,Mobile subscriptions,count,33858700.0
+2011,Mobile subscriptions,count,36661300.0
+2012,Mobile subscriptions,count,41324700.0
+2013,Mobile subscriptions,count,43005000.0
+2014,Mobile subscriptions,count,44928600.0
+2015,Mobile subscriptions,count,44104000.0
+2016,Mobile subscriptions,count,43464500.0
+2017,Mobile subscriptions,count,42338500.0
+2018,Mobile subscriptions,count,42413400.0
+2019,Mobile subscriptions,count,44600700.0
+2020,Mobile subscriptions,count,43723600.0
+2021,Mobile subscriptions,count,47201700.0
+2022,Mobile subscriptions,count,47952100.0
+2023,Mobile subscriptions,count,50136500.0
+2024,Mobile subscriptions,count,49661500.0
+1960,Mobile subscriptions per 100,per100,0.0
+1965,Mobile subscriptions per 100,per100,0.0
+1970,Mobile subscriptions per 100,per100,0.0
+1975,Mobile subscriptions per 100,per100,0.0
+1976,Mobile subscriptions per 100,per100,0.0
+1977,Mobile subscriptions per 100,per100,0.0
+1978,Mobile subscriptions per 100,per100,0.0
+1979,Mobile subscriptions per 100,per100,0.0
+1980,Mobile subscriptions per 100,per100,0.0
+1981,Mobile subscriptions per 100,per100,0.0
+1982,Mobile subscriptions per 100,per100,0.0
+1983,Mobile subscriptions per 100,per100,0.0
+1984,Mobile subscriptions per 100,per100,0.0
+1986,Mobile subscriptions per 100,per100,0.069523625
+1987,Mobile subscriptions per 100,per100,0.108594076
+1988,Mobile subscriptions per 100,per100,0.165220178
+1989,Mobile subscriptions per 100,per100,0.231602049
+1990,Mobile subscriptions per 100,per100,0.494489541
+1991,Mobile subscriptions per 100,per100,0.721522185
+1992,Mobile subscriptions per 100,per100,1.082615433
+1993,Mobile subscriptions per 100,per100,1.784885174
+1994,Mobile subscriptions per 100,per100,2.918621003
+1995,Mobile subscriptions per 100,per100,4.991168447
+1996,Mobile subscriptions per 100,per100,7.34842792
+1997,Mobile subscriptions per 100,per100,9.412128789
+1998,Mobile subscriptions per 100,per100,10.08686533
+1999,Mobile subscriptions per 100,per100,13.36691902
+2000,Mobile subscriptions per 100,per100,22.2996735954346
+2001,Mobile subscriptions per 100,per100,31.3900838278883
+2002,Mobile subscriptions per 100,per100,37.5604548860269
+2003,Mobile subscriptions per 100,per100,45.0736604261284
+2004,Mobile subscriptions per 100,per100,57.8498313244464
+2005,Mobile subscriptions per 100,per100,75.6500475633466
+2006,Mobile subscriptions per 100,per100,73.6762398568335
+2007,Mobile subscriptions per 100,per100,86.4755300769983
+2008,Mobile subscriptions per 100,per100,100.518464614095
+2009,Mobile subscriptions per 100,per100,107.179512670287
+2010,Mobile subscriptions per 100,per100,118.156632715164
+2011,Mobile subscriptions per 100,per100,125.715832147402
+2012,Mobile subscriptions per 100,per100,139.314753874976
+2013,Mobile subscriptions per 100,per100,142.522112800428
+2014,Mobile subscriptions per 100,per100,146.3656485505
+2015,Mobile subscriptions per 100,per100,141.210531313909
+2016,Mobile subscriptions per 100,per100,136.725167298764
+2017,Mobile subscriptions per 100,per100,130.853522804244
+2018,Mobile subscriptions per 100,per100,128.873150399987
+2019,Mobile subscriptions per 100,per100,133.372921941941
+2020,Mobile subscriptions per 100,per100,129.017911652905
+2021,Mobile subscriptions per 100,per100,137.684938559871
+2022,Mobile subscriptions per 100,per100,138.208441079076
+2023,Mobile subscriptions per 100,per100,142.7320920639
+2024,Mobile subscriptions per 100,per100,139.664651283564
