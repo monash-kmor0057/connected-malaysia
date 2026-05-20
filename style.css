@@ -187,7 +187,7 @@ body {
     box-sizing: border-box;
 }
 
-.grid-2 > .chart-card:not(.policy-events-panel):not(.full-width-card) {
+.grid-2 > .chart-card:not(.full-width-card):not(.chart-card--auto-height) {
 
     height: 500px;
 
@@ -196,24 +196,27 @@ body {
     max-height: 500px;
 }
 
-.grid-2 > .chart-card.policy-events-panel {
+.grid-2 > .chart-card.chart-card--auto-height {
 
-    height: 500px;
+    height: auto;
 
-    min-height: 500px;
+    min-height: 0;
 
-    max-height: 500px;
+    max-height: none;
+}
+
+.grid-2 > .chart-card.chart-card--auto-height.policy-events-panel {
 
     padding: 16px 14px 14px 10px;
 }
 
-.grid-2 > .chart-card.policy-events-panel .policy-events-timeline {
+.grid-2 > .chart-card.chart-card--auto-height.policy-events-panel .policy-events-timeline {
 
-    flex: 1 1 auto;
+    flex: 0 0 auto;
 
     min-height: 0;
 
-    overflow-y: auto;
+    overflow: visible;
 }
 
 
@@ -614,11 +617,25 @@ body {
     overflow: hidden;
 }
 
-.grid-2 > .chart-card:not(.policy-events-panel):not(.full-width-card) > div[id^="chart"] {
+.grid-2 > .chart-card:not(.full-width-card):not(.chart-card--auto-height) > div[id^="chart"] {
 
     flex: 1 1 0;
 
     min-height: 0;
+}
+
+.chart-card.chart-card--auto-height > div[id^="chart"] {
+
+    flex: 0 0 auto;
+
+    min-height: auto;
+
+    overflow: visible;
+}
+
+.chart-card.chart-card--auto-height > div[id^="chart"] .vega-embed {
+
+    height: auto !important;
 }
 
 .chart-card > div[id^="chart"] .vega-embed,
@@ -1000,6 +1017,12 @@ body {
     padding: 12px 14px 12px 8px;
 
     overflow: visible;
+
+    height: auto;
+
+    min-height: 0;
+
+    max-height: none;
 }
 
 .chart-card.full-width-card h3 {
@@ -1044,16 +1067,6 @@ body {
     width: 100%;
 
     max-width: 100%;
-}
-
-@media screen and (min-width: 1200px) {
-
-    .chart-card.full-width-card .map-timeline {
-
-        width: calc((100% - 32px) / 3);
-
-        max-width: calc((100% - 32px) / 3);
-    }
 }
 
 .map-status {

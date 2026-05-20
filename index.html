@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-card-match">
+    <link rel="stylesheet" href="style.css?v=20260520-map-full-basemap">
 
 </head>
 
@@ -96,7 +96,7 @@
 
             <!-- CHART 3 -->
 
-            <div class="chart-card">
+            <div class="chart-card chart-card--auto-height">
 
                 <div class="chart-number">3</div>
 
@@ -116,7 +116,7 @@
 
             <!-- CHART 4 -->
 
-            <div class="chart-card">
+            <div class="chart-card chart-card--auto-height">
 
                 <div class="chart-number">4</div>
 
@@ -136,7 +136,7 @@
 
             <!-- CHART 5 -->
 
-            <div class="chart-card">
+            <div class="chart-card chart-card--auto-height">
 
                 <div class="chart-number">5</div>
 
@@ -152,7 +152,7 @@
 
             </div>
 
-            <div class="chart-card policy-events-panel">
+            <div class="chart-card chart-card--auto-height policy-events-panel">
                 <h3>Major Events Driving Broadband Adoption in Malaysia</h3>
                 <ol class="policy-events-timeline" aria-label="Broadband policy milestones in Malaysia">
                     <li class="policy-events-timeline__item policy-events-timeline__item--fixed">
@@ -369,7 +369,7 @@
     <script>
 
     const svgOpts = { actions: false, renderer: "svg" };
-    const mapOpts = { actions: false, renderer: "canvas" };
+    const mapOpts = { actions: false, renderer: "svg" };
 
     const lightCharts = [
         ["#chart1", "vega/chart1_subscriptions.json"],
@@ -379,7 +379,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v2";
+    const mapCacheBust = "20260520-malaysia-map-v3";
     let MALAYSIA_GEO = null;
 
     function normalizeSpecDataUrls(spec) {
@@ -534,13 +534,26 @@
                 size: [plotW, plotH]
             };
         } else {
-            spec.projection = { type: "mercator" };
+            spec.projection = {
+                type: "mercator",
+                center: [(box.lon0 + box.lon1) / 2, (box.lat0 + box.lat1) / 2],
+                scale: Math.max(200, Math.min(8000, plotW * 28))
+            };
         }
         const hexSize = Math.max(16, Math.min(52, Math.round(plotW * 0.04)));
-        if (spec.layer && spec.layer[0] && spec.layer[0].data) {
-            if (!MALAYSIA_GEO) {
-                spec.layer[0].data.url = "data/geo/basemap_view.json";
-                spec.layer[0].data.format = { type: "geojson" };
+        if (spec.layer && spec.layer[0]) {
+            if (MALAYSIA_GEO) {
+                spec.layer[0].data = { values: MALAYSIA_GEO };
+                if (spec.layer[0].transform) {
+                    spec.layer[0].transform = spec.layer[0].transform.filter(
+                        (t) => !(t.filter && String(t.filter).indexOf("ADM0_A3") >= 0)
+                    );
+                }
+            } else {
+                spec.layer[0].data = {
+                    url: "data/geo/basemap_malaysia.json?v=" + mapCacheBust,
+                    format: { type: "geojson" }
+                };
                 if (!spec.layer[0].transform) spec.layer[0].transform = [];
                 const hasFilter = spec.layer[0].transform.some(
                     (t) => t.filter && String(t.filter).indexOf("ADM0_A3") >= 0
@@ -548,6 +561,11 @@
                 if (!hasFilter) {
                     spec.layer[0].transform.push({ filter: "datum.properties.ADM0_A3 == 'MYS'" });
                 }
+            }
+            if (spec.layer[0].mark) {
+                spec.layer[0].mark.fill = "#eef2f7";
+                spec.layer[0].mark.stroke = "#64748b";
+                spec.layer[0].mark.strokeWidth = 0.75;
             }
         }
         if (spec.layer && spec.layer[1]) {
@@ -591,6 +609,25 @@
         return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
     }
 
+    function isAutoHeightChartCard(card) {
+        return card && card.classList.contains("chart-card--auto-height");
+    }
+
+    function isFixedHeightChartCard(card) {
+        return isDataChartCard(card) && !isAutoHeightChartCard(card);
+    }
+
+    const AUTO_PLOT_HEIGHT = {
+        chart15: 265,
+        chart3: 280,
+        chart4: 300
+    };
+
+    function getAutoPlotHeight(el) {
+        const id = el && el.id;
+        return AUTO_PLOT_HEIGHT[id] || CHART_PLOT_FALLBACK;
+    }
+
     function getChartChromeHeight(card) {
         let chrome = 24;
         const num = card.querySelector(".chart-number");
@@ -607,6 +644,9 @@
         if (!isDataChartCard(card)) {
             const cw = Math.max(el.clientWidth, 200);
             return Math.max(160, Math.round(cw * 280 / 340));
+        }
+        if (isAutoHeightChartCard(card)) {
+            return getAutoPlotHeight(el);
         }
         const chrome = getChartChromeHeight(card);
         const cardH =
@@ -626,8 +666,31 @@
         const cw = Math.max(el.clientWidth, 200);
         const baseW = typeof spec.width === "number" ? spec.width : 340;
         const baseH = typeof spec.height === "number" ? spec.height : 280;
-        const ch = getChartPlotHeight(el, lastGood && lastGood.lastPlotH);
+        const card = el && el.closest(".chart-card");
         spec.width = cw;
+        if (isAutoHeightChartCard(card)) {
+            if (Array.isArray(spec.vconcat)) {
+                let used = 0;
+                spec.vconcat.forEach((child) => {
+                    if (!child || typeof child !== "object") return;
+                    child.width = cw;
+                    used += typeof child.height === "number" ? child.height : 0;
+                });
+                spec.height = used || baseH;
+            } else {
+                spec.height = baseH;
+            }
+            if (Array.isArray(spec.hconcat)) {
+                const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
+                spec.hconcat.forEach((child) => {
+                    if (child && typeof child === "object") {
+                        child.width = eachW;
+                    }
+                });
+            }
+            return spec;
+        }
+        const ch = getChartPlotHeight(el, lastGood && lastGood.lastPlotH);
         if (Array.isArray(spec.vconcat)) {
             const parts = spec.vconcat;
             const totalPartH = parts.reduce(
@@ -674,7 +737,7 @@
                 const w = el.clientWidth;
                 const h = getChartPlotHeight(el);
                 const cardReady =
-                    !isDataChartCard(card) ||
+                    !isFixedHeightChartCard(card) ||
                     card.clientHeight >= CHART_CARD_HEIGHT - 8 ||
                     attempts > 40;
                 if ((w >= 80 && h >= 100 && cardReady) || attempts++ > 150) {
