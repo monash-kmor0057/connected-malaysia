@@ -34,8 +34,8 @@
         "opacity": 0.94
       },
       "encoding": {
-        "longitude": { "field": "lon", "type": "quantitative", "scale": null },
-        "latitude": { "field": "lat", "type": "quantitative", "scale": null },
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
         "size": { "value": 45 },
         "color": {
           "field": "rate_mean",
