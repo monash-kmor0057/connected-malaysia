@@ -7,7 +7,7 @@
   "layer": [
     {
       "data": {
-        "url": "data/geo/basemap_malaysia.json",
+        "url": "data/geo/basemap_view.json",
         "format": { "type": "geojson" }
       },
       "mark": {

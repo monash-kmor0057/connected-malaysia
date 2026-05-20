@@ -29,7 +29,7 @@
         "y": {
           "field": "value_num",
           "type": "quantitative",
-          "scale": { "domainMin": 0, "domainMax": 6200000, "nice": false, "paddingTop": 84 },
+          "scale": { "domainMin": 0, "domainMax": 5000000, "nice": false, "paddingTop": 84 },
           "title": "Fixed broadband subscriptions",
           "axis": { "gridColor": "#e5e7eb" }
         }
@@ -39,7 +39,7 @@
       "mark": { "type": "line", "stroke": "#16a34a", "strokeWidth": 3.5, "point": { "filled": true, "size": 55 } },
       "encoding": {
         "x": { "field": "year_num", "type": "quantitative" },
-        "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 6200000, "nice": false, "paddingTop": 84 } },
+        "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 5000000, "nice": false, "paddingTop": 84 } },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
           { "field": "value_num", "type": "quantitative", "title": "Subscriptions" }
@@ -50,7 +50,7 @@
       "mark": { "type": "line", "stroke": "#15803d", "strokeDash": [5, 5], "strokeWidth": 2 },
       "encoding": {
         "x": { "field": "year_num", "type": "quantitative" },
-        "y": { "field": "smooth_value", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 6200000, "nice": false, "paddingTop": 84 } },
+        "y": { "field": "smooth_value", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 5000000, "nice": false, "paddingTop": 84 } },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
           { "field": "smooth_value", "type": "quantitative", "title": "5-year moving average", "format": ".0f" }
@@ -60,10 +60,10 @@
     {
       "data": {
         "values": [
-          { "year": 2008, "label": "HSBB", "color": "#a16207", "label_y": 5950000 },
-          { "year": 2010, "label": "NBI", "color": "#c2410c", "label_y": 5750000 },
-          { "year": 2015, "label": "HSBB2", "color": "#5b21b6", "label_y": 5550000 },
-          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 5350000 }
+          { "year": 2008, "label": "HSBB", "color": "#a16207", "label_y": 4800000 },
+          { "year": 2010, "label": "NBI", "color": "#c2410c", "label_y": 4640000 },
+          { "year": 2015, "label": "HSBB2", "color": "#5b21b6", "label_y": 4480000 },
+          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 4320000 }
         ]
       },
       "transform": [{ "calculate": "datum.year", "as": "year_num" }],

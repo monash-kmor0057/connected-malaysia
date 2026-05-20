@@ -29,7 +29,7 @@
         "y": {
           "field": "value_num",
           "type": "quantitative",
-          "scale": { "domainMin": 0, "domainMax": 56000000, "nice": false, "paddingTop": 84 },
+          "scale": { "domainMin": 0, "domainMax": 50000000, "nice": false, "paddingTop": 84 },
           "title": "Mobile subscriptions",
           "axis": { "gridColor": "#e5e7eb" }
         }
@@ -39,7 +39,7 @@
       "mark": { "type": "line", "stroke": "#2563eb", "strokeWidth": 3.5, "point": { "filled": true, "size": 55 } },
       "encoding": {
         "x": { "field": "year_num", "type": "quantitative" },
-        "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 56000000, "nice": false, "paddingTop": 84 } },
+        "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 50000000, "nice": false, "paddingTop": 84 } },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
           { "field": "value_num", "type": "quantitative", "title": "Subscriptions" }
@@ -50,7 +50,7 @@
       "mark": { "type": "line", "stroke": "#1d4ed8", "strokeDash": [5, 5], "strokeWidth": 2 },
       "encoding": {
         "x": { "field": "year_num", "type": "quantitative" },
-        "y": { "field": "smooth_value", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 56000000, "nice": false, "paddingTop": 84 } },
+        "y": { "field": "smooth_value", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 50000000, "nice": false, "paddingTop": 84 } },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
           { "field": "smooth_value", "type": "quantitative", "title": "5-year moving average", "format": ".0f" }
@@ -60,9 +60,9 @@
     {
       "data": {
         "values": [
-          { "year": 2013, "label": "4G LTE start", "color": "#5b21b6", "label_y": 54800000 },
-          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 53400000 },
-          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 52000000 }
+          { "year": 2013, "label": "4G LTE start", "color": "#5b21b6", "label_y": 48900000 },
+          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 47700000 },
+          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 46400000 }
         ]
       },
       "transform": [
@@ -91,7 +91,7 @@
     {
       "data": {
         "values": [
-          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 52000000 }
+          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 46400000 }
         ]
       },
       "transform": [
