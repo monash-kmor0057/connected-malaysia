@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-section1-titles">
+    <link rel="stylesheet" href="style.css?v=20260520-map-fix-v5">
 
 </head>
 
@@ -389,7 +389,7 @@
     <script>
 
     const svgOpts = { actions: false, renderer: "svg" };
-    const mapOpts = { actions: false, renderer: "svg" };
+    const mapOpts = { actions: false, renderer: "canvas" };
 
     const lightCharts = [
         ["#chart1", "vega/chart1_subscriptions.json"],
@@ -399,9 +399,9 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v4";
+    const mapCacheBust = "20260520-malaysia-map-v5";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
-    const MAP_VIEW_BBOX = { lon0: 99.8, lat0: 0.85, lon1: 119.2, lat1: 7.0 };
+    const MAP_VIEW_BBOX = { lon0: 99.0, lat0: 0.5, lon1: 119.5, lat1: 7.2 };
     let MALAYSIA_GEO = null;
     let MAP_REGION_GEO = null;
     let MAP_FIT_GEO = null;
@@ -469,9 +469,18 @@
             .then((r) => (r.ok ? r.json() : null))
             .then((full) => {
                 if (!full || !Array.isArray(full.features)) return;
-                const region = full.features.filter(
+                let region = full.features.filter(
                     (f) => f.properties && MAP_REGION_A3.includes(f.properties.ADM0_A3)
                 );
+                if (!region.length) {
+                    region = full.features.filter(
+                        (f) =>
+                            f.properties &&
+                            (f.properties.ADM0_A3 === "MYS" ||
+                                f.properties.ADM0_A3 === "IDN" ||
+                                f.properties.ADM0_A3 === "BRN")
+                    );
+                }
                 applyMapRegionGeo(region);
             })
             .catch(() => {});
@@ -579,49 +588,49 @@
             };
         }
         const hexSize = Math.max(14, Math.min(48, Math.round(plotW * 0.032)));
+        const regionFilter =
+            "datum.properties.ADM0_A3 == 'MYS' || datum.properties.ADM0_A3 == 'IDN' || " +
+            "datum.properties.ADM0_A3 == 'BRN' || datum.properties.ADM0_A3 == 'SGP' || " +
+            "datum.properties.ADM0_A3 == 'THA' || datum.properties.ADM0_A3 == 'VNM' || " +
+            "datum.properties.ADM0_A3 == 'PHL' || datum.properties.ADM0_A3 == 'KHM'";
         if (spec.layer && spec.layer[0]) {
             if (mapGeo) {
                 spec.layer[0].data = { values: mapGeo };
-                spec.layer[0].transform = [
-                    { calculate: "datum.properties.ADM0_A3 === 'MYS' ? 1 : 0", as: "is_mys" }
-                ];
             } else {
                 spec.layer[0].data = {
                     url: "data/geo/basemap_view.json?v=" + mapCacheBust,
                     format: { type: "geojson" }
                 };
-                spec.layer[0].transform = [
-                    {
-                        filter:
-                            "indexof(['MYS','IDN','BRN','SGP','THA','VNM','PHL','KHM'], datum.properties.ADM0_A3) >= 0"
-                    },
-                    { calculate: "datum.properties.ADM0_A3 === 'MYS' ? 1 : 0", as: "is_mys" }
-                ];
+                spec.layer[0].transform = [{ filter: regionFilter }];
             }
-            if (spec.layer[0].mark) {
-                spec.layer[0].mark.type = "geoshape";
-                spec.layer[0].mark.fill = {
-                    condition: { test: "datum.is_mys === 1", value: "#e8eef5" },
-                    value: "#f4f6f8"
-                };
-                spec.layer[0].mark.stroke = {
-                    condition: { test: "datum.is_mys === 1", value: "#475569" },
-                    value: "#cbd5e1"
-                };
-                spec.layer[0].mark.strokeWidth = {
-                    condition: { test: "datum.is_mys === 1", value: 0.9 },
-                    value: 0.45
-                };
-            }
+            spec.layer[0].mark = {
+                type: "geoshape",
+                fill: "#eef2f7",
+                stroke: "#64748b",
+                strokeWidth: 0.75
+            };
+            delete spec.layer[0].encoding;
         }
         if (spec.layer && spec.layer[1]) {
-            if (!spec.layer[1].transform) spec.layer[1].transform = [];
+            const hexUrl =
+                spec.layer[1].data && spec.layer[1].data.url
+                    ? spec.layer[1].data.url.split("?")[0] +
+                      "?v=" +
+                      mapCacheBust
+                    : null;
+            if (hexUrl) {
+                spec.layer[1].data.url = hexUrl;
+            }
+            const baseTransforms = [
+                { calculate: "datum.properties.rate_mean", as: "rate_mean" },
+                { calculate: "datum.geometry.coordinates[0]", as: "lon" },
+                { calculate: "datum.geometry.coordinates[1]", as: "lat" }
+            ];
             const lonFilter = "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1;
             const latFilter = "datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1;
-            spec.layer[1].transform = spec.layer[1].transform.filter(
-                (t) => !(t.filter && String(t.filter).indexOf("datum.lon") >= 0)
-            );
-            spec.layer[1].transform.push({ filter: lonFilter + " && " + latFilter });
+            spec.layer[1].transform = baseTransforms.concat([
+                { filter: lonFilter + " && " + latFilter }
+            ]);
             if (spec.layer[1].encoding) {
                 spec.layer[1].encoding.size = { value: hexSize };
                 spec.layer[1].encoding.longitude = { field: "lon", type: "quantitative", scale: null };
@@ -922,14 +931,14 @@
         return waitForMapSize(selector).then(() => {
             const metrics = getMapBoxMetrics(selector);
             const w = metrics.w;
-            const h = metrics.plotH;
-            syncMapBoxHeight(metrics.box, h, metrics.statusH, metrics.legendH);
+            const totalH = getMapHeight(w);
+            syncMapBoxHeight(metrics.box, totalH, metrics.statusH, metrics.legendH);
             return fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
             }).then((spec) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w, h);
+                patchMapSpec(spec, w, totalH);
                 return vegaEmbed(selector, spec, mapOpts);
             }).then((result) => {
                 if (result && result.view) {
@@ -939,14 +948,14 @@
                         specUrl,
                         view: result.view,
                         lastW: w,
-                        lastH: h,
+                        lastH: totalH,
                         lastStacked: mapLayoutStacked
                     });
                 }
                 setMapStatus(statusId, "");
                 return result;
             }).catch((err) => {
-                console.error(err);
+                console.error("Map embed error (" + yearLabel + "):", err);
                 setMapStatus(statusId, "Failed to load " + yearLabel + ".");
             });
         });
@@ -969,25 +978,25 @@
         if (!el || !entry.view) return Promise.resolve();
         const metrics = getMapBoxMetrics(entry.selector);
         const w = metrics.w;
-        const h = metrics.plotH;
-        syncMapBoxHeight(metrics.box, h, metrics.statusH, metrics.legendH);
+        const totalH = getMapHeight(w);
+        syncMapBoxHeight(metrics.box, totalH, metrics.statusH, metrics.legendH);
         if (
             !force &&
             entry.lastW != null &&
             Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD &&
-            Math.abs(entry.lastH - h) < MAP_SIZE_THRESHOLD &&
+            Math.abs(entry.lastH - totalH) < MAP_SIZE_THRESHOLD &&
             entry.lastStacked === mapLayoutStacked
         ) {
             return Promise.resolve();
         }
         entry.lastW = w;
-        entry.lastH = h;
+        entry.lastH = totalH;
         entry.lastStacked = mapLayoutStacked;
         return fetch(entry.specUrl)
             .then((r) => r.json())
             .then((spec) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w, h);
+                patchMapSpec(spec, w, totalH);
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
@@ -1031,16 +1040,26 @@
         mapResizeTimer = setTimeout(onMapViewportChange, 350);
     });
 
+    function scheduleMapLoad() {
+        if (mapsLoadStarted) return;
+        loadMapsSequentially().catch((err) => console.error("Map load failed:", err));
+    }
+
     const mapSection = document.querySelector(".map-timeline");
     if (mapSection && "IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
+        const observer = new IntersectionObserver((entries) => {
             if (!entries.some((e) => e.isIntersecting)) return;
-            obs.disconnect();
-            loadMapsSequentially();
-        }, { rootMargin: "120px" });
+            scheduleMapLoad();
+        }, { rootMargin: "200px", threshold: 0.01 });
         observer.observe(mapSection);
+        requestAnimationFrame(() => {
+            const rect = mapSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight + 200 && rect.bottom > -200) {
+                scheduleMapLoad();
+            }
+        });
     } else {
-        loadMapsSequentially();
+        scheduleMapLoad();
     }
 
     </script>
