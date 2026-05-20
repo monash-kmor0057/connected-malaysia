@@ -52,7 +52,7 @@
     {
       "mark": { "type": "text", "align": "left", "dx": 0, "baseline": "bottom", "dy": -6, "fontSize": 9, "fontWeight": 700, "color": "#9a3412" },
       "encoding": {
-        "x": { "datum": 1990, "type": "quantitative" },
+        "x": { "datum": 1986, "type": "quantitative" },
         "y": { "datum": 100 },
         "text": { "value": "More than one SIM per person" }
       }
