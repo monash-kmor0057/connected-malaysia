@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-events-title-match">
+    <link rel="stylesheet" href="style.css?v=20260520-map-stack-fixed">
 
 </head>
 
@@ -274,7 +274,7 @@
                 </h3>
 
 
-                                <div class="map-timeline">
+                                <div class="map-timeline map-timeline--stacked">
                     <div class="map-row">
                         <div class="map-box">
                             <p class="map-status" id="map-status-5">Waiting to load…</p>
@@ -400,10 +400,9 @@
     let MAP_FILTER = { lon0: 99.35, lon1: 119.42, lat0: 0.8, lat1: 6.8 };
     const MAP_LAT_TRIM_BASE = 0.1;
     const MAP_LAT_TRIM_WIDE = 0.32;
-    const MAP_MIN_HORIZONTAL = 1180;
-    const MAP_STACK_HYST = 48;
+    const MAP_BOX_HEIGHT = 220;
     const MAP_SIZE_THRESHOLD = 10;
-    let mapLayoutStacked = null;
+    let mapLayoutStacked = true;
     let mapResizePending = false;
 
     function loadMapBbox() {
@@ -423,10 +422,7 @@
     }
 
     function isMapWideLayout() {
-        if (mapLayoutStacked === false) return true;
-        if (mapLayoutStacked === true) return false;
-        const timeline = document.querySelector(".map-timeline");
-        return timeline ? timeline.clientWidth >= MAP_MIN_HORIZONTAL : false;
+        return false;
     }
 
     function getMapFilter() {
@@ -451,14 +447,7 @@
     const mapRuntime = [];
 
     function getMapHeight(containerWidth) {
-        const w = Math.max(containerWidth || 320, 120);
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const box = getMapFilter();
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const plotH = plotW * (latSpan / lonSpanRad);
-        const minH = isMapWideLayout() ? 110 : 200;
-        return Math.max(minH, Math.round(plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom));
+        return MAP_BOX_HEIGHT;
     }
 
     function mercatorY(latDeg) {
@@ -683,28 +672,14 @@
 
     function updateMapLayout(callback) {
         const timeline = document.querySelector(".map-timeline");
-        if (!timeline) {
-            if (callback) callback(false);
-            return false;
+        if (timeline) {
+            timeline.classList.add("map-timeline--stacked");
         }
-        const w = timeline.clientWidth;
-        timeline.classList.remove("map-timeline--stacked");
-        const overflows = timeline.scrollWidth > timeline.clientWidth + 1;
-        let shouldStack;
-        if (mapLayoutStacked === null) {
-            shouldStack = w < MAP_MIN_HORIZONTAL || overflows;
-        } else if (mapLayoutStacked === true) {
-            shouldStack = w < MAP_MIN_HORIZONTAL + MAP_STACK_HYST || overflows;
-        } else {
-            shouldStack = w < MAP_MIN_HORIZONTAL - MAP_STACK_HYST || overflows;
-        }
-        const layoutChanged = shouldStack !== mapLayoutStacked;
-        mapLayoutStacked = shouldStack;
-        timeline.classList.toggle("map-timeline--stacked", shouldStack);
+        mapLayoutStacked = true;
         if (callback) {
-            requestAnimationFrame(() => callback(layoutChanged));
+            requestAnimationFrame(() => callback(false));
         }
-        return layoutChanged;
+        return false;
     }
 
     function resizeMapEntry(entry, force) {
