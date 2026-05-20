@@ -11,6 +11,7 @@
     { "calculate": "datum.value", "as": "value_num" },
     { "filter": "isValid(datum.value_num) && datum.value_num > 0" }
   ],
+  "resolve": { "axis": { "x": "shared", "y": "shared" } },
   "layer": [
     {
       "transform": [{ "filter": "datum.year_num >= 2020" }],
@@ -39,8 +40,7 @@
         "y": {
           "field": "value_num",
           "type": "quantitative",
-          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 },
-          "axis": null
+          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 }
         },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
