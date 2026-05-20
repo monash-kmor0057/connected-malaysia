@@ -48,11 +48,11 @@
       "encoding": { "y": { "datum": 100 } }
     },
     {
-      "mark": { "type": "text", "align": "left", "dx": 4, "baseline": "bottom", "dy": -10, "fontSize": 10, "fontWeight": 700, "color": "#9a3412" },
+      "mark": { "type": "text", "align": "left", "dx": -6, "baseline": "bottom", "dy": -14, "fontSize": 9, "fontWeight": 700, "color": "#9a3412", "lineBreak": "\n" },
       "encoding": {
-        "x": { "datum": 2002 },
-        "y": { "datum": 104 },
-        "text": { "value": "More than one SIM per person" }
+        "x": { "datum": 1994 },
+        "y": { "datum": 112 },
+        "text": { "value": "More than one SIM\nper person" }
       }
     },
     {
