@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 320,
+  "height": 250,
+  "title": { "text": "January 2023", "anchor": "start", "offset": 0, "fontSize": 18, "fontWeight": 600 },
+  "projection": { "type": "mercator" },
+  "layer": [
+    {
+      "data": {
+        "url": "data/geo/basemap_view.json",
+        "format": { "type": "json", "property": "features" }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eef2f7",
+        "stroke": "#94a3b8",
+        "strokeWidth": 0.55
+      }
+    },
+    {
+      "data": {
+        "url": "data/geo/gps_mobile_hexbin_2023.json",
+        "format": { "type": "json", "property": "features" }
+      },
+      "transform": [
+        { "calculate": "datum.properties.rate_mean", "as": "rate_mean" },
+        { "calculate": "datum.geometry.coordinates[0]", "as": "lon" },
+        { "calculate": "datum.geometry.coordinates[1]", "as": "lat" }
+      ],
+      "mark": {
+        "type": "circle",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.15,
+        "opacity": 0.94
+      },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative", "scale": null },
+        "latitude": { "field": "lat", "type": "quantitative", "scale": null },
+        "size": { "value": 45 },
+        "color": {
+          "field": "rate_mean",
+          "type": "quantitative",
+          "scale": {
+            "domain": [3000, 130000],
+            "clamp": true,
+            "interpolate": "lab",
+            "range": [
+              "#3288bd",
+              "#66b2d3",
+              "#9ecae1",
+              "#cfe8f3",
+              "#fdd0bc",
+              "#fa9a6d",
+              "#ef6548",
+              "#f03b20"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "rate_mean", "title": "Hex area mean (kbps)", "format": ",.0f" },
+          { "field": "properties.tile_count", "title": "Tiles in hex", "format": ",.0f" }
+        ]
+      }
+    }
+  ],
+  "padding": { "left": 0, "top": 0, "right": 0, "bottom": 0 },
+  "config": {
+    "view": { "stroke": null, "fill": "#ffffff", "clip": true },
+    "background": "#ffffff",
+    "legend": { "symbolStrokeWidth": 0 }
+  }
+}

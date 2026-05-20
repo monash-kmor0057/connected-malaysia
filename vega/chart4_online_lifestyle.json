@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 340,
+  "height": 300,
+  "data": {
+    "url": "data/csv/section1_worldbank_long.csv"
+  },
+  "transform": [
+    { "filter": "datum.indicator == 'Fixed broadband subscriptions per 100'" },
+    { "calculate": "datum.year", "as": "year_num" },
+    { "calculate": "datum.value", "as": "value_num" },
+    { "filter": "isValid(datum.value_num) && datum.value_num > 0" }
+  ],
+  "layer": [
+    {
+      "transform": [{ "filter": "datum.year_num >= 2020" }],
+      "mark": { "type": "area", "color": "#99f6e4", "opacity": 0.22 },
+      "encoding": {
+        "x": {
+          "field": "year_num",
+          "type": "quantitative",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "tickCount": 6, "grid": false }
+        },
+        "y": {
+          "field": "value_num",
+          "type": "quantitative",
+          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 },
+          "title": "Subscriptions per 100 people",
+          "axis": { "gridColor": "#e5e7eb" }
+        },
+        "y2": { "datum": 0 }
+      }
+    },
+    {
+      "mark": { "type": "line", "stroke": "#0f766e", "strokeWidth": 3.5, "point": { "filled": true, "size": 50 } },
+      "encoding": {
+        "x": { "field": "year_num", "type": "quantitative" },
+        "y": {
+          "field": "value_num",
+          "type": "quantitative",
+          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 },
+          "axis": null
+        },
+        "tooltip": [
+          { "field": "year_num", "type": "quantitative", "title": "Year" },
+          { "field": "value_num", "type": "quantitative", "title": "Fixed per 100", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          { "year": 2008, "label": "HSBB", "color": "#a16207", "label_y": 17.6 },
+          { "year": 2010, "label": "NBI", "color": "#c2410c", "label_y": 16.9 },
+          { "year": 2015, "label": "HSBB2", "color": "#5b21b6", "label_y": 16.2 },
+          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 15.5 }
+        ]
+      },
+      "transform": [{ "calculate": "datum.year", "as": "year_num" }],
+      "layer": [
+        {
+          "mark": { "type": "rule", "strokeDash": [6, 4], "strokeWidth": 2, "opacity": 0.85 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        },
+        {
+          "mark": { "type": "text", "align": "right", "dx": -8, "baseline": "bottom", "dy": -8, "fontSize": 10, "fontWeight": 700 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "y": { "field": "label_y", "type": "quantitative" },
+            "text": { "field": "label", "type": "nominal" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 11, "titleFontSize": 12, "labelColor": "#374151", "titleColor": "#111827" }
+  }
+}

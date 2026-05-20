@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 340,
+  "height": 280,
+  "data": {
+    "url": "data/csv/section1_worldbank_long.csv"
+  },
+  "transform": [
+    { "filter": "datum.indicator == 'Mobile subscriptions per 100'" },
+    { "calculate": "datum.year", "as": "year_num" },
+    { "calculate": "datum.value", "as": "value_num" },
+    { "filter": "isValid(datum.value_num) && datum.value_num > 0" },
+    { "calculate": "datum.value_num >= 100 ? datum.value_num : null", "as": "over_100" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "area", "color": "#93c5fd", "opacity": 0.3 },
+      "encoding": {
+        "x": {
+          "field": "year_num",
+          "type": "quantitative",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "tickCount": 6, "grid": false }
+        },
+        "y": {
+          "field": "over_100",
+          "type": "quantitative",
+          "scale": { "domainMin": 0, "domainMax": 215, "nice": false, "paddingTop": 84 },
+          "title": "Subscriptions per 100 people",
+          "axis": { "gridColor": "#e5e7eb" }
+        },
+        "y2": { "datum": 100 }
+      }
+    },
+    {
+      "mark": { "type": "line", "stroke": "#1d4ed8", "strokeWidth": 3.5, "point": { "filled": true, "size": 50 } },
+      "encoding": {
+        "x": { "field": "year_num", "type": "quantitative" },
+        "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 215, "nice": false, "paddingTop": 84 } },
+        "tooltip": [
+          { "field": "year_num", "type": "quantitative", "title": "Year" },
+          { "field": "value_num", "type": "quantitative", "title": "Per 100 people", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "rule", "stroke": "#f97316", "strokeDash": [6, 4], "strokeWidth": 2 },
+      "encoding": { "y": { "datum": 100 } }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "dx": 4, "baseline": "bottom", "dy": -10, "fontSize": 10, "fontWeight": 700, "color": "#9a3412" },
+      "encoding": {
+        "x": { "datum": 2002 },
+        "y": { "datum": 104 },
+        "text": { "value": "More than one SIM per person" }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          { "year": 2013, "label": "4G LTE start", "color": "#5b21b6", "label_y": 205 },
+          { "year": 2020, "label": "JENDELA", "color": "#b91c1c", "label_y": 192 },
+          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 178 }
+        ]
+      },
+      "transform": [
+        { "calculate": "datum.year", "as": "year_num" },
+        { "filter": "datum.label != '5G start'" }
+      ],
+      "layer": [
+        {
+          "mark": { "type": "rule", "strokeDash": [6, 4], "strokeWidth": 2, "opacity": 0.85 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        },
+        {
+          "mark": { "type": "text", "align": "right", "dx": -10, "baseline": "bottom", "dy": -8, "fontSize": 10, "fontWeight": 700 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "y": { "field": "label_y", "type": "quantitative" },
+            "text": { "field": "label", "type": "nominal" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          { "year": 2021, "label": "5G start", "color": "#0891b2", "label_y": 178 }
+        ]
+      },
+      "transform": [
+        { "calculate": "datum.year", "as": "year_num" },
+        { "filter": "datum.label == '5G start'" }
+      ],
+      "layer": [
+        {
+          "mark": { "type": "rule", "strokeDash": [6, 4], "strokeWidth": 2, "opacity": 0.85 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        },
+        {
+          "mark": { "type": "text", "align": "left", "dx": 10, "baseline": "bottom", "dy": -8, "fontSize": 10, "fontWeight": 700 },
+          "encoding": {
+            "x": { "field": "year_num", "type": "quantitative" },
+            "y": { "field": "label_y", "type": "quantitative" },
+            "text": { "field": "label", "type": "nominal" },
+            "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 11, "titleFontSize": 12, "labelColor": "#374151", "titleColor": "#111827" }
+  }
+}
