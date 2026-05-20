@@ -28,7 +28,7 @@
         "color": {
           "field": "group",
           "type": "nominal",
-          "scale": { "domain": ["female", "male"], "range": ["#2563eb", "#14b8a6"] },
+          "scale": { "domain": ["female", "male"], "range": ["#dc2626", "#2563eb"] },
           "legend": { "title": null, "orient": "top" }
         },
         "tooltip": [
