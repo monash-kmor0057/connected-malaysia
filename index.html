@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-card-height-fix2">
+    <link rel="stylesheet" href="style.css?v=20260520-map-card-match">
 
 </head>
 
@@ -379,7 +379,8 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map";
+    const mapCacheBust = "20260520-malaysia-map-v2";
+    let MALAYSIA_GEO = null;
 
     function normalizeSpecDataUrls(spec) {
         if (!spec || typeof spec !== "object") return spec;
@@ -408,7 +409,29 @@
         return fetch("data/geo/basemap_malaysia.json?v=" + mapCacheBust)
             .then((r) => (r.ok ? r.json() : null))
             .then((d) => {
-                if (d && d.bbox && d.bbox.length === 4) {
+                if (!d) {
+                    return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
+                        .then((r2) => (r2.ok ? r2.json() : null))
+                        .then((full) => {
+                            if (!full || !Array.isArray(full.features)) return;
+                            const my = full.features.filter(
+                                (f) => f.properties && f.properties.ADM0_A3 === "MYS"
+                            );
+                            if (my.length) {
+                                MALAYSIA_GEO = { type: "FeatureCollection", features: my };
+                                if (my[0].bbox) {
+                                    MAP_FILTER = {
+                                        lon0: my[0].bbox[0],
+                                        lat0: my[0].bbox[1],
+                                        lon1: my[0].bbox[2],
+                                        lat1: my[0].bbox[3]
+                                    };
+                                }
+                            }
+                        });
+                }
+                MALAYSIA_GEO = d;
+                if (d.bbox && d.bbox.length === 4) {
                     MAP_FILTER = {
                         lon0: d.bbox[0],
                         lat0: d.bbox[1],
@@ -490,29 +513,6 @@
         };
     }
 
-    function buildMapProjection(containerWidth, containerHeight) {
-        const w = Math.max(containerWidth, 120);
-        const h = containerHeight || getMapHeight(w);
-        const box = getMapGeoBounds();
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
-        return {
-            type: "mercator",
-            center: [
-                (box.lon0 + box.lon1) / 2,
-                (box.lat0 + box.lat1) / 2
-            ],
-            scale,
-            translate: [
-                MAP_PAD.left + plotW / 2,
-                MAP_TITLE_H + MAP_PAD.top + plotH / 2
-            ]
-        };
-    }
-
     const mapCharts = [
         ["#chart5", "vega/chart5_map_2020.json?v=" + mapCacheBust, "map-status-5", "Jan 2020"],
         ["#chart6", "vega/chart6_map_2023.json?v=" + mapCacheBust, "map-status-6", "Jan 2023"],
@@ -523,11 +523,33 @@
         const w = Math.max(width, 120);
         const h = height || getMapHeight(w);
         const box = getMapGeoBounds();
-        const projection = buildMapProjection(w, h);
+        const plotW = Math.max(w - MAP_PAD.left - MAP_PAD.right, 80);
+        const plotH = Math.max(h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom, 80);
         spec.width = w;
         spec.height = h;
-        spec.projection = projection;
-        const hexSize = Math.max(14, Math.min(44, Math.round(projection.scale * 0.11)));
+        if (MALAYSIA_GEO) {
+            spec.projection = {
+                type: "mercator",
+                fit: MALAYSIA_GEO,
+                size: [plotW, plotH]
+            };
+        } else {
+            spec.projection = { type: "mercator" };
+        }
+        const hexSize = Math.max(16, Math.min(52, Math.round(plotW * 0.04)));
+        if (spec.layer && spec.layer[0] && spec.layer[0].data) {
+            if (!MALAYSIA_GEO) {
+                spec.layer[0].data.url = "data/geo/basemap_view.json";
+                spec.layer[0].data.format = { type: "geojson" };
+                if (!spec.layer[0].transform) spec.layer[0].transform = [];
+                const hasFilter = spec.layer[0].transform.some(
+                    (t) => t.filter && String(t.filter).indexOf("ADM0_A3") >= 0
+                );
+                if (!hasFilter) {
+                    spec.layer[0].transform.push({ filter: "datum.properties.ADM0_A3 == 'MYS'" });
+                }
+            }
+        }
         if (spec.layer && spec.layer[1]) {
             if (!spec.layer[1].transform) spec.layer[1].transform = [];
             const lonFilter = "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1;
@@ -562,8 +584,8 @@
     }
 
     const chartRuntime = [];
-    const CHART_CARD_HEIGHT = 307;
-    const CHART_PLOT_FALLBACK = 186;
+    const CHART_CARD_HEIGHT = 500;
+    const CHART_PLOT_FALLBACK = 380;
 
     function isDataChartCard(card) {
         return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
@@ -591,7 +613,7 @@
             card.clientHeight >= CHART_CARD_HEIGHT - 8 ? card.clientHeight : CHART_CARD_HEIGHT;
         const expected = Math.max(140, cardH - chrome);
         const measured = el.clientHeight;
-        if (measured >= expected * 0.85 && measured <= expected + 24) {
+        if (measured >= expected * 0.85) {
             return measured;
         }
         if (lastGood && lastGood >= expected * 0.85) {

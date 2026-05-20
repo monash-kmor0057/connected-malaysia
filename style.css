@@ -189,16 +189,22 @@ body {
 
 .grid-2 > .chart-card:not(.policy-events-panel):not(.full-width-card) {
 
-    height: 307px;
+    height: 500px;
 
-    min-height: 307px;
+    min-height: 500px;
 
-    max-height: 307px;
+    max-height: 500px;
 }
 
 .grid-2 > .chart-card.policy-events-panel {
 
-    min-height: 307px;
+    height: 500px;
+
+    min-height: 500px;
+
+    max-height: 500px;
+
+    padding: 16px 14px 14px 10px;
 }
 
 .grid-2 > .chart-card.policy-events-panel .policy-events-timeline {
@@ -292,8 +298,6 @@ body {
 .chart-card.policy-events-panel {
 
     overflow: visible;
-
-    padding: 12px 14px 12px 8px;
 }
 
 .policy-events-panel {
@@ -305,7 +309,7 @@ body {
 
     margin-top: 0;
 
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 
     font-size: 17px;
 
@@ -366,7 +370,7 @@ body {
 
     max-width: 100%;
 
-    padding-bottom: 9px;
+    padding-bottom: 11px;
 
     position: relative;
 
@@ -501,7 +505,7 @@ body {
 
     border-radius: 8px;
 
-    padding: 7px 9px;
+    padding: 9px 10px;
 
     background: #f8fafc;
 }
@@ -993,32 +997,63 @@ body {
 
 .chart-card.full-width-card {
 
-    padding: 10px 12px 8px 6px;
+    padding: 12px 14px 12px 8px;
 
     overflow: visible;
 }
 
 .chart-card.full-width-card h3 {
 
-    margin-bottom: 6px;
+    margin-top: 0;
+
+    margin-bottom: 8px;
 
     font-size: 17px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    color: #0f172a;
 }
 
 .chart-card.full-width-card .chart-number {
 
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .chart-card.full-width-card .annotation {
 
-    margin-top: 6px;
+    margin-top: 8px;
 
     margin-bottom: 0;
 
-    font-size: 17px;
+    font-size: 14px;
 
-    line-height: 1.45;
+    line-height: 1.5;
+
+    color: #4b5563;
+}
+
+.chart-card.full-width-card .map-timeline {
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    width: 100%;
+
+    max-width: 100%;
+}
+
+@media screen and (min-width: 1200px) {
+
+    .chart-card.full-width-card .map-timeline {
+
+        width: calc((100% - 32px) / 3);
+
+        max-width: calc((100% - 32px) / 3);
+    }
 }
 
 .map-status {
