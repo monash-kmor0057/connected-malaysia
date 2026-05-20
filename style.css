@@ -154,7 +154,7 @@ body {
 
     gap: 16px;
 
-    align-items: start;
+    align-items: stretch;
 }
 
 
@@ -179,6 +179,28 @@ body {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
 
     overflow: hidden;
+
+    min-height: 460px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+}
+
+.grid-2 > .chart-card.policy-events-panel {
+
+    min-height: 460px;
+}
+
+.grid-2 > .chart-card.policy-events-panel .policy-events-timeline {
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
 }
 
 
@@ -573,6 +595,10 @@ body {
     width: 100%;
 
     min-width: 0;
+
+    flex: 1 1 auto;
+
+    min-height: 280px;
 }
 
 .chart-card > div[id^="chart"] .vega-embed,
@@ -686,7 +712,7 @@ body {
 
     display: flex;
 
-    flex-direction: row;
+    flex-direction: column;
 
     align-items: stretch;
 
@@ -701,28 +727,27 @@ body {
     margin-top: 4px;
 }
 
-.map-timeline--stacked {
-
-    flex-direction: column;
-}
-
-.map-timeline--stacked .map-row {
+.map-timeline .map-row {
 
     flex-direction: column;
 
     width: 100%;
 }
 
-.map-timeline--stacked .map-box {
+.map-timeline .map-box {
 
-    flex: 1 1 auto;
+    flex: 0 0 220px;
 
     width: 100%;
 
     max-width: 100%;
+
+    height: 220px;
+
+    min-height: 220px;
 }
 
-.map-timeline--stacked .map-legend-aside {
+.map-timeline .map-legend-aside {
 
     flex: 0 0 auto;
 
@@ -739,7 +764,7 @@ body {
     gap: 6px;
 }
 
-.map-timeline--stacked .map-legend-title {
+.map-timeline .map-legend-title {
 
     writing-mode: horizontal-tb;
 
@@ -752,7 +777,7 @@ body {
     text-align: left;
 }
 
-.map-timeline--stacked .map-legend-scale {
+.map-timeline .map-legend-scale {
 
     display: grid;
 
@@ -767,12 +792,12 @@ body {
     max-width: 100%;
 }
 
-.map-timeline--stacked .map-legend-ticks {
+.map-timeline .map-legend-ticks {
 
     display: contents;
 }
 
-.map-timeline--stacked .map-legend-ticks span:first-child {
+.map-timeline .map-legend-ticks span:first-child {
 
     grid-column: 3;
 
@@ -781,7 +806,7 @@ body {
     justify-self: end;
 }
 
-.map-timeline--stacked .map-legend-ticks span:last-child {
+.map-timeline .map-legend-ticks span:last-child {
 
     grid-column: 1;
 
@@ -790,7 +815,7 @@ body {
     justify-self: start;
 }
 
-.map-timeline--stacked .map-legend-bar {
+.map-timeline .map-legend-bar {
 
     grid-column: 2;
 
@@ -823,7 +848,7 @@ body {
 
     flex: 1 1 auto;
 
-    flex-direction: row;
+    flex-direction: column;
 
     align-items: stretch;
 
@@ -986,11 +1011,13 @@ body {
 
 .map-box {
 
-    flex: 1 1 0;
+    flex: 0 0 220px;
 
     min-width: 0;
 
-    min-height: 0;
+    height: 220px;
+
+    min-height: 220px;
 
     overflow: hidden;
 }
@@ -1002,13 +1029,8 @@ body {
     width: 100%;
 
     min-width: 0;
-}
 
-.map-timeline--stacked .map-box #chart5,
-.map-timeline--stacked .map-box #chart6,
-.map-timeline--stacked .map-box #chart7 {
-
-    min-height: 220px;
+    height: 100%;
 }
 
 .map-box .vega-embed {
