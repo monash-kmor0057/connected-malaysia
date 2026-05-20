@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-full-basemap">
+    <link rel="stylesheet" href="style.css?v=20260520-section1-titles">
 
 </head>
 
@@ -56,7 +56,7 @@
 
             <!-- CHART 1 -->
 
-            <div class="chart-card">
+            <div class="chart-card chart-card--auto-height">
 
                 <div class="chart-number">1</div>
 
@@ -76,7 +76,7 @@
 
             <!-- CHART 2 -->
 
-            <div class="chart-card">
+            <div class="chart-card chart-card--auto-height">
 
                 <div class="chart-number">2</div>
 
@@ -279,26 +279,46 @@
                         <div class="map-box">
                             <p class="map-status" id="map-status-5">Waiting to load…</p>
                             <div id="chart5"></div>
+                            <div class="map-legend-inline" aria-label="Download speed scale for January 2020">
+                                <p class="map-legend-title">Download (kbps)</p>
+                                <div class="map-legend-scale">
+                                    <div class="map-legend-ticks">
+                                        <span>3k</span>
+                                        <span>130k</span>
+                                    </div>
+                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-6">Waiting to load…</p>
                             <div id="chart6"></div>
+                            <div class="map-legend-inline" aria-label="Download speed scale for January 2023">
+                                <p class="map-legend-title">Download (kbps)</p>
+                                <div class="map-legend-scale">
+                                    <div class="map-legend-ticks">
+                                        <span>3k</span>
+                                        <span>130k</span>
+                                    </div>
+                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-7">Waiting to load…</p>
                             <div id="chart7"></div>
+                            <div class="map-legend-inline" aria-label="Download speed scale for January 2026">
+                                <p class="map-legend-title">Download (kbps)</p>
+                                <div class="map-legend-scale">
+                                    <div class="map-legend-ticks">
+                                        <span>3k</span>
+                                        <span>130k</span>
+                                    </div>
+                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <aside class="map-legend-aside" aria-label="Download speed scale">
-                        <p class="map-legend-title">Download (kbps)</p>
-                        <div class="map-legend-scale">
-                            <div class="map-legend-ticks">
-                                <span>130k</span>
-                                <span>3k</span>
-                            </div>
-                            <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
-                        </div>
-                    </aside>
                 </div>
 
                 <p class="annotation">
@@ -379,8 +399,12 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v3";
+    const mapCacheBust = "20260520-malaysia-map-v4";
+    const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
+    const MAP_VIEW_BBOX = { lon0: 99.8, lat0: 0.85, lon1: 119.2, lat1: 7.0 };
     let MALAYSIA_GEO = null;
+    let MAP_REGION_GEO = null;
+    let MAP_FIT_GEO = null;
 
     function normalizeSpecDataUrls(spec) {
         if (!spec || typeof spec !== "object") return spec;
@@ -405,40 +429,50 @@
     let mapLayoutStacked = true;
     let mapResizePending = false;
 
+    function makeMapFitBox(b) {
+        return {
+            type: "FeatureCollection",
+            features: [
+                {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [b.lon0, b.lat0],
+                                [b.lon1, b.lat0],
+                                [b.lon1, b.lat1],
+                                [b.lon0, b.lat1],
+                                [b.lon0, b.lat0]
+                            ]
+                        ]
+                    }
+                }
+            ]
+        };
+    }
+
+    function applyMapRegionGeo(features) {
+        if (!features || !features.length) return;
+        MAP_REGION_GEO = { type: "FeatureCollection", features: features };
+        const myOnly = features.filter((f) => f.properties && f.properties.ADM0_A3 === "MYS");
+        MALAYSIA_GEO = myOnly.length
+            ? { type: "FeatureCollection", features: myOnly }
+            : MAP_REGION_GEO;
+        MAP_FILTER = { ...MAP_VIEW_BBOX };
+        MAP_FIT_GEO = makeMapFitBox(MAP_VIEW_BBOX);
+    }
+
     function loadMapBbox() {
-        return fetch("data/geo/basemap_malaysia.json?v=" + mapCacheBust)
+        return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
             .then((r) => (r.ok ? r.json() : null))
-            .then((d) => {
-                if (!d) {
-                    return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
-                        .then((r2) => (r2.ok ? r2.json() : null))
-                        .then((full) => {
-                            if (!full || !Array.isArray(full.features)) return;
-                            const my = full.features.filter(
-                                (f) => f.properties && f.properties.ADM0_A3 === "MYS"
-                            );
-                            if (my.length) {
-                                MALAYSIA_GEO = { type: "FeatureCollection", features: my };
-                                if (my[0].bbox) {
-                                    MAP_FILTER = {
-                                        lon0: my[0].bbox[0],
-                                        lat0: my[0].bbox[1],
-                                        lon1: my[0].bbox[2],
-                                        lat1: my[0].bbox[3]
-                                    };
-                                }
-                            }
-                        });
-                }
-                MALAYSIA_GEO = d;
-                if (d.bbox && d.bbox.length === 4) {
-                    MAP_FILTER = {
-                        lon0: d.bbox[0],
-                        lat0: d.bbox[1],
-                        lon1: d.bbox[2],
-                        lat1: d.bbox[3]
-                    };
-                }
+            .then((full) => {
+                if (!full || !Array.isArray(full.features)) return;
+                const region = full.features.filter(
+                    (f) => f.properties && MAP_REGION_A3.includes(f.properties.ADM0_A3)
+                );
+                applyMapRegionGeo(region);
             })
             .catch(() => {});
     }
@@ -487,16 +521,18 @@
             return { w, plotH: getMapHeight(w), box: null, statusH: 0 };
         }
         const status = box.querySelector(".map-status");
+        const legend = box.querySelector(".map-legend-inline");
         const statusH = status ? status.offsetHeight : 0;
+        const legendH = legend ? legend.offsetHeight : 40;
         const w = Math.max(box.clientWidth, 120);
         const plotH = getMapHeight(w);
-        return { w, plotH, box, statusH };
+        return { w, plotH, box, statusH, legendH };
     }
 
-    function syncMapBoxHeight(box, plotH, statusH) {
+    function syncMapBoxHeight(box, plotH, statusH, legendH) {
         if (!box) return;
         box.style.height = "auto";
-        box.style.minHeight = (plotH + statusH) + "px";
+        box.style.minHeight = (plotH + statusH + (legendH || 0)) + "px";
     }
 
     function mercatorY(latDeg) {
@@ -527,10 +563,12 @@
         const plotH = Math.max(h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom, 80);
         spec.width = w;
         spec.height = h;
-        if (MALAYSIA_GEO) {
+        const mapGeo = MAP_REGION_GEO || MALAYSIA_GEO;
+        const fitGeo = MAP_FIT_GEO || mapGeo;
+        if (fitGeo) {
             spec.projection = {
                 type: "mercator",
-                fit: MALAYSIA_GEO,
+                fit: fitGeo,
                 size: [plotW, plotH]
             };
         } else {
@@ -540,32 +578,40 @@
                 scale: Math.max(200, Math.min(8000, plotW * 28))
             };
         }
-        const hexSize = Math.max(16, Math.min(52, Math.round(plotW * 0.04)));
+        const hexSize = Math.max(14, Math.min(48, Math.round(plotW * 0.032)));
         if (spec.layer && spec.layer[0]) {
-            if (MALAYSIA_GEO) {
-                spec.layer[0].data = { values: MALAYSIA_GEO };
-                if (spec.layer[0].transform) {
-                    spec.layer[0].transform = spec.layer[0].transform.filter(
-                        (t) => !(t.filter && String(t.filter).indexOf("ADM0_A3") >= 0)
-                    );
-                }
+            if (mapGeo) {
+                spec.layer[0].data = { values: mapGeo };
+                spec.layer[0].transform = [
+                    { calculate: "datum.properties.ADM0_A3 === 'MYS' ? 1 : 0", as: "is_mys" }
+                ];
             } else {
                 spec.layer[0].data = {
-                    url: "data/geo/basemap_malaysia.json?v=" + mapCacheBust,
+                    url: "data/geo/basemap_view.json?v=" + mapCacheBust,
                     format: { type: "geojson" }
                 };
-                if (!spec.layer[0].transform) spec.layer[0].transform = [];
-                const hasFilter = spec.layer[0].transform.some(
-                    (t) => t.filter && String(t.filter).indexOf("ADM0_A3") >= 0
-                );
-                if (!hasFilter) {
-                    spec.layer[0].transform.push({ filter: "datum.properties.ADM0_A3 == 'MYS'" });
-                }
+                spec.layer[0].transform = [
+                    {
+                        filter:
+                            "indexof(['MYS','IDN','BRN','SGP','THA','VNM','PHL','KHM'], datum.properties.ADM0_A3) >= 0"
+                    },
+                    { calculate: "datum.properties.ADM0_A3 === 'MYS' ? 1 : 0", as: "is_mys" }
+                ];
             }
             if (spec.layer[0].mark) {
-                spec.layer[0].mark.fill = "#eef2f7";
-                spec.layer[0].mark.stroke = "#64748b";
-                spec.layer[0].mark.strokeWidth = 0.75;
+                spec.layer[0].mark.type = "geoshape";
+                spec.layer[0].mark.fill = {
+                    condition: { test: "datum.is_mys === 1", value: "#e8eef5" },
+                    value: "#f4f6f8"
+                };
+                spec.layer[0].mark.stroke = {
+                    condition: { test: "datum.is_mys === 1", value: "#475569" },
+                    value: "#cbd5e1"
+                };
+                spec.layer[0].mark.strokeWidth = {
+                    condition: { test: "datum.is_mys === 1", value: 0.9 },
+                    value: 0.45
+                };
             }
         }
         if (spec.layer && spec.layer[1]) {
@@ -602,30 +648,33 @@
     }
 
     const chartRuntime = [];
-    const CHART_CARD_HEIGHT = 500;
-    const CHART_PLOT_FALLBACK = 380;
+    const CHART_PLOT_FALLBACK = 280;
 
     function isDataChartCard(card) {
         return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
     }
 
     function isAutoHeightChartCard(card) {
-        return card && card.classList.contains("chart-card--auto-height");
+        return isDataChartCard(card);
     }
 
-    function isFixedHeightChartCard(card) {
-        return isDataChartCard(card) && !isAutoHeightChartCard(card);
+    function getIntrinsicSpecHeight(spec) {
+        if (!spec || typeof spec !== "object") return CHART_PLOT_FALLBACK;
+        if (Array.isArray(spec.vconcat)) {
+            const total = spec.vconcat.reduce(
+                (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
+                0
+            );
+            return total || CHART_PLOT_FALLBACK;
+        }
+        return typeof spec.height === "number" ? spec.height : CHART_PLOT_FALLBACK;
     }
 
-    const AUTO_PLOT_HEIGHT = {
-        chart15: 265,
-        chart3: 280,
-        chart4: 300
-    };
-
-    function getAutoPlotHeight(el) {
-        const id = el && el.id;
-        return AUTO_PLOT_HEIGHT[id] || CHART_PLOT_FALLBACK;
+    function getAutoPlotHeight(el, spec) {
+        const cw = Math.max(el && el.clientWidth ? el.clientWidth : 340, 200);
+        const baseW = spec && typeof spec.width === "number" ? spec.width : 340;
+        const intrinsicH = getIntrinsicSpecHeight(spec);
+        return Math.max(intrinsicH, Math.round(intrinsicH * cw / baseW));
     }
 
     function getChartChromeHeight(card) {
@@ -639,46 +688,45 @@
         return chrome;
     }
 
-    function getChartPlotHeight(el, lastGood) {
+    function getChartPlotHeight(el, spec) {
         const card = el && el.closest(".chart-card");
         if (!isDataChartCard(card)) {
             const cw = Math.max(el.clientWidth, 200);
             return Math.max(160, Math.round(cw * 280 / 340));
         }
-        if (isAutoHeightChartCard(card)) {
-            return getAutoPlotHeight(el);
-        }
-        const chrome = getChartChromeHeight(card);
-        const cardH =
-            card.clientHeight >= CHART_CARD_HEIGHT - 8 ? card.clientHeight : CHART_CARD_HEIGHT;
-        const expected = Math.max(140, cardH - chrome);
-        const measured = el.clientHeight;
-        if (measured >= expected * 0.85) {
-            return measured;
-        }
-        if (lastGood && lastGood >= expected * 0.85) {
-            return lastGood;
-        }
-        return expected;
+        return getAutoPlotHeight(el, spec);
     }
 
     function patchResponsiveSpec(spec, el, lastGood) {
         const cw = Math.max(el.clientWidth, 200);
         const baseW = typeof spec.width === "number" ? spec.width : 340;
-        const baseH = typeof spec.height === "number" ? spec.height : 280;
+        const baseH = getIntrinsicSpecHeight(spec);
         const card = el && el.closest(".chart-card");
         spec.width = cw;
         if (isAutoHeightChartCard(card)) {
+            const ch = getAutoPlotHeight(el, spec);
             if (Array.isArray(spec.vconcat)) {
+                const parts = spec.vconcat;
+                const totalPartH = parts.reduce(
+                    (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
+                    0
+                ) || baseH;
                 let used = 0;
-                spec.vconcat.forEach((child) => {
+                parts.forEach((child, i) => {
                     if (!child || typeof child !== "object") return;
                     child.width = cw;
-                    used += typeof child.height === "number" ? child.height : 0;
+                    const partBase = typeof child.height === "number" ? child.height : 0;
+                    const ratio = partBase / totalPartH;
+                    const partH =
+                        i === parts.length - 1
+                            ? Math.max(60, ch - used)
+                            : Math.max(60, Math.round(ch * ratio));
+                    child.height = partH;
+                    used += partH;
                 });
-                spec.height = used || baseH;
+                spec.height = used;
             } else {
-                spec.height = baseH;
+                spec.height = ch;
             }
             if (Array.isArray(spec.hconcat)) {
                 const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
@@ -690,7 +738,7 @@
             }
             return spec;
         }
-        const ch = getChartPlotHeight(el, lastGood && lastGood.lastPlotH);
+        const ch = getChartPlotHeight(el, spec);
         if (Array.isArray(spec.vconcat)) {
             const parts = spec.vconcat;
             const totalPartH = parts.reduce(
@@ -736,11 +784,7 @@
             const check = () => {
                 const w = el.clientWidth;
                 const h = getChartPlotHeight(el);
-                const cardReady =
-                    !isFixedHeightChartCard(card) ||
-                    card.clientHeight >= CHART_CARD_HEIGHT - 8 ||
-                    attempts > 40;
-                if ((w >= 80 && h >= 100 && cardReady) || attempts++ > 150) {
+                if ((w >= 80 && h >= 100) || attempts++ > 150) {
                     resolve();
                     return;
                 }
@@ -879,7 +923,7 @@
             const metrics = getMapBoxMetrics(selector);
             const w = metrics.w;
             const h = metrics.plotH;
-            syncMapBoxHeight(metrics.box, h, metrics.statusH);
+            syncMapBoxHeight(metrics.box, h, metrics.statusH, metrics.legendH);
             return fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
@@ -926,7 +970,7 @@
         const metrics = getMapBoxMetrics(entry.selector);
         const w = metrics.w;
         const h = metrics.plotH;
-        syncMapBoxHeight(metrics.box, h, metrics.statusH);
+        syncMapBoxHeight(metrics.box, h, metrics.statusH, metrics.legendH);
         if (
             !force &&
             entry.lastW != null &&
