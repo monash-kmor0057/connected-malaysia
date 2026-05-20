@@ -54,7 +54,7 @@
       "encoding": {
         "x": { "datum": 1986, "type": "quantitative" },
         "y": { "datum": 100 },
-        "text": { "value": "More than one SIM per person" }
+        "text": { "value": "　More than one SIM per person" }
       }
     },
     {
