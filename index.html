@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-align-compact">
+    <link rel="stylesheet" href="style.css?v=20260520-card-height-fix2">
 
 </head>
 
@@ -379,7 +379,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-map-align";
+    const mapCacheBust = "20260520-malaysia-map";
 
     function normalizeSpecDataUrls(spec) {
         if (!spec || typeof spec !== "object") return spec;
@@ -397,7 +397,7 @@
         });
         return spec;
     }
-    let MAP_FILTER = { lon0: 99.35, lon1: 119.42, lat0: 0.8, lat1: 6.8 };
+    let MAP_FILTER = { lon0: 100.09, lon1: 119.18, lat0: 0.77, lat1: 6.93 };
     const MAP_LAT_TRIM_BASE = 0.1;
     const MAP_LAT_TRIM_WIDE = 0.32;
     const MAP_SIZE_THRESHOLD = 10;
@@ -405,7 +405,7 @@
     let mapResizePending = false;
 
     function loadMapBbox() {
-        return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
+        return fetch("data/geo/basemap_malaysia.json?v=" + mapCacheBust)
             .then((r) => (r.ok ? r.json() : null))
             .then((d) => {
                 if (d && d.bbox && d.bbox.length === 4) {
@@ -447,7 +447,7 @@
 
     function getMapHeight(containerWidth) {
         const w = Math.max(containerWidth || 320, 120);
-        const box = getMapFilter();
+        const box = getMapGeoBounds();
         const plotW = w - MAP_PAD.left - MAP_PAD.right;
         const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
@@ -480,6 +480,39 @@
         const r = (latDeg * Math.PI) / 180;
         return Math.log(Math.tan(Math.PI / 4 + r / 2));
     }
+
+    function getMapGeoBounds() {
+        return {
+            lon0: MAP_FILTER.lon0,
+            lon1: MAP_FILTER.lon1,
+            lat0: MAP_FILTER.lat0,
+            lat1: MAP_FILTER.lat1
+        };
+    }
+
+    function buildMapProjection(containerWidth, containerHeight) {
+        const w = Math.max(containerWidth, 120);
+        const h = containerHeight || getMapHeight(w);
+        const box = getMapGeoBounds();
+        const plotW = w - MAP_PAD.left - MAP_PAD.right;
+        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
+        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
+        return {
+            type: "mercator",
+            center: [
+                (box.lon0 + box.lon1) / 2,
+                (box.lat0 + box.lat1) / 2
+            ],
+            scale,
+            translate: [
+                MAP_PAD.left + plotW / 2,
+                MAP_TITLE_H + MAP_PAD.top + plotH / 2
+            ]
+        };
+    }
+
     const mapCharts = [
         ["#chart5", "vega/chart5_map_2020.json?v=" + mapCacheBust, "map-status-5", "Jan 2020"],
         ["#chart6", "vega/chart6_map_2023.json?v=" + mapCacheBust, "map-status-6", "Jan 2023"],
@@ -489,28 +522,24 @@
     function patchMapSpec(spec, width, height) {
         const w = Math.max(width, 120);
         const h = height || getMapHeight(w);
-        const box = getMapFilter();
+        const box = getMapGeoBounds();
+        const projection = buildMapProjection(w, h);
         spec.width = w;
         spec.height = h;
-        spec.projection = { type: "mercator" };
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const hexSize = Math.max(18, Math.min(52, Math.round(plotW * 0.045)));
+        spec.projection = projection;
+        const hexSize = Math.max(14, Math.min(44, Math.round(projection.scale * 0.11)));
         if (spec.layer && spec.layer[1]) {
             if (!spec.layer[1].transform) spec.layer[1].transform = [];
             const lonFilter = "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1;
             const latFilter = "datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1;
-            const hasLonFilter = spec.layer[1].transform.some((t) => t.filter && String(t.filter).indexOf("datum.lon") >= 0);
-            if (!hasLonFilter) {
-                spec.layer[1].transform.push({ filter: lonFilter + " && " + latFilter });
-            }
+            spec.layer[1].transform = spec.layer[1].transform.filter(
+                (t) => !(t.filter && String(t.filter).indexOf("datum.lon") >= 0)
+            );
+            spec.layer[1].transform.push({ filter: lonFilter + " && " + latFilter });
             if (spec.layer[1].encoding) {
                 spec.layer[1].encoding.size = { value: hexSize };
-                if (spec.layer[1].encoding.longitude) {
-                    spec.layer[1].encoding.longitude = { field: "lon", "type": "quantitative" };
-                }
-                if (spec.layer[1].encoding.latitude) {
-                    spec.layer[1].encoding.latitude = { field: "lat", "type": "quantitative" };
-                }
+                spec.layer[1].encoding.longitude = { field: "lon", type: "quantitative", scale: null };
+                spec.layer[1].encoding.latitude = { field: "lat", type: "quantitative", scale: null };
                 if (spec.layer[1].encoding.color) {
                     spec.layer[1].encoding.color.legend = null;
                 }
@@ -533,17 +562,49 @@
     }
 
     const chartRuntime = [];
+    const CHART_CARD_HEIGHT = 307;
+    const CHART_PLOT_FALLBACK = 186;
 
-    function patchResponsiveSpec(spec, el) {
+    function isDataChartCard(card) {
+        return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
+    }
+
+    function getChartChromeHeight(card) {
+        let chrome = 24;
+        const num = card.querySelector(".chart-number");
+        const title = card.querySelector("h3");
+        const note = card.querySelector(".annotation");
+        if (num) chrome += num.offsetHeight + 8;
+        if (title) chrome += title.offsetHeight + 8;
+        if (note) chrome += note.offsetHeight + 8;
+        return chrome;
+    }
+
+    function getChartPlotHeight(el, lastGood) {
+        const card = el && el.closest(".chart-card");
+        if (!isDataChartCard(card)) {
+            const cw = Math.max(el.clientWidth, 200);
+            return Math.max(160, Math.round(cw * 280 / 340));
+        }
+        const chrome = getChartChromeHeight(card);
+        const cardH =
+            card.clientHeight >= CHART_CARD_HEIGHT - 8 ? card.clientHeight : CHART_CARD_HEIGHT;
+        const expected = Math.max(140, cardH - chrome);
+        const measured = el.clientHeight;
+        if (measured >= expected * 0.85 && measured <= expected + 24) {
+            return measured;
+        }
+        if (lastGood && lastGood >= expected * 0.85) {
+            return lastGood;
+        }
+        return expected;
+    }
+
+    function patchResponsiveSpec(spec, el, lastGood) {
         const cw = Math.max(el.clientWidth, 200);
         const baseW = typeof spec.width === "number" ? spec.width : 340;
         const baseH = typeof spec.height === "number" ? spec.height : 280;
-        let ch = el.clientHeight;
-        if (ch < 80) {
-            ch = Math.max(160, Math.round(cw * baseH / baseW));
-        } else {
-            ch = Math.max(120, ch);
-        }
+        const ch = getChartPlotHeight(el, lastGood && lastGood.lastPlotH);
         spec.width = cw;
         if (Array.isArray(spec.vconcat)) {
             const parts = spec.vconcat;
@@ -576,7 +637,6 @@
                 }
             });
         }
-        spec.autosize = { type: "fit", contains: "padding" };
         return spec;
     }
 
@@ -586,15 +646,49 @@
                 resolve();
                 return;
             }
+            const card = el.closest(".chart-card");
             let attempts = 0;
             const check = () => {
-                if ((el.clientWidth >= 80 && el.clientHeight >= 80) || attempts++ > 120) {
+                const w = el.clientWidth;
+                const h = getChartPlotHeight(el);
+                const cardReady =
+                    !isDataChartCard(card) ||
+                    card.clientHeight >= CHART_CARD_HEIGHT - 8 ||
+                    attempts > 40;
+                if ((w >= 80 && h >= 100 && cardReady) || attempts++ > 150) {
                     resolve();
                     return;
                 }
                 requestAnimationFrame(check);
             };
             requestAnimationFrame(check);
+        });
+    }
+
+    function resizeChartEntry(entry) {
+        const el = document.querySelector(entry.selector);
+        if (!el) return Promise.resolve();
+        return waitForChartSize(el).then(() => {
+            return fetch(entry.specUrl).then((r) => {
+                if (!r.ok) throw new Error("Chart spec not found: " + entry.specUrl);
+                return r.json();
+            }).then((spec) => {
+                normalizeSpecDataUrls(spec);
+                patchResponsiveSpec(spec, el, entry);
+                entry.lastPlotH = spec.height;
+                entry.lastPlotW = spec.width;
+                if (entry.view && typeof entry.view.width === "function") {
+                    return entry.view.width(spec.width).height(spec.height).runAsync();
+                }
+                return vegaEmbed(entry.selector, spec, svgOpts).then((result) => {
+                    if (result && result.view) {
+                        entry.view = result.view;
+                    }
+                    return result;
+                });
+            });
+        }).catch((err) => {
+            console.error("Failed to resize " + entry.selector + ":", err);
         });
     }
 
@@ -608,20 +702,31 @@
                 return r.json();
             }).then((spec) => {
                 normalizeSpecDataUrls(spec);
-                patchResponsiveSpec(spec, target);
-                return vegaEmbed(selector, spec, svgOpts);
-            }).then((result) => {
-                if (result && result.view) {
-                    result.view.resize().run();
-                    const entry = chartRuntime.find((c) => c.selector === selector);
-                    if (entry) {
-                        entry.view = result.view;
-                        entry.specUrl = specUrl;
-                    } else {
-                        chartRuntime.push({ selector, specUrl, view: result.view });
+                const entry = chartRuntime.find((c) => c.selector === selector) || { selector, specUrl };
+                patchResponsiveSpec(spec, target, entry);
+                const plotW = spec.width;
+                const plotH = spec.height;
+                return vegaEmbed(selector, spec, svgOpts).then((result) => {
+                    if (result && result.view) {
+                        const stored = chartRuntime.find((c) => c.selector === selector);
+                        if (stored) {
+                            stored.view = result.view;
+                            stored.specUrl = specUrl;
+                            stored.lastPlotH = plotH;
+                            stored.lastPlotW = plotW;
+                        } else {
+                            chartRuntime.push({
+                                selector,
+                                specUrl,
+                                view: result.view,
+                                lastPlotH: plotH,
+                                lastPlotW: plotW
+                            });
+                        }
+                        return result.view.width(plotW).height(plotH).runAsync();
                     }
-                }
-                return result;
+                    return result;
+                });
             }).catch((err) => {
                 console.error("Failed to load " + specUrl + " into " + selector + ":", err);
             });
@@ -629,15 +734,32 @@
     }
 
     function redrawCharts() {
-        chartRuntime.forEach(({ selector, specUrl }) => embedResponsiveChart(selector, specUrl));
+        if (!chartRuntime.length) return;
+        return Promise.all(chartRuntime.map((entry) => resizeChartEntry(entry)));
+    }
+
+    function scheduleChartRelayout() {
+        clearTimeout(chartResizeTimer);
+        chartResizeTimer = setTimeout(() => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    redrawCharts();
+                });
+            });
+        }, 280);
     }
 
     lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
 
     let chartResizeTimer;
-    window.addEventListener("resize", () => {
-        clearTimeout(chartResizeTimer);
-        chartResizeTimer = setTimeout(redrawCharts, 200);
+    window.addEventListener("resize", scheduleChartRelayout);
+    document.addEventListener("fullscreenchange", scheduleChartRelayout);
+    document.addEventListener("webkitfullscreenchange", scheduleChartRelayout);
+
+    document.querySelectorAll(".dashboard-section .grid-2").forEach((grid) => {
+        if (typeof ResizeObserver === "undefined") return;
+        const ro = new ResizeObserver(() => scheduleChartRelayout());
+        ro.observe(grid);
     });
 
     function setMapStatus(id, message) {

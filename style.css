@@ -180,13 +180,20 @@ body {
 
     overflow: hidden;
 
-    min-height: 307px;
-
     display: flex;
 
     flex-direction: column;
 
     box-sizing: border-box;
+}
+
+.grid-2 > .chart-card:not(.policy-events-panel):not(.full-width-card) {
+
+    height: 307px;
+
+    min-height: 307px;
+
+    max-height: 307px;
 }
 
 .grid-2 > .chart-card.policy-events-panel {
@@ -596,9 +603,18 @@ body {
 
     min-width: 0;
 
-    flex: 1 1 auto;
+    flex: 1 1 0;
 
-    min-height: 186px;
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+.grid-2 > .chart-card:not(.policy-events-panel):not(.full-width-card) > div[id^="chart"] {
+
+    flex: 1 1 0;
+
+    min-height: 0;
 }
 
 .chart-card > div[id^="chart"] .vega-embed,
