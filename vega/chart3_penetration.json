@@ -2,6 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 340,
   "height": 280,
+  "padding": { "left": 0, "top": 4, "right": 8, "bottom": 0 },
   "data": {
     "url": "data/csv/section1_worldbank_long.csv"
   },
@@ -20,6 +21,7 @@
           "field": "year_num",
           "type": "quantitative",
           "title": "Year",
+          "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 },
           "axis": { "labelAngle": 0, "tickCount": 6, "grid": false }
         },
         "y": {
@@ -35,7 +37,7 @@
     {
       "mark": { "type": "line", "stroke": "#1d4ed8", "strokeWidth": 3.5, "point": { "filled": true, "size": 50 } },
       "encoding": {
-        "x": { "field": "year_num", "type": "quantitative" },
+        "x": { "field": "year_num", "type": "quantitative", "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 } },
         "y": { "field": "value_num", "type": "quantitative", "scale": { "domainMin": 0, "domainMax": 215, "nice": false, "paddingTop": 84 } },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
@@ -48,9 +50,9 @@
       "encoding": { "y": { "datum": 100 } }
     },
     {
-      "mark": { "type": "text", "align": "left", "dx": 6, "baseline": "bottom", "dy": -6, "fontSize": 9, "fontWeight": 700, "color": "#9a3412" },
+      "mark": { "type": "text", "align": "left", "dx": 0, "baseline": "bottom", "dy": -6, "fontSize": 9, "fontWeight": 700, "color": "#9a3412" },
       "encoding": {
-        "x": { "datum": 2000 },
+        "x": { "datum": 1986, "type": "quantitative" },
         "y": { "datum": 100 },
         "text": { "value": "More than one SIM per person" }
       }
@@ -71,14 +73,14 @@
         {
           "mark": { "type": "rule", "strokeDash": [6, 4], "strokeWidth": 2, "opacity": 0.85 },
           "encoding": {
-            "x": { "field": "year_num", "type": "quantitative" },
+            "x": { "field": "year_num", "type": "quantitative", "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 } },
             "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
           }
         },
         {
           "mark": { "type": "text", "align": "right", "dx": -10, "baseline": "bottom", "dy": -8, "fontSize": 10, "fontWeight": 700 },
           "encoding": {
-            "x": { "field": "year_num", "type": "quantitative" },
+            "x": { "field": "year_num", "type": "quantitative", "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 } },
             "y": { "field": "label_y", "type": "quantitative" },
             "text": { "field": "label", "type": "nominal" },
             "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
@@ -100,14 +102,14 @@
         {
           "mark": { "type": "rule", "strokeDash": [6, 4], "strokeWidth": 2, "opacity": 0.85 },
           "encoding": {
-            "x": { "field": "year_num", "type": "quantitative" },
+            "x": { "field": "year_num", "type": "quantitative", "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 } },
             "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
           }
         },
         {
           "mark": { "type": "text", "align": "left", "dx": 10, "baseline": "bottom", "dy": -8, "fontSize": 10, "fontWeight": 700 },
           "encoding": {
-            "x": { "field": "year_num", "type": "quantitative" },
+            "x": { "field": "year_num", "type": "quantitative", "scale": { "domain": [1986, 2024], "nice": false, "padding": 0 } },
             "y": { "field": "label_y", "type": "quantitative" },
             "text": { "field": "label", "type": "nominal" },
             "color": { "field": "color", "type": "nominal", "scale": null, "legend": null }
