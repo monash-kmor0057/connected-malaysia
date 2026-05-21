@@ -402,7 +402,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v12";
+    const mapCacheBust = "20260520-malaysia-map-v13";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.45, lat0: 0.72, lon1: 119.4, lat1: 6.98 };
     let MALAYSIA_GEO = null;
@@ -427,7 +427,6 @@
     }
     let MAP_FILTER = { lon0: 99.45, lat0: 0.72, lon1: 119.4, lat1: 6.98 };
     const MAP_LAT_TRIM_BASE = 0;
-    const MAP_PROJECTION_PAD = 6;
     const MAP_LAT_TRIM_WIDE = 0.32;
     const MAP_SIZE_THRESHOLD = 10;
     let mapResizePending = false;
@@ -559,8 +558,13 @@
     function patchMapSpec(spec, width) {
         const w = Math.max(Math.round(width), 400);
         const h = getMapPlotHeight(w);
-        const box = getMapFilter();
-        const fitGeo = MAP_FIT_GEO || makeMapFitBox(MAP_VIEW_BBOX);
+        const box = getMapGeoBounds();
+        const hexBox = getMapFilter();
+        const centerLon = (box.lon0 + box.lon1) / 2;
+        const centerLat = (box.lat0 + box.lat1) / 2;
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const latRad = (centerLat * Math.PI) / 180;
+        const scale = Math.round((w * 0.92) / lonSpanRad * Math.cos(latRad));
         spec.title = null;
         spec.width = w;
         spec.height = h;
@@ -568,9 +572,8 @@
         spec.spacing = 0;
         spec.projection = {
             type: "mercator",
-            fit: fitGeo,
-            size: [w, h],
-            padding: MAP_PROJECTION_PAD
+            center: [centerLon, centerLat],
+            scale: Math.max(900, Math.min(14000, scale))
         };
         const hexSize = Math.max(18, Math.min(56, Math.round(w * 0.038)));
         const regionFilter =
@@ -604,8 +607,8 @@
                 { calculate: "datum.geometry.coordinates[1]", as: "lat" },
                 {
                     filter:
-                        "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1 +
-                        " && datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1
+                        "datum.lon >= " + hexBox.lon0 + " && datum.lon <= " + hexBox.lon1 +
+                        " && datum.lat >= " + hexBox.lat0 + " && datum.lat <= " + hexBox.lat1
                 }
             ];
             if (spec.layer[1].encoding) {
@@ -887,6 +890,7 @@
                 normalizeSpecDataUrls(spec);
                 patchMapSpec(spec, w);
                 const mapH = spec.height;
+                applyChartContainerSize(el, mapH);
                 return vegaEmbed(selector, spec, mapOpts).then((result) => {
                     if (result && result.view) {
                         mapRuntime.push({
@@ -922,6 +926,7 @@
                 normalizeSpecDataUrls(spec);
                 patchMapSpec(spec, w);
                 entry.lastH = spec.height;
+                applyChartContainerSize(el, spec.height);
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
