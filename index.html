@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-fix-v5">
+    <link rel="stylesheet" href="style.css?v=20260520-map-chart-size">
 
 </head>
 
@@ -399,7 +399,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v5";
+    const mapCacheBust = "20260520-malaysia-map-v6";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.0, lat0: 0.5, lon1: 119.5, lat1: 7.2 };
     let MALAYSIA_GEO = null;
@@ -511,15 +511,18 @@
     let mapsLoadStarted = false;
     const mapRuntime = [];
 
-    function getMapHeight(containerWidth) {
-        const w = Math.max(containerWidth || 320, 120);
+    function getMapPlotHeight(containerWidth) {
+        const w = Math.max(Math.round(containerWidth || 320), 280);
         const box = getMapGeoBounds();
         const plotW = w - MAP_PAD.left - MAP_PAD.right;
         const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
         const plotH = plotW * (latSpan / lonSpanRad);
-        const calcH = Math.round(plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom);
-        return Math.max(120, calcH);
+        return Math.max(160, Math.round(plotH));
+    }
+
+    function getMapTotalHeight(containerWidth) {
+        return getMapPlotHeight(containerWidth) + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom + 8;
     }
 
     function getMapBoxMetrics(selector) {
@@ -527,21 +530,38 @@
         const box = el && el.closest(".map-box");
         if (!box) {
             const w = 400;
-            return { w, plotH: getMapHeight(w), box: null, statusH: 0 };
+            return { w, plotH: getMapPlotHeight(w), totalH: getMapTotalHeight(w), box: null, statusH: 0, legendH: 0 };
         }
         const status = box.querySelector(".map-status");
         const legend = box.querySelector(".map-legend-inline");
-        const statusH = status ? status.offsetHeight : 0;
-        const legendH = legend ? legend.offsetHeight : 40;
-        const w = Math.max(box.clientWidth, 120);
-        const plotH = getMapHeight(w);
-        return { w, plotH, box, statusH, legendH };
+        const statusH = status && status.textContent ? status.offsetHeight : 0;
+        const legendH = legend ? legend.offsetHeight : 0;
+        const w = Math.max(Math.round(box.clientWidth), 280);
+        const plotH = getMapPlotHeight(w);
+        const totalH = getMapTotalHeight(w);
+        return { w, plotH, totalH, box, statusH, legendH };
     }
 
-    function syncMapBoxHeight(box, plotH, statusH, legendH) {
+    function syncMapBoxHeight(box) {
         if (!box) return;
         box.style.height = "auto";
-        box.style.minHeight = (plotH + statusH + (legendH || 0)) + "px";
+        box.style.minHeight = "0";
+    }
+
+    function applyMapContainerSize(el, spec) {
+        if (!el || !spec) return;
+        el.style.width = "100%";
+        el.style.height = spec.height + "px";
+        el.style.minHeight = "0";
+        el.style.flex = "0 0 auto";
+    }
+
+    function applyChartContainerSize(el, height) {
+        if (!el || !height) return;
+        el.style.width = "100%";
+        el.style.height = height + "px";
+        el.style.minHeight = "0";
+        el.style.flex = "0 0 auto";
     }
 
     function mercatorY(latDeg) {
@@ -564,21 +584,19 @@
         ["#chart7", "vega/chart7_map_2026.json?v=" + mapCacheBust, "map-status-7", "Jan 2026"]
     ];
 
-    function patchMapSpec(spec, width, height) {
-        const w = Math.max(width, 120);
-        const h = height || getMapHeight(w);
+    function patchMapSpec(spec, width) {
+        const w = Math.max(Math.round(width), 280);
+        const plotH = getMapPlotHeight(w);
+        const totalH = plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom + 8;
         const box = getMapGeoBounds();
-        const plotW = Math.max(w - MAP_PAD.left - MAP_PAD.right, 80);
-        const plotH = Math.max(h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom, 80);
         spec.width = w;
-        spec.height = h;
+        spec.height = totalH;
         const mapGeo = MAP_REGION_GEO || MALAYSIA_GEO;
         const fitGeo = MAP_FIT_GEO || mapGeo;
         if (fitGeo) {
             spec.projection = {
                 type: "mercator",
-                fit: fitGeo,
-                size: [plotW, plotH]
+                fit: fitGeo
             };
         } else {
             spec.projection = {
@@ -788,12 +806,18 @@
                 resolve();
                 return;
             }
-            const card = el.closest(".chart-card");
             let attempts = 0;
+            let lastW = 0;
+            let stable = 0;
             const check = () => {
-                const w = el.clientWidth;
-                const h = getChartPlotHeight(el);
-                if ((w >= 80 && h >= 100) || attempts++ > 150) {
+                const w = Math.round(el.clientWidth);
+                if (w >= 160 && w === lastW) {
+                    stable += 1;
+                } else {
+                    stable = 0;
+                    lastW = w;
+                }
+                if (stable >= 2 || attempts++ > 150) {
                     resolve();
                     return;
                 }
@@ -813,14 +837,18 @@
             }).then((spec) => {
                 normalizeSpecDataUrls(spec);
                 patchResponsiveSpec(spec, el, entry);
+                applyChartContainerSize(el, spec.height);
                 entry.lastPlotH = spec.height;
                 entry.lastPlotW = spec.width;
                 if (entry.view && typeof entry.view.width === "function") {
-                    return entry.view.width(spec.width).height(spec.height).runAsync();
+                    return entry.view.width(spec.width).height(spec.height).runAsync().then(() => {
+                        applyChartContainerSize(el, spec.height);
+                    });
                 }
                 return vegaEmbed(entry.selector, spec, svgOpts).then((result) => {
                     if (result && result.view) {
                         entry.view = result.view;
+                        applyChartContainerSize(el, spec.height);
                     }
                     return result;
                 });
@@ -842,6 +870,7 @@
                 normalizeSpecDataUrls(spec);
                 const entry = chartRuntime.find((c) => c.selector === selector) || { selector, specUrl };
                 patchResponsiveSpec(spec, target, entry);
+                applyChartContainerSize(target, spec.height);
                 const plotW = spec.width;
                 const plotH = spec.height;
                 return vegaEmbed(selector, spec, svgOpts).then((result) => {
@@ -861,7 +890,10 @@
                                 lastPlotW: plotW
                             });
                         }
-                        return result.view.width(plotW).height(plotH).runAsync();
+                        applyChartContainerSize(target, plotH);
+                        return result.view.width(plotW).height(plotH).runAsync().then(() => {
+                            applyChartContainerSize(target, plotH);
+                        });
                     }
                     return result;
                 });
@@ -915,8 +947,17 @@
                 return;
             }
             let attempts = 0;
+            let lastW = 0;
+            let stable = 0;
             const check = () => {
-                if (measure.clientWidth >= 80 || attempts++ > 120) {
+                const w = Math.round(measure.clientWidth);
+                if (w >= 240 && w === lastW) {
+                    stable += 1;
+                } else {
+                    stable = 0;
+                    lastW = w;
+                }
+                if (stable >= 2 || attempts++ > 160) {
                     resolve();
                     return;
                 }
@@ -931,24 +972,25 @@
         return waitForMapSize(selector).then(() => {
             const metrics = getMapBoxMetrics(selector);
             const w = metrics.w;
-            const totalH = getMapHeight(w);
-            syncMapBoxHeight(metrics.box, totalH, metrics.statusH, metrics.legendH);
+            syncMapBoxHeight(metrics.box);
+            const el = document.querySelector(selector);
             return fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
             }).then((spec) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w, totalH);
+                patchMapSpec(spec, w);
+                applyMapContainerSize(el, spec);
                 return vegaEmbed(selector, spec, mapOpts);
             }).then((result) => {
                 if (result && result.view) {
-                    result.view.resize().run();
+                    applyMapContainerSize(el, { height: result.view.height() });
                     mapRuntime.push({
                         selector,
                         specUrl,
                         view: result.view,
                         lastW: w,
-                        lastH: totalH,
+                        lastH: result.view.height(),
                         lastStacked: mapLayoutStacked
                     });
                 }
@@ -978,31 +1020,31 @@
         if (!el || !entry.view) return Promise.resolve();
         const metrics = getMapBoxMetrics(entry.selector);
         const w = metrics.w;
-        const totalH = getMapHeight(w);
-        syncMapBoxHeight(metrics.box, totalH, metrics.statusH, metrics.legendH);
+        syncMapBoxHeight(metrics.box);
+        const el = document.querySelector(entry.selector);
         if (
             !force &&
             entry.lastW != null &&
             Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD &&
-            Math.abs(entry.lastH - totalH) < MAP_SIZE_THRESHOLD &&
             entry.lastStacked === mapLayoutStacked
         ) {
             return Promise.resolve();
         }
         entry.lastW = w;
-        entry.lastH = totalH;
         entry.lastStacked = mapLayoutStacked;
         return fetch(entry.specUrl)
             .then((r) => r.json())
             .then((spec) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w, totalH);
+                patchMapSpec(spec, w);
+                applyMapContainerSize(el, spec);
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
                 if (result && result.view) {
                     entry.view = result.view;
-                    result.view.resize().run();
+                    entry.lastH = result.view.height();
+                    applyMapContainerSize(el, { height: entry.lastH });
                 }
             });
     }
@@ -1026,6 +1068,14 @@
             return chain.then(() => embedMap(selector, spec, statusId, yearLabel, index + 1, total));
         }, Promise.resolve())).then(() => {
             updateMapLayout(() => redrawMaps(true));
+            document.querySelectorAll(".map-box").forEach((box) => {
+                if (typeof ResizeObserver === "undefined") return;
+                const ro = new ResizeObserver(() => {
+                    clearTimeout(mapResizeTimer);
+                    mapResizeTimer = setTimeout(() => redrawMaps(true), 300);
+                });
+                ro.observe(box);
+            });
         });
     }
 
