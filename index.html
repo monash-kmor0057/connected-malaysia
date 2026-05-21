@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-chart-size">
+    <link rel="stylesheet" href="style.css?v=20260520-fix-charts">
 
 </head>
 
@@ -586,6 +586,7 @@
 
     function patchMapSpec(spec, width) {
         const w = Math.max(Math.round(width), 280);
+        const plotW = Math.max(w - MAP_PAD.left - MAP_PAD.right, 80);
         const plotH = getMapPlotHeight(w);
         const totalH = plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom + 8;
         const box = getMapGeoBounds();
@@ -811,13 +812,13 @@
             let stable = 0;
             const check = () => {
                 const w = Math.round(el.clientWidth);
-                if (w >= 160 && w === lastW) {
+                if (w >= 80 && w === lastW) {
                     stable += 1;
                 } else {
                     stable = 0;
                     lastW = w;
                 }
-                if (stable >= 2 || attempts++ > 150) {
+                if (stable >= 1 || attempts++ > 80) {
                     resolve();
                     return;
                 }
@@ -1021,7 +1022,6 @@
         const metrics = getMapBoxMetrics(entry.selector);
         const w = metrics.w;
         syncMapBoxHeight(metrics.box);
-        const el = document.querySelector(entry.selector);
         if (
             !force &&
             entry.lastW != null &&
@@ -1068,14 +1068,15 @@
             return chain.then(() => embedMap(selector, spec, statusId, yearLabel, index + 1, total));
         }, Promise.resolve())).then(() => {
             updateMapLayout(() => redrawMaps(true));
-            document.querySelectorAll(".map-box").forEach((box) => {
-                if (typeof ResizeObserver === "undefined") return;
-                const ro = new ResizeObserver(() => {
+            if (!window._mapBoxResizeObserver && typeof ResizeObserver !== "undefined") {
+                window._mapBoxResizeObserver = new ResizeObserver(() => {
                     clearTimeout(mapResizeTimer);
-                    mapResizeTimer = setTimeout(() => redrawMaps(true), 300);
+                    mapResizeTimer = setTimeout(() => redrawMaps(false), 350);
                 });
-                ro.observe(box);
-            });
+                document.querySelectorAll(".map-box").forEach((box) => {
+                    window._mapBoxResizeObserver.observe(box);
+                });
+            }
         });
     }
 
