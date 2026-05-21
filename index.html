@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-scale-fix">
+    <link rel="stylesheet" href="style.css?v=20260520-map-rewrite-v8">
 
 </head>
 
@@ -278,6 +278,7 @@
                     <div class="map-row">
                         <div class="map-box">
                             <p class="map-status" id="map-status-5">Waiting to load…</p>
+                            <p class="map-year">January 2020</p>
                             <div id="chart5"></div>
                             <div class="map-legend-inline" aria-label="Download speed scale for January 2020">
                                 <p class="map-legend-title">Download (kbps)</p>
@@ -292,6 +293,7 @@
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-6">Waiting to load…</p>
+                            <p class="map-year">January 2023</p>
                             <div id="chart6"></div>
                             <div class="map-legend-inline" aria-label="Download speed scale for January 2023">
                                 <p class="map-legend-title">Download (kbps)</p>
@@ -306,6 +308,7 @@
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-7">Waiting to load…</p>
+                            <p class="map-year">January 2026</p>
                             <div id="chart7"></div>
                             <div class="map-legend-inline" aria-label="Download speed scale for January 2026">
                                 <p class="map-legend-title">Download (kbps)</p>
@@ -389,7 +392,7 @@
     <script>
 
     const svgOpts = { actions: false, renderer: "svg" };
-    const mapOpts = { actions: false, renderer: "canvas" };
+    const mapOpts = { actions: false, renderer: "svg" };
 
     const lightCharts = [
         ["#chart1", "vega/chart1_subscriptions.json"],
@@ -399,7 +402,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v7";
+    const mapCacheBust = "20260520-malaysia-map-v10";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.0, lat0: 0.5, lon1: 119.5, lat1: 7.2 };
     let MALAYSIA_GEO = null;
@@ -426,7 +429,6 @@
     const MAP_LAT_TRIM_BASE = 0.1;
     const MAP_LAT_TRIM_WIDE = 0.32;
     const MAP_SIZE_THRESHOLD = 10;
-    let mapLayoutStacked = true;
     let mapResizePending = false;
 
     function makeMapFitBox(b) {
@@ -506,60 +508,15 @@
         return f;
     }
 
-    const MAP_TITLE_H = 28;
-    const MAP_PAD = { left: 4, top: 0, right: 4, bottom: 4 };
+    const MAP_ASPECT = 0.38;
     let mapsLoadStarted = false;
     const mapRuntime = [];
 
-    function measureMapBoxWidth(box) {
-        if (!box) return 400;
-        const rect = box.getBoundingClientRect();
-        const w = Math.round(rect.width || box.clientWidth || box.offsetWidth);
-        return Math.max(w, 320);
-    }
-
-    function getMapPlotHeight(plotW) {
-        const box = getMapGeoBounds();
-        const innerW = Math.max(plotW - MAP_PAD.left - MAP_PAD.right, 200);
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const plotH = innerW * (latSpan / lonSpanRad);
-        return Math.max(180, Math.round(plotH));
-    }
-
-    function getMapBoxMetrics(selector) {
-        const el = document.querySelector(selector);
-        const box = el && el.closest(".map-box");
-        if (!box) {
-            const w = 400;
-            const plotH = getMapPlotHeight(w);
-            return { w, plotH, totalH: plotH + MAP_TITLE_H, box: null };
-        }
-        const w = measureMapBoxWidth(box);
-        const plotH = getMapPlotHeight(w);
-        const totalH = plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom;
-        return { w, plotH, totalH, box };
-    }
-
-    function syncMapBoxHeight(box) {
-        if (!box) return;
-        box.style.height = "auto";
-        box.style.minHeight = "0";
-    }
-
-    function applyMapContainerSize(el, spec) {
-        if (!el || !spec) return;
-        el.style.width = "100%";
-        el.style.maxWidth = spec.width + "px";
-        el.style.height = spec.height + "px";
-        el.style.minHeight = "0";
-        el.style.flex = "0 0 auto";
-        const embed = el.querySelector(".vega-embed");
-        if (embed) {
-            embed.style.width = "100%";
-            embed.style.maxWidth = spec.width + "px";
-            embed.style.height = spec.height + "px";
-        }
+    function measureMapWidth(box) {
+        const card = (box && box.closest(".chart-card.full-width-card")) || box;
+        if (!card) return 720;
+        const rect = card.getBoundingClientRect();
+        return Math.max(400, Math.round(rect.width - 24));
     }
 
     function applyChartContainerSize(el, height) {
@@ -591,37 +548,31 @@
     ];
 
     function patchMapSpec(spec, width) {
-        const w = Math.max(Math.round(width), 320);
-        const plotW = Math.max(w - MAP_PAD.left - MAP_PAD.right, 200);
-        const plotH = getMapPlotHeight(w);
-        const totalH = plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom;
+        const w = Math.max(Math.round(width), 400);
+        const h = Math.max(200, Math.round(w * MAP_ASPECT));
         const box = getMapGeoBounds();
+        spec.title = null;
         spec.width = w;
-        spec.height = totalH;
-        const mapGeo = MAP_REGION_GEO || MALAYSIA_GEO;
-        const fitGeo = MAP_FIT_GEO || mapGeo;
-        if (fitGeo) {
-            spec.projection = {
-                type: "mercator",
-                fit: fitGeo,
-                size: [plotW, plotH]
-            };
-        } else {
-            spec.projection = {
-                type: "mercator",
-                center: [(box.lon0 + box.lon1) / 2, (box.lat0 + box.lat1) / 2],
-                scale: Math.max(200, Math.min(8000, plotW * 28))
-            };
-        }
-        const hexSize = Math.max(14, Math.min(48, Math.round(plotW * 0.032)));
+        spec.height = h;
+        spec.padding = 0;
+        spec.spacing = 0;
+        const centerLon = (box.lon0 + box.lon1) / 2;
+        const centerLat = (box.lat0 + box.lat1) / 2;
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const latRad = (centerLat * Math.PI) / 180;
+        const scale = Math.round((w * 0.94) / lonSpanRad * Math.cos(latRad));
+        spec.projection = {
+            type: "mercator",
+            center: [centerLon, centerLat],
+            scale: Math.max(500, Math.min(12000, scale))
+        };
+        const hexSize = Math.max(18, Math.min(56, Math.round(w * 0.038)));
         const regionFilter =
             "datum.properties.ADM0_A3 == 'MYS' || datum.properties.ADM0_A3 == 'IDN' || " +
-            "datum.properties.ADM0_A3 == 'BRN' || datum.properties.ADM0_A3 == 'SGP' || " +
-            "datum.properties.ADM0_A3 == 'THA' || datum.properties.ADM0_A3 == 'VNM' || " +
-            "datum.properties.ADM0_A3 == 'PHL' || datum.properties.ADM0_A3 == 'KHM'";
+            "datum.properties.ADM0_A3 == 'BRN'";
         if (spec.layer && spec.layer[0]) {
-            if (mapGeo) {
-                spec.layer[0].data = { values: mapGeo };
+            if (MAP_REGION_GEO) {
+                spec.layer[0].data = { values: MAP_REGION_GEO };
             } else {
                 spec.layer[0].data = {
                     url: "data/geo/basemap_view.json?v=" + mapCacheBust,
@@ -631,32 +582,26 @@
             }
             spec.layer[0].mark = {
                 type: "geoshape",
-                fill: "#eef2f7",
+                fill: "#e8eef5",
                 stroke: "#64748b",
-                strokeWidth: 0.75
+                strokeWidth: 0.85
             };
-            delete spec.layer[0].encoding;
         }
         if (spec.layer && spec.layer[1]) {
-            const hexUrl =
-                spec.layer[1].data && spec.layer[1].data.url
-                    ? spec.layer[1].data.url.split("?")[0] +
-                      "?v=" +
-                      mapCacheBust
-                    : null;
-            if (hexUrl) {
-                spec.layer[1].data.url = hexUrl;
+            if (spec.layer[1].data && spec.layer[1].data.url) {
+                spec.layer[1].data.url =
+                    spec.layer[1].data.url.split("?")[0] + "?v=" + mapCacheBust;
             }
-            const baseTransforms = [
+            spec.layer[1].transform = [
                 { calculate: "datum.properties.rate_mean", as: "rate_mean" },
                 { calculate: "datum.geometry.coordinates[0]", as: "lon" },
-                { calculate: "datum.geometry.coordinates[1]", as: "lat" }
+                { calculate: "datum.geometry.coordinates[1]", as: "lat" },
+                {
+                    filter:
+                        "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1 +
+                        " && datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1
+                }
             ];
-            const lonFilter = "datum.lon >= " + box.lon0 + " && datum.lon <= " + box.lon1;
-            const latFilter = "datum.lat >= " + box.lat0 + " && datum.lat <= " + box.lat1;
-            spec.layer[1].transform = baseTransforms.concat([
-                { filter: lonFilter + " && " + latFilter }
-            ]);
             if (spec.layer[1].encoding) {
                 spec.layer[1].encoding.size = { value: hexSize };
                 spec.layer[1].encoding.longitude = { field: "lon", type: "quantitative", scale: null };
@@ -666,24 +611,8 @@
                 }
             }
         }
-        spec.padding = {
-            left: MAP_PAD.left,
-            top: MAP_TITLE_H + MAP_PAD.top,
-            right: MAP_PAD.right,
-            bottom: MAP_PAD.bottom
-        };
-        if (spec.title) {
-            spec.title.fontSize = 14;
-            spec.title.fontWeight = 600;
-            spec.title.offset = 4;
-            spec.title.anchor = "start";
-        }
         if (!spec.config) spec.config = {};
-        spec.config.title = { offset: 4, subtitlePadding: 0, orient: "top" };
-        if (!spec.config.view) spec.config.view = {};
-        spec.config.view.fill = "#ffffff";
-        spec.config.view.stroke = null;
-        spec.config.view.clip = false;
+        spec.config.view = { stroke: null, fill: "#ffffff", clip: true };
         spec.config.background = "#ffffff";
         return spec;
     }
@@ -933,146 +862,73 @@
         }, 280);
     }
 
-    lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
-
-    let chartResizeTimer;
-    window.addEventListener("resize", scheduleChartRelayout);
-    document.addEventListener("fullscreenchange", scheduleChartRelayout);
-    document.addEventListener("webkitfullscreenchange", scheduleChartRelayout);
-
-    document.querySelectorAll(".dashboard-section .grid-2").forEach((grid) => {
-        if (typeof ResizeObserver === "undefined") return;
-        const ro = new ResizeObserver(() => scheduleChartRelayout());
-        ro.observe(grid);
-    });
-
     function setMapStatus(id, message) {
         const el = document.getElementById(id);
         if (el) el.textContent = message;
     }
 
-    function waitForMapLayout(selector) {
-        return new Promise((resolve) => {
-            const box = document.querySelector(selector) &&
-                document.querySelector(selector).closest(".map-box");
-            if (!box) {
-                resolve();
-                return;
-            }
-            let attempts = 0;
-            let lastW = 0;
-            let stable = 0;
-            const check = () => {
-                const w = measureMapBoxWidth(box);
-                if (w >= 300 && w === lastW) {
-                    stable += 1;
-                } else {
-                    stable = 0;
-                    lastW = w;
-                }
-                if (stable >= 2 || attempts++ > 120) {
-                    resolve();
-                    return;
-                }
-                requestAnimationFrame(check);
-            };
-            requestAnimationFrame(check);
-        });
-    }
-
-    function afterMapLayout() {
-        return new Promise((resolve) => {
-            requestAnimationFrame(() => requestAnimationFrame(resolve));
-        });
-    }
-
     function embedMap(selector, specUrl, statusId, yearLabel, step, total) {
         setMapStatus(statusId, "Loading " + yearLabel + " (" + step + "/" + total + ")…");
-        return waitForMapLayout(selector)
-            .then(afterMapLayout)
-            .then(() => {
-            const metrics = getMapBoxMetrics(selector);
-            const w = metrics.w;
-            syncMapBoxHeight(metrics.box);
-            const el = document.querySelector(selector);
-            return fetch(specUrl).then((r) => {
+        const el = document.querySelector(selector);
+        const box = el && el.closest(".map-box");
+        const w = measureMapWidth(box);
+        return fetch(specUrl)
+            .then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
-            }).then((spec) => {
+            })
+            .then((spec) => {
                 normalizeSpecDataUrls(spec);
                 patchMapSpec(spec, w);
-                applyMapContainerSize(el, spec);
-                return vegaEmbed(selector, spec, mapOpts);
-            }).then((result) => {
-                if (result && result.view) {
-                    applyMapContainerSize(el, { width: w, height: metrics.totalH });
-                    mapRuntime.push({
-                        selector,
-                        specUrl,
-                        view: result.view,
-                        lastW: w,
-                        lastH: metrics.totalH,
-                        lastStacked: mapLayoutStacked
-                    });
-                }
-                setMapStatus(statusId, "");
-                return result;
-            }).catch((err) => {
+                const mapH = spec.height;
+                return vegaEmbed(selector, spec, mapOpts).then((result) => {
+                    if (result && result.view) {
+                        mapRuntime.push({
+                            selector,
+                            specUrl,
+                            view: result.view,
+                            lastW: w,
+                            lastH: mapH
+                        });
+                    }
+                    setMapStatus(statusId, "");
+                    return result;
+                });
+            })
+            .catch((err) => {
                 console.error("Map embed error (" + yearLabel + "):", err);
                 setMapStatus(statusId, "Failed to load " + yearLabel + ".");
             });
-        });
     }
 
-    function updateMapLayout(callback) {
-        const timeline = document.querySelector(".map-timeline");
-        if (timeline) {
-            timeline.classList.add("map-timeline--stacked");
-        }
-        mapLayoutStacked = true;
-        if (callback) {
-            requestAnimationFrame(() => callback(false));
-        }
-        return false;
-    }
-
-    function resizeMapEntry(entry, force) {
+    function resizeMapEntry(entry) {
         const el = document.querySelector(entry.selector);
+        const box = el && el.closest(".map-box");
         if (!el || !entry.view) return Promise.resolve();
-        const metrics = getMapBoxMetrics(entry.selector);
-        const w = metrics.w;
-        syncMapBoxHeight(metrics.box);
-        if (
-            !force &&
-            entry.lastW != null &&
-            Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD &&
-            entry.lastStacked === mapLayoutStacked
-        ) {
+        const w = measureMapWidth(box);
+        if (entry.lastW != null && Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD) {
             return Promise.resolve();
         }
         entry.lastW = w;
-        entry.lastStacked = mapLayoutStacked;
         return fetch(entry.specUrl)
             .then((r) => r.json())
             .then((spec) => {
                 normalizeSpecDataUrls(spec);
                 patchMapSpec(spec, w);
-                applyMapContainerSize(el, spec);
+                entry.lastH = spec.height;
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
                 if (result && result.view) {
                     entry.view = result.view;
-                    entry.lastH = metrics.totalH;
-                    applyMapContainerSize(el, { width: w, height: metrics.totalH });
                 }
             });
     }
 
-    function redrawMaps(force) {
-        if (!mapsLoadStarted || !mapRuntime.length || mapResizePending) return;
+    function redrawMaps() {
+        if (!mapRuntime.length || mapResizePending) return;
         mapResizePending = true;
-        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry, force))).finally(() => {
+        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry))).finally(() => {
             mapResizePending = false;
         });
     }
@@ -1084,53 +940,40 @@
         mapCharts.forEach(([, , statusId], i) => {
             if (i > 0) setMapStatus(statusId, "Waiting…");
         });
-        return loadMapBbox().then(() => mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
-            return chain.then(() => embedMap(selector, spec, statusId, yearLabel, index + 1, total));
-        }, Promise.resolve())).then(() => {
-            updateMapLayout(() => redrawMaps(true));
-            if (!window._mapBoxResizeObserver && typeof ResizeObserver !== "undefined") {
-                window._mapBoxResizeObserver = new ResizeObserver(() => {
-                    clearTimeout(mapResizeTimer);
-                    mapResizeTimer = setTimeout(() => redrawMaps(false), 350);
-                });
-                document.querySelectorAll(".map-box").forEach((box) => {
-                    window._mapBoxResizeObserver.observe(box);
-                });
-            }
-        });
+        return loadMapBbox().then(() =>
+            mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
+                return chain.then(() =>
+                    embedMap(selector, spec, statusId, yearLabel, index + 1, total)
+                );
+            }, Promise.resolve())
+        );
     }
 
     let mapResizeTimer;
-    function onMapViewportChange() {
-        updateMapLayout((layoutChanged) => {
-            redrawMaps(layoutChanged);
-        });
-    }
     window.addEventListener("resize", () => {
         clearTimeout(mapResizeTimer);
-        mapResizeTimer = setTimeout(onMapViewportChange, 350);
+        mapResizeTimer = setTimeout(redrawMaps, 400);
     });
 
-    function scheduleMapLoad() {
-        if (mapsLoadStarted) return;
+    let chartResizeTimer;
+
+    function initDashboard() {
+        lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
         loadMapsSequentially().catch((err) => console.error("Map load failed:", err));
+        window.addEventListener("resize", scheduleChartRelayout);
+        document.addEventListener("fullscreenchange", scheduleChartRelayout);
+        document.addEventListener("webkitfullscreenchange", scheduleChartRelayout);
+        document.querySelectorAll(".dashboard-section .grid-2").forEach((grid) => {
+            if (typeof ResizeObserver === "undefined") return;
+            const ro = new ResizeObserver(() => scheduleChartRelayout());
+            ro.observe(grid);
+        });
     }
 
-    const mapSection = document.querySelector(".map-timeline");
-    if (mapSection && "IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-            if (!entries.some((e) => e.isIntersecting)) return;
-            scheduleMapLoad();
-        }, { rootMargin: "200px", threshold: 0.01 });
-        observer.observe(mapSection);
-        requestAnimationFrame(() => {
-            const rect = mapSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight + 200 && rect.bottom > -200) {
-                scheduleMapLoad();
-            }
-        });
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initDashboard);
     } else {
-        scheduleMapLoad();
+        initDashboard();
     }
 
     </script>
