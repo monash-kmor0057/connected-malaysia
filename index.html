@@ -402,9 +402,9 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v13";
+    const mapCacheBust = "20260520-malaysia-map-v14";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
-    const MAP_VIEW_BBOX = { lon0: 99.45, lat0: 0.72, lon1: 119.4, lat1: 6.98 };
+    const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
     let MALAYSIA_GEO = null;
     let MAP_REGION_GEO = null;
     let MAP_FIT_GEO = null;
@@ -425,7 +425,7 @@
         });
         return spec;
     }
-    let MAP_FILTER = { lon0: 99.45, lat0: 0.72, lon1: 119.4, lat1: 6.98 };
+    let MAP_FILTER = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
     const MAP_LAT_TRIM_BASE = 0;
     const MAP_LAT_TRIM_WIDE = 0.32;
     const MAP_SIZE_THRESHOLD = 10;
@@ -455,10 +455,100 @@
         };
     }
 
+    function clipEdge(points, inside, intersect) {
+        const out = [];
+        if (!points.length) return out;
+        let prev = points[points.length - 1];
+        let prevIn = inside(prev);
+        for (let i = 0; i < points.length; i++) {
+            const cur = points[i];
+            const curIn = inside(cur);
+            if (curIn) {
+                if (!prevIn) out.push(intersect(prev, cur));
+                out.push(cur);
+            } else if (prevIn) {
+                out.push(intersect(prev, cur));
+            }
+            prev = cur;
+            prevIn = curIn;
+        }
+        return out;
+    }
+
+    function closeRing(ring) {
+        if (!ring.length) return ring;
+        const first = ring[0];
+        const last = ring[ring.length - 1];
+        if (first[0] === last[0] && first[1] === last[1]) return ring;
+        return ring.concat([[first[0], first[1]]]);
+    }
+
+    function clipRingToBbox(ring, b) {
+        let pts = ring.slice();
+        pts = clipEdge(pts, (p) => p[0] >= b.lon0, (a, c) => {
+            const t = (b.lon0 - a[0]) / (c[0] - a[0]);
+            return [b.lon0, a[1] + t * (c[1] - a[1])];
+        });
+        pts = clipEdge(pts, (p) => p[0] <= b.lon1, (a, c) => {
+            const t = (b.lon1 - a[0]) / (c[0] - a[0]);
+            return [b.lon1, a[1] + t * (c[1] - a[1])];
+        });
+        pts = clipEdge(pts, (p) => p[1] >= b.lat0, (a, c) => {
+            const t = (b.lat0 - a[1]) / (c[1] - a[1]);
+            return [a[0] + t * (c[0] - a[0]), b.lat0];
+        });
+        pts = clipEdge(pts, (p) => p[1] <= b.lat1, (a, c) => {
+            const t = (b.lat1 - a[1]) / (c[1] - a[1]);
+            return [a[0] + t * (c[0] - a[0]), b.lat1];
+        });
+        return pts.length >= 3 ? closeRing(pts) : [];
+    }
+
+    function clipPolygonCoords(coords, b) {
+        const rings = [];
+        for (let i = 0; i < coords.length; i++) {
+            const clipped = clipRingToBbox(coords[i], b);
+            if (clipped.length >= 4) rings.push(clipped);
+        }
+        return rings;
+    }
+
+    function clipFeatureToBbox(feature, b) {
+        if (!feature || !feature.geometry) return null;
+        const g = feature.geometry;
+        let geometry = null;
+        if (g.type === "Polygon") {
+            const coordinates = clipPolygonCoords(g.coordinates, b);
+            if (coordinates.length) geometry = { type: "Polygon", coordinates: coordinates };
+        } else if (g.type === "MultiPolygon") {
+            const coordinates = [];
+            for (let i = 0; i < g.coordinates.length; i++) {
+                const poly = clipPolygonCoords(g.coordinates[i], b);
+                if (poly.length) coordinates.push(poly);
+            }
+            if (coordinates.length) geometry = { type: "MultiPolygon", coordinates: coordinates };
+        } else {
+            return feature;
+        }
+        if (!geometry) return null;
+        return { type: "Feature", properties: feature.properties, geometry: geometry };
+    }
+
+    function clipBasemapToViewBbox(features) {
+        const clipped = [];
+        for (let i = 0; i < features.length; i++) {
+            const f = clipFeatureToBbox(features[i], MAP_VIEW_BBOX);
+            if (f) clipped.push(f);
+        }
+        return clipped;
+    }
+
     function applyMapRegionGeo(features) {
         if (!features || !features.length) return;
-        MAP_REGION_GEO = { type: "FeatureCollection", features: features };
-        const myOnly = features.filter((f) => f.properties && f.properties.ADM0_A3 === "MYS");
+        const clipped = clipBasemapToViewBbox(features);
+        if (!clipped.length) return;
+        MAP_REGION_GEO = { type: "FeatureCollection", features: clipped };
+        const myOnly = clipped.filter((f) => f.properties && f.properties.ADM0_A3 === "MYS");
         MALAYSIA_GEO = myOnly.length
             ? { type: "FeatureCollection", features: myOnly }
             : MAP_REGION_GEO;
@@ -546,7 +636,7 @@
         const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
         const h = Math.round(w * (latSpan / lonSpanRad));
-        return Math.max(180, Math.min(520, h));
+        return Math.max(200, Math.min(640, h));
     }
 
     const mapCharts = [
@@ -559,7 +649,7 @@
         const w = Math.max(Math.round(width), 400);
         const h = getMapPlotHeight(w);
         const box = getMapGeoBounds();
-        const hexBox = getMapFilter();
+        const hexBox = getMapGeoBounds();
         const centerLon = (box.lon0 + box.lon1) / 2;
         const centerLat = (box.lat0 + box.lat1) / 2;
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
