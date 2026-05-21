@@ -1128,24 +1128,28 @@ body {
 
     min-height: 0;
 
-    height: auto;
+    overflow: hidden;
 
-    overflow: visible;
+    line-height: 0;
 }
 
 .map-box .vega-embed {
+    display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    overflow: visible;
-    margin: 0;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .map-box .vega-embed canvas,
 .map-box .vega-embed svg {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
+    margin: 0 !important;
 }
 
 
