@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-map-rewrite-v8">
+    <link rel="stylesheet" href="style.css?v=20260520-section1-card-heights-v2">
 
 </head>
 
@@ -718,6 +718,13 @@
 
     const chartRuntime = [];
     const CHART_PLOT_FALLBACK = 280;
+    const SECTION1_CARD_HEIGHT = 560;
+
+    function isSection1GridCard(card) {
+        if (!card) return false;
+        const grid = card.closest(".grid-2");
+        return !!(grid && grid.querySelector(".policy-events-panel"));
+    }
 
     function isDataChartCard(card) {
         return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
@@ -746,14 +753,31 @@
         return Math.max(intrinsicH, Math.round(intrinsicH * cw / baseW));
     }
 
+    function isSection1FixedLayout() {
+        return window.matchMedia("(min-width: 1001px)").matches;
+    }
+
+    function getSection1PlotHeight(el, spec) {
+        const card = el && el.closest(".chart-card");
+        if (
+            !isSection1FixedLayout() ||
+            !card ||
+            !isAutoHeightChartCard(card) ||
+            !isSection1GridCard(card)
+        ) {
+            return getAutoPlotHeight(el, spec);
+        }
+        return Math.max(120, SECTION1_CARD_HEIGHT - getChartChromeHeight(card));
+    }
+
     function getChartChromeHeight(card) {
-        let chrome = 24;
+        let chrome = 28;
         const num = card.querySelector(".chart-number");
         const title = card.querySelector("h3");
         const note = card.querySelector(".annotation");
-        if (num) chrome += num.offsetHeight + 8;
-        if (title) chrome += title.offsetHeight + 8;
-        if (note) chrome += note.offsetHeight + 8;
+        if (num) chrome += num.offsetHeight + 10;
+        if (title) chrome += title.offsetHeight + 10;
+        if (note) chrome += note.offsetHeight + 10;
         return chrome;
     }
 
@@ -773,7 +797,7 @@
         const card = el && el.closest(".chart-card");
         spec.width = cw;
         if (isAutoHeightChartCard(card)) {
-            const ch = getAutoPlotHeight(el, spec);
+            const ch = getSection1PlotHeight(el, spec);
             if (Array.isArray(spec.vconcat)) {
                 const parts = spec.vconcat;
                 const totalPartH = parts.reduce(

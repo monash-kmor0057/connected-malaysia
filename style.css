@@ -146,6 +146,13 @@ body {
 }
 
 
+/* Section 1 card height (matches policy events timeline card) */
+
+:root {
+
+    --section1-card-height: 560px;
+}
+
 /* Grid */
 
 .grid-2 {
@@ -156,7 +163,7 @@ body {
 
     gap: 16px;
 
-    align-items: start;
+    align-items: stretch;
 }
 
 
@@ -189,13 +196,13 @@ body {
     box-sizing: border-box;
 }
 
-.grid-2 > .chart-card:not(.full-width-card) {
+.section-title + .grid-2 > .chart-card:not(.full-width-card) {
 
-    height: auto;
+    height: var(--section1-card-height);
 
-    min-height: 0;
+    min-height: var(--section1-card-height);
 
-    max-height: none;
+    max-height: var(--section1-card-height);
 }
 
 .grid-2 > .chart-card.chart-card--auto-height.policy-events-panel {
@@ -203,13 +210,18 @@ body {
     padding: 16px 14px 14px 10px;
 }
 
-.grid-2 > .chart-card.chart-card--auto-height.policy-events-panel .policy-events-timeline {
+.grid-2 > .chart-card.chart-card--auto-height.policy-events-panel h3 {
 
     flex: 0 0 auto;
+}
+
+.grid-2 > .chart-card.chart-card--auto-height.policy-events-panel .policy-events-timeline {
+
+    flex: 1 1 auto;
 
     min-height: 0;
 
-    overflow: visible;
+    overflow-y: auto;
 }
 
 
@@ -612,18 +624,26 @@ body {
     overflow: visible;
 }
 
-.grid-2 > .chart-card:not(.full-width-card) > div[id^="chart"] {
+.section-title + .grid-2 > .chart-card:not(.full-width-card) > div[id^="chart"] {
 
-    flex: 0 0 auto;
+    flex: 1 1 auto;
 
-    min-height: auto;
+    min-height: 0;
 
-    overflow: visible;
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
 }
 
-.grid-2 > .chart-card:not(.full-width-card) > div[id^="chart"] .vega-embed {
+.section-title + .grid-2 > .chart-card:not(.full-width-card) > div[id^="chart"] .vega-embed {
 
-    height: auto !important;
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    height: 100% !important;
 }
 
 .chart-card > div[id^="chart"] .vega-embed,
@@ -1245,6 +1265,15 @@ body {
     .grid-2 {
 
         grid-template-columns: 1fr;
+    }
+
+    .section-title + .grid-2 > .chart-card:not(.full-width-card) {
+
+        height: auto;
+
+        min-height: 0;
+
+        max-height: none;
     }
 
     .platform-grid {
