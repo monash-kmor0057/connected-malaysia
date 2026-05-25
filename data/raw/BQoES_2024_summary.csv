@@ -1,0 +1,45 @@
+Category,Item,Fixed Broadband (FBB),Mobile Broadband (MBB)
+Overall Satisfaction,Overall CSI,4.00,3.93
+CSI,Video Streaming,3.98,3.91
+CSI,Web Browsing,4.14,4.01
+CSI,Online Gaming,3.78,3.72
+CSI,Online Voice Calls,4.07,4.06
+CSI,Online Video Calls,4.02,3.95
+SQG,Video Streaming Gap,+0.03,+0.04
+SQG,Web Browsing Gap,-0.32,-0.31
+SQG,Online Gaming Gap,+0.43,+0.33
+SQG,Online Voice Calls Gap,-0.18,-0.34
+SQG,Online Video Calls Gap,-0.11,-0.19
+Usage Rate,Video Streaming Users,97.5%,83.5%
+Usage Rate,Web Browser Users,56.7% (browser),44.2% (browser)
+Usage Rate,App Users,43.3%,55.8%
+Usage Rate,Online Gaming Users,52.3%,48.6%
+Usage Rate,Voice Call Users,96.8%,89.3%
+Usage Rate,Video Call Users,98.4%,88.7%
+Top Video Platform,Rank #1,YouTube 48.5%,YouTube 38.3%
+Top Video Platform,Rank #2,Netflix 26.9%,TikTok 30.8%
+Top Browser,Rank #1,Chrome 78.0%,Chrome 78.4%
+Top Browser,Rank #2,Safari 12.0%,Safari 17.4%
+Top Apps,Rank #1,Shopee 49.2%,Shopee 54.6%
+Top Apps,Rank #2,Grab 12.9%,Grab 10.2%
+Gaming Device,Smartphone,62.0%,89.7%
+Gaming Device,PC/Laptop,20.7%,7.8%
+Gaming Device,Smart TV,10.1%,0.5%
+Gaming Device,Gaming Console,7.1%,2.0%
+Top Voice Call App,WhatsApp,96.0%,95.6%
+Top Video Call App,WhatsApp,78.8%,89.5%
+Video Streaming Issues,Buffering/Stalling,38.9%,52.4%
+Video Streaming Issues,Slow Loading,30.6%,22.3%
+Web Browsing Issues,Slow Page Loading,29.2%,24.0%
+Web Browsing Issues,Slow Downloads,20.8%,24.0%
+Voice Call Issues,Choppy/Broken Voice,55.2%,49.0%
+Voice Call Issues,Dropped Calls,24.1%,24.0%
+Video Call Issues,Frozen/Disconnected Video,28.1%,38.9%
+Video Call Issues,Choppy Voice,28.1%,23.0%
+Demographics,Male,72.9%,64.6%
+Demographics,Female,27.1%,35.4%
+Demographics,Urban,85.0%,70.1%
+Demographics,Rural,15.0%,29.9%
+Demographics,Main Age Group,40s (40.6%),30s (34.9%)
+Demographics,Main Income Group,"RM4,850–10,959","Above RM10,959"
+Demographics,Main Ethnicity,Malay 55.5%,Malay 73.1%
