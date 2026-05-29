@@ -1,0 +1,7 @@
+scope,broadband_type,broadband_label,label,value,rank
+Video streaming,FBB,Fixed (FBB),YouTube,48.5,1
+Video streaming,FBB,Fixed (FBB),Netflix,26.9,2
+Video streaming,FBB,Fixed (FBB),TikTok,9.8,3
+Video streaming,MBB,Mobile (MBB),YouTube,38.3,1
+Video streaming,MBB,Mobile (MBB),TikTok,30.8,2
+Video streaming,MBB,Mobile (MBB),Facebook,13.7,3

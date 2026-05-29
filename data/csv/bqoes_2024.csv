@@ -1,0 +1,233 @@
+year,broadband_type,category,scope,label,value,unit
+2024,FBB,CSI,Overall,,4.0,score
+2024,MBB,CSI,Overall,,3.93,score
+2024,FBB,CSI,Video streaming,,3.98,score
+2024,FBB,CSI,Web browsing,,4.14,score
+2024,FBB,CSI,Online gaming,,3.78,score
+2024,FBB,CSI,Online voice calls,,4.07,score
+2024,FBB,CSI,Online video calls,,4.02,score
+2024,MBB,CSI,Video streaming,,3.91,score
+2024,MBB,CSI,Web browsing,,4.01,score
+2024,MBB,CSI,Online gaming,,3.72,score
+2024,MBB,CSI,Online voice calls,,4.06,score
+2024,MBB,CSI,Online video calls,,3.95,score
+2024,FBB,SQG_importance,Video streaming,,3.96,score
+2024,FBB,SQG_satisfaction,Video streaming,,3.99,score
+2024,FBB,SQG_gap,Video streaming,,0.03,score
+2024,FBB,SQG_importance,Web browsing,,4.38,score
+2024,FBB,SQG_satisfaction,Web browsing,,4.06,score
+2024,FBB,SQG_gap,Web browsing,,-0.32,score
+2024,FBB,SQG_importance,Online gaming,,3.46,score
+2024,FBB,SQG_satisfaction,Online gaming,,3.89,score
+2024,FBB,SQG_gap,Online gaming,,0.43,score
+2024,FBB,SQG_importance,Online voice calls,,4.2,score
+2024,FBB,SQG_satisfaction,Online voice calls,,4.02,score
+2024,FBB,SQG_gap,Online voice calls,,-0.18,score
+2024,FBB,SQG_importance,Online video calls,,4.1,score
+2024,FBB,SQG_satisfaction,Online video calls,,3.99,score
+2024,FBB,SQG_gap,Online video calls,,-0.11,score
+2024,MBB,SQG_importance,Video streaming,,3.88,score
+2024,MBB,SQG_satisfaction,Video streaming,,3.92,score
+2024,MBB,SQG_gap,Video streaming,,0.04,score
+2024,MBB,SQG_importance,Web browsing,,4.24,score
+2024,MBB,SQG_satisfaction,Web browsing,,3.94,score
+2024,MBB,SQG_gap,Web browsing,,-0.31,score
+2024,MBB,SQG_importance,Online gaming,,3.47,score
+2024,MBB,SQG_satisfaction,Online gaming,,3.8,score
+2024,MBB,SQG_gap,Online gaming,,0.33,score
+2024,MBB,SQG_importance,Online voice calls,,4.31,score
+2024,MBB,SQG_satisfaction,Online voice calls,,3.97,score
+2024,MBB,SQG_gap,Online voice calls,,-0.34,score
+2024,MBB,SQG_importance,Online video calls,,4.09,score
+2024,MBB,SQG_satisfaction,Online video calls,,3.9,score
+2024,MBB,SQG_gap,Online video calls,,-0.19,score
+2024,FBB,IPA_performance,Web browsing,,4.2,score
+2024,FBB,IPA_importance,Web browsing,,4.5,score
+2024,FBB,IPA_quadrant,Web browsing,Keep up good work,,label
+2024,FBB,IPA_performance,Online voice calls,,4.1,score
+2024,FBB,IPA_importance,Online voice calls,,4.1,score
+2024,FBB,IPA_quadrant,Online voice calls,Keep up good work,,label
+2024,FBB,IPA_performance,Online video calls,,4.0,score
+2024,FBB,IPA_importance,Online video calls,,4.05,score
+2024,FBB,IPA_quadrant,Online video calls,Keep up good work,,label
+2024,FBB,IPA_performance,Video streaming,,4.0,score
+2024,FBB,IPA_importance,Video streaming,,4.0,score
+2024,FBB,IPA_quadrant,Video streaming,Keep up good work,,label
+2024,FBB,IPA_performance,Online gaming,,3.8,score
+2024,FBB,IPA_importance,Online gaming,,3.55,score
+2024,FBB,IPA_quadrant,Online gaming,Low priority,,label
+2024,MBB,IPA_performance,Online voice calls,,4.4,score
+2024,MBB,IPA_importance,Online voice calls,,4.3,score
+2024,MBB,IPA_quadrant,Online voice calls,Keep up good work,,label
+2024,MBB,IPA_performance,Web browsing,,4.15,score
+2024,MBB,IPA_importance,Web browsing,,4.2,score
+2024,MBB,IPA_quadrant,Web browsing,Keep up good work,,label
+2024,MBB,IPA_performance,Online video calls,,3.92,score
+2024,MBB,IPA_importance,Online video calls,,4.1,score
+2024,MBB,IPA_quadrant,Online video calls,Concentrate here,,label
+2024,MBB,IPA_performance,Video streaming,,3.9,score
+2024,MBB,IPA_importance,Video streaming,,3.8,score
+2024,MBB,IPA_quadrant,Video streaming,Possible overkill,,label
+2024,MBB,IPA_performance,Online gaming,,3.75,score
+2024,MBB,IPA_importance,Online gaming,,3.55,score
+2024,MBB,IPA_quadrant,Online gaming,Low priority,,label
+2024,FBB,Platform_share,Video streaming,YouTube,48.5,%
+2024,FBB,Platform_share,Video streaming,Netflix,26.9,%
+2024,FBB,Platform_share,Video streaming,TikTok,9.8,%
+2024,FBB,Platform_share,Video streaming,Facebook,7.0,%
+2024,FBB,Platform_share,Video streaming,Instagram,3.0,%
+2024,FBB,Platform_share,Video streaming,Others,4.9,%
+2024,MBB,Platform_share,Video streaming,YouTube,38.3,%
+2024,MBB,Platform_share,Video streaming,TikTok,30.8,%
+2024,MBB,Platform_share,Video streaming,Facebook,13.7,%
+2024,MBB,Platform_share,Video streaming,Netflix,11.3,%
+2024,MBB,Platform_share,Video streaming,Instagram,3.2,%
+2024,MBB,Platform_share,Video streaming,Others,2.8,%
+2024,FBB,Platform_share,Web browsing,Google Chrome,78.0,%
+2024,FBB,Platform_share,Web browsing,Safari,12.0,%
+2024,FBB,Platform_share,Web browsing,Microsoft Edge,4.2,%
+2024,FBB,Platform_share,Web browsing,Mozilla Firefox,3.1,%
+2024,FBB,Platform_share,Web browsing,Browser Others,2.6,%
+2024,FBB,Platform_share,Web browsing,Shopee,49.2,%
+2024,FBB,Platform_share,Web browsing,Spotify,8.8,%
+2024,FBB,Platform_share,Web browsing,Grab,12.9,%
+2024,FBB,Platform_share,Web browsing,TikTok,4.5,%
+2024,FBB,Platform_share,Web browsing,Lazada,4.5,%
+2024,FBB,Platform_share,Web browsing,App Others,20.1,%
+2024,FBB,Platform_share,Web browsing,Via browser,56.7,%
+2024,FBB,Platform_share,Web browsing,Via application,43.3,%
+2024,MBB,Platform_share,Web browsing,Google Chrome,78.4,%
+2024,MBB,Platform_share,Web browsing,Safari,17.4,%
+2024,MBB,Platform_share,Web browsing,Mozilla Firefox,1.3,%
+2024,MBB,Platform_share,Web browsing,Microsoft Edge,1.3,%
+2024,MBB,Platform_share,Web browsing,Browser Others,1.5,%
+2024,MBB,Platform_share,Web browsing,Shopee,54.6,%
+2024,MBB,Platform_share,Web browsing,Spotify,7.3,%
+2024,MBB,Platform_share,Web browsing,Grab,10.2,%
+2024,MBB,Platform_share,Web browsing,Lazada,3.2,%
+2024,MBB,Platform_share,Web browsing,TikTok,5.5,%
+2024,MBB,Platform_share,Web browsing,App Others,19.2,%
+2024,MBB,Platform_share,Web browsing,Via browser,44.2,%
+2024,MBB,Platform_share,Web browsing,Via application,55.8,%
+2024,FBB,Platform_share,Online gaming,Smartphone,62.0,%
+2024,FBB,Platform_share,Online gaming,PC/Laptop,20.7,%
+2024,FBB,Platform_share,Online gaming,Game console,7.1,%
+2024,FBB,Platform_share,Online gaming,Smart TV,10.1,%
+2024,MBB,Platform_share,Online gaming,Smartphone,89.7,%
+2024,MBB,Platform_share,Online gaming,PC/Laptop,7.8,%
+2024,MBB,Platform_share,Online gaming,Smart TV,0.5,%
+2024,MBB,Platform_share,Online gaming,Game console,2.0,%
+2024,FBB,Platform_share,Online voice calls,WhatsApp,96.0,%
+2024,FBB,Platform_share,Online voice calls,WeChat,2.2,%
+2024,FBB,Platform_share,Online voice calls,Facebook Messenger,1.2,%
+2024,FBB,Platform_share,Online voice calls,Others,0.7,%
+2024,MBB,Platform_share,Online voice calls,WhatsApp,95.6,%
+2024,MBB,Platform_share,Online voice calls,Telegram,1.4,%
+2024,MBB,Platform_share,Online voice calls,WeChat,1.3,%
+2024,MBB,Platform_share,Online voice calls,Others,1.8,%
+2024,FBB,Platform_share,Online video calls,WhatsApp,78.8,%
+2024,FBB,Platform_share,Online video calls,Teams,4.7,%
+2024,FBB,Platform_share,Online video calls,FaceTime,5.3,%
+2024,FBB,Platform_share,Online video calls,Zoom,4.7,%
+2024,FBB,Platform_share,Online video calls,WeChat,2.3,%
+2024,FBB,Platform_share,Online video calls,Others,4.2,%
+2024,MBB,Platform_share,Online video calls,WhatsApp,89.5,%
+2024,MBB,Platform_share,Online video calls,FaceTime,3.2,%
+2024,MBB,Platform_share,Online video calls,Zoom,1.3,%
+2024,MBB,Platform_share,Online video calls,Messenger,1.4,%
+2024,MBB,Platform_share,Online video calls,Others,4.5,%
+2024,FBB,Participation,Online gaming,,52.3,%
+2024,MBB,Participation,Online gaming,,48.6,%
+2024,FBB,Participation,Online voice calls,,96.8,%
+2024,MBB,Participation,Online voice calls,,89.3,%
+2024,FBB,Participation,Online video calls,,98.4,%
+2024,MBB,Participation,Online video calls,,88.7,%
+2024,FBB,Participation,Video streaming,,95.7,%
+2024,MBB,Participation,Video streaming,,83.5,%
+2024,FBB,Dissatisfaction_rate,Video streaming,,3.2,%
+2024,MBB,Dissatisfaction_rate,Video streaming,,4.5,%
+2024,FBB,Dissatisfaction_rate,Web browsing,,0.9,%
+2024,MBB,Dissatisfaction_rate,Web browsing,,0.9,%
+2024,FBB,Dissatisfaction_rate,Online gaming,,3.5,%
+2024,MBB,Dissatisfaction_rate,Online gaming,,3.5,%
+2024,FBB,Dissatisfaction_rate,Online voice calls,,1.1,%
+2024,MBB,Dissatisfaction_rate,Online voice calls,,2.2,%
+2024,FBB,Dissatisfaction_rate,Online video calls,,1.2,%
+2024,MBB,Dissatisfaction_rate,Online video calls,,2.6,%
+2024,FBB,Dissatisfaction_reason,Video streaming,Video stalls and buffers,38.9,%
+2024,FBB,Dissatisfaction_reason,Video streaming,Video slow to load/start,30.6,%
+2024,FBB,Dissatisfaction_reason,Video streaming,Low video quality,13.9,%
+2024,FBB,Dissatisfaction_reason,Video streaming,Video playback fails,13.9,%
+2024,FBB,Dissatisfaction_reason,Video streaming,Others,2.8,%
+2024,MBB,Dissatisfaction_reason,Video streaming,Video stalls and buffers,52.4,%
+2024,MBB,Dissatisfaction_reason,Video streaming,Video slow to load/start,22.3,%
+2024,FBB,Dissatisfaction_reason,Web browsing,Waiting for page to load,29.2,%
+2024,FBB,Dissatisfaction_reason,Web browsing,Slow download,20.8,%
+2024,FBB,Dissatisfaction_reason,Web browsing,Page does not display smoothly,16.7,%
+2024,FBB,Dissatisfaction_reason,Web browsing,Others,33.3,%
+2024,MBB,Dissatisfaction_reason,Web browsing,Waiting for page to load,24.0,%
+2024,MBB,Dissatisfaction_reason,Web browsing,Slow download,24.0,%
+2024,MBB,Dissatisfaction_reason,Web browsing,Page does not display smoothly,18.7,%
+2024,MBB,Dissatisfaction_reason,Web browsing,Others,33.3,%
+2024,FBB,Dissatisfaction_reason,Online gaming,Animation stuttering,42.9,%
+2024,FBB,Dissatisfaction_reason,Online gaming,Latency and lag,33.3,%
+2024,MBB,Dissatisfaction_reason,Online gaming,Animation stuttering,42.9,%
+2024,MBB,Dissatisfaction_reason,Online gaming,Latency and lag,33.3,%
+2024,FBB,Dissatisfaction_reason,Online voice calls,Choppy/Broken voice,55.2,%
+2024,FBB,Dissatisfaction_reason,Online voice calls,Dropped calls,24.1,%
+2024,FBB,Dissatisfaction_reason,Online voice calls,Could not hear,17.2,%
+2024,FBB,Dissatisfaction_reason,Online voice calls,Others,3.4,%
+2024,MBB,Dissatisfaction_reason,Online voice calls,Choppy/Broken voice,49.0,%
+2024,MBB,Dissatisfaction_reason,Online voice calls,Dropped calls,24.0,%
+2024,MBB,Dissatisfaction_reason,Online voice calls,Could not hear,16.0,%
+2024,FBB,Dissatisfaction_reason,Online video calls,Video froze/disconnected,28.1,%
+2024,FBB,Dissatisfaction_reason,Online video calls,Choppy/broken voice,28.1,%
+2024,FBB,Dissatisfaction_reason,Online video calls,Low video quality,28.1,%
+2024,MBB,Dissatisfaction_reason,Online video calls,Video froze/disconnected,38.9,%
+2024,MBB,Dissatisfaction_reason,Online video calls,Choppy/broken voice,23.0,%
+2024,MBB,Dissatisfaction_reason,Online video calls,Low picture quality,15.9,%
+2024,MBB,Dissatisfaction_reason,Online video calls,Difficulties connecting,8.0,%
+2024,FBB,Demo,Gender,Male,72.9,%
+2024,FBB,Demo,Gender,Female,27.1,%
+2024,FBB,Demo,Location,Urban,85.0,%
+2024,FBB,Demo,Location,Rural,15.0,%
+2024,FBB,Demo,Age group,Under 20,0.3,%
+2024,FBB,Demo,Age group,20s,19.2,%
+2024,FBB,Demo,Age group,30s,40.6,%
+2024,FBB,Demo,Age group,40s,24.9,%
+2024,FBB,Demo,Age group,50s,10.8,%
+2024,FBB,Demo,Age group,60+,4.3,%
+2024,FBB,Demo,Employment,Employed,65.6,%
+2024,FBB,Demo,Employment,Self-employed,20.1,%
+2024,FBB,Demo,Employment,Unemployed,6.9,%
+2024,FBB,Demo,Employment,Pensioner,3.7,%
+2024,FBB,Demo,Employment,Full-time student,2.4,%
+2024,FBB,Demo,Income,"Below RM4,850",36.6,%
+2024,FBB,Demo,Income,"RM4,850-RM10,959",38.2,%
+2024,FBB,Demo,Income,"Above RM10,959",25.2,%
+2024,FBB,Demo,Ethnicity,Malay,55.5,%
+2024,FBB,Demo,Ethnicity,Chinese,32.6,%
+2024,FBB,Demo,Ethnicity,Indian,7.1,%
+2024,FBB,Demo,Ethnicity,Bumiputra Sabah/Sarawak,3.0,%
+2024,MBB,Demo,Gender,Male,64.6,%
+2024,MBB,Demo,Gender,Female,35.4,%
+2024,MBB,Demo,Location,Urban,70.1,%
+2024,MBB,Demo,Location,Rural,29.9,%
+2024,MBB,Demo,Age group,Under 20,3.9,%
+2024,MBB,Demo,Age group,20s,34.9,%
+2024,MBB,Demo,Age group,30s,29.2,%
+2024,MBB,Demo,Age group,40s,18.2,%
+2024,MBB,Demo,Age group,50s,8.8,%
+2024,MBB,Demo,Age group,60+,5.0,%
+2024,MBB,Demo,Employment,Employed,55.8,%
+2024,MBB,Demo,Employment,Self-employed,19.1,%
+2024,MBB,Demo,Employment,Unemployed,11.6,%
+2024,MBB,Demo,Employment,Full-time student,10.0,%
+2024,MBB,Demo,Employment,Pensioner,3.6,%
+2024,MBB,Demo,Income,"Below RM4,850",66.5,%
+2024,MBB,Demo,Income,"RM4,850-RM10,959",24.7,%
+2024,MBB,Demo,Income,"Above RM10,959",8.8,%
+2024,MBB,Demo,Ethnicity,Malay,73.1,%
+2024,MBB,Demo,Ethnicity,Chinese,12.5,%
+2024,MBB,Demo,Ethnicity,Indian,4.6,%
+2024,MBB,Demo,Ethnicity,Bumiputra Sabah/Sarawak,8.1,%

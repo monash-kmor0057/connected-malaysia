@@ -1,0 +1,11 @@
+broadband_type,scope,performance,importance,quadrant
+FBB,Web browsing,4.2,4.5,Keep up good work
+FBB,Online voice calls,4.1,4.1,Keep up good work
+FBB,Online video calls,4,4.05,Keep up good work
+FBB,Video streaming,4,4,Keep up good work
+FBB,Online gaming,3.8,3.55,Low priority
+MBB,Online voice calls,4.4,4.3,Keep up good work
+MBB,Web browsing,4.15,4.2,Keep up good work
+MBB,Online video calls,3.92,4.1,Concentrate here
+MBB,Video streaming,3.9,3.8,Possible overkill
+MBB,Online gaming,3.75,3.55,Low priority

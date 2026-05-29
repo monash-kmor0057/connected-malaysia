@@ -1,0 +1,19 @@
+scope,broadband_type,broadband_label,label,value,rank
+Video streaming,FBB,Fixed (FBB),YouTube,48.5,1
+Video streaming,FBB,Fixed (FBB),Netflix,26.9,2
+Video streaming,FBB,Fixed (FBB),TikTok,9.8,3
+Video streaming,MBB,Mobile (MBB),YouTube,38.3,1
+Video streaming,MBB,Mobile (MBB),TikTok,30.8,2
+Video streaming,MBB,Mobile (MBB),Facebook,13.7,3
+Online video calls,FBB,Fixed (FBB),WhatsApp,78.8,1
+Online video calls,FBB,Fixed (FBB),FaceTime,5.3,2
+Online video calls,FBB,Fixed (FBB),Teams,4.7,3
+Online video calls,MBB,Mobile (MBB),WhatsApp,89.5,1
+Online video calls,MBB,Mobile (MBB),FaceTime,3.2,2
+Online video calls,MBB,Mobile (MBB),Messenger,1.4,3
+Online gaming,FBB,Fixed (FBB),Smartphone,62.0,1
+Online gaming,FBB,Fixed (FBB),PC/Laptop,20.7,2
+Online gaming,FBB,Fixed (FBB),Smart TV,10.1,3
+Online gaming,MBB,Mobile (MBB),Smartphone,89.7,1
+Online gaming,MBB,Mobile (MBB),PC/Laptop,7.8,2
+Online gaming,MBB,Mobile (MBB),Game console,2.0,3
