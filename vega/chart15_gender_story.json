@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "spacing": 4,
+  "padding": { "top": 4, "bottom": 10, "left": 8, "right": 8 },
+  "vconcat": [
+    {
+      "width": 340,
+      "height": 248,
+      "data": {
+        "url": "data/csv/gender_internet_use.csv"
+      },
+      "transform": [
+        { "fold": ["female", "male"], "as": ["group", "value"] }
+      ],
+      "mark": { "type": "line", "point": { "filled": true, "size": 45 }, "strokeWidth": 2.8 },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "grid": false,
+            "labels": false,
+            "ticks": false,
+            "title": null
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Internet use (%)",
+          "scale": { "domain": [0, 100] },
+          "axis": { "gridColor": "#e5e7eb", "labelFontSize": 11 }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": { "domain": ["female", "male"], "range": ["#dc2626", "#2563eb"] },
+          "legend": { "title": null, "orient": "top", "labelFontSize": 11 }
+        },
+        "tooltip": [
+          { "field": "year", "type": "ordinal" },
+          { "field": "group", "type": "nominal", "title": "Group" },
+          { "field": "value", "type": "quantitative", "title": "Internet use (%)", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "width": 340,
+      "height": 182,
+      "data": {
+        "url": "data/csv/gender_internet_use.csv"
+      },
+      "transform": [
+        { "calculate": "datum.male - datum.female", "as": "gap" }
+      ],
+      "layer": [
+        {
+          "mark": { "type": "bar", "color": "#93c5fd" },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "ordinal",
+              "title": "Year",
+              "axis": { "labelAngle": 0, "labelFontSize": 11 }
+            },
+            "y": {
+              "field": "gap",
+              "type": "quantitative",
+              "title": "Gap (pp)",
+              "axis": { "gridColor": "#e5e7eb", "labelFontSize": 11, "titleFontSize": 11 }
+            },
+            "tooltip": [
+              { "field": "year", "type": "ordinal" },
+              { "field": "gap", "type": "quantitative", "title": "Male − Female", "format": ".2f" }
+            ]
+          }
+        },
+        {
+          "mark": { "type": "line", "stroke": "#1d4ed8", "strokeWidth": 2, "point": { "filled": true, "size": 28 } },
+          "encoding": {
+            "x": { "field": "year", "type": "ordinal" },
+            "y": { "field": "gap", "type": "quantitative" }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": { "stroke": null, "clip": false },
+    "padding": { "top": 10, "bottom": 14, "left": 10, "right": 10 },
+    "axis": { "labelFontSize": 11, "titleFontSize": 12, "labelColor": "#374151", "titleColor": "#111827" },
+    "legend": { "labelFontSize": 11, "titleFontSize": 11 }
+  }
+}

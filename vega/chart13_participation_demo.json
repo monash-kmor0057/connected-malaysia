@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "spacing": 8,
+  "padding": { "top": 2, "bottom": 0, "left": 4, "right": 4 },
+  "resolve": { "legend": { "color": "shared" } },
+  "vconcat": [
+    {
+      "width": 400,
+      "height": 178,
+      "title": {
+        "text": "Who uses each online activity?",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "anchor": "start",
+        "color": "#0f172a"
+      },
+      "data": { "url": "data/csv/bqoes_2024.csv" },
+      "transform": [
+        { "filter": "datum.category == 'Participation'" },
+        {
+          "calculate": "datum.broadband_type == 'FBB' ? 'Fixed (FBB)' : 'Mobile (MBB)'",
+          "as": "broadband_label"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "scope",
+          "type": "nominal",
+          "title": null,
+          "sort": "-x",
+          "axis": { "labelFontSize": 10, "labelLimit": 160 }
+        },
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "% who do this activity",
+          "scale": { "domain": [0, 100] },
+          "axis": { "gridColor": "#e5e7eb" }
+        },
+        "color": {
+          "field": "broadband_label",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Fixed (FBB)", "Mobile (MBB)"],
+            "range": ["#2563eb", "#16a34a"]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "title": null,
+            "labelFontSize": 10
+          }
+        },
+        "yOffset": { "field": "broadband_label" }
+      },
+      "layer": [
+        { "mark": { "type": "bar", "cornerRadiusEnd": 3, "height": 16 } },
+        {
+          "mark": { "type": "text", "dx": 5, "fontSize": 9, "fontWeight": 700, "align": "left", "color": "#334155" },
+          "encoding": {
+            "text": { "field": "value", "type": "quantitative", "format": ".1f" }
+          }
+        }
+      ]
+    },
+    {
+      "width": 400,
+      "height": 218,
+      "title": {
+        "text": "Age group in the 2024 sample",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "anchor": "start",
+        "color": "#0f172a"
+      },
+      "data": { "url": "data/csv/bqoes_2024.csv" },
+      "transform": [
+        { "filter": "datum.category == 'Demo' && datum.scope == 'Age group'" },
+        {
+          "calculate": "datum.broadband_type == 'FBB' ? 'Fixed (FBB)' : 'Mobile (MBB)'",
+          "as": "broadband_label"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "label",
+          "type": "nominal",
+          "title": null,
+          "sort": ["Under 20", "20s", "30s", "40s", "50s", "60+"],
+          "axis": { "labelFontSize": 10 }
+        },
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "% of sample",
+          "scale": { "domain": [0, 45] },
+          "axis": { "gridColor": "#e5e7eb" }
+        },
+        "color": {
+          "field": "broadband_label",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Fixed (FBB)", "Mobile (MBB)"],
+            "range": ["#2563eb", "#16a34a"]
+          },
+          "legend": null
+        },
+        "yOffset": { "field": "broadband_label" }
+      },
+      "layer": [
+        { "mark": { "type": "bar", "cornerRadiusEnd": 3, "height": 14 } },
+        {
+          "mark": { "type": "text", "dx": 5, "fontSize": 9, "fontWeight": 700, "align": "left", "color": "#334155" },
+          "encoding": {
+            "text": { "field": "value", "type": "quantitative", "format": ".1f" }
+          }
+        }
+      ]
+    },
+    {
+      "width": 400,
+      "height": 168,
+      "title": {
+        "text": "Ethnicity in the 2024 sample",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "anchor": "start",
+        "color": "#0f172a"
+      },
+      "data": { "url": "data/csv/bqoes_2024.csv" },
+      "transform": [
+        { "filter": "datum.category == 'Demo' && datum.scope == 'Ethnicity'" },
+        {
+          "calculate": "datum.broadband_type == 'FBB' ? 'Fixed (FBB)' : 'Mobile (MBB)'",
+          "as": "broadband_label"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "label",
+          "type": "nominal",
+          "title": null,
+          "sort": "-x",
+          "axis": { "labelFontSize": 10 }
+        },
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "% of sample",
+          "scale": { "domain": [0, 80] },
+          "axis": { "gridColor": "#e5e7eb" }
+        },
+        "color": {
+          "field": "broadband_label",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Fixed (FBB)", "Mobile (MBB)"],
+            "range": ["#2563eb", "#16a34a"]
+          },
+          "legend": null
+        },
+        "yOffset": { "field": "broadband_label" }
+      },
+      "layer": [
+        { "mark": { "type": "bar", "cornerRadiusEnd": 3, "height": 16 } },
+        {
+          "mark": { "type": "text", "dx": 5, "fontSize": 9, "fontWeight": 700, "align": "left", "color": "#334155" },
+          "encoding": {
+            "text": { "field": "value", "type": "quantitative", "format": ".1f" }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 10, "titleFontSize": 11 }
+  }
+}
