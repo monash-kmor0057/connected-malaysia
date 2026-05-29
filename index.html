@@ -532,7 +532,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const section3CacheBust = "20260526-ch9-fullw";
+    const section3CacheBust = "20260529-ch11-pct";
     const section3Charts = [
         ["#chart8", "vega/chart8_csi_radar.json?v=" + section3CacheBust],
         ["#chart9", "vega/chart9_sqg_heatmap.json?v=" + section3CacheBust],
@@ -548,7 +548,7 @@
         ["#chart13-ethnicity", "vega/chart13_ethnicity.json?v=" + section3CacheBust]
     ];
 
-    const mapCacheBust = "20260526-map-tiles-v2";
+    const mapCacheBust = "20260529-map-tiles-v4";
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
     let MALAYSIA_GEO = null;
@@ -1306,7 +1306,7 @@
             if (spec.layer[1].data && spec.layer[1].data.url) {
                 spec.layer[1].data.url =
                     spec.layer[1].data.url.split("?")[0] + "?v=" + mapCacheBust;
-                spec.layer[1].data.format = { type: "geojson" };
+                spec.layer[1].data.format = { type: "json", property: "features" };
             }
             spec.layer[1].mark = {
                 type: "geoshape",
@@ -1314,11 +1314,29 @@
                 strokeWidth: 0,
                 opacity: 0.62
             };
-            spec.layer[1].transform = [];
+            spec.layer[1].transform = [
+                {
+                    calculate:
+                        "datum.properties && datum.properties.rate_mean != null ? datum.properties.rate_mean : null",
+                    as: "rate_mean"
+                },
+                {
+                    calculate:
+                        "datum.properties && datum.properties.tile_count != null ? datum.properties.tile_count : null",
+                    as: "tile_count"
+                },
+                { filter: "isValid(datum.rate_mean) && isFinite(datum.rate_mean)" }
+            ];
             if (spec.layer[1].encoding) {
                 if (spec.layer[1].encoding.color) {
-                    spec.layer[1].encoding.color.field = "properties.rate_mean";
+                    spec.layer[1].encoding.color.field = "rate_mean";
                     spec.layer[1].encoding.color.legend = null;
+                }
+                if (spec.layer[1].encoding.tooltip) {
+                    spec.layer[1].encoding.tooltip = [
+                        { field: "rate_mean", title: "Tile mean download (kbps)", format: ",.0f" },
+                        { field: "tile_count", title: "Tests in tile", format: ",.0f" }
+                    ];
                 }
                 delete spec.layer[1].encoding.longitude;
                 delete spec.layer[1].encoding.latitude;
