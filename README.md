@@ -30,15 +30,16 @@ Upload these from your local project folder
 
 Also push the latest **`index.html`** and **`style.css`** from your PC (they contain Section 3 layout and fixes).
 
-### Map tile data (Section 2 — gapless polygons)
+### Map tile data (Section 2 — gapless grid cells)
 
-After changing maps from dots to tiles, upload these (~18–20 MB each):
+Upload these (~0.6–0.7 MB each; aggregated grid, not raw 64k tiles):
 
 - `data/geo/gps_mobile_tiles_2020.json`
 - `data/geo/gps_mobile_tiles_2023.json`
 - `data/geo/gps_mobile_tiles_2026.json`
 
-Regenerate locally: `node scripts/build_map_tiles_geojson.mjs`
+Regenerate locally: `node scripts/build_map_tiles_geojson.mjs`  
+Also push `index.html` and `vega/chart5_map_2020.json` (and chart6/7 map specs).
 
 Also update map specs: `vega/chart5_map_2020.json`, `chart6_map_2023.json`, `chart7_map_2026.json`
 

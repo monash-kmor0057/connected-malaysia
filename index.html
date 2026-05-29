@@ -548,7 +548,8 @@
         ["#chart13-ethnicity", "vega/chart13_ethnicity.json?v=" + section3CacheBust]
     ];
 
-    const mapCacheBust = "20260529-map-tiles-v4";
+    const mapCacheBust = "20260529-map-grid-v5";
+    const MAP_TILES_BY_YEAR = {};
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
     let MALAYSIA_GEO = null;
@@ -1262,7 +1263,31 @@
         ["#chart7", "vega/chart7_map_2026.json?v=" + mapCacheBust, "map-status-7", "Jan 2026"]
     ];
 
-    function patchMapSpec(spec, width) {
+    function mapTileYearFromSpecUrl(specUrl) {
+        const m = String(specUrl || "").match(/map_(\d{4})/);
+        return m ? m[1] : null;
+    }
+
+    function loadMapTiles(year) {
+        if (MAP_TILES_BY_YEAR[year]) return Promise.resolve(MAP_TILES_BY_YEAR[year]);
+        const url = "data/geo/gps_mobile_tiles_" + year + ".json?v=" + mapCacheBust;
+        return fetch(url)
+            .then((r) => {
+                if (!r.ok) throw new Error("Tile data not found: " + url);
+                return r.json();
+            })
+            .then((geo) => {
+                const features = geo && Array.isArray(geo.features) ? geo.features : [];
+                MAP_TILES_BY_YEAR[year] = features;
+                return features;
+            });
+    }
+
+    function prefetchAllMapTiles() {
+        return Promise.all(["2020", "2023", "2026"].map((year) => loadMapTiles(year)));
+    }
+
+    function patchMapSpec(spec, width, tileFeatures) {
         const w = Math.max(Math.round(width), 280);
         const h = getMapPlotHeight(w);
         const box = getMapGeoBounds();
@@ -1303,16 +1328,18 @@
             };
         }
         if (spec.layer && spec.layer[1]) {
-            if (spec.layer[1].data && spec.layer[1].data.url) {
+            if (tileFeatures) {
+                spec.layer[1].data = { values: tileFeatures };
+            } else if (spec.layer[1].data && spec.layer[1].data.url) {
                 spec.layer[1].data.url =
                     spec.layer[1].data.url.split("?")[0] + "?v=" + mapCacheBust;
                 spec.layer[1].data.format = { type: "json", property: "features" };
             }
             spec.layer[1].mark = {
                 type: "geoshape",
-                stroke: null,
-                strokeWidth: 0,
-                opacity: 0.62
+                stroke: "#ffffff",
+                strokeWidth: 0.15,
+                opacity: 0.9
             };
             spec.layer[1].transform = [
                 {
@@ -1896,14 +1923,18 @@
         const el = document.querySelector(selector);
         const box = el && el.closest(".map-box");
         const w = measureMapWidth(box);
-        return fetch(specUrl)
-            .then((r) => {
+        const tileYear = mapTileYearFromSpecUrl(specUrl);
+        const tilesReady = tileYear ? loadMapTiles(tileYear) : Promise.resolve(null);
+        return Promise.all([
+            fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
-            })
-            .then((spec) => {
+            }),
+            tilesReady
+        ])
+            .then(([spec, tileFeatures]) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w);
+                patchMapSpec(spec, w, tileFeatures);
                 const mapH = spec.height;
                 applyChartContainerSize(el, mapH);
                 return vegaEmbed(selector, spec, mapOpts).then((result) => {
@@ -1911,6 +1942,7 @@
                         mapRuntime.push({
                             selector,
                             specUrl,
+                            tileYear: tileYear,
                             view: result.view,
                             lastW: w,
                             lastH: mapH
@@ -1937,11 +1969,15 @@
             return Promise.resolve();
         }
         entry.lastW = w;
-        return fetch(entry.specUrl)
-            .then((r) => r.json())
-            .then((spec) => {
+        const tileYear = entry.tileYear || mapTileYearFromSpecUrl(entry.specUrl);
+        const tilesReady = tileYear ? loadMapTiles(tileYear) : Promise.resolve(null);
+        return Promise.all([
+            fetch(entry.specUrl).then((r) => r.json()),
+            tilesReady
+        ])
+            .then(([spec, tileFeatures]) => {
                 normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w);
+                patchMapSpec(spec, w, tileFeatures);
                 entry.lastH = spec.height;
                 applyChartContainerSize(el, spec.height);
                 return vegaEmbed(entry.selector, spec, mapOpts);
@@ -1972,13 +2008,18 @@
         mapCharts.forEach(([, , statusId], i) => {
             if (i > 0) setMapStatus(statusId, "Waiting…");
         });
-        return loadMapBbox().then(() =>
-            mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
-                return chain.then(() =>
-                    embedMap(selector, spec, statusId, yearLabel, index + 1, total)
-                );
-            }, Promise.resolve())
-        );
+        return loadMapBbox()
+            .then(() => {
+                setMapStatus("map-status-5", "Loading map data…");
+                return prefetchAllMapTiles();
+            })
+            .then(() =>
+                mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
+                    return chain.then(() =>
+                        embedMap(selector, spec, statusId, yearLabel, index + 1, total)
+                    );
+                }, Promise.resolve())
+            );
     }
 
     let mapResizeTimer;
