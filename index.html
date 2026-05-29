@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-section1-card-heights-v2">
+    <link rel="stylesheet" href="style.css?v=20260520-year-range-line">
 
 </head>
 
@@ -56,7 +56,7 @@
 
             <!-- CHART 1 -->
 
-            <div class="chart-card chart-card--auto-height">
+            <div class="chart-card">
 
                 <div class="chart-number">1</div>
 
@@ -76,7 +76,7 @@
 
             <!-- CHART 2 -->
 
-            <div class="chart-card chart-card--auto-height">
+            <div class="chart-card">
 
                 <div class="chart-number">2</div>
 
@@ -96,29 +96,9 @@
 
             <!-- CHART 3 -->
 
-            <div class="chart-card chart-card--auto-height">
+            <div class="chart-card">
 
                 <div class="chart-number">3</div>
-
-                <h3>
-                    Malaysia internet use by gender and gap trend
-                </h3>
-
-                <div id="chart15"></div>
-
-                <p class="annotation">
-                    Top lines show female and male usage, while the bottom bars show how the gap changes each year.
-                </p>
-
-            </div>
-
-
-
-            <!-- CHART 4 -->
-
-            <div class="chart-card chart-card--auto-height">
-
-                <div class="chart-number">4</div>
 
                 <h3>
                     Malaysia mobile penetration (per 100 people)
@@ -134,11 +114,11 @@
 
 
 
-            <!-- CHART 5 -->
+            <!-- CHART 4 -->
 
-            <div class="chart-card chart-card--auto-height">
+            <div class="chart-card">
 
-                <div class="chart-number">5</div>
+                <div class="chart-number">4</div>
 
                 <h3>
                     Malaysia fixed broadband penetration (per 100 people)
@@ -147,12 +127,30 @@
                 <div id="chart4"></div>
 
                 <p class="annotation">
-                    This is the fixed-broadband version of Chart 4, using the same visual style.
+                    This is the fixed-broadband version of Chart 3, using the same visual style.
                 </p>
 
             </div>
 
-            <div class="chart-card chart-card--auto-height policy-events-panel">
+            <!-- CHART 15 + policy events -->
+
+            <div class="chart-card">
+
+                <div class="chart-number">5</div>
+
+                <h3>
+                    Malaysia internet use by gender and gap trend
+                </h3>
+
+                <div id="chart15"></div>
+
+                <p class="annotation">
+                    Top lines show female and male usage, while the bottom bars show how the gap changes each year.
+                </p>
+
+            </div>
+
+            <div class="chart-card policy-events-panel">
                 <h3>Major Events Driving Broadband Adoption in Malaysia</h3>
                 <ol class="policy-events-timeline" aria-label="Broadband policy milestones in Malaysia">
                     <li class="policy-events-timeline__item policy-events-timeline__item--fixed">
@@ -274,54 +272,31 @@
                 </h3>
 
 
-                                <div class="map-timeline map-timeline--stacked">
+                                <div class="map-timeline">
                     <div class="map-row">
                         <div class="map-box">
                             <p class="map-status" id="map-status-5">Waiting to load…</p>
-                            <p class="map-year">January 2020</p>
                             <div id="chart5"></div>
-                            <div class="map-legend-inline" aria-label="Download speed scale for January 2020">
-                                <p class="map-legend-title">Download (kbps)</p>
-                                <div class="map-legend-scale">
-                                    <div class="map-legend-ticks">
-                                        <span>3k</span>
-                                        <span>130k</span>
-                                    </div>
-                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
-                                </div>
-                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-6">Waiting to load…</p>
-                            <p class="map-year">January 2023</p>
                             <div id="chart6"></div>
-                            <div class="map-legend-inline" aria-label="Download speed scale for January 2023">
-                                <p class="map-legend-title">Download (kbps)</p>
-                                <div class="map-legend-scale">
-                                    <div class="map-legend-ticks">
-                                        <span>3k</span>
-                                        <span>130k</span>
-                                    </div>
-                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
-                                </div>
-                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-7">Waiting to load…</p>
-                            <p class="map-year">January 2026</p>
                             <div id="chart7"></div>
-                            <div class="map-legend-inline" aria-label="Download speed scale for January 2026">
-                                <p class="map-legend-title">Download (kbps)</p>
-                                <div class="map-legend-scale">
-                                    <div class="map-legend-ticks">
-                                        <span>3k</span>
-                                        <span>130k</span>
-                                    </div>
-                                    <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                    <aside class="map-legend-aside" aria-label="Download speed scale">
+                        <p class="map-legend-title">Download (kbps)</p>
+                        <div class="map-legend-scale">
+                            <div class="map-legend-ticks">
+                                <span>130k</span>
+                                <span>3k</span>
+                            </div>
+                            <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                        </div>
+                    </aside>
                 </div>
 
                 <p class="annotation">
@@ -392,194 +367,47 @@
     <script>
 
     const svgOpts = { actions: false, renderer: "svg" };
-    const mapOpts = { actions: false, renderer: "svg" };
+    const mapOpts = { actions: false, renderer: "canvas" };
 
     const lightCharts = [
         ["#chart1", "vega/chart1_subscriptions.json"],
         ["#chart2", "vega/chart2_mobile_shift.json"],
-        ["#chart15", "vega/chart15_gender_story.json"],
         ["#chart3", "vega/chart3_penetration.json"],
-        ["#chart4", "vega/chart4_online_lifestyle.json"]
+        ["#chart4", "vega/chart4_online_lifestyle.json"],
+        ["#chart15", "vega/chart15_gender_story.json"]
     ];
 
-    const mapCacheBust = "20260520-malaysia-map-v14";
-    const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
-    const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
-    let MALAYSIA_GEO = null;
-    let MAP_REGION_GEO = null;
-    let MAP_FIT_GEO = null;
-
-    function normalizeSpecDataUrls(spec) {
-        if (!spec || typeof spec !== "object") return spec;
-        const fixUrl = (url) =>
-            typeof url === "string" && url.indexOf("../data/") === 0
-                ? url.slice(3)
-                : url;
-        if (spec.data && spec.data.url) {
-            spec.data.url = fixUrl(spec.data.url);
-        }
-        ["layer", "vconcat", "hconcat"].forEach((key) => {
-            if (Array.isArray(spec[key])) {
-                spec[key].forEach((child) => normalizeSpecDataUrls(child));
-            }
-        });
-        return spec;
-    }
-    let MAP_FILTER = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
-    const MAP_LAT_TRIM_BASE = 0;
+    const mapCacheBust = "20260518-map-wide-fit";
+    let MAP_FILTER = { lon0: 99.35, lon1: 119.42, lat0: 0.8, lat1: 6.8 };
+    const MAP_LAT_TRIM_BASE = 0.1;
     const MAP_LAT_TRIM_WIDE = 0.32;
+    const MAP_MIN_HORIZONTAL = 1180;
+    const MAP_STACK_HYST = 48;
     const MAP_SIZE_THRESHOLD = 10;
+    let mapLayoutStacked = null;
     let mapResizePending = false;
-
-    function makeMapFitBox(b) {
-        return {
-            type: "FeatureCollection",
-            features: [
-                {
-                    type: "Feature",
-                    properties: {},
-                    geometry: {
-                        type: "Polygon",
-                        coordinates: [
-                            [
-                                [b.lon0, b.lat0],
-                                [b.lon1, b.lat0],
-                                [b.lon1, b.lat1],
-                                [b.lon0, b.lat1],
-                                [b.lon0, b.lat0]
-                            ]
-                        ]
-                    }
-                }
-            ]
-        };
-    }
-
-    function clipEdge(points, inside, intersect) {
-        const out = [];
-        if (!points.length) return out;
-        let prev = points[points.length - 1];
-        let prevIn = inside(prev);
-        for (let i = 0; i < points.length; i++) {
-            const cur = points[i];
-            const curIn = inside(cur);
-            if (curIn) {
-                if (!prevIn) out.push(intersect(prev, cur));
-                out.push(cur);
-            } else if (prevIn) {
-                out.push(intersect(prev, cur));
-            }
-            prev = cur;
-            prevIn = curIn;
-        }
-        return out;
-    }
-
-    function closeRing(ring) {
-        if (!ring.length) return ring;
-        const first = ring[0];
-        const last = ring[ring.length - 1];
-        if (first[0] === last[0] && first[1] === last[1]) return ring;
-        return ring.concat([[first[0], first[1]]]);
-    }
-
-    function clipRingToBbox(ring, b) {
-        let pts = ring.slice();
-        pts = clipEdge(pts, (p) => p[0] >= b.lon0, (a, c) => {
-            const t = (b.lon0 - a[0]) / (c[0] - a[0]);
-            return [b.lon0, a[1] + t * (c[1] - a[1])];
-        });
-        pts = clipEdge(pts, (p) => p[0] <= b.lon1, (a, c) => {
-            const t = (b.lon1 - a[0]) / (c[0] - a[0]);
-            return [b.lon1, a[1] + t * (c[1] - a[1])];
-        });
-        pts = clipEdge(pts, (p) => p[1] >= b.lat0, (a, c) => {
-            const t = (b.lat0 - a[1]) / (c[1] - a[1]);
-            return [a[0] + t * (c[0] - a[0]), b.lat0];
-        });
-        pts = clipEdge(pts, (p) => p[1] <= b.lat1, (a, c) => {
-            const t = (b.lat1 - a[1]) / (c[1] - a[1]);
-            return [a[0] + t * (c[0] - a[0]), b.lat1];
-        });
-        return pts.length >= 3 ? closeRing(pts) : [];
-    }
-
-    function clipPolygonCoords(coords, b) {
-        const rings = [];
-        for (let i = 0; i < coords.length; i++) {
-            const clipped = clipRingToBbox(coords[i], b);
-            if (clipped.length >= 4) rings.push(clipped);
-        }
-        return rings;
-    }
-
-    function clipFeatureToBbox(feature, b) {
-        if (!feature || !feature.geometry) return null;
-        const g = feature.geometry;
-        let geometry = null;
-        if (g.type === "Polygon") {
-            const coordinates = clipPolygonCoords(g.coordinates, b);
-            if (coordinates.length) geometry = { type: "Polygon", coordinates: coordinates };
-        } else if (g.type === "MultiPolygon") {
-            const coordinates = [];
-            for (let i = 0; i < g.coordinates.length; i++) {
-                const poly = clipPolygonCoords(g.coordinates[i], b);
-                if (poly.length) coordinates.push(poly);
-            }
-            if (coordinates.length) geometry = { type: "MultiPolygon", coordinates: coordinates };
-        } else {
-            return feature;
-        }
-        if (!geometry) return null;
-        return { type: "Feature", properties: feature.properties, geometry: geometry };
-    }
-
-    function clipBasemapToViewBbox(features) {
-        const clipped = [];
-        for (let i = 0; i < features.length; i++) {
-            const f = clipFeatureToBbox(features[i], MAP_VIEW_BBOX);
-            if (f) clipped.push(f);
-        }
-        return clipped;
-    }
-
-    function applyMapRegionGeo(features) {
-        if (!features || !features.length) return;
-        const clipped = clipBasemapToViewBbox(features);
-        if (!clipped.length) return;
-        MAP_REGION_GEO = { type: "FeatureCollection", features: clipped };
-        const myOnly = clipped.filter((f) => f.properties && f.properties.ADM0_A3 === "MYS");
-        MALAYSIA_GEO = myOnly.length
-            ? { type: "FeatureCollection", features: myOnly }
-            : MAP_REGION_GEO;
-        MAP_FILTER = { ...MAP_VIEW_BBOX };
-        MAP_FIT_GEO = makeMapFitBox(MAP_VIEW_BBOX);
-    }
 
     function loadMapBbox() {
         return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
             .then((r) => (r.ok ? r.json() : null))
-            .then((full) => {
-                if (!full || !Array.isArray(full.features)) return;
-                let region = full.features.filter(
-                    (f) => f.properties && MAP_REGION_A3.includes(f.properties.ADM0_A3)
-                );
-                if (!region.length) {
-                    region = full.features.filter(
-                        (f) =>
-                            f.properties &&
-                            (f.properties.ADM0_A3 === "MYS" ||
-                                f.properties.ADM0_A3 === "IDN" ||
-                                f.properties.ADM0_A3 === "BRN")
-                    );
+            .then((d) => {
+                if (d && d.bbox && d.bbox.length === 4) {
+                    MAP_FILTER = {
+                        lon0: d.bbox[0],
+                        lat0: d.bbox[1],
+                        lon1: d.bbox[2],
+                        lat1: d.bbox[3]
+                    };
                 }
-                applyMapRegionGeo(region);
             })
             .catch(() => {});
     }
 
     function isMapWideLayout() {
-        return false;
+        if (mapLayoutStacked === false) return true;
+        if (mapLayoutStacked === true) return false;
+        const timeline = document.querySelector(".map-timeline");
+        return timeline ? timeline.clientWidth >= MAP_MIN_HORIZONTAL : false;
     }
 
     function getMapFilter() {
@@ -598,22 +426,20 @@
         return f;
     }
 
+    const MAP_TITLE_H = 26;
+    const MAP_PAD = { left: 0, top: 0, right: 0, bottom: 0 };
     let mapsLoadStarted = false;
     const mapRuntime = [];
 
-    function measureMapWidth(box) {
-        const card = (box && box.closest(".chart-card.full-width-card")) || box;
-        if (!card) return 720;
-        const rect = card.getBoundingClientRect();
-        return Math.max(400, Math.round(rect.width - 24));
-    }
-
-    function applyChartContainerSize(el, height) {
-        if (!el || !height) return;
-        el.style.width = "100%";
-        el.style.height = height + "px";
-        el.style.minHeight = "0";
-        el.style.flex = "0 0 auto";
+    function getMapHeight(containerWidth) {
+        const w = Math.max(containerWidth || 320, 120);
+        const plotW = w - MAP_PAD.left - MAP_PAD.right;
+        const box = getMapFilter();
+        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const plotH = plotW * (latSpan / lonSpanRad);
+        const minH = isMapWideLayout() ? 110 : 200;
+        return Math.max(minH, Math.round(plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom));
     }
 
     function mercatorY(latDeg) {
@@ -621,239 +447,88 @@
         return Math.log(Math.tan(Math.PI / 4 + r / 2));
     }
 
-    function getMapGeoBounds() {
-        return {
-            lon0: MAP_FILTER.lon0,
-            lon1: MAP_FILTER.lon1,
-            lat0: MAP_FILTER.lat0,
-            lat1: MAP_FILTER.lat1
-        };
-    }
-
-    function getMapPlotHeight(width) {
-        const w = Math.max(Math.round(width || 400), 200);
-        const box = getMapGeoBounds();
+    function buildMapProjection(containerWidth, containerHeight) {
+        const w = Math.max(containerWidth, 120);
+        const h = containerHeight || getMapHeight(w);
+        const box = getMapFilter();
+        const plotW = w - MAP_PAD.left - MAP_PAD.right;
+        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
         const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
         const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const h = Math.round(w * (latSpan / lonSpanRad));
-        return Math.max(200, Math.min(640, h));
+        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
+        return {
+            type: "mercator",
+            center: [
+                (box.lon0 + box.lon1) / 2,
+                (box.lat0 + box.lat1) / 2
+            ],
+            scale,
+            translate: [
+                MAP_PAD.left + plotW / 2,
+                MAP_TITLE_H + MAP_PAD.top + plotH / 2
+            ]
+        };
     }
-
     const mapCharts = [
         ["#chart5", "vega/chart5_map_2020.json?v=" + mapCacheBust, "map-status-5", "Jan 2020"],
         ["#chart6", "vega/chart6_map_2023.json?v=" + mapCacheBust, "map-status-6", "Jan 2023"],
         ["#chart7", "vega/chart7_map_2026.json?v=" + mapCacheBust, "map-status-7", "Jan 2026"]
     ];
 
-    function patchMapSpec(spec, width) {
-        const w = Math.max(Math.round(width), 400);
-        const h = getMapPlotHeight(w);
-        const box = getMapGeoBounds();
-        const hexBox = getMapGeoBounds();
-        const centerLon = (box.lon0 + box.lon1) / 2;
-        const centerLat = (box.lat0 + box.lat1) / 2;
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const latRad = (centerLat * Math.PI) / 180;
-        const scale = Math.round((w * 0.92) / lonSpanRad * Math.cos(latRad));
-        spec.title = null;
+    function patchMapSpec(spec, width, height) {
+        const w = Math.max(width, 120);
+        const h = height || getMapHeight(w);
         spec.width = w;
         spec.height = h;
-        spec.padding = 0;
-        spec.spacing = 0;
-        spec.projection = {
-            type: "mercator",
-            center: [centerLon, centerLat],
-            scale: Math.max(900, Math.min(14000, scale))
-        };
-        const hexSize = Math.max(18, Math.min(56, Math.round(w * 0.038)));
-        const regionFilter =
-            "datum.properties.ADM0_A3 == 'MYS' || datum.properties.ADM0_A3 == 'IDN' || " +
-            "datum.properties.ADM0_A3 == 'BRN'";
-        if (spec.layer && spec.layer[0]) {
-            if (MAP_REGION_GEO) {
-                spec.layer[0].data = { values: MAP_REGION_GEO };
-            } else {
-                spec.layer[0].data = {
-                    url: "data/geo/basemap_view.json?v=" + mapCacheBust,
-                    format: { type: "geojson" }
-                };
-                spec.layer[0].transform = [{ filter: regionFilter }];
+        spec.projection = buildMapProjection(w, h);
+        const box = getMapFilter();
+        const plotW = w - MAP_PAD.left - MAP_PAD.right;
+        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
+        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
+        const hexSize = Math.max(22, Math.min(65, Math.round(scale * 0.0048)));
+        if (spec.layer && spec.layer[1] && spec.layer[1].encoding) {
+            spec.layer[1].encoding.size = { value: hexSize };
+            if (spec.layer[1].encoding.color) {
+                spec.layer[1].encoding.color.legend = null;
             }
-            spec.layer[0].mark = {
-                type: "geoshape",
-                fill: "#e8eef5",
-                stroke: "#64748b",
-                strokeWidth: 0.85
-            };
         }
-        if (spec.layer && spec.layer[1]) {
-            if (spec.layer[1].data && spec.layer[1].data.url) {
-                spec.layer[1].data.url =
-                    spec.layer[1].data.url.split("?")[0] + "?v=" + mapCacheBust;
-            }
-            spec.layer[1].transform = [
-                { calculate: "datum.properties.rate_mean", as: "rate_mean" },
-                { calculate: "datum.geometry.coordinates[0]", as: "lon" },
-                { calculate: "datum.geometry.coordinates[1]", as: "lat" },
-                {
-                    filter:
-                        "datum.lon >= " + hexBox.lon0 + " && datum.lon <= " + hexBox.lon1 +
-                        " && datum.lat >= " + hexBox.lat0 + " && datum.lat <= " + hexBox.lat1
-                }
-            ];
-            if (spec.layer[1].encoding) {
-                spec.layer[1].encoding.size = { value: hexSize };
-                spec.layer[1].encoding.longitude = { field: "lon", type: "quantitative", scale: null };
-                spec.layer[1].encoding.latitude = { field: "lat", type: "quantitative", scale: null };
-                if (spec.layer[1].encoding.color) {
-                    spec.layer[1].encoding.color.legend = null;
-                }
-            }
+        if (spec.padding) {
+            spec.padding = { left: 0, top: 0, right: 0, bottom: 0 };
+        }
+        if (spec.title) {
+            spec.title.fontSize = 18;
+            spec.title.fontWeight = 600;
+            spec.title.offset = 0;
+            spec.title.anchor = "start";
         }
         if (!spec.config) spec.config = {};
-        spec.config.view = { stroke: null, fill: "#ffffff", clip: true };
+        spec.config.title = { offset: 0, subtitlePadding: 0, orient: "top" };
+        if (!spec.config.view) spec.config.view = {};
+        spec.config.view.fill = "#ffffff";
+        spec.config.view.stroke = null;
         spec.config.background = "#ffffff";
         return spec;
     }
 
     const chartRuntime = [];
-    const CHART_PLOT_FALLBACK = 280;
-    const SECTION1_CARD_HEIGHT = 560;
 
-    function isSection1GridCard(card) {
-        if (!card) return false;
-        const grid = card.closest(".grid-2");
-        return !!(grid && grid.querySelector(".policy-events-panel"));
-    }
-
-    function isDataChartCard(card) {
-        return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
-    }
-
-    function isAutoHeightChartCard(card) {
-        return isDataChartCard(card);
-    }
-
-    function getIntrinsicSpecHeight(spec) {
-        if (!spec || typeof spec !== "object") return CHART_PLOT_FALLBACK;
-        if (Array.isArray(spec.vconcat)) {
-            const total = spec.vconcat.reduce(
-                (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
-                0
-            );
-            return total || CHART_PLOT_FALLBACK;
-        }
-        return typeof spec.height === "number" ? spec.height : CHART_PLOT_FALLBACK;
-    }
-
-    function getAutoPlotHeight(el, spec) {
-        const cw = Math.max(el && el.clientWidth ? el.clientWidth : 340, 200);
-        const baseW = spec && typeof spec.width === "number" ? spec.width : 340;
-        const intrinsicH = getIntrinsicSpecHeight(spec);
-        return Math.max(intrinsicH, Math.round(intrinsicH * cw / baseW));
-    }
-
-    function isSection1FixedLayout() {
-        return window.matchMedia("(min-width: 1001px)").matches;
-    }
-
-    function getSection1PlotHeight(el, spec) {
-        const card = el && el.closest(".chart-card");
-        if (
-            !isSection1FixedLayout() ||
-            !card ||
-            !isAutoHeightChartCard(card) ||
-            !isSection1GridCard(card)
-        ) {
-            return getAutoPlotHeight(el, spec);
-        }
-        return Math.max(120, SECTION1_CARD_HEIGHT - getChartChromeHeight(card));
-    }
-
-    function getChartChromeHeight(card) {
-        let chrome = 28;
-        const num = card.querySelector(".chart-number");
-        const title = card.querySelector("h3");
-        const note = card.querySelector(".annotation");
-        if (num) chrome += num.offsetHeight + 10;
-        if (title) chrome += title.offsetHeight + 10;
-        if (note) chrome += note.offsetHeight + 10;
-        return chrome;
-    }
-
-    function getChartPlotHeight(el, spec) {
-        const card = el && el.closest(".chart-card");
-        if (!isDataChartCard(card)) {
-            const cw = Math.max(el.clientWidth, 200);
-            return Math.max(160, Math.round(cw * 280 / 340));
-        }
-        return getAutoPlotHeight(el, spec);
-    }
-
-    function patchResponsiveSpec(spec, el, lastGood) {
+    function patchResponsiveSpec(spec, el) {
         const cw = Math.max(el.clientWidth, 200);
         const baseW = typeof spec.width === "number" ? spec.width : 340;
-        const baseH = getIntrinsicSpecHeight(spec);
-        const card = el && el.closest(".chart-card");
+        const baseH = typeof spec.height === "number" ? spec.height : 280;
         spec.width = cw;
-        if (isAutoHeightChartCard(card)) {
-            const ch = getSection1PlotHeight(el, spec);
-            if (Array.isArray(spec.vconcat)) {
-                const parts = spec.vconcat;
-                const totalPartH = parts.reduce(
-                    (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
-                    0
-                ) || baseH;
-                let used = 0;
-                parts.forEach((child, i) => {
-                    if (!child || typeof child !== "object") return;
-                    child.width = cw;
-                    const partBase = typeof child.height === "number" ? child.height : 0;
-                    const ratio = partBase / totalPartH;
-                    const partH =
-                        i === parts.length - 1
-                            ? Math.max(60, ch - used)
-                            : Math.max(60, Math.round(ch * ratio));
-                    child.height = partH;
-                    used += partH;
-                });
-                spec.height = used;
-            } else {
-                spec.height = ch;
-            }
-            if (Array.isArray(spec.hconcat)) {
-                const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
-                spec.hconcat.forEach((child) => {
-                    if (child && typeof child === "object") {
-                        child.width = eachW;
-                    }
-                });
-            }
-            return spec;
-        }
-        const ch = getChartPlotHeight(el, spec);
+        spec.height = Math.max(160, Math.round(cw * baseH / baseW));
         if (Array.isArray(spec.vconcat)) {
-            const parts = spec.vconcat;
-            const totalPartH = parts.reduce(
-                (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
-                0
-            ) || baseH;
-            let used = 0;
-            parts.forEach((child, i) => {
-                if (!child || typeof child !== "object") return;
-                child.width = cw;
-                const partBase = typeof child.height === "number" ? child.height : 0;
-                const ratio = partBase / totalPartH;
-                const partH =
-                    i === parts.length - 1
-                        ? Math.max(60, ch - used)
-                        : Math.max(60, Math.round(ch * ratio));
-                child.height = partH;
-                used += partH;
+            spec.vconcat.forEach((child) => {
+                if (child && typeof child === "object") {
+                    child.width = cw;
+                    if (typeof child.height === "number") {
+                        child.height = Math.max(80, Math.round((cw / baseW) * child.height));
+                    }
+                }
             });
-            spec.height = used;
-        } else {
-            spec.height = ch;
         }
         if (Array.isArray(spec.hconcat)) {
             const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
@@ -863,27 +538,19 @@
                 }
             });
         }
+        spec.autosize = { type: "fit", contains: "padding" };
         return spec;
     }
 
-    function waitForChartSize(el) {
+    function waitForChartWidth(el) {
         return new Promise((resolve) => {
             if (!el) {
                 resolve();
                 return;
             }
             let attempts = 0;
-            let lastW = 0;
-            let stable = 0;
             const check = () => {
-                const w = Math.round(el.clientWidth);
-                if (w >= 80 && w === lastW) {
-                    stable += 1;
-                } else {
-                    stable = 0;
-                    lastW = w;
-                }
-                if (stable >= 1 || attempts++ > 80) {
+                if (el.clientWidth >= 80 || attempts++ > 120) {
                     resolve();
                     return;
                 }
@@ -893,76 +560,29 @@
         });
     }
 
-    function resizeChartEntry(entry) {
-        const el = document.querySelector(entry.selector);
-        if (!el) return Promise.resolve();
-        return waitForChartSize(el).then(() => {
-            return fetch(entry.specUrl).then((r) => {
-                if (!r.ok) throw new Error("Chart spec not found: " + entry.specUrl);
-                return r.json();
-            }).then((spec) => {
-                normalizeSpecDataUrls(spec);
-                patchResponsiveSpec(spec, el, entry);
-                applyChartContainerSize(el, spec.height);
-                entry.lastPlotH = spec.height;
-                entry.lastPlotW = spec.width;
-                if (entry.view && typeof entry.view.width === "function") {
-                    return entry.view.width(spec.width).height(spec.height).runAsync().then(() => {
-                        applyChartContainerSize(el, spec.height);
-                    });
-                }
-                return vegaEmbed(entry.selector, spec, svgOpts).then((result) => {
-                    if (result && result.view) {
-                        entry.view = result.view;
-                        applyChartContainerSize(el, spec.height);
-                    }
-                    return result;
-                });
-            });
-        }).catch((err) => {
-            console.error("Failed to resize " + entry.selector + ":", err);
-        });
-    }
-
     function embedResponsiveChart(selector, specUrl) {
         const el = document.querySelector(selector);
         if (!el) return Promise.resolve();
-        return waitForChartSize(el).then(() => {
+        return waitForChartWidth(el).then(() => {
             const target = document.querySelector(selector);
             return fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Chart spec not found: " + specUrl);
                 return r.json();
             }).then((spec) => {
-                normalizeSpecDataUrls(spec);
-                const entry = chartRuntime.find((c) => c.selector === selector) || { selector, specUrl };
-                patchResponsiveSpec(spec, target, entry);
-                applyChartContainerSize(target, spec.height);
-                const plotW = spec.width;
-                const plotH = spec.height;
-                return vegaEmbed(selector, spec, svgOpts).then((result) => {
-                    if (result && result.view) {
-                        const stored = chartRuntime.find((c) => c.selector === selector);
-                        if (stored) {
-                            stored.view = result.view;
-                            stored.specUrl = specUrl;
-                            stored.lastPlotH = plotH;
-                            stored.lastPlotW = plotW;
-                        } else {
-                            chartRuntime.push({
-                                selector,
-                                specUrl,
-                                view: result.view,
-                                lastPlotH: plotH,
-                                lastPlotW: plotW
-                            });
-                        }
-                        applyChartContainerSize(target, plotH);
-                        return result.view.width(plotW).height(plotH).runAsync().then(() => {
-                            applyChartContainerSize(target, plotH);
-                        });
+                patchResponsiveSpec(spec, target);
+                return vegaEmbed(selector, spec, svgOpts);
+            }).then((result) => {
+                if (result && result.view) {
+                    result.view.resize().run();
+                    const entry = chartRuntime.find((c) => c.selector === selector);
+                    if (entry) {
+                        entry.view = result.view;
+                        entry.specUrl = specUrl;
+                    } else {
+                        chartRuntime.push({ selector, specUrl, view: result.view });
                     }
-                    return result;
-                });
+                }
+                return result;
             }).catch((err) => {
                 console.error("Failed to load " + specUrl + " into " + selector + ":", err);
             });
@@ -970,90 +590,137 @@
     }
 
     function redrawCharts() {
-        if (!chartRuntime.length) return;
-        return Promise.all(chartRuntime.map((entry) => resizeChartEntry(entry)));
+        chartRuntime.forEach(({ selector, specUrl }) => embedResponsiveChart(selector, specUrl));
     }
 
-    function scheduleChartRelayout() {
+    lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
+
+    let chartResizeTimer;
+    window.addEventListener("resize", () => {
         clearTimeout(chartResizeTimer);
-        chartResizeTimer = setTimeout(() => {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    redrawCharts();
-                });
-            });
-        }, 280);
-    }
+        chartResizeTimer = setTimeout(redrawCharts, 200);
+    });
 
     function setMapStatus(id, message) {
         const el = document.getElementById(id);
         if (el) el.textContent = message;
     }
 
-    function embedMap(selector, specUrl, statusId, yearLabel, step, total) {
-        setMapStatus(statusId, "Loading " + yearLabel + " (" + step + "/" + total + ")…");
-        const el = document.querySelector(selector);
-        const box = el && el.closest(".map-box");
-        const w = measureMapWidth(box);
-        return fetch(specUrl)
-            .then((r) => {
-                if (!r.ok) throw new Error("Map spec not found: " + specUrl);
-                return r.json();
-            })
-            .then((spec) => {
-                normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w);
-                const mapH = spec.height;
-                applyChartContainerSize(el, mapH);
-                return vegaEmbed(selector, spec, mapOpts).then((result) => {
-                    if (result && result.view) {
-                        mapRuntime.push({
-                            selector,
-                            specUrl,
-                            view: result.view,
-                            lastW: w,
-                            lastH: mapH
-                        });
-                    }
-                    setMapStatus(statusId, "");
-                    return result;
-                });
-            })
-            .catch((err) => {
-                console.error("Map embed error (" + yearLabel + "):", err);
-                setMapStatus(statusId, "Failed to load " + yearLabel + ".");
-            });
+    function waitForMapWidth(selector) {
+        return new Promise((resolve) => {
+            const el = document.querySelector(selector);
+            const box = el && el.closest(".map-box");
+            const measure = box || el;
+            if (!measure) {
+                resolve();
+                return;
+            }
+            let attempts = 0;
+            const check = () => {
+                if (measure.clientWidth >= 80 || attempts++ > 120) {
+                    resolve();
+                    return;
+                }
+                requestAnimationFrame(check);
+            };
+            requestAnimationFrame(check);
+        });
     }
 
-    function resizeMapEntry(entry) {
+    function embedMap(selector, specUrl, statusId, yearLabel, step, total) {
+        setMapStatus(statusId, "Loading " + yearLabel + " (" + step + "/" + total + ")…");
+        return waitForMapWidth(selector).then(() => {
+            const el = document.querySelector(selector);
+            const w = el ? el.clientWidth : 400;
+            const h = getMapHeight(w);
+            return fetch(specUrl).then((r) => {
+                if (!r.ok) throw new Error("Map spec not found: " + specUrl);
+                return r.json();
+            }).then((spec) => {
+                patchMapSpec(spec, w, h);
+                return vegaEmbed(selector, spec, mapOpts);
+            }).then((result) => {
+                if (result && result.view) {
+                    result.view.resize().run();
+                    mapRuntime.push({
+                        selector,
+                        specUrl,
+                        view: result.view,
+                        lastW: w,
+                        lastH: h,
+                        lastStacked: mapLayoutStacked
+                    });
+                }
+                setMapStatus(statusId, "");
+                return result;
+            }).catch((err) => {
+                console.error(err);
+                setMapStatus(statusId, "Failed to load " + yearLabel + ".");
+            });
+        });
+    }
+
+    function updateMapLayout(callback) {
+        const timeline = document.querySelector(".map-timeline");
+        if (!timeline) {
+            if (callback) callback(false);
+            return false;
+        }
+        const w = timeline.clientWidth;
+        timeline.classList.remove("map-timeline--stacked");
+        const overflows = timeline.scrollWidth > timeline.clientWidth + 1;
+        let shouldStack;
+        if (mapLayoutStacked === null) {
+            shouldStack = w < MAP_MIN_HORIZONTAL || overflows;
+        } else if (mapLayoutStacked === true) {
+            shouldStack = w < MAP_MIN_HORIZONTAL + MAP_STACK_HYST || overflows;
+        } else {
+            shouldStack = w < MAP_MIN_HORIZONTAL - MAP_STACK_HYST || overflows;
+        }
+        const layoutChanged = shouldStack !== mapLayoutStacked;
+        mapLayoutStacked = shouldStack;
+        timeline.classList.toggle("map-timeline--stacked", shouldStack);
+        if (callback) {
+            requestAnimationFrame(() => callback(layoutChanged));
+        }
+        return layoutChanged;
+    }
+
+    function resizeMapEntry(entry, force) {
         const el = document.querySelector(entry.selector);
-        const box = el && el.closest(".map-box");
         if (!el || !entry.view) return Promise.resolve();
-        const w = measureMapWidth(box);
-        if (entry.lastW != null && Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD) {
+        const w = el.clientWidth;
+        const h = getMapHeight(w);
+        if (
+            !force &&
+            entry.lastW != null &&
+            Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD &&
+            Math.abs(entry.lastH - h) < MAP_SIZE_THRESHOLD &&
+            entry.lastStacked === mapLayoutStacked
+        ) {
             return Promise.resolve();
         }
         entry.lastW = w;
+        entry.lastH = h;
+        entry.lastStacked = mapLayoutStacked;
         return fetch(entry.specUrl)
             .then((r) => r.json())
             .then((spec) => {
-                normalizeSpecDataUrls(spec);
-                patchMapSpec(spec, w);
-                entry.lastH = spec.height;
-                applyChartContainerSize(el, spec.height);
+                patchMapSpec(spec, w, h);
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
                 if (result && result.view) {
                     entry.view = result.view;
+                    result.view.resize().run();
                 }
             });
     }
 
-    function redrawMaps() {
-        if (!mapRuntime.length || mapResizePending) return;
+    function redrawMaps(force) {
+        if (!mapsLoadStarted || !mapRuntime.length || mapResizePending) return;
         mapResizePending = true;
-        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry))).finally(() => {
+        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry, force))).finally(() => {
             mapResizePending = false;
         });
     }
@@ -1065,40 +732,34 @@
         mapCharts.forEach(([, , statusId], i) => {
             if (i > 0) setMapStatus(statusId, "Waiting…");
         });
-        return loadMapBbox().then(() =>
-            mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
-                return chain.then(() =>
-                    embedMap(selector, spec, statusId, yearLabel, index + 1, total)
-                );
-            }, Promise.resolve())
-        );
-    }
-
-    let mapResizeTimer;
-    window.addEventListener("resize", () => {
-        clearTimeout(mapResizeTimer);
-        mapResizeTimer = setTimeout(redrawMaps, 400);
-    });
-
-    let chartResizeTimer;
-
-    function initDashboard() {
-        lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
-        loadMapsSequentially().catch((err) => console.error("Map load failed:", err));
-        window.addEventListener("resize", scheduleChartRelayout);
-        document.addEventListener("fullscreenchange", scheduleChartRelayout);
-        document.addEventListener("webkitfullscreenchange", scheduleChartRelayout);
-        document.querySelectorAll(".dashboard-section .grid-2").forEach((grid) => {
-            if (typeof ResizeObserver === "undefined") return;
-            const ro = new ResizeObserver(() => scheduleChartRelayout());
-            ro.observe(grid);
+        return loadMapBbox().then(() => mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
+            return chain.then(() => embedMap(selector, spec, statusId, yearLabel, index + 1, total));
+        }, Promise.resolve())).then(() => {
+            updateMapLayout(() => redrawMaps(true));
         });
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initDashboard);
+    let mapResizeTimer;
+    function onMapViewportChange() {
+        updateMapLayout((layoutChanged) => {
+            redrawMaps(layoutChanged);
+        });
+    }
+    window.addEventListener("resize", () => {
+        clearTimeout(mapResizeTimer);
+        mapResizeTimer = setTimeout(onMapViewportChange, 350);
+    });
+
+    const mapSection = document.querySelector(".map-timeline");
+    if (mapSection && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            obs.disconnect();
+            loadMapsSequentially();
+        }, { rootMargin: "120px" });
+        observer.observe(mapSection);
     } else {
-        initDashboard();
+        loadMapsSequentially();
     }
 
     </script>
