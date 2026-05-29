@@ -30,18 +30,16 @@ Upload these from your local project folder
 
 Also push the latest **`index.html`** and **`style.css`** from your PC (they contain Section 3 layout and fixes).
 
-### Map tile data (Section 2 — gapless grid cells)
+### Map data (Section 2 — hexbin points, one file per year)
 
-Upload these (~0.6–0.7 MB each; aggregated grid, not raw 64k tiles):
+Upload (~0.08–0.12 MB each):
 
-- `data/geo/gps_mobile_tiles_2020.json`
-- `data/geo/gps_mobile_tiles_2023.json`
-- `data/geo/gps_mobile_tiles_2026.json`
+- `data/geo/gps_mobile_hexbin_2020.json`
+- `data/geo/gps_mobile_hexbin_2023.json`
+- `data/geo/gps_mobile_hexbin_2026.json`
 
-Regenerate locally: `node scripts/build_map_tiles_geojson.mjs`  
-Also push `index.html` and `vega/chart5_map_2020.json` (and chart6/7 map specs).
-
-Also update map specs: `vega/chart5_map_2020.json`, `chart6_map_2023.json`, `chart7_map_2026.json`
+Regenerate: `node scripts/build_map_tiles_geojson.mjs`  
+Also push `index.html`, `vega/chart5_map_2020.json`, `chart6_map_2023.json`, `chart7_map_2026.json`
 
 ### Data already on GitHub (check only)
 
