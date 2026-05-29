@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 420,
+  "padding": { "top": 4, "bottom": 0, "left": 0, "right": 0 },
+  "data": { "url": "data/csv/bqoes_2024_ipa.csv" },
+  "transform": [
+    {
+      "calculate": "datum.broadband_type == 'FBB' ? 'Fixed (FBB)' : 'Mobile (MBB)'",
+      "as": "broadband_label"
+    },
+    {
+      "calculate": "datum.scope == 'Video streaming' ? 'Streaming' : datum.scope == 'Web browsing' ? 'Browsing' : datum.scope == 'Online gaming' ? 'Gaming' : datum.scope == 'Online voice calls' ? 'Voice calls' : 'Video calls'",
+      "as": "activity"
+    },
+    {
+      "calculate": "datum.quadrant == 'Keep up good work' ? 'Keep up' : datum.quadrant == 'Concentrate here' ? 'Focus here' : datum.quadrant == 'Low priority' ? 'Low priority' : 'Overkill'",
+      "as": "priority"
+    },
+    {
+      "fold": ["performance", "importance"],
+      "as": ["metric_key", "score"]
+    },
+    {
+      "calculate": "datum.metric_key == 'performance' ? 'Performance' : 'Importance'",
+      "as": "metric"
+    }
+  ],
+  "facet": {
+    "field": "broadband_label",
+    "type": "nominal",
+    "columns": 2,
+    "sort": ["Fixed (FBB)", "Mobile (MBB)"],
+    "title": null,
+    "header": {
+      "labelFontSize": 11,
+      "labelFontWeight": 700,
+      "labelColor": "#0f172a",
+      "labelPadding": 4
+    }
+  },
+  "spec": {
+    "width": 190,
+    "height": 292,
+    "padding": { "top": 0, "bottom": 0, "left": 0, "right": 0 },
+    "layer": [
+      {
+        "mark": { "type": "bar", "cornerRadiusEnd": 2 },
+        "encoding": {
+          "y": {
+            "field": "activity",
+            "type": "nominal",
+            "title": null,
+            "sort": ["Streaming", "Browsing", "Gaming", "Voice calls", "Video calls"],
+            "scale": { "paddingInner": 0.32, "paddingOuter": 0.06 },
+            "axis": { "labelFontSize": 10, "labelPadding": 4, "ticks": false, "domain": false }
+          },
+          "x": {
+            "field": "score",
+            "type": "quantitative",
+            "title": "Score (1–5)",
+            "scale": { "domain": [3.5, 4.55], "nice": false },
+            "axis": { "labelFontSize": 9, "titleFontSize": 10, "titlePadding": 4, "tickCount": 4 }
+          },
+          "color": {
+            "field": "metric",
+            "type": "nominal",
+            "scale": {
+              "domain": ["Performance", "Importance"],
+              "range": ["#2563eb", "#0d9488"]
+            },
+            "legend": {
+              "orient": "bottom",
+              "direction": "horizontal",
+              "title": null,
+              "labelFontSize": 9,
+              "symbolSize": 72,
+              "padding": 0,
+              "offset": 0
+            }
+          },
+          "yOffset": { "field": "metric" },
+          "tooltip": [
+            { "field": "scope", "title": "Activity" },
+            { "field": "metric" },
+            { "field": "score", "title": "Score", "format": ".2f" },
+            { "field": "quadrant", "title": "IPA priority" }
+          ]
+        }
+      },
+      {
+        "transform": [{ "filter": "datum.metric_key == 'performance'" }],
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "baseline": "middle",
+          "fontSize": 8,
+          "fontWeight": 700,
+          "dx": 4
+        },
+        "encoding": {
+          "y": {
+            "field": "activity",
+            "type": "nominal",
+            "sort": ["Streaming", "Browsing", "Gaming", "Voice calls", "Video calls"]
+          },
+          "x": { "value": 4.52 },
+          "text": { "field": "priority" },
+          "color": {
+            "field": "quadrant",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Keep up good work",
+                "Concentrate here",
+                "Low priority",
+                "Possible overkill"
+              ],
+              "range": ["#16a34a", "#dc2626", "#64748b", "#7c3aed"]
+            },
+            "legend": null
+          }
+        }
+      }
+    ]
+  },
+  "resolve": { "legend": { "color": "shared" } },
+  "config": {
+    "view": { "stroke": null },
+    "facet": { "spacing": 12 },
+    "axis": { "grid": true, "gridColor": "#e2e8f0", "gridOpacity": 0.8 }
+  }
+}

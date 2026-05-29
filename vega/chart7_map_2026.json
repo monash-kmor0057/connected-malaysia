@@ -7,8 +7,8 @@
   "layer": [
     {
       "data": {
-        "url": "../data/geo/basemap_view.json",
-        "format": { "type": "json", "property": "features" }
+        "url": "data/geo/basemap_view.json",
+        "format": { "type": "geojson" }
       },
       "mark": {
         "type": "geoshape",
@@ -19,7 +19,7 @@
     },
     {
       "data": {
-        "url": "../data/geo/gps_mobile_hexbin_2026.json",
+        "url": "data/geo/gps_mobile_hexbin_2026.json",
         "format": { "type": "json", "property": "features" }
       },
       "transform": [
