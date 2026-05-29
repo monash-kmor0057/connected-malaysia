@@ -12,7 +12,7 @@
         Connected Malaysia
     </title>
 
-    <link rel="stylesheet" href="style.css?v=20260520-year-range-line">
+    <link rel="stylesheet" href="style.css?v=20260526-card-543">
 
 </head>
 
@@ -51,8 +51,14 @@
 
         </div>
 
+        <p class="section-lead">
+            From 2000 to 2024, Charts 1–5 track mobile and fixed subscriptions, penetration per 100 people, and gender gaps in internet use.
+            Solid lines show annual values; dashed lines show five-year moving averages where applicable.
+            A policy timeline notes HSBB, 4G, JENDELA, and 5G milestones that shaped rollout and uptake.
+        </p>
 
-        <div class="grid-2">
+
+        <div class="grid-2 section1-grid">
 
             <!-- CHART 1 -->
 
@@ -65,6 +71,11 @@
                 </h3>
 
                 <div id="chart1"></div>
+
+                <ul class="series-legend" aria-label="Chart 1 legend">
+                    <li><span class="series-legend__swatch series-legend__swatch--solid" style="--series-color:#2563eb"></span>Annual subscriptions (solid)</li>
+                    <li><span class="series-legend__swatch series-legend__swatch--dashed" style="--series-color:#1d4ed8"></span>5-year moving average (dashed)</li>
+                </ul>
 
                 <p class="annotation">
                     Malaysia's mobile subscriptions rose quickly and stayed high.
@@ -86,6 +97,11 @@
 
                 <div id="chart2"></div>
 
+                <ul class="series-legend" aria-label="Chart 2 legend">
+                    <li><span class="series-legend__swatch series-legend__swatch--solid" style="--series-color:#16a34a"></span>Annual subscriptions (solid)</li>
+                    <li><span class="series-legend__swatch series-legend__swatch--dashed" style="--series-color:#15803d"></span>5-year moving average (dashed)</li>
+                </ul>
+
                 <p class="annotation">
                     This is the fixed-broadband version of Chart 1, using the same visual style.
                 </p>
@@ -101,13 +117,13 @@
                 <div class="chart-number">3</div>
 
                 <h3>
-                    Malaysia mobile penetration (per 100 people)
+                    Malaysia internet use by gender and gap trend
                 </h3>
 
-                <div id="chart3"></div>
+                <div id="chart15"></div>
 
                 <p class="annotation">
-                    Malaysia passed 100 mobile subscriptions per 100 people and remains very saturated.
+                    Top lines show female and male usage, while the bottom bars show how the gap changes each year.
                 </p>
 
             </div>
@@ -121,31 +137,33 @@
                 <div class="chart-number">4</div>
 
                 <h3>
-                    Malaysia fixed broadband penetration (per 100 people)
+                    Malaysia mobile penetration (per 100 people)
                 </h3>
 
-                <div id="chart4"></div>
+                <div id="chart3"></div>
 
                 <p class="annotation">
-                    This is the fixed-broadband version of Chart 3, using the same visual style.
+                    Malaysia passed 100 mobile subscriptions per 100 people and remains very saturated.
                 </p>
 
             </div>
 
-            <!-- CHART 15 + policy events -->
+
+
+            <!-- CHART 5 -->
 
             <div class="chart-card">
 
                 <div class="chart-number">5</div>
 
                 <h3>
-                    Malaysia internet use by gender and gap trend
+                    Malaysia fixed broadband penetration (per 100 people)
                 </h3>
 
-                <div id="chart15"></div>
+                <div id="chart4"></div>
 
                 <p class="annotation">
-                    Top lines show female and male usage, while the bottom bars show how the gap changes each year.
+                    This is the fixed-broadband version of Chart 4, using the same visual style.
                 </p>
 
             </div>
@@ -257,6 +275,12 @@
 
         </div>
 
+        <p class="section-lead">
+            Three maps show mean mobile download speed by state for January 2020, 2023, and 2026.
+            All three use the same kbps colour scale so years are directly comparable.
+            Compare peninsula, East Malaysia, and urban vs. rural patterns as 4G expanded and 5G began.
+        </p>
+
 
         <div class="grid-2">
 
@@ -272,31 +296,66 @@
                 </h3>
 
 
-                                <div class="map-timeline">
+                <div class="map-timeline map-timeline--stacked">
                     <div class="map-row">
                         <div class="map-box">
                             <p class="map-status" id="map-status-5">Waiting to load…</p>
-                            <div id="chart5"></div>
+                            <p class="map-year">January 2020</p>
+                            <div class="map-box__figure">
+                                <div class="map-box__plot">
+                                    <div id="chart5"></div>
+                                </div>
+                                <div class="map-legend-inline" aria-label="Download speed scale for January 2020">
+                                    <p class="map-legend-title">Download (kbps)</p>
+                                    <div class="map-legend-scale">
+                                        <div class="map-legend-ticks">
+                                            <span>3k</span>
+                                            <span>130k</span>
+                                        </div>
+                                        <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-6">Waiting to load…</p>
-                            <div id="chart6"></div>
+                            <p class="map-year">January 2023</p>
+                            <div class="map-box__figure">
+                                <div class="map-box__plot">
+                                    <div id="chart6"></div>
+                                </div>
+                                <div class="map-legend-inline" aria-label="Download speed scale for January 2023">
+                                    <p class="map-legend-title">Download (kbps)</p>
+                                    <div class="map-legend-scale">
+                                        <div class="map-legend-ticks">
+                                            <span>3k</span>
+                                            <span>130k</span>
+                                        </div>
+                                        <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="map-box">
                             <p class="map-status" id="map-status-7">Waiting to load…</p>
-                            <div id="chart7"></div>
+                            <p class="map-year">January 2026</p>
+                            <div class="map-box__figure">
+                                <div class="map-box__plot">
+                                    <div id="chart7"></div>
+                                </div>
+                                <div class="map-legend-inline" aria-label="Download speed scale for January 2026">
+                                    <p class="map-legend-title">Download (kbps)</p>
+                                    <div class="map-legend-scale">
+                                        <div class="map-legend-ticks">
+                                            <span>3k</span>
+                                            <span>130k</span>
+                                        </div>
+                                        <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <aside class="map-legend-aside" aria-label="Download speed scale">
-                        <p class="map-legend-title">Download (kbps)</p>
-                        <div class="map-legend-scale">
-                            <div class="map-legend-ticks">
-                                <span>130k</span>
-                                <span>3k</span>
-                            </div>
-                            <div class="map-legend-bar" role="img" aria-label="3,000 to 130,000 kbps"></div>
-                        </div>
-                    </aside>
                 </div>
 
                 <p class="annotation">
@@ -321,8 +380,104 @@
         <div class="section-title">
 
             <h2>
-                SECTION 3 | Digital Experience in Malaysia
+                SECTION 3 | Digital Experience in Malaysia (BQoES 2024)
             </h2>
+
+        </div>
+
+        <p class="section-lead">
+            Data come from MCMC’s Broadband Quality of Experience Study (BQoES), 2024 wave, for fixed (FBB) and mobile (MBB) subscribers.
+            The Customer Satisfaction Index (CSI) is a 1–5 score (higher is better) for streaming, browsing, gaming, and voice or video calls—each activity is scored on its own, not as one overall number.
+            Other charts cover importance–performance priorities, satisfaction gaps, top platforms, dissatisfaction reasons, and who participated.
+        </p>
+
+        <div class="grid-2 section3-grid">
+
+            <div class="chart-card">
+                <div class="chart-number">7</div>
+                <h3>Customer satisfaction across activities</h3>
+                <div id="chart8"></div>
+                <p class="annotation">
+                    Each line connects CSI scores across five online activities—compare fixed (FBB) and mobile (MBB) profiles at a glance.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">8</div>
+                <h3>Importance, satisfaction &amp; gap</h3>
+                <div id="chart9"></div>
+                <p class="annotation">
+                    Two heatmaps use the same green scale (3.4–4.5) for importance and satisfaction by activity and broadband type.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">9</div>
+                <h3>IPA priorities by activity</h3>
+                <div id="chart10"></div>
+                <p class="annotation">
+                    Blue and teal bars show performance and importance by activity; coloured labels on the right show IPA priority (green = keep up; red = focus here; grey = low priority; purple = overkill).
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">10</div>
+                <h3>Top platforms by activity</h3>
+                <div id="chart11" class="chart-stack chart-stack--platform">
+                    <section class="chart-stack__section chart-stack__section--lead">
+                        <div class="chart-stack__section-head">
+                            <h4 class="chart-stack__title">Video streaming</h4>
+                            <div class="chart-stack__legend chart-legend chart-legend--boxed" aria-hidden="true">
+                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--fbb"></span>Fixed (FBB)</span>
+                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--mbb"></span>Mobile (MBB)</span>
+                            </div>
+                        </div>
+                        <div id="chart11-streaming" class="chart-stack__plot"></div>
+                    </section>
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Online video calls</h4>
+                        <div id="chart11-calls" class="chart-stack__plot"></div>
+                    </section>
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Online gaming</h4>
+                        <div id="chart11-gaming" class="chart-stack__plot"></div>
+                    </section>
+                </div>
+                <p class="annotation">
+                    Top platforms for streaming and video calls, and top devices for gaming—grouped bars compare fixed and mobile broadband; each row only lists labels with data in that activity.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">11</div>
+                <h3>Why users are dissatisfied</h3>
+                <div id="chart12"></div>
+                <p class="annotation">
+                    Normalised stacked bars with percentage labels show the main complaint mix among dissatisfied users, by activity.
+                </p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-number">12</div>
+                <h3>Participation &amp; sample profile</h3>
+                <div id="chart13" class="chart-stack chart-stack--participation">
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Who uses each online activity?</h4>
+                        <div id="chart13-participation" class="chart-stack__plot"></div>
+                    </section>
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Age group in the 2024 sample</h4>
+                        <div id="chart13-age" class="chart-stack__plot"></div>
+                    </section>
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Ethnicity in the 2024 sample</h4>
+                        <div id="chart13-ethnicity" class="chart-stack__plot"></div>
+                    </section>
+                </div>
+                <p class="annotation">
+                    Three easy-to-read bar panels: activity participation, then age and ethnicity mix for fixed (blue) vs mobile (green) respondents.
+                </p>
+            </div>
 
         </div>
 
@@ -367,47 +522,210 @@
     <script>
 
     const svgOpts = { actions: false, renderer: "svg" };
-    const mapOpts = { actions: false, renderer: "canvas" };
+    const mapOpts = { actions: false, renderer: "svg" };
 
     const lightCharts = [
         ["#chart1", "vega/chart1_subscriptions.json"],
         ["#chart2", "vega/chart2_mobile_shift.json"],
+        ["#chart15", "vega/chart15_gender_story.json"],
         ["#chart3", "vega/chart3_penetration.json"],
-        ["#chart4", "vega/chart4_online_lifestyle.json"],
-        ["#chart15", "vega/chart15_gender_story.json"]
+        ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const mapCacheBust = "20260518-map-wide-fit";
-    let MAP_FILTER = { lon0: 99.35, lon1: 119.42, lat0: 0.8, lat1: 6.8 };
-    const MAP_LAT_TRIM_BASE = 0.1;
+    const section3CacheBust = "20260526-ch9-fullw";
+    const section3Charts = [
+        ["#chart8", "vega/chart8_csi_radar.json?v=" + section3CacheBust],
+        ["#chart9", "vega/chart9_sqg_heatmap.json?v=" + section3CacheBust],
+        ["#chart10", "vega/chart10_ipa_scatter.json?v=" + section3CacheBust],
+        ["#chart12", "vega/chart12_dissatisfaction_stack.json?v=" + section3CacheBust]
+    ];
+    const section3StackCharts = [
+        ["#chart11-streaming", "vega/chart11_streaming.json?v=" + section3CacheBust],
+        ["#chart11-calls", "vega/chart11_calls.json?v=" + section3CacheBust],
+        ["#chart11-gaming", "vega/chart11_gaming.json?v=" + section3CacheBust],
+        ["#chart13-participation", "vega/chart13_participation.json?v=" + section3CacheBust],
+        ["#chart13-age", "vega/chart13_age.json?v=" + section3CacheBust],
+        ["#chart13-ethnicity", "vega/chart13_ethnicity.json?v=" + section3CacheBust]
+    ];
+
+    const mapCacheBust = "20260520-malaysia-map-v14";
+    const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
+    const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
+    let MALAYSIA_GEO = null;
+    let MAP_REGION_GEO = null;
+    let MAP_FIT_GEO = null;
+
+    function normalizeSpecDataUrls(spec) {
+        if (!spec || typeof spec !== "object") return spec;
+        const fixUrl = (url) =>
+            typeof url === "string" && url.indexOf("../data/") === 0
+                ? url.slice(3)
+                : url;
+        if (spec.data && spec.data.url) {
+            spec.data.url = fixUrl(spec.data.url);
+        }
+        ["layer", "vconcat", "hconcat"].forEach((key) => {
+            if (Array.isArray(spec[key])) {
+                spec[key].forEach((child) => normalizeSpecDataUrls(child));
+            }
+        });
+        return spec;
+    }
+    let MAP_FILTER = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
+    const MAP_LAT_TRIM_BASE = 0;
     const MAP_LAT_TRIM_WIDE = 0.32;
-    const MAP_MIN_HORIZONTAL = 1180;
-    const MAP_STACK_HYST = 48;
     const MAP_SIZE_THRESHOLD = 10;
-    let mapLayoutStacked = null;
     let mapResizePending = false;
+
+    function makeMapFitBox(b) {
+        return {
+            type: "FeatureCollection",
+            features: [
+                {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [b.lon0, b.lat0],
+                                [b.lon1, b.lat0],
+                                [b.lon1, b.lat1],
+                                [b.lon0, b.lat1],
+                                [b.lon0, b.lat0]
+                            ]
+                        ]
+                    }
+                }
+            ]
+        };
+    }
+
+    function clipEdge(points, inside, intersect) {
+        const out = [];
+        if (!points.length) return out;
+        let prev = points[points.length - 1];
+        let prevIn = inside(prev);
+        for (let i = 0; i < points.length; i++) {
+            const cur = points[i];
+            const curIn = inside(cur);
+            if (curIn) {
+                if (!prevIn) out.push(intersect(prev, cur));
+                out.push(cur);
+            } else if (prevIn) {
+                out.push(intersect(prev, cur));
+            }
+            prev = cur;
+            prevIn = curIn;
+        }
+        return out;
+    }
+
+    function closeRing(ring) {
+        if (!ring.length) return ring;
+        const first = ring[0];
+        const last = ring[ring.length - 1];
+        if (first[0] === last[0] && first[1] === last[1]) return ring;
+        return ring.concat([[first[0], first[1]]]);
+    }
+
+    function clipRingToBbox(ring, b) {
+        let pts = ring.slice();
+        pts = clipEdge(pts, (p) => p[0] >= b.lon0, (a, c) => {
+            const t = (b.lon0 - a[0]) / (c[0] - a[0]);
+            return [b.lon0, a[1] + t * (c[1] - a[1])];
+        });
+        pts = clipEdge(pts, (p) => p[0] <= b.lon1, (a, c) => {
+            const t = (b.lon1 - a[0]) / (c[0] - a[0]);
+            return [b.lon1, a[1] + t * (c[1] - a[1])];
+        });
+        pts = clipEdge(pts, (p) => p[1] >= b.lat0, (a, c) => {
+            const t = (b.lat0 - a[1]) / (c[1] - a[1]);
+            return [a[0] + t * (c[0] - a[0]), b.lat0];
+        });
+        pts = clipEdge(pts, (p) => p[1] <= b.lat1, (a, c) => {
+            const t = (b.lat1 - a[1]) / (c[1] - a[1]);
+            return [a[0] + t * (c[0] - a[0]), b.lat1];
+        });
+        return pts.length >= 3 ? closeRing(pts) : [];
+    }
+
+    function clipPolygonCoords(coords, b) {
+        const rings = [];
+        for (let i = 0; i < coords.length; i++) {
+            const clipped = clipRingToBbox(coords[i], b);
+            if (clipped.length >= 4) rings.push(clipped);
+        }
+        return rings;
+    }
+
+    function clipFeatureToBbox(feature, b) {
+        if (!feature || !feature.geometry) return null;
+        const g = feature.geometry;
+        let geometry = null;
+        if (g.type === "Polygon") {
+            const coordinates = clipPolygonCoords(g.coordinates, b);
+            if (coordinates.length) geometry = { type: "Polygon", coordinates: coordinates };
+        } else if (g.type === "MultiPolygon") {
+            const coordinates = [];
+            for (let i = 0; i < g.coordinates.length; i++) {
+                const poly = clipPolygonCoords(g.coordinates[i], b);
+                if (poly.length) coordinates.push(poly);
+            }
+            if (coordinates.length) geometry = { type: "MultiPolygon", coordinates: coordinates };
+        } else {
+            return feature;
+        }
+        if (!geometry) return null;
+        return { type: "Feature", properties: feature.properties, geometry: geometry };
+    }
+
+    function clipBasemapToViewBbox(features) {
+        const clipped = [];
+        for (let i = 0; i < features.length; i++) {
+            const f = clipFeatureToBbox(features[i], MAP_VIEW_BBOX);
+            if (f) clipped.push(f);
+        }
+        return clipped;
+    }
+
+    function applyMapRegionGeo(features) {
+        if (!features || !features.length) return;
+        const clipped = clipBasemapToViewBbox(features);
+        if (!clipped.length) return;
+        MAP_REGION_GEO = { type: "FeatureCollection", features: clipped };
+        const myOnly = clipped.filter((f) => f.properties && f.properties.ADM0_A3 === "MYS");
+        MALAYSIA_GEO = myOnly.length
+            ? { type: "FeatureCollection", features: myOnly }
+            : MAP_REGION_GEO;
+        MAP_FILTER = { ...MAP_VIEW_BBOX };
+        MAP_FIT_GEO = makeMapFitBox(MAP_VIEW_BBOX);
+    }
 
     function loadMapBbox() {
         return fetch("data/geo/basemap_view.json?v=" + mapCacheBust)
             .then((r) => (r.ok ? r.json() : null))
-            .then((d) => {
-                if (d && d.bbox && d.bbox.length === 4) {
-                    MAP_FILTER = {
-                        lon0: d.bbox[0],
-                        lat0: d.bbox[1],
-                        lon1: d.bbox[2],
-                        lat1: d.bbox[3]
-                    };
+            .then((full) => {
+                if (!full || !Array.isArray(full.features)) return;
+                let region = full.features.filter(
+                    (f) => f.properties && MAP_REGION_A3.includes(f.properties.ADM0_A3)
+                );
+                if (!region.length) {
+                    region = full.features.filter(
+                        (f) =>
+                            f.properties &&
+                            (f.properties.ADM0_A3 === "MYS" ||
+                                f.properties.ADM0_A3 === "IDN" ||
+                                f.properties.ADM0_A3 === "BRN")
+                    );
                 }
+                applyMapRegionGeo(region);
             })
             .catch(() => {});
     }
 
     function isMapWideLayout() {
-        if (mapLayoutStacked === false) return true;
-        if (mapLayoutStacked === true) return false;
-        const timeline = document.querySelector(".map-timeline");
-        return timeline ? timeline.clientWidth >= MAP_MIN_HORIZONTAL : false;
+        return false;
     }
 
     function getMapFilter() {
@@ -426,20 +744,475 @@
         return f;
     }
 
-    const MAP_TITLE_H = 26;
-    const MAP_PAD = { left: 0, top: 0, right: 0, bottom: 0 };
     let mapsLoadStarted = false;
     const mapRuntime = [];
 
-    function getMapHeight(containerWidth) {
-        const w = Math.max(containerWidth || 320, 120);
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const box = getMapFilter();
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const plotH = plotW * (latSpan / lonSpanRad);
-        const minH = isMapWideLayout() ? 110 : 200;
-        return Math.max(minH, Math.round(plotH + MAP_TITLE_H + MAP_PAD.top + MAP_PAD.bottom));
+    const MAP_PLOT_WIDTH_RATIO = 1;
+
+    const MAP_LEGEND_COLUMN_W = 220;
+
+    function measureMapWidth(box) {
+        const card = (box && box.closest(".chart-card.full-width-card")) || box;
+        const mapBox = box || (card && card.querySelector(".map-box"));
+        const plot = mapBox && mapBox.querySelector(".map-box__plot");
+        const ref = plot || mapBox;
+        if (!ref) return 520;
+        const refW = ref.getBoundingClientRect().width;
+        if (refW > 80) {
+            return Math.max(280, Math.round(refW - 4));
+        }
+        if (!card) return 520;
+        const rect = card.getBoundingClientRect();
+        const rowW = Math.round((rect.width - 24) * MAP_PLOT_WIDTH_RATIO);
+        return Math.max(280, rowW - MAP_LEGEND_COLUMN_W - 14);
+    }
+
+    function getSection1ChartSlotHeight(el) {
+        const card = el && el.closest(".chart-card");
+        if (!card || !isSection1FixedLayout()) return null;
+        if (!isSection1GridCard(card) && !isSection3GridCard(card)) return null;
+        const layoutRoot = getSection3LayoutRoot(el);
+        const measureEl =
+            layoutRoot && layoutRoot !== el && layoutRoot.classList.contains("chart-stack")
+                ? layoutRoot
+                : el;
+        const chrome =
+            measureEl && (isSection1GridCard(card) || isSection3GridCard(card))
+                ? getMeasuredChromeHeight(card, measureEl)
+                : getChartChromeHeight(card);
+        let slot = Math.max(120, getSection1CardHeightPx() - chrome - 4);
+        if (isSection1Chart15El(el)) {
+            slot += SECTION1_CHART15_EXTRA_H;
+        }
+        return slot;
+    }
+
+    function getFacetLayoutCounts(spec) {
+        if (!spec || !spec.facet || !spec.spec) return { rows: 1, cols: 1 };
+        const f = spec.facet;
+        if (f.row) {
+            const sort = f.row.sort;
+            const rows = Array.isArray(sort) ? sort.length : 3;
+            return { rows, cols: typeof f.columns === "number" ? f.columns : 1 };
+        }
+        const sortLen = Array.isArray(f.sort) ? f.sort.length : null;
+        const cols = typeof f.columns === "number" ? f.columns : sortLen || 1;
+        const n = sortLen || cols;
+        if (cols > 1) {
+            return { rows: Math.max(1, Math.ceil(n / cols)), cols };
+        }
+        return { rows: Math.max(1, n), cols: 1 };
+    }
+
+    function isSection1Chart15El(el) {
+        return !!(el && el.id === "chart15");
+    }
+
+    function isSection3DataChartEl(el) {
+        const card = el && el.closest(".chart-card");
+        if (!card || !isSection3GridCard(card) || !isDataChartCard(card)) return false;
+        if (el.classList && el.classList.contains("chart-stack")) return true;
+        if (el.classList && el.classList.contains("chart-stack__plot")) return true;
+        return !!(el.id && /^chart\d/.test(el.id));
+    }
+
+    const STACK_PANEL_LAYOUT = {
+        chart11: {
+            panels: 3,
+            minPanelH: 66,
+            maxPanelH: 80,
+            gap: 5,
+            titleH: 14,
+            legendH: 32,
+            panelHeights: {
+                "chart11-streaming": 106,
+                "chart11-calls": 104,
+                "chart11-gaming": 118
+            }
+        },
+        chart13: { panels: 3, minPanelH: 48, gap: 8, titleH: 18, legendH: 0 }
+    };
+
+    function getSection3LayoutRoot(el) {
+        const stack = el && el.closest(".chart-stack");
+        if (stack && STACK_PANEL_LAYOUT[stack.id]) return stack;
+        return el;
+    }
+
+    function measureStackFixedChrome(container) {
+        const cfg = STACK_PANEL_LAYOUT[container.id];
+        const gap = cfg && cfg.gap != null ? cfg.gap : 8;
+        const sections = container.querySelectorAll(".chart-stack__section");
+        const titleCount = container.querySelectorAll(".chart-stack__title").length;
+        const titleH = cfg && cfg.titleH != null ? cfg.titleH : 20;
+        const legendH = container.querySelector(".chart-stack__legend")
+            ? cfg && cfg.legendH != null
+                ? cfg.legendH
+                : 34
+            : 0;
+        let reserve = legendH + titleCount * titleH;
+        if (sections.length > 1) reserve += gap * (sections.length - 1);
+        reserve += Math.max(0, sections.length) * 2;
+        let dom = 0;
+        container.querySelectorAll(".chart-stack__legend, .chart-stack__title").forEach((node) => {
+            dom += node.offsetHeight || 0;
+            dom += getChildMarginVertical(node, null);
+        });
+        if (sections.length > 1) dom += gap * (sections.length - 1);
+        dom += Math.max(0, sections.length) * 2;
+        return Math.max(reserve, dom);
+    }
+
+    function isChart11StackPlot(el) {
+        return !!(
+            el &&
+            el.classList &&
+            el.classList.contains("chart-stack__plot") &&
+            el.closest("#chart11")
+        );
+    }
+
+    function fitChart11PlotToSvg(el, spec) {
+        if (!isChart11StackPlot(el)) return spec && spec.height;
+        const svg = el.querySelector(".vega-embed svg") || el.querySelector("svg");
+        const svgH = svg ? Math.ceil(svg.getBoundingClientRect().height) : 0;
+        const minH = spec && typeof spec.height === "number" ? spec.height : 0;
+        const h = Math.max(minH, svgH, 1);
+        if (spec) spec.height = h;
+        el.style.height = h + "px";
+        el.style.minHeight = h + "px";
+        el.style.maxHeight = "none";
+        el.style.overflow = "visible";
+        return h;
+    }
+
+    function syncChart11StackAfterLayout() {
+        syncChart11StackHeight();
+        document.querySelectorAll("#chart11 .chart-stack__plot").forEach((plot) => {
+            const sel = plot.id ? "#" + plot.id : null;
+            const entry = sel ? chartRuntime.find((c) => c.selector === sel) : null;
+            fitChart11PlotToSvg(plot, entry ? { height: entry.lastPlotH } : null);
+        });
+        syncChart11StackHeight();
+    }
+
+    function syncChart11StackHeight() {
+        const stack = document.getElementById("chart11");
+        if (!stack) return;
+        let total = 0;
+        stack.querySelectorAll(".chart-stack__section").forEach((sec) => {
+            const r = sec.getBoundingClientRect();
+            const mt = parseFloat(getComputedStyle(sec).marginTop) || 0;
+            const mb = parseFloat(getComputedStyle(sec).marginBottom) || 0;
+            total += Math.ceil(r.height) + mt + mb;
+        });
+        if (total > 0) {
+            stack.style.height = total + "px";
+            stack.style.minHeight = total + "px";
+            stack.style.maxHeight = "none";
+            stack.style.overflow = "visible";
+        }
+    }
+
+    function maybeSyncChart11Stack(el) {
+        if (!el || !el.closest || !el.closest("#chart11")) return;
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                document.querySelectorAll("#chart11 .chart-stack__plot").forEach((plot) => {
+                    const sel = plot.id ? "#" + plot.id : null;
+                    const entry = sel ? chartRuntime.find((c) => c.selector === sel) : null;
+                    fitChart11PlotToSvg(plot, entry ? { height: entry.lastPlotH } : null);
+                });
+                syncChart11StackAfterLayout();
+            });
+        });
+    }
+
+    function layoutStackPanelSpec(spec, layoutRoot, plotEl) {
+        const cfg = STACK_PANEL_LAYOUT[layoutRoot.id];
+        if (!cfg) return;
+        const cw = Math.max(layoutRoot.clientWidth, 200);
+        const panelId = plotEl && plotEl.id;
+        if (cfg.panelHeights && panelId && cfg.panelHeights[panelId] != null) {
+            spec.width = cw;
+            spec.height = cfg.panelHeights[panelId];
+            return;
+        }
+        const target = getSection3PlotHeight(layoutRoot);
+        if (!target) return;
+        const fixed = measureStackFixedChrome(layoutRoot);
+        const plotBudget = Math.max(cfg.minPanelH * cfg.panels, target - fixed);
+        let panelH = Math.max(cfg.minPanelH, Math.floor(plotBudget / cfg.panels));
+        if (cfg.maxPanelH != null) panelH = Math.min(cfg.maxPanelH, panelH);
+        spec.width = cw;
+        spec.height = panelH;
+    }
+
+    function getSection3PlotHeight(el) {
+        const slot = getSection1ChartSlotHeight(el);
+        if (slot == null || !isSection1FixedLayout()) return null;
+        const trim = SECTION3_PLOT_TRIM[el.id] ?? SECTION3_PLOT_TRIM_DEFAULT;
+        return Math.max(140, slot - trim);
+    }
+
+    function isSection1DataChartEl(el) {
+        const card = el && el.closest(".chart-card");
+        return (
+            card &&
+            isSection1GridCard(card) &&
+            !card.classList.contains("policy-events-panel")
+        );
+    }
+
+    function getStackPlotMaxHeight(el, spec) {
+        if (el && el.classList && el.classList.contains("chart-stack__plot") && spec && typeof spec.height === "number") {
+            return spec.height;
+        }
+        const layoutRoot = getSection3LayoutRoot(el);
+        const measureEl =
+            layoutRoot && layoutRoot.classList.contains("chart-stack") ? layoutRoot : el;
+        return spec ? getSection1ChartSlotHeight(measureEl) : null;
+    }
+
+    function getGridPlotContainerHeight(el, spec, svgH) {
+        const slot = getStackPlotMaxHeight(el, spec);
+        const plotH = spec && typeof spec.height === "number" ? spec.height : 0;
+        if (slot && plotH > 0) return Math.min(Math.max(plotH, svgH), slot);
+        if (plotH > 0) return Math.max(plotH, svgH);
+        if (slot) return Math.max(slot, svgH);
+        return svgH;
+    }
+
+    function syncChartContainerToSvg(el, spec) {
+        if (!el) return 0;
+        const svg = el.querySelector(".vega-embed svg") || el.querySelector("svg");
+        if (!svg) return el.offsetHeight || 0;
+        const svgH = Math.ceil(svg.getBoundingClientRect().height);
+        const slot = getStackPlotMaxHeight(el, spec);
+        let h = svgH;
+        const gridChart = isSection3DataChartEl(el) || isSection1DataChartEl(el);
+        const stackPlot = el.classList && el.classList.contains("chart-stack__plot");
+
+        if (gridChart && !stackPlot) {
+            h = getGridPlotContainerHeight(el, spec, svgH);
+            el.style.flex = "1 1 auto";
+            el.style.minHeight = "0";
+            el.style.overflow = "hidden";
+        } else if (stackPlot && isChart11StackPlot(el)) {
+            h = Math.max(svgH, slot || 0, spec && spec.height ? spec.height : 0);
+            el.style.flex = "0 0 auto";
+            el.style.minHeight = h + "px";
+            el.style.overflow = "visible";
+        } else if (stackPlot) {
+            h = slot ? Math.min(svgH, slot) : svgH;
+            el.style.flex = "0 0 auto";
+            el.style.minHeight = stackPlot && slot ? slot + "px" : "";
+            el.style.overflow = "hidden";
+        } else if (slot) {
+            h = Math.min(svgH, slot);
+            el.style.flex = "0 0 auto";
+            el.style.overflow = "visible";
+        }
+
+        if (h > 0) {
+            el.style.height = h + "px";
+            el.style.minHeight =
+                gridChart && !stackPlot && slot
+                    ? slot + "px"
+                    : gridChart && !stackPlot
+                      ? h + "px"
+                      : stackPlot && slot
+                        ? slot + "px"
+                        : "";
+            el.style.maxHeight =
+                stackPlot && isChart11StackPlot(el)
+                    ? "none"
+                    : stackPlot && slot
+                      ? slot + "px"
+                      : slot && gridChart
+                        ? slot + "px"
+                        : slot
+                          ? slot + "px"
+                          : "";
+        }
+        return h;
+    }
+
+    function applyChartContainerSize(el, height, spec) {
+        if (!el || !height) return syncChartContainerToSvg(el, spec);
+        const stackPlot = el.classList && el.classList.contains("chart-stack__plot");
+        const slot = getStackPlotMaxHeight(el, spec);
+        el.style.width = "100%";
+        if (stackPlot && isChart11StackPlot(el)) {
+            const h = Math.max(height, slot || 0);
+            el.style.flex = "0 0 auto";
+            el.style.minHeight = h + "px";
+            el.style.overflow = "visible";
+            el.style.height = h + "px";
+            el.style.maxHeight = "none";
+            return h;
+        }
+        if (stackPlot) {
+            const h = slot ? Math.min(height, slot) : height;
+            el.style.flex = "0 0 auto";
+            el.style.minHeight = h + "px";
+            el.style.overflow = "hidden";
+            el.style.height = h + "px";
+            el.style.maxHeight = slot ? slot + "px" : "";
+            return h;
+        }
+        if (isSection3DataChartEl(el) || isSection1DataChartEl(el)) {
+            el.style.flex = "1 1 auto";
+            el.style.minHeight = "0";
+            el.style.overflow = "hidden";
+            const h = getGridPlotContainerHeight(el, spec || { height: height }, 0) || height;
+            el.style.height = h + "px";
+            el.style.maxHeight = slot ? slot + "px" : "";
+            return h;
+        }
+        el.style.flex = "0 0 auto";
+        el.style.overflow = "visible";
+        if (slot) el.style.maxHeight = slot + "px";
+        return syncChartContainerToSvg(el, spec);
+    }
+
+    function getSection3FacetLayout(spec, el) {
+        const { rows: facetRows, cols: facetCols } = getFacetLayoutCounts(spec);
+        let facetGap =
+            typeof spec.config?.facet?.spacing === "number" ? spec.config.facet.spacing : 8;
+        let headerH = spec.facet.row ? 24 : 20;
+        let minPanelH = facetRows >= 4 ? 56 : facetRows >= 3 ? 62 : 48;
+        let legendReserve = 0;
+        const custom = el && SECTION3_FACET_LAYOUT[el.id];
+        if (custom) {
+            if (custom.minPanelH != null) minPanelH = custom.minPanelH;
+            if (custom.legendReserve != null) legendReserve = custom.legendReserve;
+            if (custom.headerH != null) headerH = custom.headerH;
+            if (custom.facetSpacing != null) facetGap = custom.facetSpacing;
+        }
+        return { facetRows, facetCols, facetGap, headerH, minPanelH, legendReserve };
+    }
+
+    function chartLayoutIsCurrent(entry, spec, target, cw) {
+        return (
+            entry.layoutDone &&
+            entry.layoutH != null &&
+            Math.abs(entry.layoutH - target) < 4 &&
+            entry.lastPlotW != null &&
+            Math.abs(entry.lastPlotW - cw) < 4 &&
+            spec.height != null &&
+            Math.abs(spec.height - target) < 6
+        );
+    }
+
+    function getSection1PlotHeight(el) {
+        const slot = getSection1ChartSlotHeight(el);
+        if (slot == null || !isSection1FixedLayout() || !isSection1DataChartEl(el)) return null;
+        const trim = SECTION1_PLOT_TRIM[el.id] ?? SECTION1_PLOT_TRIM_DEFAULT;
+        return Math.max(140, slot - trim);
+    }
+
+    function prepareSection1Spec(spec, el) {
+        const target = getSection1PlotHeight(el);
+        if (!target) return null;
+        const cw = Math.max(el.clientWidth, 200);
+        spec.width = cw;
+        if (Array.isArray(spec.vconcat)) {
+            layoutSection1Vconcat(spec, cw, target);
+        } else {
+            spec.height = target;
+        }
+        if (Array.isArray(spec.hconcat)) {
+            const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
+            spec.hconcat.forEach((child) => {
+                if (child && typeof child === "object") child.width = eachW;
+            });
+        }
+        return target;
+    }
+
+    function layoutSection3Chart(el, spec, entry, options) {
+        const force = !!(options && options.force);
+        if (!isSection3DataChartEl(el) || !entry?.view?.width) {
+            return Promise.resolve(spec && spec.height);
+        }
+        const target = prepareSection3Spec(spec, el);
+        if (!target) return Promise.resolve(spec && spec.height);
+
+        const cw = Math.max(el.clientWidth, 200);
+        if (!force && chartLayoutIsCurrent(entry, spec, target, cw)) {
+            syncChartContainerToSvg(el, spec);
+            return Promise.resolve(spec.height);
+        }
+
+        applyChartContainerSize(el, spec.height, spec);
+        entry.lastPlotH = spec.height;
+        entry.lastPlotW = cw;
+        entry.layoutH = target;
+        entry.layoutDone = true;
+        return entry.view.width(cw).height(spec.height).runAsync().then(() => {
+            syncChartContainerToSvg(el, spec);
+            fitChart11PlotToSvg(el, spec);
+            maybeSyncChart11Stack(el);
+            return spec.height;
+        });
+    }
+
+    function layoutSection1Chart(el, spec, entry, options) {
+        const force = !!(options && options.force);
+        if (!isSection1DataChartEl(el) || !entry?.view?.width) {
+            return Promise.resolve(spec && spec.height);
+        }
+        const target = prepareSection1Spec(spec, el);
+        if (!target) return Promise.resolve(spec && spec.height);
+
+        const cw = Math.max(el.clientWidth, 200);
+        if (!force && chartLayoutIsCurrent(entry, spec, target, cw)) {
+            syncChartContainerToSvg(el, spec);
+            return Promise.resolve(spec.height);
+        }
+
+        applyChartContainerSize(el, spec.height, spec);
+        entry.lastPlotH = spec.height;
+        entry.lastPlotW = cw;
+        entry.layoutH = target;
+        entry.layoutDone = true;
+        return entry.view.width(cw).height(spec.height).runAsync().then(() => {
+            syncChartContainerToSvg(el, spec);
+            return spec.height;
+        });
+    }
+
+    function finishSection1ChartLayout(el, spec, entry) {
+        const card = el && el.closest(".chart-card");
+        const runLayout = () => {
+            syncChartContainerToSvg(el, spec);
+            const done =
+                isSection3GridCard(card)
+                    ? layoutSection3Chart(el, spec, entry)
+                    : isSection1DataChartEl(el)
+                      ? layoutSection1Chart(el, spec, entry)
+                      : Promise.resolve(spec && spec.height);
+            return Promise.resolve(done).then((h) => {
+                maybeSyncChart11Stack(el);
+                return h;
+            });
+        };
+        if (
+            !card ||
+            card.classList.contains("policy-events-panel") ||
+            isSection3GridCard(card) ||
+            isSection1GridCard(card)
+        ) {
+            return runLayout();
+        }
+        return new Promise((resolve) => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    runLayout().then(resolve);
+                });
+            });
+        });
     }
 
     function mercatorY(latDeg) {
@@ -447,88 +1220,442 @@
         return Math.log(Math.tan(Math.PI / 4 + r / 2));
     }
 
-    function buildMapProjection(containerWidth, containerHeight) {
-        const w = Math.max(containerWidth, 120);
-        const h = containerHeight || getMapHeight(w);
-        const box = getMapFilter();
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
+    function getMapGeoBounds() {
         return {
-            type: "mercator",
-            center: [
-                (box.lon0 + box.lon1) / 2,
-                (box.lat0 + box.lat1) / 2
-            ],
-            scale,
-            translate: [
-                MAP_PAD.left + plotW / 2,
-                MAP_TITLE_H + MAP_PAD.top + plotH / 2
-            ]
+            lon0: MAP_FILTER.lon0,
+            lon1: MAP_FILTER.lon1,
+            lat0: MAP_FILTER.lat0,
+            lat1: MAP_FILTER.lat1
         };
     }
+
+    function getMapPlotHeight(width) {
+        const w = Math.max(Math.round(width || 400), 200);
+        const box = getMapGeoBounds();
+        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const h = Math.round(w * (latSpan / lonSpanRad));
+        return Math.max(200, Math.min(640, h));
+    }
+
     const mapCharts = [
         ["#chart5", "vega/chart5_map_2020.json?v=" + mapCacheBust, "map-status-5", "Jan 2020"],
         ["#chart6", "vega/chart6_map_2023.json?v=" + mapCacheBust, "map-status-6", "Jan 2023"],
         ["#chart7", "vega/chart7_map_2026.json?v=" + mapCacheBust, "map-status-7", "Jan 2026"]
     ];
 
-    function patchMapSpec(spec, width, height) {
-        const w = Math.max(width, 120);
-        const h = height || getMapHeight(w);
+    function patchMapSpec(spec, width) {
+        const w = Math.max(Math.round(width), 280);
+        const h = getMapPlotHeight(w);
+        const box = getMapGeoBounds();
+        const hexBox = getMapGeoBounds();
+        const centerLon = (box.lon0 + box.lon1) / 2;
+        const centerLat = (box.lat0 + box.lat1) / 2;
+        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
+        const latRad = (centerLat * Math.PI) / 180;
+        const scale = Math.round((w * 0.98) / lonSpanRad * Math.cos(latRad));
+        spec.title = null;
         spec.width = w;
         spec.height = h;
-        spec.projection = buildMapProjection(w, h);
-        const box = getMapFilter();
-        const plotW = w - MAP_PAD.left - MAP_PAD.right;
-        const plotH = h - MAP_TITLE_H - MAP_PAD.top - MAP_PAD.bottom;
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const scale = Math.min(plotH / latSpan, plotW / lonSpanRad);
-        const hexSize = Math.max(22, Math.min(65, Math.round(scale * 0.0048)));
-        if (spec.layer && spec.layer[1] && spec.layer[1].encoding) {
-            spec.layer[1].encoding.size = { value: hexSize };
-            if (spec.layer[1].encoding.color) {
-                spec.layer[1].encoding.color.legend = null;
+        spec.padding = { top: 0, bottom: 0, left: 0, right: 0 };
+        spec.spacing = 0;
+        spec.projection = {
+            type: "mercator",
+            center: [centerLon, centerLat],
+            scale: Math.max(900, Math.min(15000, Math.round(scale * 1.1))),
+            translate: [w / 2, Math.round(h * 0.405)]
+        };
+        const hexSize = Math.max(18, Math.min(56, Math.round(w * 0.038)));
+        const regionFilter =
+            "datum.properties.ADM0_A3 == 'MYS' || datum.properties.ADM0_A3 == 'IDN' || " +
+            "datum.properties.ADM0_A3 == 'BRN'";
+        if (spec.layer && spec.layer[0]) {
+            if (MAP_REGION_GEO) {
+                spec.layer[0].data = { values: MAP_REGION_GEO };
+            } else {
+                spec.layer[0].data = {
+                    url: "data/geo/basemap_view.json?v=" + mapCacheBust,
+                    format: { type: "geojson" }
+                };
+                spec.layer[0].transform = [{ filter: regionFilter }];
+            }
+            spec.layer[0].mark = {
+                type: "geoshape",
+                fill: "#e8eef5",
+                stroke: "#64748b",
+                strokeWidth: 0.85
+            };
+        }
+        if (spec.layer && spec.layer[1]) {
+            if (spec.layer[1].data && spec.layer[1].data.url) {
+                spec.layer[1].data.url =
+                    spec.layer[1].data.url.split("?")[0] + "?v=" + mapCacheBust;
+            }
+            spec.layer[1].transform = [
+                { calculate: "datum.properties.rate_mean", as: "rate_mean" },
+                { calculate: "datum.geometry.coordinates[0]", as: "lon" },
+                { calculate: "datum.geometry.coordinates[1]", as: "lat" },
+                {
+                    filter:
+                        "datum.lon >= " + hexBox.lon0 + " && datum.lon <= " + hexBox.lon1 +
+                        " && datum.lat >= " + hexBox.lat0 + " && datum.lat <= " + hexBox.lat1
+                }
+            ];
+            if (spec.layer[1].encoding) {
+                spec.layer[1].encoding.size = { value: hexSize };
+                spec.layer[1].encoding.longitude = { field: "lon", type: "quantitative", scale: null };
+                spec.layer[1].encoding.latitude = { field: "lat", type: "quantitative", scale: null };
+                if (spec.layer[1].encoding.color) {
+                    spec.layer[1].encoding.color.legend = null;
+                }
             }
         }
-        if (spec.padding) {
-            spec.padding = { left: 0, top: 0, right: 0, bottom: 0 };
-        }
-        if (spec.title) {
-            spec.title.fontSize = 18;
-            spec.title.fontWeight = 600;
-            spec.title.offset = 0;
-            spec.title.anchor = "start";
-        }
         if (!spec.config) spec.config = {};
-        spec.config.title = { offset: 0, subtitlePadding: 0, orient: "top" };
-        if (!spec.config.view) spec.config.view = {};
-        spec.config.view.fill = "#ffffff";
-        spec.config.view.stroke = null;
+        spec.config.view = { stroke: null, fill: "#ffffff", clip: true };
         spec.config.background = "#ffffff";
         return spec;
     }
 
     const chartRuntime = [];
+    const CHART_PLOT_FALLBACK = 280;
+    const SECTION1_LEGEND_H = 40;
+    const SECTION1_PLOT_TRIM_DEFAULT = 8;
+    const SECTION1_PLOT_TRIM = { chart15: 2 };
+    const SECTION1_VCONCAT_AXIS_PAD = 48;
+    const SECTION1_VCONCAT_GAP = 8;
+    const SECTION1_VCONCAT_BOTTOM_MIN = 96;
+    const SECTION1_CHART15_EXTRA_H = 28;
+    const SECTION3_PLOT_TRIM_DEFAULT = 4;
+    const SECTION3_PLOT_TRIM = { chart8: 0, chart9: 0, chart10: 0, chart11: 0, chart13: 4 };
+    const SECTION3_FACET_LAYOUT = {
+        chart9: { minPanelH: 238, legendReserve: 34, headerH: 18, facetSpacing: 6 },
+        chart10: { minPanelH: 186, legendReserve: 32, headerH: 20, facetSpacing: 12 },
+        chart11: { minPanelH: 88, legendReserve: 0, headerH: 14, facetSpacing: 10 },
+        chart12: { minPanelH: 108, legendReserve: 10, headerH: 12 }
+    };
 
-    function patchResponsiveSpec(spec, el) {
-        const cw = Math.max(el.clientWidth, 200);
-        const baseW = typeof spec.width === "number" ? spec.width : 340;
-        const baseH = typeof spec.height === "number" ? spec.height : 280;
+    function getSection1CardHeightPx() {
+        const raw = getComputedStyle(document.documentElement)
+            .getPropertyValue("--section1-card-height")
+            .trim();
+        const n = parseFloat(raw);
+        return Number.isFinite(n) && n > 0 ? n : 520;
+    }
+
+    function getChildMarginVertical(child, card) {
+        const m = getComputedStyle(child);
+        let mt = parseFloat(m.marginTop) || 0;
+        const mb = parseFloat(m.marginBottom) || 0;
+        if (m.marginTop === "auto") mt = 0;
+        if (
+            card &&
+            isSection1GridCard(card) &&
+            child.classList &&
+            child.classList.contains("annotation")
+        ) {
+            mt = 0;
+        }
+        return mt + mb;
+    }
+
+    function getMeasuredChromeHeight(card, chartEl) {
+        if (!card) return 120;
+        const cs = getComputedStyle(card);
+        let chrome = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+        const rowGap = parseFloat(cs.rowGap) || parseFloat(cs.gap) || 0;
+        const n = card.children.length;
+        if (rowGap && n > 1) chrome += rowGap * (n - 1);
+        for (const child of card.children) {
+            if (child === chartEl) continue;
+            chrome += child.offsetHeight;
+            chrome += getChildMarginVertical(child, card);
+        }
+        return chrome;
+    }
+
+    function isSection1GridCard(card) {
+        if (!card) return false;
+        const grid = card.closest(".grid-2");
+        return !!(grid && grid.classList.contains("section1-grid"));
+    }
+
+    function isSection3GridCard(card) {
+        if (!card) return false;
+        const grid = card.closest(".grid-2");
+        return !!(grid && grid.classList.contains("section3-grid"));
+    }
+
+    function layoutSection3Spec(spec, cw, maxPlotH, el) {
+        const baseW = typeof spec.width === "number" ? spec.width : 400;
+        const intrinsic = getIntrinsicSpecHeight(spec);
+        const widthScale = Math.max(1, cw / baseW);
+        const heightScale =
+            maxPlotH && intrinsic > 0 ? maxPlotH / intrinsic : widthScale;
         spec.width = cw;
-        spec.height = Math.max(160, Math.round(cw * baseH / baseW));
-        if (Array.isArray(spec.vconcat)) {
-            spec.vconcat.forEach((child) => {
-                if (child && typeof child === "object") {
-                    child.width = cw;
-                    if (typeof child.height === "number") {
-                        child.height = Math.max(80, Math.round((cw / baseW) * child.height));
+
+        if (spec.facet && spec.spec) {
+            const { facetRows, facetCols, facetGap, headerH, minPanelH, legendReserve } =
+                getSection3FacetLayout(spec, el);
+            const fullWidthFacet = el && (el.id === "chart9" || el.id === "chart10");
+            const outerPad = fullWidthFacet ? 0 : 12;
+            const panelInset = fullWidthFacet ? 0 : spec.facet.row ? 4 : 6;
+            let panelW =
+                Math.floor((cw - outerPad - facetGap * Math.max(0, facetCols - 1)) / Math.max(facetCols, 1)) -
+                panelInset;
+            if (el && el.id === "chart9") {
+                const gap = 6;
+                panelW = Math.max(140, Math.floor((cw - gap * Math.max(0, facetCols - 1)) / Math.max(facetCols, 1)));
+                if (!spec.config) spec.config = {};
+                spec.config.facet = Object.assign({}, spec.config.facet, { spacing: gap });
+                spec.width = cw;
+            }
+            spec.spec.width = Math.max(72, panelW);
+            if (typeof spec.spec.height === "number") {
+                const headerTotal = facetRows * headerH + Math.max(0, facetRows - 1) * facetGap;
+                if (maxPlotH) {
+                    const available = Math.max(0, maxPlotH - headerTotal - legendReserve);
+                    let panelH = Math.max(56, Math.floor(available / facetRows));
+                    if (available >= minPanelH * facetRows) {
+                        panelH = Math.max(minPanelH, panelH);
                     }
+                    spec.spec.height = panelH;
+                    spec.height = maxPlotH;
+                } else {
+                    const innerTotal = Math.round(spec.spec.height * facetRows * heightScale);
+                    const panelH = Math.max(minPanelH, Math.floor(innerTotal / facetRows));
+                    spec.spec.height = panelH;
+                    spec.height = panelH * facetRows + headerTotal + legendReserve;
+                }
+            }
+        } else if (Array.isArray(spec.vconcat)) {
+            const gap =
+                el && el.id === "chart13"
+                    ? typeof spec.spacing === "number"
+                        ? spec.spacing
+                        : 8
+                    : el && el.id === "chart11"
+                      ? typeof spec.spacing === "number"
+                        ? spec.spacing
+                        : 10
+                      : typeof spec.spacing === "number"
+                        ? spec.spacing
+                        : 12;
+            const chart11Layout = el && el.id === "chart11" ? SECTION3_FACET_LAYOUT.chart11 : null;
+            const minPartH = chart11Layout && chart11Layout.minPanelH != null ? chart11Layout.minPanelH : 56;
+            const legendReserve =
+                chart11Layout && chart11Layout.legendReserve != null ? chart11Layout.legendReserve : 0;
+            const parts = spec.vconcat.filter((c) => c && typeof c.height === "number");
+            const baseSum = parts.reduce((s, c) => s + c.height, 0) || 1;
+            const plotBudget = maxPlotH
+                ? Math.max(0, maxPlotH - legendReserve) - gap * Math.max(0, parts.length - 1)
+                : null;
+            let used = 0;
+            parts.forEach((child, idx) => {
+                child.width = cw;
+                const ratio = child.height / baseSum;
+                const h = plotBudget
+                    ? idx === parts.length - 1
+                        ? Math.max(minPartH, plotBudget - used)
+                        : Math.max(minPartH, Math.round(plotBudget * ratio))
+                    : Math.round(child.height * heightScale);
+                child.height = h;
+                used += h;
+            });
+            spec.height = plotBudget
+                ? plotBudget + gap * Math.max(0, parts.length - 1) + legendReserve
+                : used + gap * Math.max(0, parts.length - 1);
+        } else if (Array.isArray(spec.hconcat)) {
+            const gap = typeof spec.spacing === "number" ? spec.spacing : 12;
+            const eachW = Math.max(
+                56,
+                Math.floor((cw - gap * Math.max(0, spec.hconcat.length - 1)) / spec.hconcat.length)
+            );
+            const childH = maxPlotH
+                ? Math.max(140, maxPlotH - 28)
+                : Math.round((spec.hconcat[0] && spec.hconcat[0].height) || 200);
+            spec.hconcat.forEach((child) => {
+                if (child && typeof child === "object") {
+                    child.width = eachW;
+                    if (typeof child.height === "number") child.height = childH;
                 }
             });
+            spec.height = childH + (maxPlotH ? 8 : 0);
+        } else if (spec.encoding && spec.encoding.column) {
+            if (typeof spec.height === "number") {
+                spec.height = maxPlotH
+                    ? maxPlotH
+                    : Math.round(spec.height * heightScale);
+            }
+        } else if (typeof spec.height === "number") {
+            spec.height = maxPlotH
+                ? maxPlotH
+                : Math.round(spec.height * heightScale);
+        }
+    }
+
+    function prepareSection3Spec(spec, el) {
+        const layoutRoot = getSection3LayoutRoot(el);
+        const target = getSection3PlotHeight(layoutRoot);
+        if (!target) return null;
+        if (layoutRoot !== el && STACK_PANEL_LAYOUT[layoutRoot.id]) {
+            layoutStackPanelSpec(spec, layoutRoot, el);
+            return target;
+        }
+        layoutSection3Spec(spec, Math.max(layoutRoot.clientWidth, 200), target, layoutRoot);
+        return target;
+    }
+
+    function isDataChartCard(card) {
+        return card && !card.classList.contains("policy-events-panel") && !card.classList.contains("full-width-card");
+    }
+
+    function getIntrinsicSpecHeight(spec) {
+        if (!spec || typeof spec !== "object") return CHART_PLOT_FALLBACK;
+        if (Array.isArray(spec.vconcat)) {
+            const total = spec.vconcat.reduce(
+                (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
+                0
+            );
+            return total || CHART_PLOT_FALLBACK;
+        }
+        if (Array.isArray(spec.hconcat)) {
+            const heights = spec.hconcat.map(
+                (c) => (c && typeof c.height === "number" ? c.height : 0)
+            );
+            return Math.max(...heights, CHART_PLOT_FALLBACK);
+        }
+        return typeof spec.height === "number" ? spec.height : CHART_PLOT_FALLBACK;
+    }
+
+    function getAutoPlotHeight(el, spec) {
+        const cw = Math.max(el && el.clientWidth ? el.clientWidth : 340, 200);
+        const baseW = spec && typeof spec.width === "number" ? spec.width : 340;
+        const intrinsicH = getIntrinsicSpecHeight(spec);
+        return Math.max(intrinsicH, Math.round(intrinsicH * cw / baseW));
+    }
+
+    function isSection1FixedLayout() {
+        return window.matchMedia("(min-width: 1001px)").matches;
+    }
+
+    function isLegendSpecPart(part) {
+        return !!(part && part.usermeta && part.usermeta.role === "legend");
+    }
+
+    function getChartChromeHeight(card) {
+        if (!card) return 160;
+        const cs = getComputedStyle(card);
+        let chrome = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0) + 8;
+        const rowGap = parseFloat(cs.rowGap) || parseFloat(cs.gap) || 0;
+        if (rowGap && card.children.length > 1) chrome += rowGap * (card.children.length - 1);
+        for (const child of card.children) {
+            if (child.matches && child.matches('div[id^="chart"]')) continue;
+            let h = child.offsetHeight || 0;
+            if (child.classList && child.classList.contains("annotation")) {
+                h = Math.max(child.scrollHeight || 0, h, 60);
+            } else if (child.classList && child.classList.contains("series-legend")) {
+                h = Math.max(h, 28);
+            } else if (child.tagName === "H3") {
+                h = Math.max(h, 38);
+            } else if (child.classList && child.classList.contains("chart-number")) {
+                h = Math.max(h, 40);
+            }
+            chrome += h;
+            chrome += getChildMarginVertical(child, card);
+        }
+        return chrome;
+    }
+
+    function layoutSection1Vconcat(spec, cw, totalPlotH) {
+        const parts = spec.vconcat;
+        const legendParts = parts.filter(isLegendSpecPart);
+        const mainParts = parts.filter((p) => !isLegendSpecPart(p));
+        const legendH = legendParts.length * SECTION1_LEGEND_H;
+        const gap = typeof spec.spacing === "number" ? spec.spacing : SECTION1_VCONCAT_GAP;
+        spec.spacing = gap;
+        const mainH = Math.max(120, totalPlotH - legendH - gap * Math.max(0, mainParts.length - 1));
+        let mainUsed = 0;
+        let totalUsed = 0;
+
+        if (mainParts.length === 2 && legendParts.length === 0) {
+            const baseHeights = mainParts.map((p) =>
+                p && typeof p.height === "number" ? p.height : 0
+            );
+            const mainBase = baseHeights.reduce((a, b) => a + b, 0) || mainH;
+            const bottomRatio = mainBase > 0 ? baseHeights[1] / mainBase : 0.4;
+            const bottomH = Math.max(88, Math.round(mainH * bottomRatio));
+            const topH = Math.max(120, mainH - bottomH);
+            spec.spacing = Math.min(gap, 4);
+            parts.forEach((child) => {
+                if (!child || typeof child !== "object") return;
+                child.width = cw;
+                if (isLegendSpecPart(child)) {
+                    child.height = SECTION1_LEGEND_H;
+                    totalUsed += SECTION1_LEGEND_H;
+                    return;
+                }
+                const idx = mainParts.indexOf(child);
+                child.height = idx === 0 ? topH : bottomH;
+                mainUsed += child.height;
+                totalUsed += child.height;
+            });
+            spec.height = totalUsed + spec.spacing;
+            return;
+        }
+
+        const mainBase = mainParts.reduce(
+            (s, c) => s + (c && typeof c.height === "number" ? c.height : 0),
+            0
+        ) || mainH;
+        parts.forEach((child) => {
+            if (!child || typeof child !== "object") return;
+            child.width = cw;
+            if (isLegendSpecPart(child)) {
+                child.height = SECTION1_LEGEND_H;
+                totalUsed += SECTION1_LEGEND_H;
+                return;
+            }
+            const partBase = typeof child.height === "number" ? child.height : 0;
+            const ratio = partBase / mainBase;
+            const idx = mainParts.indexOf(child);
+            const partH =
+                idx === mainParts.length - 1
+                    ? Math.max(SECTION1_VCONCAT_BOTTOM_MIN, mainH - mainUsed)
+                    : Math.max(100, Math.round(mainH * ratio));
+            child.height = partH;
+            mainUsed += partH;
+            totalUsed += partH;
+        });
+        spec.height = totalUsed + gap * Math.max(0, mainParts.length - 1);
+    }
+
+    function getChartPlotHeight(el, spec) {
+        const card = el && el.closest(".chart-card");
+        if (!isDataChartCard(card)) {
+            const cw = Math.max(el.clientWidth, 200);
+            return Math.max(160, Math.round(cw * 280 / 340));
+        }
+        return getAutoPlotHeight(el, spec);
+    }
+
+    function patchResponsiveSpec(spec, el) {
+        const layoutRoot = getSection3LayoutRoot(el);
+        const cw = Math.max(layoutRoot.clientWidth, el.clientWidth, 200);
+        const card = el && el.closest(".chart-card");
+        spec.width = cw;
+        if (isDataChartCard(card)) {
+            if (isSection3GridCard(card)) {
+                prepareSection3Spec(spec, el);
+            } else if (isSection1GridCard(card)) {
+                prepareSection1Spec(spec, el);
+            }
+            return spec;
+        }
+        const ch = getChartPlotHeight(el, spec);
+        if (Array.isArray(spec.vconcat)) {
+            layoutSection1Vconcat(spec, cw, ch);
+        } else {
+            spec.height = ch;
         }
         if (Array.isArray(spec.hconcat)) {
             const eachW = Math.max(120, Math.round(cw / Math.max(spec.hconcat.length, 1)));
@@ -538,19 +1665,27 @@
                 }
             });
         }
-        spec.autosize = { type: "fit", contains: "padding" };
         return spec;
     }
 
-    function waitForChartWidth(el) {
+    function waitForChartSize(el) {
         return new Promise((resolve) => {
             if (!el) {
                 resolve();
                 return;
             }
             let attempts = 0;
+            let lastW = 0;
+            let stable = 0;
             const check = () => {
-                if (el.clientWidth >= 80 || attempts++ > 120) {
+                const w = Math.round(el.clientWidth);
+                if (w >= 80 && w === lastW) {
+                    stable += 1;
+                } else {
+                    stable = 0;
+                    lastW = w;
+                }
+                if (stable >= 1 || attempts++ > 80) {
                     resolve();
                     return;
                 }
@@ -560,29 +1695,97 @@
         });
     }
 
+    function shouldSkipChartRelayout(entry, el) {
+        if (!entry.layoutDone) return false;
+        const cw = Math.max(el.clientWidth, 200);
+        if (entry.lastPlotW == null || Math.abs(entry.lastPlotW - cw) >= 4) return false;
+        const slot =
+            (isSection3DataChartEl(el) ? getSection3PlotHeight(el) : null) ||
+            (isSection1DataChartEl(el) ? getSection1PlotHeight(el) : null);
+        if (slot && entry.layoutH != null && Math.abs(entry.layoutH - slot) >= 8) return false;
+        if (entry.lastPlotH != null && slot && entry.lastPlotH < slot - 8) return false;
+        return true;
+    }
+
+    function resizeChartEntry(entry) {
+        const el = document.querySelector(entry.selector);
+        if (!el) return Promise.resolve();
+        if (shouldSkipChartRelayout(entry, el)) return Promise.resolve();
+        const card = el.closest(".chart-card");
+        return waitForChartSize(el).then(() => {
+            return fetch(entry.specUrl).then((r) => {
+                if (!r.ok) throw new Error("Chart spec not found: " + entry.specUrl);
+                return r.json();
+            }).then((spec) => {
+                normalizeSpecDataUrls(spec);
+                patchResponsiveSpec(spec, el);
+                applyChartContainerSize(el, spec.height, spec);
+                entry.lastPlotH = spec.height;
+                entry.lastPlotW = spec.width;
+                if (entry.view && typeof entry.view.width === "function") {
+                    if (isSection3GridCard(card) || isSection1GridCard(card)) {
+                        return finishSection1ChartLayout(el, spec, entry);
+                    }
+                    return entry.view.width(spec.width).height(spec.height).runAsync().then(() => {
+                        return finishSection1ChartLayout(el, spec, entry);
+                    });
+                }
+                return vegaEmbed(entry.selector, spec, svgOpts).then((result) => {
+                    if (result && result.view) {
+                        entry.view = result.view;
+                        return finishSection1ChartLayout(el, spec, entry).then(() => result);
+                    }
+                    return result;
+                });
+            });
+        }).catch((err) => {
+            console.error("Failed to resize " + entry.selector + ":", err);
+        });
+    }
+
     function embedResponsiveChart(selector, specUrl) {
         const el = document.querySelector(selector);
         if (!el) return Promise.resolve();
-        return waitForChartWidth(el).then(() => {
+        return waitForChartSize(el).then(() => {
             const target = document.querySelector(selector);
             return fetch(specUrl).then((r) => {
                 if (!r.ok) throw new Error("Chart spec not found: " + specUrl);
                 return r.json();
             }).then((spec) => {
+                normalizeSpecDataUrls(spec);
+                const entry = chartRuntime.find((c) => c.selector === selector) || { selector, specUrl };
+                const card = target.closest(".chart-card");
                 patchResponsiveSpec(spec, target);
-                return vegaEmbed(selector, spec, svgOpts);
-            }).then((result) => {
-                if (result && result.view) {
-                    result.view.resize().run();
-                    const entry = chartRuntime.find((c) => c.selector === selector);
-                    if (entry) {
-                        entry.view = result.view;
-                        entry.specUrl = specUrl;
-                    } else {
-                        chartRuntime.push({ selector, specUrl, view: result.view });
+                applyChartContainerSize(target, spec.height, spec);
+                const plotW = spec.width;
+                const plotH = spec.height;
+                return vegaEmbed(selector, spec, svgOpts).then((result) => {
+                    if (result && result.view) {
+                        let stored = chartRuntime.find((c) => c.selector === selector);
+                        if (stored) {
+                            stored.view = result.view;
+                            stored.specUrl = specUrl;
+                            stored.lastPlotH = plotH;
+                            stored.lastPlotW = plotW;
+                        } else {
+                            stored = {
+                                selector,
+                                specUrl,
+                                view: result.view,
+                                lastPlotH: plotH,
+                                lastPlotW: plotW
+                            };
+                            chartRuntime.push(stored);
+                        }
+                        if (isSection3GridCard(card) || isSection1GridCard(card)) {
+                            return finishSection1ChartLayout(target, spec, stored);
+                        }
+                        return result.view.width(plotW).height(plotH).runAsync().then(() => {
+                            return finishSection1ChartLayout(target, spec, stored);
+                        });
                     }
-                }
-                return result;
+                    return result;
+                });
             }).catch((err) => {
                 console.error("Failed to load " + specUrl + " into " + selector + ":", err);
             });
@@ -590,139 +1793,142 @@
     }
 
     function redrawCharts() {
-        chartRuntime.forEach(({ selector, specUrl }) => embedResponsiveChart(selector, specUrl));
+        if (!chartRuntime.length) return;
+        return Promise.all(chartRuntime.map((entry) => resizeChartEntry(entry)));
     }
 
-    lightCharts.forEach(([selector, spec]) => embedResponsiveChart(selector, spec));
-
-    let chartResizeTimer;
-    window.addEventListener("resize", () => {
+    function scheduleChartRelayout() {
         clearTimeout(chartResizeTimer);
-        chartResizeTimer = setTimeout(redrawCharts, 200);
-    });
+        chartResizeTimer = setTimeout(() => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    redrawCharts();
+                });
+            });
+        }, 280);
+    }
 
     function setMapStatus(id, message) {
         const el = document.getElementById(id);
-        if (el) el.textContent = message;
+        if (!el) return;
+        el.textContent = message;
+        el.style.display = message && String(message).trim() ? "block" : "none";
     }
 
-    function waitForMapWidth(selector) {
-        return new Promise((resolve) => {
-            const el = document.querySelector(selector);
-            const box = el && el.closest(".map-box");
-            const measure = box || el;
-            if (!measure) {
-                resolve();
-                return;
-            }
-            let attempts = 0;
-            const check = () => {
-                if (measure.clientWidth >= 80 || attempts++ > 120) {
-                    resolve();
-                    return;
-                }
-                requestAnimationFrame(check);
-            };
-            requestAnimationFrame(check);
-        });
+    function syncMapContainerToPlot(el) {
+        if (!el) return;
+        const plot =
+            el.querySelector(".vega-embed svg") ||
+            el.querySelector(".vega-embed canvas") ||
+            el.querySelector("svg") ||
+            el.querySelector("canvas");
+        if (!plot) return;
+        const h = Math.ceil(plot.getBoundingClientRect().height);
+        if (h > 0) {
+            el.style.height = h + "px";
+            el.style.minHeight = h + "px";
+            el.style.maxHeight = h + "px";
+        }
+    }
+
+    function tightenMapBoxLayout(box) {
+        if (!box) return;
+        const year = box.querySelector(".map-year");
+        const figure = box.querySelector(".map-box__figure");
+        const chartEl = box.querySelector('[id^="chart"]');
+        if (!year || !chartEl) return;
+        syncMapContainerToPlot(chartEl);
+        const anchor = figure || chartEl;
+        const plot =
+            chartEl.querySelector(".vega-embed svg") ||
+            chartEl.querySelector(".vega-embed canvas");
+        if (!plot) return;
+        const gap = anchor.getBoundingClientRect().top - year.getBoundingClientRect().bottom;
+        const targetGap = 2;
+        if (figure) {
+            figure.style.marginTop = gap > targetGap + 1 ? Math.round(targetGap - gap) + "px" : "0";
+            chartEl.style.marginTop = "0";
+        } else {
+            chartEl.style.marginTop = gap > targetGap + 1 ? Math.round(targetGap - gap) + "px" : "0";
+        }
+    }
+
+    function tightenAllMapBoxes() {
+        document.querySelectorAll(".map-box").forEach((box) => tightenMapBoxLayout(box));
     }
 
     function embedMap(selector, specUrl, statusId, yearLabel, step, total) {
         setMapStatus(statusId, "Loading " + yearLabel + " (" + step + "/" + total + ")…");
-        return waitForMapWidth(selector).then(() => {
-            const el = document.querySelector(selector);
-            const w = el ? el.clientWidth : 400;
-            const h = getMapHeight(w);
-            return fetch(specUrl).then((r) => {
+        const el = document.querySelector(selector);
+        const box = el && el.closest(".map-box");
+        const w = measureMapWidth(box);
+        return fetch(specUrl)
+            .then((r) => {
                 if (!r.ok) throw new Error("Map spec not found: " + specUrl);
                 return r.json();
-            }).then((spec) => {
-                patchMapSpec(spec, w, h);
-                return vegaEmbed(selector, spec, mapOpts);
-            }).then((result) => {
-                if (result && result.view) {
-                    result.view.resize().run();
-                    mapRuntime.push({
-                        selector,
-                        specUrl,
-                        view: result.view,
-                        lastW: w,
-                        lastH: h,
-                        lastStacked: mapLayoutStacked
-                    });
-                }
-                setMapStatus(statusId, "");
-                return result;
-            }).catch((err) => {
-                console.error(err);
+            })
+            .then((spec) => {
+                normalizeSpecDataUrls(spec);
+                patchMapSpec(spec, w);
+                const mapH = spec.height;
+                applyChartContainerSize(el, mapH);
+                return vegaEmbed(selector, spec, mapOpts).then((result) => {
+                    if (result && result.view) {
+                        mapRuntime.push({
+                            selector,
+                            specUrl,
+                            view: result.view,
+                            lastW: w,
+                            lastH: mapH
+                        });
+                    }
+                    setMapStatus(statusId, "");
+                    syncMapContainerToPlot(el);
+                    tightenMapBoxLayout(box);
+                    return result;
+                });
+            })
+            .catch((err) => {
+                console.error("Map embed error (" + yearLabel + "):", err);
                 setMapStatus(statusId, "Failed to load " + yearLabel + ".");
             });
-        });
     }
 
-    function updateMapLayout(callback) {
-        const timeline = document.querySelector(".map-timeline");
-        if (!timeline) {
-            if (callback) callback(false);
-            return false;
-        }
-        const w = timeline.clientWidth;
-        timeline.classList.remove("map-timeline--stacked");
-        const overflows = timeline.scrollWidth > timeline.clientWidth + 1;
-        let shouldStack;
-        if (mapLayoutStacked === null) {
-            shouldStack = w < MAP_MIN_HORIZONTAL || overflows;
-        } else if (mapLayoutStacked === true) {
-            shouldStack = w < MAP_MIN_HORIZONTAL + MAP_STACK_HYST || overflows;
-        } else {
-            shouldStack = w < MAP_MIN_HORIZONTAL - MAP_STACK_HYST || overflows;
-        }
-        const layoutChanged = shouldStack !== mapLayoutStacked;
-        mapLayoutStacked = shouldStack;
-        timeline.classList.toggle("map-timeline--stacked", shouldStack);
-        if (callback) {
-            requestAnimationFrame(() => callback(layoutChanged));
-        }
-        return layoutChanged;
-    }
-
-    function resizeMapEntry(entry, force) {
+    function resizeMapEntry(entry) {
         const el = document.querySelector(entry.selector);
+        const box = el && el.closest(".map-box");
         if (!el || !entry.view) return Promise.resolve();
-        const w = el.clientWidth;
-        const h = getMapHeight(w);
-        if (
-            !force &&
-            entry.lastW != null &&
-            Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD &&
-            Math.abs(entry.lastH - h) < MAP_SIZE_THRESHOLD &&
-            entry.lastStacked === mapLayoutStacked
-        ) {
+        const w = measureMapWidth(box);
+        if (entry.lastW != null && Math.abs(entry.lastW - w) < MAP_SIZE_THRESHOLD) {
             return Promise.resolve();
         }
         entry.lastW = w;
-        entry.lastH = h;
-        entry.lastStacked = mapLayoutStacked;
         return fetch(entry.specUrl)
             .then((r) => r.json())
             .then((spec) => {
-                patchMapSpec(spec, w, h);
+                normalizeSpecDataUrls(spec);
+                patchMapSpec(spec, w);
+                entry.lastH = spec.height;
+                applyChartContainerSize(el, spec.height);
                 return vegaEmbed(entry.selector, spec, mapOpts);
             })
             .then((result) => {
                 if (result && result.view) {
                     entry.view = result.view;
-                    result.view.resize().run();
                 }
+                syncMapContainerToPlot(el);
+                tightenMapBoxLayout(box);
             });
     }
 
-    function redrawMaps(force) {
-        if (!mapsLoadStarted || !mapRuntime.length || mapResizePending) return;
+    function redrawMaps() {
+        if (!mapRuntime.length || mapResizePending) return;
         mapResizePending = true;
-        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry, force))).finally(() => {
-            mapResizePending = false;
-        });
+        Promise.all(mapRuntime.map((entry) => resizeMapEntry(entry)))
+            .then(() => tightenAllMapBoxes())
+            .finally(() => {
+                mapResizePending = false;
+            });
     }
 
     function loadMapsSequentially() {
@@ -732,34 +1938,51 @@
         mapCharts.forEach(([, , statusId], i) => {
             if (i > 0) setMapStatus(statusId, "Waiting…");
         });
-        return loadMapBbox().then(() => mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
-            return chain.then(() => embedMap(selector, spec, statusId, yearLabel, index + 1, total));
-        }, Promise.resolve())).then(() => {
-            updateMapLayout(() => redrawMaps(true));
-        });
+        return loadMapBbox().then(() =>
+            mapCharts.reduce((chain, [selector, spec, statusId, yearLabel], index) => {
+                return chain.then(() =>
+                    embedMap(selector, spec, statusId, yearLabel, index + 1, total)
+                );
+            }, Promise.resolve())
+        );
     }
 
     let mapResizeTimer;
-    function onMapViewportChange() {
-        updateMapLayout((layoutChanged) => {
-            redrawMaps(layoutChanged);
-        });
-    }
     window.addEventListener("resize", () => {
         clearTimeout(mapResizeTimer);
-        mapResizeTimer = setTimeout(onMapViewportChange, 350);
+        mapResizeTimer = setTimeout(redrawMaps, 400);
     });
 
-    const mapSection = document.querySelector(".map-timeline");
-    if (mapSection && "IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-            if (!entries.some((e) => e.isIntersecting)) return;
-            obs.disconnect();
-            loadMapsSequentially();
-        }, { rootMargin: "120px" });
-        observer.observe(mapSection);
+    let chartResizeTimer;
+
+    function initDashboard() {
+        const chartLoads = lightCharts
+            .map(([selector, spec]) => embedResponsiveChart(selector, spec))
+            .concat(section3Charts.map(([selector, spec]) => embedResponsiveChart(selector, spec)))
+            .concat(section3StackCharts.map(([selector, spec]) => embedResponsiveChart(selector, spec)));
+        Promise.all(chartLoads).then(() => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    syncChart11StackAfterLayout();
+                    scheduleChartRelayout();
+                });
+            });
+        });
+        loadMapsSequentially().catch((err) => console.error("Map load failed:", err));
+        window.addEventListener("resize", scheduleChartRelayout);
+        document.addEventListener("fullscreenchange", scheduleChartRelayout);
+        document.addEventListener("webkitfullscreenchange", scheduleChartRelayout);
+        document.querySelectorAll(".dashboard-section .grid-2").forEach((grid) => {
+            if (typeof ResizeObserver === "undefined") return;
+            const ro = new ResizeObserver(() => scheduleChartRelayout());
+            ro.observe(grid);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initDashboard);
     } else {
-        loadMapsSequentially();
+        initDashboard();
     }
 
     </script>
