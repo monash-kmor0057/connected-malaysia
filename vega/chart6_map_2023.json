@@ -20,8 +20,13 @@
     {
       "data": {
         "url": "data/geo/gps_mobile_tiles_2023.json",
-        "format": { "type": "geojson" }
+        "format": { "type": "json", "property": "features" }
       },
+      "transform": [
+        { "calculate": "datum.properties.rate_mean", "as": "rate_mean" },
+        { "calculate": "datum.properties.tile_count", "as": "tile_count" },
+        { "filter": "isValid(datum.rate_mean) && isFinite(datum.rate_mean)" }
+      ],
       "mark": {
         "type": "geoshape",
         "stroke": null,
@@ -30,7 +35,7 @@
       },
       "encoding": {
         "color": {
-          "field": "properties.rate_mean",
+          "field": "rate_mean",
           "type": "quantitative",
           "scale": {
             "domain": [3000, 130000],
@@ -50,8 +55,8 @@
           "legend": null
         },
         "tooltip": [
-          { "field": "properties.rate_mean", "title": "Tile mean download (kbps)", "format": ",.0f" },
-          { "field": "properties.tile_count", "title": "Tests in tile", "format": ",.0f" }
+          { "field": "rate_mean", "title": "Tile mean download (kbps)", "format": ",.0f" },
+          { "field": "tile_count", "title": "Tests in tile", "format": ",.0f" }
         ]
       }
     }

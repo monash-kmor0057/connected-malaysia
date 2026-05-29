@@ -4,7 +4,13 @@
   "height": 118,
   "padding": { "top": 0, "bottom": 4, "left": 0, "right": 8 },
   "data": { "url": "data/csv/chart11/chart11_gaming.csv" },
-  "transform": [{ "calculate": "format(datum.value, '.1f') + '%'", "as": "pct_label" }],
+  "transform": [
+    {
+      "calculate": "isValid(datum.value) && isFinite(datum.value) ? datum.value : 0",
+      "as": "value"
+    },
+    { "calculate": "format(datum.value, '.1f') + '%'", "as": "pct_label" }
+  ],
   "layer": [
     {
       "mark": { "type": "bar", "cornerRadiusEnd": 2, "height": 12 },
@@ -34,7 +40,7 @@
             "titlePadding": 6,
             "labelPadding": 3,
             "values": [0, 20, 40, 60, 80, 100],
-            "labelExpr": "format(datum.value, '.0f') + '%'",
+            "labelExpr": "format(datum.value, '.1f') + '%'",
             "grid": false
           }
         },
