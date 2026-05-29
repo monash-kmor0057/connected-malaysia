@@ -464,6 +464,46 @@ body {
 }
 
 
+.chart-load-error {
+
+    margin: 12px 0 0;
+
+    padding: 10px 12px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    color: #991b1b;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+}
+
+.chart-load-error code {
+
+    font-size: 12px;
+
+    color: #7f1d1d;
+
+    word-break: break-all;
+}
+
+.chart-load-error__detail {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 11px;
+
+    color: #b91c1c;
+}
+
+
 /* Annotation (unified across all chart cards) */
 
 .annotation,
