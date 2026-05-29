@@ -29,9 +29,9 @@
       ],
       "mark": {
         "type": "geoshape",
-        "stroke": null,
-        "strokeWidth": 0,
-        "opacity": 0.62
+        "stroke": "#ffffff",
+        "strokeWidth": 0.15,
+        "opacity": 0.9
       },
       "encoding": {
         "color": {
