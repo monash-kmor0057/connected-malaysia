@@ -5,7 +5,7 @@
       "width": 340,
       "height": 170,
       "data": {
-        "url": "data/csv/gender_internet_use.csv"
+        "url": "../data/csv/gender_internet_use.csv"
       },
       "transform": [
         { "fold": ["female", "male"], "as": ["group", "value"] }
@@ -28,7 +28,7 @@
         "color": {
           "field": "group",
           "type": "nominal",
-          "scale": { "domain": ["female", "male"], "range": ["#dc2626", "#2563eb"] },
+          "scale": { "domain": ["female", "male"], "range": ["#2563eb", "#14b8a6"] },
           "legend": { "title": null, "orient": "top" }
         },
         "tooltip": [
@@ -42,7 +42,7 @@
       "width": 340,
       "height": 95,
       "data": {
-        "url": "data/csv/gender_internet_use.csv"
+        "url": "../data/csv/gender_internet_use.csv"
       },
       "transform": [
         { "calculate": "datum.male - datum.female", "as": "gap" }

@@ -3,7 +3,7 @@
   "width": 340,
   "height": 300,
   "data": {
-    "url": "data/csv/section1_worldbank_long.csv"
+    "url": "../data/csv/section1_worldbank_long.csv"
   },
   "transform": [
     { "filter": "datum.indicator == 'Fixed broadband subscriptions per 100'" },
@@ -11,7 +11,6 @@
     { "calculate": "datum.value", "as": "value_num" },
     { "filter": "isValid(datum.value_num) && datum.value_num > 0" }
   ],
-  "resolve": { "axis": { "x": "shared", "y": "shared" } },
   "layer": [
     {
       "transform": [{ "filter": "datum.year_num >= 2020" }],
@@ -40,7 +39,8 @@
         "y": {
           "field": "value_num",
           "type": "quantitative",
-          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 }
+          "scale": { "zero": true, "domainMax": 18.5, "nice": false, "paddingTop": 84 },
+          "axis": null
         },
         "tooltip": [
           { "field": "year_num", "type": "quantitative", "title": "Year" },
