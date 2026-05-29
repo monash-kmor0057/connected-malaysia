@@ -19,26 +19,18 @@
     },
     {
       "data": {
-        "url": "data/geo/gps_mobile_hexbin_2020.json",
-        "format": { "type": "json", "property": "features" }
+        "url": "data/geo/gps_mobile_tiles_2020.json",
+        "format": { "type": "geojson" }
       },
-      "transform": [
-        { "calculate": "datum.properties.rate_mean", "as": "rate_mean" },
-        { "calculate": "datum.geometry.coordinates[0]", "as": "lon" },
-        { "calculate": "datum.geometry.coordinates[1]", "as": "lat" }
-      ],
       "mark": {
-        "type": "circle",
-        "stroke": "#ffffff",
-        "strokeWidth": 0.15,
-        "opacity": 0.94
+        "type": "geoshape",
+        "stroke": null,
+        "strokeWidth": 0,
+        "opacity": 0.62
       },
       "encoding": {
-        "longitude": { "field": "lon", "type": "quantitative", "scale": null },
-        "latitude": { "field": "lat", "type": "quantitative", "scale": null },
-        "size": { "value": 45 },
         "color": {
-          "field": "rate_mean",
+          "field": "properties.rate_mean",
           "type": "quantitative",
           "scale": {
             "domain": [3000, 130000],
@@ -58,8 +50,8 @@
           "legend": null
         },
         "tooltip": [
-          { "field": "rate_mean", "title": "Hex area mean (kbps)", "format": ",.0f" },
-          { "field": "properties.tile_count", "title": "Tiles in hex", "format": ",.0f" }
+          { "field": "properties.rate_mean", "title": "Tile mean download (kbps)", "format": ",.0f" },
+          { "field": "properties.tile_count", "title": "Tests in tile", "format": ",.0f" }
         ]
       }
     }
