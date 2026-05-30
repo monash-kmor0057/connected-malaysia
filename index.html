@@ -460,26 +460,10 @@
             <div class="chart-card">
                 <div class="chart-number">12</div>
                 <h3>Participation &amp; sample profile</h3>
-                <div id="chart13" class="chart-stack chart-stack--platform">
-                    <section class="chart-stack__section chart-stack__section--lead">
-                        <div class="chart-stack__section-head">
-                            <h4 class="chart-stack__title">Who uses each online activity?</h4>
-                            <div class="chart-stack__legend chart-legend chart-legend--boxed" aria-hidden="true">
-                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--fbb-stone"></span>Fixed (FBB)</span>
-                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--mbb"></span>Mobile (MBB)</span>
-                            </div>
-                        </div>
+                <div id="chart13" class="chart-stack chart-stack--participation">
+                    <section class="chart-stack__section">
+                        <h4 class="chart-stack__title">Who uses each online activity?</h4>
                         <div id="chart13-participation" class="chart-stack__plot"></div>
-                    </section>
-                    <section class="chart-stack__section chart-stack__section--lead">
-                        <div class="chart-stack__section-head">
-                            <h4 class="chart-stack__title">Gender in the 2024 sample</h4>
-                            <div class="chart-stack__legend chart-legend chart-legend--boxed" aria-hidden="true">
-                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--male"></span>Male</span>
-                                <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--female"></span>Female</span>
-                            </div>
-                        </div>
-                        <div id="chart13-gender" class="chart-stack__plot"></div>
                     </section>
                     <section class="chart-stack__section">
                         <h4 class="chart-stack__title">Age group in the 2024 sample</h4>
@@ -491,7 +475,7 @@
                     </section>
                 </div>
                 <p class="annotation">
-                    Four grouped bar panels in the same style as chart 10: activity participation and sample profile by fixed vs mobile broadband (stone and green), with gender shown as male (blue) and female (red).
+                    Three easy-to-read bar panels: activity participation, then age and ethnicity mix for fixed (blue) vs mobile (green) respondents.
                 </p>
             </div>
 
@@ -548,7 +532,7 @@
         ["#chart4", "vega/chart4_online_lifestyle.json"]
     ];
 
-    const section3CacheBust = "20260529-ch13-style";
+    const section3CacheBust = "20260529-ch11-zero";
     const section3Charts = [
         ["#chart8", "vega/chart8_csi_radar.json?v=" + section3CacheBust],
         ["#chart9", "vega/chart9_sqg_heatmap.json?v=" + section3CacheBust],
@@ -560,12 +544,11 @@
         ["#chart11-calls", "vega/chart11_calls.json?v=" + section3CacheBust],
         ["#chart11-gaming", "vega/chart11_gaming.json?v=" + section3CacheBust],
         ["#chart13-participation", "vega/chart13_participation.json?v=" + section3CacheBust],
-        ["#chart13-gender", "vega/chart13_gender.json?v=" + section3CacheBust],
         ["#chart13-age", "vega/chart13_age.json?v=" + section3CacheBust],
         ["#chart13-ethnicity", "vega/chart13_ethnicity.json?v=" + section3CacheBust]
     ];
 
-    const mapCacheBust = "20260529-map-square";
+    const mapCacheBust = "20260529-map-hexbin";
     const MAP_SPEC_BY_URL = {};
     const MAP_REGION_A3 = ["MYS", "IDN", "BRN", "SGP", "THA", "VNM", "PHL", "KHM"];
     const MAP_VIEW_BBOX = { lon0: 99.6, lat0: 0.8, lon1: 119.3, lat1: 8.3 };
@@ -866,20 +849,7 @@
                 "chart11-gaming": 118
             }
         },
-        chart13: {
-            panels: 4,
-            minPanelH: 52,
-            maxPanelH: 130,
-            gap: 5,
-            titleH: 14,
-            legendH: 32,
-            panelHeights: {
-                "chart13-participation": 92,
-                "chart13-gender": 56,
-                "chart13-age": 128,
-                "chart13-ethnicity": 92
-            }
-        }
+        chart13: { panels: 3, minPanelH: 48, gap: 8, titleH: 18, legendH: 0 }
     };
 
     function getSection3LayoutRoot(el) {
@@ -912,17 +882,17 @@
         return Math.max(reserve, dom);
     }
 
-    function isSection3StackPlot(el) {
+    function isChart11StackPlot(el) {
         return !!(
             el &&
             el.classList &&
             el.classList.contains("chart-stack__plot") &&
-            (el.closest("#chart11") || el.closest("#chart13"))
+            el.closest("#chart11")
         );
     }
 
     function fitChart11PlotToSvg(el, spec) {
-        if (!isSection3StackPlot(el)) return spec && spec.height;
+        if (!isChart11StackPlot(el)) return spec && spec.height;
         const svg = el.querySelector(".vega-embed svg") || el.querySelector("svg");
         const svgH = svg ? Math.ceil(svg.getBoundingClientRect().height) : 0;
         const minH = spec && typeof spec.height === "number" ? spec.height : 0;
@@ -945,8 +915,8 @@
         syncChart11StackHeight();
     }
 
-    function syncChartStackHeight(stackId) {
-        const stack = document.getElementById(stackId);
+    function syncChart11StackHeight() {
+        const stack = document.getElementById("chart11");
         if (!stack) return;
         let total = 0;
         stack.querySelectorAll(".chart-stack__section").forEach((sec) => {
@@ -963,25 +933,16 @@
         }
     }
 
-    function syncChart11StackHeight() {
-        syncChartStackHeight("chart11");
-    }
-
     function maybeSyncChart11Stack(el) {
-        const stack = el && el.closest && (el.closest("#chart11") || el.closest("#chart13"));
-        if (!stack) return;
+        if (!el || !el.closest || !el.closest("#chart11")) return;
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                stack.querySelectorAll(".chart-stack__plot").forEach((plot) => {
+                document.querySelectorAll("#chart11 .chart-stack__plot").forEach((plot) => {
                     const sel = plot.id ? "#" + plot.id : null;
                     const entry = sel ? chartRuntime.find((c) => c.selector === sel) : null;
                     fitChart11PlotToSvg(plot, entry ? { height: entry.lastPlotH } : null);
                 });
-                if (stack.id === "chart11") {
-                    syncChart11StackAfterLayout();
-                } else {
-                    syncChartStackHeight(stack.id);
-                }
+                syncChart11StackAfterLayout();
             });
         });
     }
@@ -1289,11 +1250,7 @@
 
     function getMapPlotHeight(width) {
         const w = Math.max(Math.round(width || 400), 200);
-        const box = getMapGeoBounds();
-        const latSpan = mercatorY(box.lat1) - mercatorY(box.lat0);
-        const lonSpanRad = ((box.lon1 - box.lon0) * Math.PI) / 180;
-        const h = Math.round(w * (latSpan / lonSpanRad));
-        return Math.max(200, Math.min(640, h));
+        return Math.max(200, Math.min(640, w));
     }
 
     const mapCharts = [
@@ -1333,7 +1290,7 @@
             type: "mercator",
             center: [centerLon, centerLat],
             scale: Math.max(900, Math.min(15000, Math.round(scale * 1.1))),
-            translate: [w / 2, Math.round(h * 0.405)]
+            translate: [w / 2, Math.round(h / 2)]
         };
         const regionFilter =
             "datum.properties.ADM0_A3 == 'MYS' || datum.properties.ADM0_A3 == 'IDN' || " +
